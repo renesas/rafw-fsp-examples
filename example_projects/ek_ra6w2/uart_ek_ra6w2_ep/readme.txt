@@ -15,9 +15,9 @@ To see user input values on Serial terminal, enable local echo option.
 2. Hardware and Software Requirements:
 
 Three jumper wires are required to connect UART RX/TX lines and LED.
-Renesas Flexible Software Package (FSP): Version 1.0.0
-e2 studio: Version 2025-10
-GCC ARM Embedded Toolchain: Version 10.3.1.20210824
+Renesas RAFW (FSP): Version 2.0.1
+e2 studio: Version 2025-12
+GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term, RTT viewer or a similar application
 
 3. Hardware settings for the project:
@@ -25,8 +25,8 @@ Terminal Console Application: Tera Term, RTT viewer or a similar application
 Wiring details:
 
 RA6W2-EK:
-1) Connect UART0_RXD (Jumper J201 Pin 1) ----> P0_00 (Jumper J201 Pin 2)
-2) Connect UART0_TXD (Jumper J201 Pin 3) ----> P0_01 (Jumper J201 Pin 4)
+1) Connect UART1_RXD (Jumper J201 Pin 1) ----> P0_00 (Jumper J201 Pin 2)
+2) Connect UART1_TXD (Jumper J201 Pin 3) ----> P0_01 (Jumper J201 Pin 4)
 3) Connect LED       (Jumper J611 Pin 1 or any LED Pin) ----> P0_10 (Jumper J201 Pin 22)  
 
 4. Verifying Operation:
@@ -38,13 +38,13 @@ RA6W2-EK:
 5) After the debug session starts, click Run to execute the program (no need to press the board's reset button).
 6) Open a SEGGER RTT Viewer on the host PC to view the console output.
 7) Check console log " Type LED status (on or off)
-	Input "on" ¡æ Press Enter key and check the LED, it should be turned on.
-	Input "off" ¡æ Press Enter key and check the LED, it should be turned off.
+	Input "on" -> Press Enter key and check the LED, it should be turned on.
+	Input "off" -> Press Enter key and check the LED, it should be turned off.
 
 Note:
 1) Segger RTT block address may be needed to download and observe EP operation using a hex file with RTT-Viewer.
    RTT Block address for hex file committed in repository are as follows:
-   a. e2studio: 0x20003CD0
+   a. e2studio: 0x20000B7C
  
 2) If an EP is modified, compiled, and downloaded please find the block address (for the variable in RAM called _SEGGER_RTT) 
    in .map file generated in the build configuration folder (Debug/Release).

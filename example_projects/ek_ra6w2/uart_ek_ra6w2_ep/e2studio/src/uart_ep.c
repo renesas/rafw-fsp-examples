@@ -10,6 +10,7 @@
 
 #include "common_utils.h"
 #include "uart_ep.h"
+#include "hal_data.h"
 
 /*******************************************************************************************************************//**
  * @addtogroup r_uart_b_ep
@@ -175,14 +176,14 @@ fsp_err_t uart_initialize(void)
 {
     fsp_err_t err = FSP_SUCCESS;
 
-    if (g_uart0_cfg.channel != 0)
+    if (g_uart1_cfg.channel != 0)
     {
-        APP_PRINT("Enable uart clock %d\r\n", g_uart0_cfg.channel)
-        hw_clk_enable_uart_w_clk(g_uart0_cfg.channel);
+        APP_PRINT("Enable uart clock %d\r\n", g_uart1_cfg.channel);
+        hw_clk_enable_uart_w_clk(g_uart1_cfg.channel);
     }
 
     /* Initialize UART channel with baud rate 115200 */
-    err = R_UART_W_Open(&g_uart0_ctrl, &g_uart0_cfg);
+    err = R_UART_W_Open(&g_uart1_ctrl, &g_uart1_cfg);
     if (FSP_SUCCESS != err)
     {
         APP_ERR_PRINT("\r\n**  R_UART_B_Open API failed  **\r\n");
@@ -212,7 +213,7 @@ fsp_err_t uart_print_user_msg(uint8_t *p_msg)
     g_uart_event = RESET_VALUE;
 
     /* Writing to terminal */
-    err = R_UART_W_Write(&g_uart0_ctrl, p_msg, msg_len);
+    err = R_UART_W_Write(&g_uart1_ctrl, p_msg, msg_len);
     if (FSP_SUCCESS != err)
     {
         APP_ERR_PRINT("\r\n**  R_UART_B_Write API Failed  **\r\n");
@@ -250,7 +251,7 @@ void deinit_uart(void)
     fsp_err_t err = FSP_SUCCESS;
 
     /* Close module */
-    err = R_UART_W_Close(&g_uart0_ctrl);
+    err = R_UART_W_Close(&g_uart1_ctrl);
     if (FSP_SUCCESS != err)
     {
         APP_ERR_PRINT("\r\n**  R_UART_B_Close API failed  ** \r\n");

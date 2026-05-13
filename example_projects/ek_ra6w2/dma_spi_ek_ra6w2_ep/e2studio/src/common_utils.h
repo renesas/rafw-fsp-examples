@@ -3,7 +3,7 @@
  * Description  : Contains macros, data structures and functions used  common to the EP
  ***********************************************************************************************************************/
 /***********************************************************************************************************************
- * Copyright (c) 2020 - 2025 Renesas Electronics Corporation and/or its affiliates
+ * Copyright (c) 2020 - 2026 Renesas Electronics Corporation and/or its affiliates
  *
  * SPDX-License-Identifier: BSD-3-Clause
  ***********************************************************************************************************************/
@@ -16,6 +16,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "hal_data.h"
+
 /* SEGGER RTT and error related headers */
 #include "SEGGER_RTT/SEGGER_RTT.h"
 

@@ -3,7 +3,7 @@
  * Description  : Contains data structures and functions used in timer_setup.c
  **********************************************************************************************************************/
 /***********************************************************************************************************************
- * Copyright (c) 2025 Renesas Electronics Corporation and/or its affiliates
+ * Copyright (c) 2025 - 2026 Renesas Electronics Corporation and/or its affiliates
  *
  * SPDX-License-Identifier: BSD-3-Clause
  **********************************************************************************************************************/
@@ -20,7 +20,7 @@
 #define RESET_STATUS_REGISTER_POR_DEFAULT           (0x1F)
 
 /* WDOG detect reset value */
-#define RESET_STATUS_REGISTER_DETECT_WDOG_RESET     (1u)
+#define RESET_STATUS_REGISTER_DETECT_WDOG_RESET     (0x16)
 
 /* GPIO pin for LED notification */
 #define LED_POR_AND_TIMER_ACTIVE_IND                (BSP_IO_PORT_01_PIN_12)

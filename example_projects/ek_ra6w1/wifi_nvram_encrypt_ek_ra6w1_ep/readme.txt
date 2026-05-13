@@ -1,0 +1,60 @@
+/**********************************************************************************************************************
+* File Name    : readme.txt
+* Description  : Contains general information about Example Project and detailed instructions
+**********************************************************************************************************************/
+
+1. Project Overview:
+This project demonstrates how to securely store and retrieve sensitive application 
+data such as Wi-Fi credentials and attestation keys using the CC312 Security Library
+on Renesas RA6W1 microcontrollers.
+
+2. Software Requirements:
+Renesas RAFW (FSP): Version 2.0.1
+e2 studio: Version 2025-12
+GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
+Terminal Console Application: Tera Term, RTT viewer or a similar application
+
+3. Hardware Requirements:
+Renesas RA6W1 Mother board.
+Renesas RA6W1 Module.
+Micro USB cable for programming and debugging or type C USB cable.
+
+
+4. Hardware Connections:
+Attach RA6W1 module to the motherboard via the extension socket.
+Connect the USB Debug port on the RA6W1 mother board to the host PC via a type C USB cable.
+
+5. Hardware settings for the project
+Jumper Configurations
+	UART(RX) = P0_00
+	UART(TX) = P0_01
+	J102 ={2-3} [Current measurement]
+	J106 ={2,3} [Volatge selector]
+	J105 ={2,3} [Volatge selector]
+	J107 ={2,3} [Volatge selector]
+	J210 ={1,2} [reset]
+	SWCLK(c) = SWCLK
+	SWDIO(c) = SWDIO
+	
+6. Verification:
+1. Import the Example project into e2 studio.
+2. Build the project.
+3. Flash the project onto the RA6W1 board via the debugger.
+4. Open a SEGGER RTT Viewer or minicom on the host PC to view the console output.
+5. Reset the board to start execution. 
+6. Verify that the output shows:
+	Successful secure asset creation and storage (USER and PROD examples).
+	Correct display of stored and retrieved payloads (e.g., SSID, Password, AT Key). 
+	Log message indicating “Secure asset store complete” for both USER and PROD(VEE) assets.
+	
+Note:
+To view console output in RTT Viewer: 
+
+1) Find the RTT block address by searching for the _SEGGER_RTT variable in the .map file located in the Debug or Release folder.
+   eg: 0x000000002000c5e0
+   
+   
+Flashing Procedure:
+1. Open e²studio and connect your JTAG debugger.
+2. Go to Debug Configurations and select your .img.bin file in the Startup tab.
+3. Start debugging and the image will be flashed automatically to the RA6W1.

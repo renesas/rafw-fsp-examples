@@ -9,7 +9,6 @@
  ***********************************************************************************************************************/
 
 #include "common_utils.h"
-#include "uart_ep.h"
 #include "gpt_timer.h"
 #include "hal_data.h"
 
@@ -25,17 +24,6 @@ FSP_CPP_FOOTER
 /* value to validate open state of timer instances */
 extern uint8_t g_timer_open_state;
 extern bool volatile g_one_shot_expired;
-
-void uart_log(char *p_msg)
-{
-#ifdef ENABLE_UART_LOG
-    fsp_err_t err = uart_print_user_msg((uint8_t*) p_msg);
-    if (FSP_SUCCESS != err && FSP_ERR_TIMEOUT != err)
-    {
-        APP_PRINT("\r\n ** UART LOG Print error (%d)** \r\n", err);
-    }
-#endif
-}
 
 void hal_entry(void)
 {
@@ -60,21 +48,6 @@ void hal_entry(void)
     APP_PRINT(BANNER_5);
     APP_PRINT(BANNER_6);
 
-#ifdef ENABLE_UART_LOG
-    APP_PRINT("\r\n\r\nThe project initializes the UART with baud rate of 115200 bps.");
-    APP_PRINT("\r\nOpen Serial Terminal with this baud rate value and");
-
-    /* Initializing UART */
-    err = uart_initialize();
-    if (FSP_SUCCESS != err)
-    {
-        APP_PRINT("\r\n ** UART INIT FAILED ** \r\n");
-        APP_ERR_TRAP(err);
-    }
-
-    uart_log("\r\n** Timer example started **\r\n");
-#endif
-
     /* Print Menu option of GPT timer*/
     print_timer_menu();
 
@@ -93,6 +66,13 @@ void hal_entry(void)
             {
                 case PERIODIC_MODE_TIMER:
                 {
+                    /* Check the status of GPT timer in Periodic mode */
+                    if (PERIODIC_MODE == g_timer_open_state)
+                    {
+                        /* Close Periodic Timer instance */
+                        deinit_gpt_timer(&g_timer_periodic_ctrl);
+                    }
+
                     /* Check the status of GPT timer in PWM mode */
                     if (PWM_MODE == g_timer_open_state)
                     {
@@ -126,6 +106,11 @@ void hal_entry(void)
                     {
                         APP_ERR_PRINT("\r\n ** INVALID INPUT, DESIRED PERIOD IS OUT OF RANGE. ** \r\n");
                     }
+                    else if (GPT_MIN_PERIOD_COUNT > period_counts)
+                    {
+                        APP_PRINT("\r\n ** INVALID INPUT: %d, MIN: %d (ms)** \r\n",
+                                  gpt_desired_period_ms, GPT_MIN_PERIOD_COUNT/TIMER_UNITS_CONV_FACTOR);
+                    }
                     else
                     {
                         /* Check the status of GPT timer in Periodic mode */
@@ -152,7 +137,6 @@ void hal_entry(void)
                             }
 
                             APP_PRINT("Started Timer in Periodic Mode\r\n");
-                            uart_log("Started Timer in Periodic Mode\r\n");
                         }
                         else
                         {
@@ -300,7 +284,6 @@ void hal_entry(void)
                     }
 
                     APP_PRINT("Started Timer in ONE-SHOT Mode with preset period\r\n");
-                    uart_log("Started Timer in ONE_SHOT Mode\r\n");
 
                     /* wait for one-shot mode timer to expire. */
                     while (true != g_one_shot_expired)
@@ -318,7 +301,6 @@ void hal_entry(void)
                     if (true == g_one_shot_expired)
                     {
                         APP_PRINT("\r\n Timer Expired in One-Shot Mode\r\n");
-                        uart_log("\r\n Timer Expired in One-Shot Mode\r\n");
                     }
 
                     g_one_shot_expired = false;
@@ -344,17 +326,6 @@ void hal_entry(void)
         }
     }
 
-#ifdef USE_UART_EP_DEMO
-    /* User defined function to demonstrate UART functionality */
-    err = uart_ep_demo();
-    if (FSP_SUCCESS != err)
-    {
-        APP_PRINT ("\r\n ** UART EP Demo FAILED ** \r\n");
-        deinit_uart();
-        APP_ERR_TRAP(err)
-    }
-#endif
-
 #if BSP_TZ_SECURE_BUILD
     /* Enter non-secure code */
     R_BSP_NonSecureEnter();
@@ -362,8 +333,9 @@ void hal_entry(void)
 }
 
 /*******************************************************************************************************************//**
- * This function is called at various points during the startup process.  This implementation uses the event that is
- * called right before main() to set up the pins.
+ * This function is called at various points during the startup process.  This implementation uses:
+ *  - the event that is called after the clocks have been configured, to freeze the watchdog
+ *  - the event that is called right before main() to set up the pins
  *
  * @param[in]  event    Where at in the start up process the code is currently at
  **********************************************************************************************************************/
@@ -373,11 +345,22 @@ void R_BSP_WarmStart(bsp_warm_start_event_t event)
     {
     }
 
+    if (BSP_WARM_START_POST_CLOCK == event)
+    {
+        /* System clocks are configured. */
+
+        /*
+         * Freeze the watchdog, to avoid an unexpected reboot.
+         * The watchdog-freeze setting must be enabled for this to have an effect.
+         */
+        R_BSP_PeripheralFreeze (BSP_FREEZE_PERIPHERAL_SYS_WDOG);
+    }
+
     if (BSP_WARM_START_POST_C == event)
     {
         /* C runtime environment and system clocks are setup. */
         /* Configure pins. */
-        IOPORT_CFG_OPEN(&IOPORT_CFG_CTRL, &IOPORT_CFG_NAME);
+        R_GPIO_W_Open (&g_gpio_w_ctrl, &IOPORT_CFG_NAME);
     }
 }
 

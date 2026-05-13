@@ -1,0 +1,1159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<raConfiguration version="12">
+  <generalSettings>
+    <option key="#Board#" value="board.rrq61xxx_evb"/>
+    <option key="CPU" value="RA6W1"/>
+    <option key="Core" value="CM33"/>
+    <option key="#TargetName#" value="R7SA6W1CEDZDD"/>
+    <option key="#TargetARCHITECTURE#" value="cortex-m33"/>
+    <option key="#DeviceCommand#" value="R7SA6W1CE"/>
+    <option key="#RTOS#" value="rtos.awsfreertos"/>
+    <option key="#pinconfiguration#" value="RTKRRQ61000C.pincfg"/>
+    <option key="#FSPVersion#" value="2.0.1"/>
+    <option key="#ConfigurationFragments#" value="Renesas##BSP##Board##rrq61xxx_evb##"/>
+    <option key="#SELECTED_TOOLCHAIN#" value="gcc-arm-embedded"/>
+    <option key="#ToolchainVersion#" value="13.3.1.arm-13-24"/>
+  </generalSettings>
+  <raBspConfiguration>
+    <config id="config.bsp.ra6w1.R7SA6W1CEDZDD">
+      <property id="config.bsp.part_number" value="config.bsp.part_number.value"/>
+      <property id="config.bsp.rom_size_bytes" value="config.bsp.rom_size_bytes.value"/>
+      <property id="config.bsp.rom_size_bytes_hidden" value="67108864"/>
+      <property id="config.bsp.ram_size_bytes" value="config.bsp.ram_size_bytes.value"/>
+      <property id="config.bsp.package_style" value="config.bsp.package_style.value"/>
+      <property id="config.bsp.package_pins" value="config.bsp.package_pins.value"/>
+      <property id="config.bsp.number_of_cores" value="1"/>
+      <property id="config.bsp.irq_count_hidden" value="55"/>
+    </config>
+    <config id="config.bsp.ra6w1">
+      <property id="config.bsp.series" value="config.bsp.series.value"/>
+    </config>
+    <config id="config.bsp.ra6w1.fsp">
+      <property id="config.bsp.fsp.tz.exception_response" value="config.bsp.fsp.tz.exception_response.nmi"/>
+      <property id="config.bsp.fsp.tz.cmsis.bfhfnmins" value="config.bsp.fsp.tz.cmsis.bfhfnmins.secure"/>
+      <property id="config.bsp.fsp.tz.cmsis.sysresetreqs" value="config.bsp.fsp.tz.cmsis.sysresetreqs.secure_only"/>
+      <property id="config.bsp.fsp.tz.cmsis.s_priority_boost" value="config.bsp.fsp.tz.cmsis.s_priority_boost.disabled"/>
+      <property id="config.bsp.fsp.tz.csar" value="config.bsp.fsp.tz.csar.both"/>
+      <property id="config.bsp.fsp.tz.rstsar" value="config.bsp.fsp.tz.rstsar.both"/>
+      <property id="config.bsp.fsp.tz.sramsar.sramprcr" value="config.bsp.fsp.tz.sramsar.sramprcr.both"/>
+      <property id="config.bsp.fsp.tz.sramsar.sramecc" value="config.bsp.fsp.tz.sramsar.sramecc.both"/>
+      <property id="config.bsp.fsp.tz.stbramsar" value="config.bsp.fsp.tz.stbramsar.both"/>
+      <property id="config.bsp.fsp.tz.bussara" value="config.bsp.fsp.tz.bussara.both"/>
+      <property id="config.bsp.fsp.tz.bussarb" value="config.bsp.fsp.tz.bussarb.both"/>
+      <property id="config.bsp.fsp.tz.uninitialized_ns_application_fallback" value="config.bsp.fsp.tz.uninitialized_ns_application_fallback.enabled"/>
+      <property id="config.bsp.fsp.ivt_copy" value="config.bsp.fsp.ivt_copy.disabled"/>
+      <property id="config.bsp.fsp.mcu.clock_manager" value="config.bsp.fsp.mcu.clock_manager.enabled"/>
+      <property id="config.bsp.fsp.mcu.ospi_8_lines_support" value="config.bsp.fsp.mcu.ospi_8_lines_support.disabled"/>
+      <property id="config.bsp.fsp.mcu.uart.max_baud" value="5000000"/>
+      <property id="config.bsp.fsp.mcu.iic_master.rate.rate_fastplus" value="1"/>
+      <property id="config.bsp.fsp.mcu.iic_master.fastplus_channels" value="0x1"/>
+      <property id="config.bsp.fsp.mcu.spi1.max_bitrate" value="48000000"/>
+      <property id="config.bsp.fsp.mcu.spi2.max_bitrate" value="48000000"/>
+      <property id="config.bsp.fsp.mcu.spi1.rx_fifo_threshold_level" value="32"/>
+      <property id="config.bsp.fsp.mcu.spi2.rx_fifo_threshold_level" value="32"/>
+      <property id="config.bsp.fsp.mcu.spi1.tx_fifo_threshold_level" value="32"/>
+      <property id="config.bsp.fsp.mcu.spi2.tx_fifo_threshold_level" value="32"/>
+    </config>
+    <config id="config.bsp.rrq">
+      <property id="config.bsp.common.main" value="0x1000"/>
+      <property id="config.bsp.common.heap" value="0x2000"/>
+      <property id="config.bsp.common.nvm_size" value="0x180000"/>
+      <property id="config.bsp.common.checking" value="config.bsp.common.checking.disabled"/>
+      <property id="config.bsp.common.assert" value="config.bsp.common.assert.none"/>
+      <property id="config.bsp.common.error_log" value="config.bsp.common.error_log.none"/>
+      <property id="config.bsp.common.wakeup_reset_handler_en" value="config.bsp.common.wakeup_reset_handler_en.enabled"/>
+      <property id="config.bsp.common.soft_reset" value="config.bsp.common.soft_reset.disabled"/>
+      <property id="config.bsp.common.c_runtime_init" value="config.bsp.common.c_runtime_init.enabled"/>
+      <property id="config.bsp.common.early_init" value="config.bsp.common.early_init.disabled"/>
+      <property id="config.bsp.common.main_osc_populated" value="config.bsp.common.main_osc_populated.enabled"/>
+      <property id="config.bsp.common.main_osc_stabilization_us" value="0"/>
+      <property id="config.bsp.common.subclock_populated" value="config.bsp.common.subclock_populated.enabled"/>
+      <property id="config.bsp.common.subclock_stabilization_ms" value="1000"/>
+      <property id="config.bsp.common.cal_cycles" value="25"/>
+      <property id="config.bsp.common.image_header_version" value="0x00000000"/>
+      <property id="config.bsp.common.headerless" value="config.bsp.common.headerless.false"/>
+    </config>
+  </raBspConfiguration>
+  <raClockConfiguration>
+    <node id="board.clock.xtal40m.freq" option="board.clock.xtal40m.freq.40m"/>
+    <node id="board.clock.xtal.freq" option="board.clock.xtal.freq.32k"/>
+    <node id="board.clock.rcx.freq" option="board.clock.rcx.freq.32k"/>
+    <node id="board.clock.pll480m.freq" option="board.clock.pll480m.freq.480m"/>
+    <node id="board.clock.xtal40m.source" option="board.clock.xtal40m.source.enabled"/>
+    <node id="board.clock.xtal.source" option="board.clock.xtal.source.enabled"/>
+    <node id="board.clock.rcx.source" option="board.clock.rcx.source.enabled"/>
+    <node id="board.clock.pll.source" option="board.clock.pll.source.xtal40m"/>
+    <node id="board.clock.pll.mul" option="board.clock.pll.mul.12"/>
+    <node id="board.clock.lp_clk.source" option="board.clock.lp_clk.source.xtal32k"/>
+    <node id="board.clock.pll_sys.source" option="board.clock.pll_sys.source.pll"/>
+    <node id="board.clock.pll_sys.mul" option="board.clock.pll_sys.mul.1_3"/>
+    <node id="board.clock.sys_clk.source" option="board.clock.sys_clk.source.pll_sys"/>
+    <node id="board.clock.sys_clk.display" option="board.clock.sys_clk.display.value"/>
+    <node id="board.clock.hclk.div" option="board.clock.hclk.div.1"/>
+    <node id="board.clock.qspiclk.div" option="board.clock.qspiclk.div.1"/>
+    <node id="board.clock.pll_spi.source" option="board.clock.pll_spi.source.disabled"/>
+    <node id="board.clock.pll_spi.mul" option="board.clock.pll_spi.mul.1_6"/>
+    <node id="board.clock.spi_clk.source" option="board.clock.spi_clk.source.xtal_sys"/>
+    <node id="board.clock.spi_clk.display" option="board.clock.spi_clk.display.value"/>
+    <node id="board.clock.spi1clk.display" option="board.clock.spi1clk.display.value"/>
+    <node id="board.clock.spi2clk.display" option="board.clock.spi2clk.display.value"/>
+    <node id="board.clock.pll_peri.source" option="board.clock.pll_peri.source.pll"/>
+    <node id="board.clock.pll_peri.div" option="board.clock.pll_peri.div.6"/>
+    <node id="board.clock.peri_clk.source" option="board.clock.peri_clk.source.pll_peri"/>
+    <node id="board.clock.peri_clk.display" option="board.clock.peri_clk.display.value"/>
+    <node id="board.clock.i2c1.div" option="board.clock.i2c1.div.1"/>
+    <node id="board.clock.i2c2.div" option="board.clock.i2c2.div.1"/>
+    <node id="board.clock.i2c1clk.display" option="board.clock.i2c1clk.display.value"/>
+    <node id="board.clock.i2c2clk.display" option="board.clock.i2c2clk.display.value"/>
+    <node id="board.clock.uart1clk.display" option="board.clock.uart1clk.display.value"/>
+    <node id="board.clock.uart2clk.display" option="board.clock.uart2clk.display.value"/>
+    <node id="board.clock.uart3clk.display" option="board.clock.uart3clk.display.value"/>
+    <node id="board.clock.rtc_clk.display" option="board.clock.rtc_clk.display.value"/>
+    <node id="board.clock.wdog.div" option="board.clock.wdog.div.320"/>
+    <node id="board.clock.wdog.div.display" option="board.clock.wdog.div.display.value"/>
+  </raClockConfiguration>
+  <raComponentSelection>
+    <component apiversion="" class="PSA" condition="" group="Crypto" subgroup="mbedCrypto" variant="" vendor="Arm" version="3.2.1+renesas.7.fsp.2.0.1">
+      <description>Arm PSA Crypto Implementation</description>
+      <originalPack>Arm.MbedCrypto.3.2.1+renesas.7.fsp.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.0.1">
+      <description>Board Support Package Common Files</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ext_irq_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>External Interrupt (W)</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>I/O Port (W)</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ospi_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>Octa Serial Peripheral Interface Flash</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_rtc_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>Real Time Clock</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_uart_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>UART_W</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_wdog_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>Watchdog Timer (W)</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_block_media_spi_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>SPI Block Media Memory Implementation</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_comms_uart_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>UART Communications Implementation</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_freertos_port_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>FreeRTOS Port</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_https_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>HTTPS</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_lwip_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>lwip</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_map_persistant_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>RM_MAP_PERSISTANT_W</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_mbedtls" variant="" vendor="Renesas" version="2.0.1">
+      <description>Modified mbedTLS</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_mqtt_port_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>MQTT Port</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_pmgr_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>Power Manager Mode</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_psa_crypto_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>MbedCrypto H/W Acceleration</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_stdio_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>RM_STDIO_W</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_vee_flash_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>Virtual EEPROM (W)</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_watchdog_service_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>Watchdog Service</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_wifi" variant="" vendor="Renesas" version="2.0.1">
+      <description>WIFI</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Mosquitto" condition="" group="all" subgroup="MQTT" variant="" vendor="Eclipse" version="1.4.14+fsp.2.0.1">
+      <description>Eclipse Mosquitto</description>
+      <originalPack>Eclipse-Foundation.Eclipse-Mosquitto.1.4.14+fsp.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="mbed" condition="" group="Security" subgroup="mbedTLS" variant="" vendor="Arm" version="3.6.4+renesas.2.fsp.2.0.1">
+      <description>Arm mbed TLS</description>
+      <originalPack>Arm.MbedTLS.3.6.4+renesas.2.fsp.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_cc312_openable_w" variant="" vendor="Renesas" version="1.0.0+fsp.2.0.1">
+      <description>CC312 Openable Library</description>
+      <originalPack>Renesas.CC312-Openable.1.0.0+fsp.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_cc312_property_w" variant="" vendor="Renesas" version="1.0.0+fsp.2.0.1">
+      <description>CC312 Property Library</description>
+      <originalPack>Renesas.CC312-Property.1.0.0+fsp.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="RTOS" condition="" group="FreeRTOS" subgroup="all" variant="" vendor="AWS" version="10.6.1+fsp.2.0.1">
+      <description>FreeRTOS</description>
+      <originalPack>Amazon.FreeRTOS-Kernel.10.6.1+fsp.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Heaps" condition="" group="FreeRTOS" subgroup="heap_5" variant="" vendor="AWS" version="10.6.1+fsp.2.0.1">
+      <description>FreeRTOS - Memory Management - Heap 5</description>
+      <originalPack>Amazon.FreeRTOS-Kernel.10.6.1+fsp.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="R7SA6W1CEDZDD" vendor="Renesas" version="2.0.1">
+      <description>Board support package for R7SA6W1CEDZDD</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="" vendor="Renesas" version="2.0.1">
+      <description>Board support package for RA6W1</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="fsp" variant="" vendor="Renesas" version="2.0.1">
+      <description>Board support package for RA6W1 - FSP Data</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="events" variant="" vendor="Renesas" version="2.0.1">
+      <description>Board support package for RA6W1 - Events</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="linker" variant="" vendor="Renesas" version="2.0.1">
+      <description>Board support package for RA6W1 - Linker</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.0.1">
+      <description>Arm CMSIS Version 6 - Core (M)</description>
+      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq61xxx_evb" variant="" vendor="Renesas" version="2.0.1">
+      <description>RRQ61xxx-EVB Board Support Files</description>
+      <originalPack>Renesas.RAFW_board_rrq61xxx_evb.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Libraries" condition="" group="Networking" subgroup="lwIP" variant="" vendor="3rdParty" version="2.1.3+fsp.2.0.1">
+      <description>lwIP</description>
+      <originalPack>3rdparty.lwIP.2.1.3+fsp.2.0.1.pack</originalPack>
+    </component>
+  </raComponentSelection>
+  <raElcConfiguration/>
+  <raIcuConfiguration/>
+  <raLinkMapConfiguration/>
+  <raModuleConfiguration>
+    <module id="module.driver.ioport_on_gpio_w.0">
+      <property id="module.driver.gpio_w.name" value="g_gpio_w"/>
+      <property id="module.driver.gpio_w.pincfg" value="g_bsp_pin_cfg"/>
+    </module>
+    <module id="module.middleware.rm_freertos_port.0"/>
+    <module id="module.freertos.heap.5.6224082"/>
+    <module id="module.middleware.rm_wifi.440010314">
+      <property id="module.middleware.rm_wifi.name" value="g_wifi0"/>
+      <property id="module.middleware.rm_wifi.ipl" value="board.icu.common.irq.priority12"/>
+      <property id="module.middleware.rm_wifi.zigbee_bt_coex" value="module.middleware.rm_wifi.zigbee_bt_coex.disabled"/>
+      <property id="module.middleware.rm_wifi.coex_asc1_port" value="module.middleware.rm_wifi.coex_asc1_port.PORT_00"/>
+      <property id="module.middleware.rm_wifi.coex_asc1_pin" value="module.middleware.rm_wifi.coex_asc1_pin.PIN_07"/>
+      <property id="module.middleware.rm_wifi.coex_asc2_port" value="module.middleware.rm_wifi.coex_asc2_port.PORT_00"/>
+      <property id="module.middleware.rm_wifi.coex_asc2_pin" value="module.middleware.rm_wifi.coex_asc2_pin.PIN_06"/>
+      <property id="module.middleware.rm_wifi.bt_act_port" value="module.middleware.rm_wifi.bt_act_port.PORT_01"/>
+      <property id="module.middleware.rm_wifi.bt_act_pin" value="module.middleware.rm_wifi.bt_act_pin.PIN_15"/>
+      <property id="module.middleware.rm_wifi.coex_asc1_reset_val" value="module.middleware.rm_wifi.coex_asc1_reset_val.high"/>
+      <property id="module.middleware.rm_wifi.coex_asc2_reset_val" value="module.middleware.rm_wifi.coex_asc2_reset_val.low"/>
+    </module>
+    <module id="module.middleware.rm_lwip_w.2060514317">
+      <property id="module.middleware.rm_lwip_w.name" value="g_lwip0"/>
+    </module>
+    <module id="module.3rdparty.3rdparty_lwip.1434511177"/>
+    <module id="module.middleware.watchdog_service_on_watchdog_service_w.295561336">
+      <property id="module.middleware.watchdog_service_w.name" value="g_watchdog_service0"/>
+    </module>
+    <module id="module.driver.watchdog_on_wdog_w.133957934">
+      <property id="module.driver.watchdog.name" value="g_wdog_w0"/>
+      <property id="module.driver.watchdog.timeout" value="8191"/>
+      <property id="module.driver.watchdog.window_start" value="0"/>
+      <property id="module.driver.watchdog.window_end" value="0"/>
+      <property id="module.driver.watchdog.reset_control" value="module.driver.watchdog.reset_control.reset"/>
+      <property id="module.driver.watchdog.nmi_callback" value="NULL"/>
+    </module>
+    <module id="module.arm.mbedtls.1608067099"/>
+    <module id="module.driver.psa_crypto.187810447"/>
+    <module id="module.driver.rm_psa_crypto_w_cc312.1377350251"/>
+    <module id="module.middleware.rm_pmgr_w.942762869"/>
+    <module id="module.middleware.mqtt_port_w.1845471890">
+      <property id="module.middleware.mqtt_port_w.name" value="g_mqtt_client0"/>
+      <property id="module.middleware.mqtt_port_w.mqtt_certs" value=""/>
+      <property id="module.middleware.mqtt_port_w.use_mqtt_v311" value="module.middleware.mqtt_port_w.use_mqtt_v311.enabled"/>
+      <property id="module.middleware.mqtt_port_w.rx_timeout" value="1000"/>
+      <property id="module.middleware.mqtt_port_w.tx_timeout" value="1000"/>
+      <property id="module.middleware.mqtt_port_w.clean_session" value="module.middleware.mqtt_port_w.clean_session.enabled"/>
+      <property id="module.middleware.mqtt_port_w.alpn_1" value=""/>
+      <property id="module.middleware.mqtt_port_w.alpn_2" value=""/>
+      <property id="module.middleware.mqtt_port_w.alpn_3" value=""/>
+      <property id="module.middleware.mqtt_port_w.keep_alive" value="60"/>
+      <property id="module.middleware.mqtt_port_w.client_identifier" value=""/>
+      <property id="module.middleware.mqtt_port_w.host_name" value=""/>
+      <property id="module.middleware.mqtt_port_w.mqtt_port" value="8883"/>
+      <property id="module.middleware.mqtt_port_w.user_name" value=""/>
+      <property id="module.middleware.mqtt_port_w.password" value=""/>
+      <property id="module.middleware.mqtt_port_w.root_ca" value="ROOT_CA"/>
+      <property id="module.middleware.mqtt_port_w.client_cert" value="CLIENT_CERT"/>
+      <property id="module.middleware.mqtt_port_w.private_key" value="PRIVATE_KEY"/>
+      <property id="module.middleware.mqtt_port_w.will_topic" value=""/>
+      <property id="module.middleware.mqtt_port_w.will_message" value=""/>
+      <property id="module.middleware.mqtt_port_w.sni_name" value=""/>
+      <property id="module.middleware.mqtt_port_w.will_qos" value="module.middleware.mqtt_port_w.will_qos.0"/>
+      <property id="module.middleware.mqtt_port_w.tls_cipher_suites" value=""/>
+      <property id="module.middleware.mqtt_port_w.p_callback" value="mqtt_client0_callback"/>
+    </module>
+    <module id="module.eclipse.mosquitto_mqtt.1242259116"/>
+    <module id="module.driver.external_irq_on_ext_irq_w.1825911459">
+      <property id="module.driver.external_irq.name" value="g_external_irq1"/>
+      <property id="module.driver.external_irq.channel" value="1"/>
+      <property id="module.driver.external_irq.trigger" value="module.driver.external_irq.trigger.trig_falling"/>
+      <property id="module.driver.external_irq.p_callback" value="srm_wifi_app_gpio_p0_fr_handler"/>
+      <property id="module.driver.external_irq.ipl" value="board.icu.common.irq.priority12"/>
+    </module>
+    <module id="module.driver.external_irq_on_ext_irq_w.42643178">
+      <property id="module.driver.external_irq.name" value="g_external_irq2"/>
+      <property id="module.driver.external_irq.channel" value="2"/>
+      <property id="module.driver.external_irq.trigger" value="module.driver.external_irq.trigger.trig_falling"/>
+      <property id="module.driver.external_irq.p_callback" value="NULL"/>
+      <property id="module.driver.external_irq.ipl" value="board.icu.common.irq.priority12"/>
+    </module>
+    <module id="module.driver.rm_stdio_w_on_stdio.1788668778"/>
+    <module id="module.driver.rm_comms_on_uart_w.2078850146">
+      <property id="module.driver.rm_comms.name" value="g_comms_uart_w0"/>
+      <property id="module.driver.comms_uart_w.buffer_overwrite_protection" value="module.driver.comms_uart_w.buffer_overwrite_protection.disabled"/>
+      <property id="module.driver.comms_uart_w.tx_mutex" value="module.driver.comms_uart_w.tx_mutex.use"/>
+      <property id="module.driver.comms_uart_w.rx_mutex" value="module.driver.comms_uart_w.rx_mutex.use"/>
+      <property id="module.driver.comms_uart_w.mutex_timeout" value="0xFFFFFFFF"/>
+      <property id="module.driver.comms_uart_w.tx_semaphore" value="module.driver.comms_uart_w.tx_semaphore.use"/>
+      <property id="module.driver.comms_uart_w.rx_semaphore" value="module.driver.comms_uart_w.rx_semaphore.use"/>
+      <property id="module.driver.comms_uart_w.semaphore_timeout" value="0xFFFFFFFF"/>
+      <property id="module.driver.comms_uart_w.p_callback" value="NULL"/>
+    </module>
+    <module id="module.driver.uart_w.831407423">
+      <property id="module.driver.uart.name" value="g_uart0"/>
+      <property id="module.driver.uart.channel" value="1"/>
+      <property id="module.driver.uart.data_bits" value="module.driver.uart.data_bits.data_bits_8"/>
+      <property id="module.driver.uart.parity" value="module.driver.uart.parity.parity_off"/>
+      <property id="module.driver.uart.stop_bits" value="module.driver.uart.stop_bits.stop_bits_1"/>
+      <property id="module.driver.uart.baud" value="115200"/>
+      <property id="module.driver.uart.extended_data_bits" value="module.driver.uart.extended_data_bits.data_bits_8"/>
+      <property id="module.driver.uart.loopback" value="module.driver.uart.loopback.disabled"/>
+      <property id="module.driver.uart.flow_control" value="module.driver.uart.flow_control.enable"/>
+      <property id="module.driver.uart.fifo_enable" value="module.driver.uart.fifo_enable.enabled"/>
+      <property id="module.driver.uart.rx_fifo_trigger" value="module.driver.uart.rx_fifo_trigger.seven_eighths"/>
+      <property id="module.driver.uart.tx_fifo_trigger" value="module.driver.uart.tx_fifo_trigger.eighth"/>
+      <property id="module.driver.uart.extended_data_bits_enable" value="module.driver.uart.extended_data_bits_enable.disabled"/>
+      <property id="module.driver.uart.rs485_enable" value="module.driver.uart.rs485_enable.disabled"/>
+      <property id="module.driver.uart.ipl" value="board.icu.common.irq.priority4"/>
+      <property id="module.driver.uart.callback" value="NULL"/>
+    </module>
+    <module id="module.middleware.rm_map_persistant_w.1882295735"/>
+    <module id="module.middleware.rm_vee_flash_w.2035419766">
+      <property id="module.middleware.rm_vee_flash_w.name" value="g_vee0"/>
+      <property id="module.middleware.rm_vee_flash_w.record_max_id" value="2048"/>
+      <property id="module.middleware.rm_vee_flash_w.num_segments" value="2"/>
+      <property id="module.middleware.rm_vee_flash_w.start_addr" value="0x2A300000"/>
+      <property id="module.middleware.rm_vee_flash_w.total_size" value="0x4000"/>
+      <property id="module.middleware.rm_vee_flash_w.p_callback" value="NULL"/>
+    </module>
+    <module id="module.middleware.rm_block_media_on_rm_block_media_spi_w.1489706663">
+      <property id="module.middleware.rm_block_media.name" value="g_rm_block_media0"/>
+      <property id="module.middleware.rm_block_media.block_size" value="4096"/>
+      <property id="module.middleware.rm_block_media.block_count" value="8192"/>
+      <property id="module.middleware.rm_block_media.base_address" value="0"/>
+      <property id="module.middleware.rm_block_media.callback" value="NULL"/>
+    </module>
+    <module id="module.driver.ospi_on_ospi_w.746256455">
+      <property id="module.driver.ospi_w.name" value="g_ospi"/>
+      <property id="module.driver.ospi_w.channel" value="0"/>
+      <property id="module.driver.ospi_w.spi_protocol" value="module.driver.ospi_w.protocol_mode.protocol_1S_1S_1S"/>
+      <property id="module.driver.ospi_w.address_bytes" value="module.driver.ospi_w.address_bytes.address_bytes_3"/>
+      <property id="module.driver.ospi_w.page_program_addr_line" value="module.driver.ospi_w.page_program_addr_line.data_line_4"/>
+      <property id="module.driver.ospi_w.write_status_bit" value="0"/>
+      <property id="module.driver.ospi_w.write_enable_bit" value="1"/>
+      <property id="module.driver.ospi_w.sector_erase_size" value="4096"/>
+      <property id="module.driver.ospi_w.block_erase_size" value="32768"/>
+      <property id="module.driver.ospi_w.block_64k_erase_size" value="65536"/>
+      <property id="module.driver.ospi_w.spi_page_program_command" value="0x32"/>
+      <property id="module.driver.ospi_w.spi_read_command" value="0xEB"/>
+      <property id="module.driver.ospi_w.spi_write_enable_command" value="0x06"/>
+      <property id="module.driver.ospi_w.spi_status_command" value="0x05"/>
+      <property id="module.driver.ospi_w.sector_erase_command" value="0x20"/>
+      <property id="module.driver.ospi_w.block_erase_command" value="0x52"/>
+      <property id="module.driver.ospi_w.chip_erase_command" value="0xD8"/>
+      <property id="module.driver.ospi_w.high_speed_protocol" value="module.driver.ospi_w.protocol_mode.protocol_1S_4S_4S"/>
+      <property id="module.driver.ospi_w.high_speed_command_length" value="module.driver.opi.high_speed_command_length.1"/>
+      <property id="module.driver.ospi_w.high_speed_page_program_command" value="0x32"/>
+      <property id="module.driver.ospi_w.high_speed_read_command" value="0xEB"/>
+      <property id="module.driver.ospi_w.high_speed_write_enable_command" value="0x06"/>
+      <property id="module.driver.ospi_w.high_speed_status_command" value="0x05"/>
+      <property id="module.driver.ospi_w.high_speed_sector_erase_command" value="0"/>
+      <property id="module.driver.ospi_w.high_speed_block_erase_command" value="0"/>
+      <property id="module.driver.ospi_w.high_speed_chip_erase_command" value="0"/>
+      <property id="module.driver.ospi_w.mem_read_dummy_cycles" value="0x02"/>
+      <property id="module.driver.ospi_w.status_read_dummy_cycles" value="0"/>
+      <property id="module.driver.ospi_w.hw_cfg.device_clk_div" value="module.driver.ospi_w.hw_cfg.device_clk_div_2"/>
+      <property id="module.driver.ospi_w.hw_cfg.clock_mode" value="module.driver.ospi_w.hw_cfg.clock_mode_1"/>
+      <property id="module.driver.ospi_w.hw_cfg.io2_dir" value="module.driver.ospi_w.hw_cfg.io2_dir_auto"/>
+      <property id="module.driver.ospi_w.hw_cfg.io2_value" value="module.driver.ospi_w.hw_cfg.io2_value_low"/>
+      <property id="module.driver.ospi_w.hw_cfg.io3_dir" value="module.driver.ospi_w.hw_cfg.io3_dir_auto"/>
+      <property id="module.driver.ospi_w.hw_cfg.io3_value" value="module.driver.ospi_w.hw_cfg.io3_value_low"/>
+      <property id="module.driver.ospi_w.hw_cfg.io4_7_dir" value="module.driver.ospi_w.hw_cfg.io4_7_dir_auto"/>
+      <property id="module.driver.ospi_w.hw_cfg.io4_7_value" value="module.driver.ospi_w.hw_cfg.io4_7_value_0000"/>
+      <property id="module.driver.ospi_w.hw_cfg.hready_mode" value="module.driver.ospi_w.hw_cfg.hready_mode_wait"/>
+      <property id="module.driver.ospi_w.hw_cfg.sampling_edge" value="module.driver.ospi_w.hw_cfg.sampling_edge_neg"/>
+      <property id="module.driver.ospi_w.hw_cfg.read_pipe" value="module.driver.ospi_w.hw_cfg.read_pipe_en"/>
+      <property id="module.driver.ospi_w.hw_cfg.pipe_delay" value="module.driver.ospi_w.hw_cfg.pipe_delay_7"/>
+      <property id="module.driver.ospi_w.hw_cfg.slew_rate" value="module.driver.ospi_w.hw_cfg.slew_rate_0"/>
+      <property id="module.driver.ospi_w.hw_cfg.drive_current" value="module.driver.ospi_w.hw_cfg.drive_current_12"/>
+      <property id="module.driver.ospi_w.flash_cfg.instr_bus_mode" value="module.driver.ospi_w.flash_cfg.instr_bus_mode_single"/>
+      <property id="module.driver.ospi_w.flash_cfg.bus_mode" value="module.driver.ospi_w.flash_cfg.bus_mode_quad"/>
+      <property id="module.driver.ospi_w.flash_cfg.instr_size" value="module.driver.ospi_w.flash_cfg.instr_size_1byte"/>
+      <property id="module.driver.ospi_w.flash_cfg.read_opcode" value="0xEB"/>
+      <property id="module.driver.ospi_w.flash_cfg.erase_opcode" value="0x20"/>
+      <property id="module.driver.ospi_w.flash_cfg.suspend_opcode" value="0x75"/>
+      <property id="module.driver.ospi_w.flash_cfg.resume_opcode" value="0x7A"/>
+      <property id="module.driver.ospi_w.flash_cfg.read_status_opcode" value="0x05"/>
+      <property id="module.driver.ospi_w.flash_cfg.write_enable_opcode" value="0x06"/>
+      <property id="module.driver.ospi_w.flash_cfg.dummy_cycles" value="0x02"/>
+      <property id="module.driver.ospi_w.flash_cfg.addr_size" value="module.driver.ospi_w.flash_cfg.addr_size_24"/>
+      <property id="module.driver.ospi_w.flash_cfg.instr_mode" value="module.driver.ospi_w.flash_cfg.instr_mode_once"/>
+      <property id="module.driver.ospi_w.flash_cfg.extra_byte_setting" value="module.driver.ospi_w.flash_cfg.extra_byte_en"/>
+      <property id="module.driver.ospi_w.flash_cfg.extra_byte" value="0xA0"/>
+      <property id="module.driver.ospi_w.flash_cfg.busy_bit" value="0"/>
+    </module>
+    <module id="module.driver.rtc_w.1656851181"/>
+    <module id="module.driver.external_irq_on_ext_irq_w.910472504">
+      <property id="module.driver.external_irq.name" value="g_external_irq0"/>
+      <property id="module.driver.external_irq.channel" value="0"/>
+      <property id="module.driver.external_irq.trigger" value="module.driver.external_irq.trigger.trig_rising"/>
+      <property id="module.driver.external_irq.p_callback" value="NULL"/>
+      <property id="module.driver.external_irq.ipl" value="board.icu.common.irq.priority12"/>
+    </module>
+    <module id="module.driver.r_cc312_openable_w.2041970257"/>
+    <module id="module.driver.r_cc312_property_w.1698786929"/>
+    <module id="module.driver.rm_mbedtls.1101935449"/>
+    <context id="_hal.0">
+      <stack module="module.driver.ioport_on_gpio_w.0"/>
+      <stack module="module.middleware.rm_freertos_port.0"/>
+      <stack module="module.freertos.heap.5.6224082"/>
+      <stack module="module.middleware.rm_wifi.440010314">
+        <stack module="module.middleware.rm_lwip_w.2060514317" requires="module.middleware.rm_wifi.requires.lwip">
+          <stack module="module.3rdparty.3rdparty_lwip.1434511177" requires="module.middleware.rm_lwip_w.requires.3rdparty_lwip"/>
+          <stack module="module.arm.mbedtls.1608067099" requires="module.middleware.rm_lwip_w.requires.rm_mbedtls">
+            <stack module="module.driver.psa_crypto.187810447" requires="module.arm.mbedtls.requires.psa_crypto">
+              <stack module="module.driver.rm_psa_crypto_w_cc312.1377350251" requires="module.driver.rm_psa_crypto_w">
+                <stack module="module.driver.r_cc312_openable_w.2041970257" requires="module.driver.rm_psa_crypto_w.requires.cc312">
+                  <stack module="module.driver.r_cc312_property_w.1698786929" requires="module.driver.r_cc312_openable_w.requires.cc312"/>
+                </stack>
+              </stack>
+            </stack>
+            <stack module="module.driver.rm_mbedtls.1101935449" requires="module.driver.rm_mbedtls.requires.rm_mbedtls"/>
+          </stack>
+          <stack module="module.middleware.watchdog_service_on_watchdog_service_w.295561336" requires="module.middleware.rm_lwip_w.requires.watchdog_service">
+            <stack module="module.driver.watchdog_on_wdog_w.133957934" requires="module.middleware.watchdog_service_on_watchdog_service_w.requires.wdog_w"/>
+          </stack>
+        </stack>
+        <stack module="module.middleware.watchdog_service_on_watchdog_service_w.295561336" requires="module.middleware.rm_wifi.requires.watchdog_service">
+          <stack module="module.driver.watchdog_on_wdog_w.133957934" requires="module.middleware.watchdog_service_on_watchdog_service_w.requires.wdog_w"/>
+        </stack>
+        <stack module="module.middleware.rm_map_persistant_w.1882295735" requires="module.middleware.rm_wifi.requires.rm_map_persistant_w">
+          <stack module="module.middleware.rm_vee_flash_w.2035419766" requires="module.middleware.rm_map_persistant_w.requires.vee_flash_w">
+            <stack module="module.middleware.rm_block_media_on_rm_block_media_spi_w.1489706663" requires="module.middleware.rm_vee_flash_w.requires.flash">
+              <stack module="module.driver.ospi_on_ospi_w.746256455" requires="module.middleware.rm_block_media_on_rm_block_media_spi_w.requires.spi"/>
+            </stack>
+          </stack>
+        </stack>
+        <stack module="module.middleware.rm_pmgr_w.942762869" requires="module.middleware.rm_wifi.common.requires.rm_pmgr_w"/>
+        <stack module="module.driver.rtc_w.1656851181" requires="module.middleware.rm_wifi.requires.rtc_w"/>
+      </stack>
+      <stack module="module.middleware.mqtt_port_w.1845471890">
+        <stack module="module.eclipse.mosquitto_mqtt.1242259116" requires="module.middleware.mqtt_port_w.requires.mqtt"/>
+        <stack module="module.middleware.watchdog_service_on_watchdog_service_w.295561336" requires="module.middleware.mqtt_port_w.requires.watchdog_service">
+          <stack module="module.driver.watchdog_on_wdog_w.133957934" requires="module.middleware.watchdog_service_on_watchdog_service_w.requires.wdog_w"/>
+        </stack>
+      </stack>
+      <stack module="module.driver.external_irq_on_ext_irq_w.1825911459"/>
+      <stack module="module.driver.external_irq_on_ext_irq_w.42643178"/>
+      <stack module="module.driver.rm_stdio_w_on_stdio.1788668778">
+        <stack module="module.driver.rm_comms_on_uart_w.2078850146" requires="module.driver.stdio.requires.comms_uart_w">
+          <stack module="module.driver.uart_w.831407423" requires="module.driver.comms_uart_w.requires.uart"/>
+        </stack>
+      </stack>
+      <stack module="module.driver.external_irq_on_ext_irq_w.910472504"/>
+    </context>
+    <context id="rtos.awsfreertos.thread.356414379">
+      <property id="_symbol" value="app_task"/>
+      <property id="rtos.awsfreertos.thread.name" value="App task"/>
+      <property id="rtos.awsfreertos.thread.stack" value="6144"/>
+      <property id="rtos.awsfreertos.thread.priority" value="2"/>
+      <property id="rtos.awsfreertos.thread.context" value="NULL"/>
+      <property id="rtos.awsfreertos.thread.allocation" value="rtos.awsfreertos.thread.allocation.static"/>
+      <property id="rtos.awsfreertos.thread.secure_context" value="rtos.awsfreertos.thread.secure_context.enable"/>
+    </context>
+    <config id="config.middleware.watchdog_service_w">
+      <property id="config.middleware.watchdog_service_w.param_checking_enable" value="config.middleware.watchdog_service_w.param_checking_enable.bsp"/>
+    </config>
+    <config id="config.driver.wdog_w">
+      <property id="config.driver.wdog_w.param_checking_enable" value="config.driver.wdog_w.param_checking_enable.bsp"/>
+      <property id="config.driver.wdog_w.nmi_supported" value="config.driver.wdog_w.nmi_supported.enabled"/>
+    </config>
+    <config id="config.driver.psa_crypto">
+      <property id="config.driver.psa_crypto.mbedtls_entropy_hardware_alt" value="config.driver.psa_crypto.mbedtls_entropy_hardware_alt.enabled"/>
+      <property id="config.driver.psa_crypto.aes_format" value="config.driver.psa_crypto.aes_format.plaintext"/>
+      <property id="config.driver.psa_crypto.ecc_format" value="config.driver.psa_crypto.ecc_format.plaintext"/>
+      <property id="config.driver.psa_crypto.rsa_format" value="config.driver.psa_crypto.rsa_format.plaintext"/>
+      <property id="config.driver.psa_crypto.sha256_alt" value="config.driver.psa_crypto.sha256_alt.enabled"/>
+      <property id="config.driver.psa_crypto.sha512_alt" value="config.driver.psa_crypto.sha512_alt.disabled"/>
+      <property id="config.driver.psa_crypto.sha3_alt" value="config.driver.psa_crypto.sha3_alt.disabled"/>
+      <property id="config.driver.psa_crypto.aes_alt" value="config.driver.psa_crypto.aes_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_alt" value="config.driver.psa_crypto.ecp_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecdsa_alt" value="config.driver.psa_crypto.ecdsa_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecdh_alt" value="config.driver.psa_crypto.ecdh_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_rsa_1024_alt" value="config.driver.psa_crypto.rsa_1024_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_rsa_alt" value="config.driver.psa_crypto.rsa_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_rsa_3072_keygen" value="config.driver.psa_crypto.rsa_3072_keygen.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_rsa_3072_signing" value="config.driver.psa_crypto.rsa_3072_signing.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_rsa_3072" value="config.driver.psa_crypto.rsa_3072.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_rsa_4096_keygen" value="config.driver.psa_crypto.rsa_4096_keygen.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_rsa_4096_signing" value="config.driver.psa_crypto.rsa_4096_signing.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_rsa_4096" value="config.driver.psa_crypto.rsa_4096.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_setup_teardown_alt" value="config.driver.psa_crypto.mbedtls_platform_setup_teardown_alt.disabled"/>
+      <property id="config.driver.psa_crypto.cc312.ipl" value="board.icu.common.irq.priority12"/>
+      <property id="config.driver.psa_crypto.mbedtls_have_asm" value="config.driver.psa_crypto.mbedtls_have_asm.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_no_udbl_division" value="config.driver.psa_crypto.mbedtls_no_udbl_division.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_no_64bit_multiplication" value="config.driver.psa_crypto.mbedtls_no_64bit_multiplication.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_have_sse2" value="config.driver.psa_crypto.mbedtls_have_sse2.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_have_time" value="config.driver.psa_crypto.mbedtls_have_time.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_have_time_date" value="config.driver.psa_crypto.mbedtls_have_time_date.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_memory" value="config.driver.psa_crypto.mbedtls_platform_memory.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_no_std_functions" value="config.driver.psa_crypto.mbedtls_platform_no_std_functions.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_setbuf_alt" value="config.driver.psa_crypto.mbedtls_platform_setbuf_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_exit_alt" value="config.driver.psa_crypto.mbedtls_platform_exit_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_time_alt" value="config.driver.psa_crypto.mbedtls_platform_time_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_fprintf_alt" value="config.driver.psa_crypto.mbedtls_platform_fprintf_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_printf_alt" value="config.driver.psa_crypto.mbedtls_platform_printf_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_snprintf_alt" value="config.driver.psa_crypto.mbedtls_platform_snprintf_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_vsnprintf_alt" value="config.driver.psa_crypto.mbedtls_platform_vsnprintf_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_nv_seed_alt" value="config.driver.psa_crypto.mbedtls_platform_nv_seed_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_ms_time_alt" value="config.driver.psa_crypto.mbedtls_platform_ms_time_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_crypto_drivers" value="config.driver.psa_crypto.mbedtls_psa_crypto_drivers.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_deprecated_warning" value="config.driver.psa_crypto.mbedtls_deprecated_warning.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_deprecated_removed" value="config.driver.psa_crypto.mbedtls_deprecated_removed.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_timing_alt" value="config.driver.psa_crypto.mbedtls_timing_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_aria_alt" value="config.driver.psa_crypto.mbedtls_aria_alt.disabled"/>
+      <property id="config.driver.psa_crypto.cipher_alt" value="config.driver.psa_crypto.mbedtls_cipher_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_camellia_alt" value="config.driver.psa_crypto.mbedtls_camellia_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ccm_alt" value="config.driver.psa_crypto.aes_ccm_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_chacha20_alt" value="config.driver.psa_crypto.chacha20_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_chachapoly_alt" value="config.driver.psa_crypto.chachapoly_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cmac_alt" value="config.driver.psa_crypto.mbedtls_cmac_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_des_alt" value="config.driver.psa_crypto.mbedtls_des_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_dhm_alt" value="config.driver.psa_crypto.mbedtls_dhm_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecjpake_alt" value="config.driver.psa_crypto.mbedtls_ecjpake_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_gcm_alt" value="config.driver.psa_crypto.aes_gcm_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_nist_kw_alt" value="config.driver.psa_crypto.mbedtls_nist_kw_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_md5_alt" value="config.driver.psa_crypto.mbedtls_md5_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_poly1305_alt" value="config.driver.psa_crypto.mbedtls_poly1305_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ripemd160_alt" value="config.driver.psa_crypto.mbedtls_ripemd160_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_sha1_alt" value="config.driver.psa_crypto.mbedtls_sha1_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_md5_process_alt" value="config.driver.psa_crypto.mbedtls_md5_process_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ripemd160_process_alt" value="config.driver.psa_crypto.mbedtls_ripemd160_process_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_sha1_process_alt" value="config.driver.psa_crypto.mbedtls_sha1_process_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_des_setkey_alt" value="config.driver.psa_crypto.mbedtls_des_setkey_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_des_crypt_ecb_alt" value="config.driver.psa_crypto.mbedtls_des_crypt_ecb_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_des3_crypt_ecb_alt" value="config.driver.psa_crypto.mbedtls_des3_crypt_ecb_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecdh_gen_public_alt" value="config.driver.psa_crypto.mbedtls_ecdh_gen_public_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecdh_compute_shared_alt" value="config.driver.psa_crypto.mbedtls_ecdh_compute_shared_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecdsa_genkey_alt" value="config.driver.psa_crypto.mbedtls_ecdsa_genkey_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_internal_alt" value="config.driver.psa_crypto.mbedtls_ecp_internal_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_no_fallback" value="config.driver.psa_crypto.mbedtls_ecp_no_fallback.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_randomize_jac_alt" value="config.driver.psa_crypto.mbedtls_ecp_randomize_jac_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_add_mixed_alt" value="config.driver.psa_crypto.mbedtls_ecp_add_mixed_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_double_jac_alt" value="config.driver.psa_crypto.mbedtls_ecp_double_jac_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_normalize_jac_many_alt" value="config.driver.psa_crypto.mbedtls_ecp_normalize_jac_many_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_normalize_jac_alt" value="config.driver.psa_crypto.mbedtls_ecp_normalize_jac_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_double_add_mxz_alt" value="config.driver.psa_crypto.mbedtls_ecp_double_add_mxz_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_randomize_mxz_alt" value="config.driver.psa_crypto.mbedtls_ecp_randomize_mxz_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_normalize_mxz_alt" value="config.driver.psa_crypto.mbedtls_ecp_normalize_mxz_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_aes_rom_tables" value="config.driver.psa_crypto.mbedtls_aes_rom_tables.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_aes_fewer_tables" value="config.driver.psa_crypto.mbedtls_aes_fewer_tables.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_aes_only_128_bit_key_length" value="config.driver.psa_crypto.mbedtls_aes_only_128_bit_key_length.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_camellia_small_memory" value="config.driver.psa_crypto.mbedtls_camellia_small_memory.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_check_return_warning" value="config.driver.psa_crypto.mbedtls_check_return_warning.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cipher_mode_cbc" value="config.driver.psa_crypto.mbedtls_cipher_mode_cbc.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cipher_mode_cfb" value="config.driver.psa_crypto.mbedtls_cipher_mode_cfb.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cipher_mode_ctr" value="config.driver.psa_crypto.mbedtls_cipher_mode_ctr.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cipher_mode_ofb" value="config.driver.psa_crypto.mbedtls_cipher_mode_ofb.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cipher_mode_xts" value="config.driver.psa_crypto.mbedtls_cipher_mode_xts.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cipher_null_cipher" value="config.driver.psa_crypto.mbedtls_cipher_null_cipher.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cipher_padding_pkcs7" value="config.driver.psa_crypto.mbedtls_cipher_padding_pkcs7.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cipher_padding_one_and_zeros" value="config.driver.psa_crypto.mbedtls_cipher_padding_one_and_zeros.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cipher_padding_zeros_and_len" value="config.driver.psa_crypto.mbedtls_cipher_padding_zeros_and_len.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cipher_padding_zeros" value="config.driver.psa_crypto.mbedtls_cipher_padding_zeros.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_secp192r1_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_secp192r1_enabled.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_secp224r1_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_secp224r1_enabled.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_secp256r1_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_secp256r1_enabled.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_secp384r1_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_secp384r1_enabled.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_secp521r1_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_secp521r1_enabled.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_secp192k1_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_secp192k1_enabled.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_secp224k1_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_secp224k1_enabled.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_secp256k1_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_secp256k1_enabled.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_bp256r1_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_bp256r1_enabled.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_bp384r1_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_bp384r1_enabled.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_bp512r1_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_bp512r1_enabled.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_curve25519_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_curve25519_enabled.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_dp_curve448_enabled" value="config.driver.psa_crypto.mbedtls_ecp_dp_curve448_enabled.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_nist_optim" value="config.driver.psa_crypto.mbedtls_ecp_nist_optim.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_restartable" value="config.driver.psa_crypto.mbedtls_ecp_restartable.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecdsa_deterministic" value="config.driver.psa_crypto.mbedtls_ecdsa_deterministic.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pk_parse_ec_compressed" value="config.driver.psa_crypto.mbedtls_pk_parse_ec_compressed.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pk_parse_ec_extended" value="config.driver.psa_crypto.mbedtls_pk_parse_ec_extended.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_error_strerror_dummy" value="config.driver.psa_crypto.mbedtls_error_strerror_dummy.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_genprime" value="config.driver.psa_crypto.mbedtls_genprime.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_fs_io" value="config.driver.psa_crypto.mbedtls_fs_io.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_no_default_entropy_sources" value="config.driver.psa_crypto.mbedtls_no_default_entropy_sources.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_no_platform_entropy" value="config.driver.psa_crypto.mbedtls_no_platform_entropy.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_entropy_force_sha256" value="config.driver.psa_crypto.mbedtls_entropy_force_sha256.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_entropy_nv_seed" value="config.driver.psa_crypto.mbedtls_entropy_nv_seed.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_crypto_key_file_id_encodes_owner" value="config.driver.psa_crypto.mbedtls_psa_crypto_key_file_id_encodes_owner.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_memory_debug" value="config.driver.psa_crypto.mbedtls_memory_debug.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_memory_backtrace" value="config.driver.psa_crypto.mbedtls_memory_backtrace.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pk_rsa_alt_support" value="config.driver.psa_crypto.mbedtls_pk_rsa_alt_support.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pkcs5_alt" value="config.driver.psa_crypto.mbedtls_pkcs5_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pkcs1_v15" value="config.driver.psa_crypto.mbedtls_pkcs1_v15.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pkcs1_v21" value="config.driver.psa_crypto.mbedtls_pkcs1_v21.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_crypto_builtin_keys" value="config.driver.psa_crypto.mbedtls_crypto_builtin_keys.disabled"/>
+      <property id="config.driver.psa_crypto.psa_crypto_tfm_builtin_keys" value="config.driver.psa_crypto.psa_crypto_tfm_builtin_keys.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_crypto_client" value="config.driver.psa_crypto.mbedtls_psa_crypto_client.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_crypto_external_rng" value="config.driver.psa_crypto.mbedtls_crypto_external_rng.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_crypto_spm" value="config.driver.psa_crypto.mbedtls_psa_crypto_spm.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_key_store_dynamic" value="config.driver.psa_crypto.mbedtls_psa_key_store_dynamic.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_inject_entropy" value="config.driver.psa_crypto.mbedtls_psa_inject_entropy.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_assume_exclusive_buffers" value="config.driver.psa_crypto.mbedtls_psa_assume_exclusive_buffers.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_rsa_no_crt" value="config.driver.psa_crypto.mbedtls_rsa_no_crt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_self_test" value="config.driver.psa_crypto.mbedtls_self_test.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_sha256_smaller" value="config.driver.psa_crypto.mbedtls_sha256_smaller.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_sha512_smaller" value="config.driver.psa_crypto.mbedtls_sha512_smaller.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_threading_alt" value="config.driver.psa_crypto.mbedtls_threading_alt.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_threading_pthread" value="config.driver.psa_crypto.mbedtls_threading_pthread.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_use_psa_crypto" value="config.driver.psa_crypto.mbedtls_use_psa_crypto.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_version_features" value="config.driver.psa_crypto.mbedtls_version_features.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_aes_c" value="config.driver.psa_crypto.mbedtls_aes_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_asn1_parse_c" value="config.driver.psa_crypto.mbedtls_asn1_parse_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_asn1_write_c" value="config.driver.psa_crypto.mbedtls_asn1_write_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_base64_c" value="config.driver.psa_crypto.mbedtls_base64_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_block_cipher_no_decrypt" value="config.driver.psa_crypto.mbedtls_block_cipher_no_decrypt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_bignum_c" value="config.driver.psa_crypto.mbedtls_bignum_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_camellia_c" value="config.driver.psa_crypto.mbedtls_camellia_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_aria_c" value="config.driver.psa_crypto.mbedtls_aria_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ccm_c" value="config.driver.psa_crypto.mbedtls_ccm_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_chacha20_c" value="config.driver.psa_crypto.mbedtls_chacha20_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_chachapoly_c" value="config.driver.psa_crypto.mbedtls_chachapoly_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cipher_c" value="config.driver.psa_crypto.mbedtls_cipher_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_cmac_c" value="config.driver.psa_crypto.mbedtls_cmac_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_c" value="config.driver.psa_crypto.mbedtls_ctr_drbg_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_c_alt" value="config.driver.psa_crypto.mbedtls_ctr_drbg_c_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_des_c" value="config.driver.psa_crypto.mbedtls_des_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_dhm_c" value="config.driver.psa_crypto.mbedtls_dhm_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecdh_c" value="config.driver.psa_crypto.mbedtls_ecdh_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecdsa_c" value="config.driver.psa_crypto.mbedtls_ecdsa_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_c" value="config.driver.psa_crypto.mbedtls_ecp_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecjpake_c" value="config.driver.psa_crypto.mbedtls_ecjpake_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_entropy_c" value="config.driver.psa_crypto.mbedtls_entropy_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_error_c" value="config.driver.psa_crypto.mbedtls_error_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_gcm_c" value="config.driver.psa_crypto.mbedtls_gcm_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_gcm_large_table" value="config.driver.psa_crypto.mbedtls_gcm_large_table.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_hkdf_c" value="config.driver.psa_crypto.mbedtls_hkdf_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_hmac_drbg_c" value="config.driver.psa_crypto.mbedtls_hmac_drbg_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_lms_c" value="config.driver.psa_crypto.mbedtls_lms_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_lms_private" value="config.driver.psa_crypto.mbedtls_lms_private.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_nist_kw_c" value="config.driver.psa_crypto.mbedtls_nist_kw_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_md_c" value="config.driver.psa_crypto.mbedtls_md_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_md5_c" value="config.driver.psa_crypto.mbedtls_md5_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_memory_buffer_alloc_c" value="config.driver.psa_crypto.mbedtls_memory_buffer_alloc_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_mlkem_c" value="config.driver.psa_crypto.mbedtls_mlkem_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_mldsa_c" value="config.driver.psa_crypto.mbedtls_mldsa_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_oid_c" value="config.driver.psa_crypto.mbedtls_oid_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pem_parse_c" value="config.driver.psa_crypto.mbedtls_pem_parse_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pem_write_c" value="config.driver.psa_crypto.mbedtls_pem_write_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pk_c" value="config.driver.psa_crypto.mbedtls_pk_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pk_parse_c" value="config.driver.psa_crypto.mbedtls_pk_parse_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pk_write_c" value="config.driver.psa_crypto.mbedtls_pk_write_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pkcs5_c" value="config.driver.psa_crypto.mbedtls_pkcs5_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pkcs7_c" value="config.driver.psa_crypto.mbedtls_pkcs7_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_pkcs12_c" value="config.driver.psa_crypto.mbedtls_pkcs12_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_c" value="config.driver.psa_crypto.mbedtls_platform_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_poly1305_c" value="config.driver.psa_crypto.mbedtls_poly1305_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_crypto_c" value="config.driver.psa_crypto.mbedtls_psa_crypto_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_crypto_se_c" value="config.driver.psa_crypto.mbedtls_psa_crypto_se_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_crypto_storage_c" value="config.driver.psa_crypto.mbedtls_psa_crypto_storage_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_its_file_c" value="config.driver.psa_crypto.mbedtls_psa_its_file_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_static_key_slots" value="config.driver.psa_crypto.mbedtls_psa_static_key_slots.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ripemd160_c" value="config.driver.psa_crypto.mbedtls_ripemd160_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_rsa_c" value="config.driver.psa_crypto.mbedtls_rsa_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_rsa_gen_key_min_bits" value="config.driver.psa_crypto.mbedtls_rsa_gen_key_min_bits.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_rsa_gen_key_min_bits_value" value="1024"/>
+      <property id="config.driver.psa_crypto.mbedtls_sha1_c" value="config.driver.psa_crypto.mbedtls_sha1_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_sha3_c" value="config.driver.psa_crypto.mbedtls_sha3_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_sha224_c" value="config.driver.psa_crypto.mbedtls_sha224_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_sha256_c" value="config.driver.psa_crypto.mbedtls_sha256_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_sha384_c" value="config.driver.psa_crypto.mbedtls_sha384_c.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_sha512_c" value="config.driver.psa_crypto.mbedtls_sha512_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_threading_c" value="config.driver.psa_crypto.mbedtls_threading_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_timing_c" value="config.driver.psa_crypto.mbedtls_timing_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_version_c" value="config.driver.psa_crypto.mbedtls_version_c.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_mpi_window_size" value="config.driver.psa_crypto.mbedtls_mpi_window_size.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_mpi_window_size_value" value="6"/>
+      <property id="config.driver.psa_crypto.mbedtls_mpi_max_size" value="config.driver.psa_crypto.mbedtls_mpi_max_size.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_mpi_max_size_value" value="1024"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_entropy_len" value="config.driver.psa_crypto.mbedtls_ctr_drbg_entropy_len.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_entropy_len_value" value="48"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_reseed_interval" value="config.driver.psa_crypto.mbedtls_ctr_drbg_reseed_interval.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_reseed_interval_value" value="10000"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_max_input" value="config.driver.psa_crypto.mbedtls_ctr_drbg_max_input.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_max_input_value" value="256"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_max_request" value="config.driver.psa_crypto.mbedtls_ctr_drbg_max_request.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_max_request_value" value="1024"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_max_seed_input" value="config.driver.psa_crypto.mbedtls_ctr_drbg_max_seed_input.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_max_seed_input_value" value="384"/>
+      <property id="config.driver.psa_crypto.mbedtls_ctr_drbg_use_128_bit_key" value="config.driver.psa_crypto.mbedtls_ctr_drbg_use_128_bit_key.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_hmac_drbg_reseed_interval" value="config.driver.psa_crypto.mbedtls_hmac_drbg_reseed_interval.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_hmac_drbg_reseed_interval_value" value="10000"/>
+      <property id="config.driver.psa_crypto.mbedtls_hmac_drbg_max_input" value="config.driver.psa_crypto.mbedtls_hmac_drbg_max_input.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_hmac_drbg_max_input_value" value="256"/>
+      <property id="config.driver.psa_crypto.mbedtls_hmac_drbg_max_request" value="config.driver.psa_crypto.mbedtls_hmac_drbg_max_request.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_hmac_drbg_max_request_value" value="1024"/>
+      <property id="config.driver.psa_crypto.mbedtls_hmac_drbg_max_seed_input" value="config.driver.psa_crypto.mbedtls_hmac_drbg_max_seed_input.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_hmac_drbg_max_seed_input_value" value="384"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_window_size" value="config.driver.psa_crypto.mbedtls_ecp_window_size.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_window_size_value" value="6"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_fixed_point_optim" value="config.driver.psa_crypto.mbedtls_ecp_fixed_point_optim.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecp_fixed_point_optim_value" value="1"/>
+      <property id="config.driver.psa_crypto.mbedtls_entropy_max_sources" value="config.driver.psa_crypto.mbedtls_entropy_max_sources.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_entropy_max_sources_value" value="20"/>
+      <property id="config.driver.psa_crypto.mbedtls_entropy_max_gather" value="config.driver.psa_crypto.mbedtls_entropy_max_gather.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_entropy_max_gather_value" value="128"/>
+      <property id="config.driver.psa_crypto.mbedtls_entropy_min_hardware" value="config.driver.psa_crypto.mbedtls_entropy_min_hardware.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_entropy_min_hardware_value" value="32"/>
+      <property id="config.driver.psa_crypto.mbedtls_memory_align_multiple" value="config.driver.psa_crypto.mbedtls_memory_align_multiple.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_memory_align_multiple_value" value="4"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_calloc" value="config.driver.psa_crypto.mbedtls_platform_std_calloc.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_calloc_value" value="calloc"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_free" value="config.driver.psa_crypto.mbedtls_platform_std_free.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_free_value" value="free"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_setbuf" value="config.driver.psa_crypto.mbedtls_platform_std_setbuf.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_setbuf_value" value="setbuf"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_exit" value="config.driver.psa_crypto.mbedtls_platform_std_exit.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_exit_value" value="exit"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_time" value="config.driver.psa_crypto.mbedtls_platform_std_time.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_time_value" value="time"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_fprintf" value="config.driver.psa_crypto.mbedtls_platform_std_fprintf.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_fprintf_value" value="fprintf"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_printf" value="config.driver.psa_crypto.mbedtls_platform_std_printf.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_printf_value" value="printf"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_snprintf" value="config.driver.psa_crypto.mbedtls_platform_std_snprintf.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_snprintf_value" value="snprintf"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_exit_success" value="config.driver.psa_crypto.mbedtls_platform_std_exit_success.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_exit_success_value" value="0"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_exit_failure" value="config.driver.psa_crypto.mbedtls_platform_std_exit_failure.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_exit_failure_value" value="1"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_nv_seed_read" value="config.driver.psa_crypto.mbedtls_platform_std_nv_seed_read.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_nv_seed_read_value" value="mbedtls_platform_std_nv_seed_read"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_nv_seed_write" value="config.driver.psa_crypto.mbedtls_platform_std_nv_seed_write.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_nv_seed_write_value" value="mbedtls_platform_std_nv_seed_write"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_nv_seed_file" value="config.driver.psa_crypto.mbedtls_platform_std_nv_seed_file.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_std_nv_seed_file_value" value=""/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_calloc_macro" value="config.driver.psa_crypto.mbedtls_platform_calloc_macro.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_calloc_macro_value" value="calloc"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_free_macro" value="config.driver.psa_crypto.mbedtls_platform_free_macro.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_free_macro_value" value="free"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_exit_macro" value="config.driver.psa_crypto.mbedtls_platform_exit_macro.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_exit_macro_value" value="exit"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_setbuf_macro" value="config.driver.psa_crypto.mbedtls_platform_setbuf_macro.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_setbuf_macro_value" value="dummy_setbuf"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_time_macro" value="config.driver.psa_crypto.mbedtls_platform_time_macro.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_time_macro_value" value="time"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_time_type_macro" value="config.driver.psa_crypto.mbedtls_platform_time_type_macro.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_time_type_macro_value" value="time_t"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_ms_time_type_macro" value="config.driver.psa_crypto.mbedtls_platform_ms_time_type_macro.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_ms_time_type_macro_value" value="int64_t"/>
+      <property id="config.driver.psa_crypto.mbedtls_printf_ms_time" value="config.driver.psa_crypto.mbedtls_printf_ms_time.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_printf_ms_time_value" value="PRId64"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_fprintf_macro" value="config.driver.psa_crypto.mbedtls_platform_fprintf_macro.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_fprintf_macro_value" value="fprintf"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_printf_macro" value="config.driver.psa_crypto.mbedtls_platform_printf_macro.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_printf_macro_value" value="printf"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_snprintf_macro" value="config.driver.psa_crypto.mbedtls_platform_snprintf_macro.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_snprintf_macro_value" value="snprintf"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_vsnprintf_macro" value="config.driver.psa_crypto.mbedtls_platform_vsnprintf_macro.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_vsnprintf_macro_value" value="vsnprintf"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_nv_seed_read_macro" value="config.driver.psa_crypto.mbedtls_platform_nv_seed_read_macro.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_nv_seed_read_macro_value" value="mbedtls_platform_std_nv_seed_read"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_nv_seed_write_macro" value="config.driver.psa_crypto.mbedtls_platform_nv_seed_write_macro.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_nv_seed_write_macro_value" value="mbedtls_platform_std_nv_seed_write"/>
+      <property id="config.driver.psa_crypto.mbedtls_check_return" value="config.driver.psa_crypto.mbedtls_check_return.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ignore_return" value="config.driver.psa_crypto.mbedtls_ignore_return.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_hmac_drbg_md_type" value="config.driver.psa_crypto.mbedtls_psa_hmac_drbg_md_type.enabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_zeroize_alt" value="config.driver.psa_crypto.mbedtls_platform_zeroize_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_key_slot_count" value="config.driver.psa_crypto.mbedtls_psa_key_slot_count.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_key_slot_count_value" value="32"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_static_key_slot_buffer_size_value" value="256"/>
+      <property id="config.driver.psa_crypto.mbedtls_platform_gmtime_r_alt" value="config.driver.psa_crypto.mbedtls_platform_gmtime_r_alt.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_ecdh_variant_everest_enabled" value="config.driver.psa_crypto.mbedtls_ecdh_variant_everest_enabled.disabled"/>
+      <property id="config.driver.psa_crypto.mbedtls_psa_crypto_config" value="config.driver.psa_crypto.mbedtls_psa_crypto_config.disabled"/>
+    </config>
+    <config id="config.driver.comms_uart_w">
+      <property id="config.driver.comms_uart_w.param_checking_enable" value="config.driver.comms_uart_w.param_checking_enable.bsp"/>
+    </config>
+    <config id="config.middleware.https_w">
+      <property id="config.middleware.https_w.checking" value="config.middleware.https_w.checking.system"/>
+      <property id="config.middleware.https_w.watchdog_service_enable" value="config.middleware.https_w.watchdog_service_enable.disabled"/>
+      <property id="config.middleware.https_w.server_role_enable" value="config.middleware.https_w.server_role_enable.enabled"/>
+      <property id="config.middleware.https_w.client_role_enable" value="config.middleware.https_w.client_role_enable.enabled"/>
+    </config>
+    <config id="config.driver.stdio"/>
+    <config id="config.middleware.rm_lwip_w">
+      <property id="config.middleware.rm_lwip_w.watchdog_service_enable" value="config.middleware.rm_lwip_w.watchdog_service_enable.enabled"/>
+      <property id="config.middleware.rm_lwip_w.garp_time" value="60"/>
+    </config>
+    <config id="config.middleware.mqtt_port_w">
+      <property id="config.middleware.mqtt_port_w.param_checking_enable" value="config.middleware.mqtt_port_w.param_checking_enable.bsp"/>
+      <property id="config.middleware.mqtt_port_w.watchdog_service_enable" value="config.middleware.mqtt_port_w.watchdog_service_enable.enabled"/>
+    </config>
+    <config id="config.eclipse.mosquitto_mqtt">
+      <property id="config.eclipse.mosquitto_mqtt.clean_session_mode" value="config.eclipse.mosquitto_mqtt.clean_session_mode.enabled"/>
+      <property id="config.eclipse.mosquitto_mqtt.watchdog_service_enable" value="config.eclipse.mosquitto_mqtt.watchdog_service_enable.disabled"/>
+      <property id="config.eclipse.mosquitto_mqtt.tls_mode" value="config.eclipse.mosquitto_mqtt.tls_mode.enabled"/>
+      <property id="config.eclipse.mosquitto_mqtt.debug_mode" value="config.eclipse.mosquitto_mqtt.debug_mode.enabled"/>
+    </config>
+    <config id="config.driver.rm_psa_crypto_w"/>
+    <config id="config.driver.rtc_w">
+      <property id="config.driver.rtc_w.param_checking_enable" value="config.driver.rtc_w.param_checking_enable.bsp"/>
+    </config>
+    <config id="config.driver.gpio_w">
+      <property id="config.driver.gpio_w.checking" value="config.driver.gpio_w.checking.system"/>
+    </config>
+    <config id="config.middleware.rm_block_media_spi_w">
+      <property id="config.middleware.rm_block_media_spi_w.param_checking_enable" value="config.middleware.rm_block_media_spi_w.param_checking_enable.bsp"/>
+    </config>
+    <config id="config.middleware.rm_pmgr_w">
+      <property id="config.middleware.rm_pmgr_w.max_notifier_array" value="5"/>
+      <property id="config.middleware.rm_pmgr_w.ssl_dpm_support" value="config.middleware.rm_pmgr_w.ssl_dpm_support.enabled"/>
+    </config>
+    <config id="config.arm.mbedtls">
+      <property id="config.arm.mbedtls.mbedtls_key_exchange_psk_enabled" value="config.arm.mbedtls.mbedtls_key_exchange_psk_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_key_exchange_dhe_psk_enabled" value="config.arm.mbedtls.mbedtls_key_exchange_dhe_psk_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_key_exchange_ecdhe_psk_enabled" value="config.arm.mbedtls.mbedtls_key_exchange_ecdhe_psk_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_key_exchange_rsa_psk_enabled" value="config.arm.mbedtls.mbedtls_key_exchange_rsa_psk_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_key_exchange_rsa_enabled" value="config.arm.mbedtls.mbedtls_key_exchange_rsa_enabled.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_key_exchange_dhe_rsa_enabled" value="config.arm.mbedtls.mbedtls_key_exchange_dhe_rsa_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_key_exchange_ecdhe_rsa_enabled" value="config.arm.mbedtls.mbedtls_key_exchange_ecdhe_rsa_enabled.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_key_exchange_ecdhe_ecdsa_enabled" value="config.arm.mbedtls.mbedtls_key_exchange_ecdhe_ecdsa_enabled.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_key_exchange_ecdh_ecdsa_enabled" value="config.arm.mbedtls.mbedtls_key_exchange_ecdh_ecdsa_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_key_exchange_ecdh_rsa_enabled" value="config.arm.mbedtls.mbedtls_key_exchange_ecdh_rsa_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_key_exchange_ecjpake_enabled" value="config.arm.mbedtls.mbedtls_key_exchange_ecjpake_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_ciphersuites_enabled" value="config.arm.mbedtls.mbedtls_ssl_ciphersuites_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_ciphersuites" value="MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA256,MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA256,MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,MBEDTLS_TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA256,MBEDTLS_TLS_PSK_WITH_NULL_SHA256,MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256,MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256,MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA256,MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA256,MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA256,MBEDTLS_TLS_RSA_WITH_NULL_SHA256"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_max_intermediate_ca_enabled" value="config.arm.mbedtls.mbedtls_x509_max_intermediate_ca_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_all_alert_messages" value="config.arm.mbedtls.mbedtls_ssl_all_alert_messages.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_dtls_connection_id" value="config.arm.mbedtls.mbedtls_ssl_dtls_connection_id.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_dtls_connection_id_compat_enabled" value="config.arm.mbedtls.mbedtls_ssl_dtls_connection_id_compat_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_dtls_connection_id_compat" value="config.arm.mbedtls.mbedtls_ssl_dtls_connection_id_compat.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_async_private" value="config.arm.mbedtls.mbedtls_ssl_async_private.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cli_allow_weak_certificate_verification_without_hostname" value="config.arm.mbedtls.mbedtls_ssl_cli_allow_weak_certificate_verification_without_hostname.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_debug_all" value="config.arm.mbedtls.mbedtls_ssl_debug_all.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_encrypt_then_mac" value="config.arm.mbedtls.mbedtls_ssl_encrypt_then_mac.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_extended_master_secret" value="config.arm.mbedtls.mbedtls_ssl_extended_master_secret.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_keep_peer_certificate" value="config.arm.mbedtls.mbedtls_ssl_keep_peer_certificate.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_keying_material_export" value="config.arm.mbedtls.mbedtls_ssl_keying_material_export.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_renegotiation" value="config.arm.mbedtls.mbedtls_ssl_renegotiation.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_max_fragment_length" value="config.arm.mbedtls.mbedtls_ssl_max_fragment_length.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_proto_tls1_2" value="config.arm.mbedtls.mbedtls_ssl_proto_tls1_2.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_proto_tls1_3" value="config.arm.mbedtls.mbedtls_ssl_proto_tls1_3.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_tls1_3_compatibility_mode" value="config.arm.mbedtls.mbedtls_ssl_tls1_3_compatibility_mode.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_tls1_3_key_exchange_mode_psk" value="config.arm.mbedtls.mbedtls_ssl_tls1_3_key_exchange_mode_psk.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_tls1_3_key_exchange_mode_ephemeral" value="config.arm.mbedtls.mbedtls_ssl_tls1_3_key_exchange_mode_ephemeral.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_tls1_3_key_exchange_mode_psk_ephemeral" value="config.arm.mbedtls.mbedtls_ssl_tls1_3_key_exchange_mode_psk_ephemeral.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_tls1_3_ticket_age_tolerance_enabled" value="config.arm.mbedtls.mbedtls_ssl_tls1_3_ticket_age_tolerance_enabled.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_tls1_3_ticket_age_tolerance" value="6000"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_tls1_3_ticket_nonce_length_enabled" value="config.arm.mbedtls.mbedtls_ssl_tls1_3_ticket_nonce_length_enabled.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_tls1_3_ticket_nonce_length" value="32"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_tls1_3_default_new_session_tickets_enabled" value="config.arm.mbedtls.mbedtls_ssl_tls1_3_default_new_session_tickets_enabled.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_tls1_3_default_new_session_tickets" value="1"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_early_data" value="config.arm.mbedtls.mbedtls_ssl_early_data.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_early_data_size" value="32"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_proto_dtls" value="config.arm.mbedtls.mbedtls_ssl_proto_dtls.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_alpn" value="config.arm.mbedtls.mbedtls_ssl_alpn.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_dtls_anti_replay" value="config.arm.mbedtls.mbedtls_ssl_dtls_anti_replay.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_dtls_hello_verify" value="config.arm.mbedtls.mbedtls_ssl_dtls_hello_verify.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_dtls_client_port_reuse" value="config.arm.mbedtls.mbedtls_ssl_dtls_client_port_reuse.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_session_tickets" value="config.arm.mbedtls.mbedtls_ssl_session_tickets.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_server_name_indication" value="config.arm.mbedtls.mbedtls_ssl_server_name_indication.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_eap_tls" value="config.arm.mbedtls.mbedtls_ssl_eap_tls.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_trusted_certificate_callback" value="config.arm.mbedtls.mbedtls_x509_trusted_certificate_callback.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_remove_info" value="config.arm.mbedtls.mbedtls_x509_remove_info.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_rsassa_pss_support" value="config.arm.mbedtls.mbedtls_x509_rsassa_pss_support.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_debug_c" value="config.arm.mbedtls.mbedtls_debug_c.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_net_c" value="config.arm.mbedtls.mbedtls_net_c.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cache_c" value="config.arm.mbedtls.mbedtls_ssl_cache_c.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cookie_c" value="config.arm.mbedtls.mbedtls_ssl_cookie_c.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_ticket_c" value="config.arm.mbedtls.mbedtls_ssl_ticket_c.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cli_c" value="config.arm.mbedtls.mbedtls_ssl_cli_c.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_srv_c" value="config.arm.mbedtls.mbedtls_ssl_srv_c.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_tls_c" value="config.arm.mbedtls.mbedtls_ssl_tls_c.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_use_c" value="config.arm.mbedtls.mbedtls_x509_use_c.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_crt_parse_c" value="config.arm.mbedtls.mbedtls_x509_crt_parse_c.enabled"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_crl_parse_c" value="config.arm.mbedtls.mbedtls_x509_crl_parse_c.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_csr_parse_c" value="config.arm.mbedtls.mbedtls_x509_csr_parse_c.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_create_c" value="config.arm.mbedtls.mbedtls_x509_create_c.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_crt_write_c" value="config.arm.mbedtls.mbedtls_x509_crt_write_c.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_csr_write_c" value="config.arm.mbedtls.mbedtls_x509_csr_write_c.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_in_content_len_enabled" value="config.arm.mbedtls.mbedtls_ssl_in_content_len_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_in_content_len" value="16384"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cid_in_len_max_enabled" value="config.arm.mbedtls.mbedtls_ssl_cid_in_len_max.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cid_in_len_max" value="32"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cid_out_len_max_enabled" value="config.arm.mbedtls.mbedtls_ssl_cid_out_len_max.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cid_out_len_max" value="32"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cid_tls1_3_padding_granularity_enabled" value="config.arm.mbedtls.mbedtls_ssl_cid_tls1_3_padding_granularity_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cid_tls1_3_padding_granularity" value="16"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cid_padding_granularity_enabled" value="config.arm.mbedtls.mbedtls_ssl_cid_padding_granularity.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cid_padding_granularity" value="16"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_out_content_len_enabled" value="config.arm.mbedtls.mbedtls_ssl_out_content_len.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_out_content_len" value="16384"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_dtls_max_buffering_enabled" value="config.arm.mbedtls.mbedtls_ssl_dtls_max_buffering.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_dtls_max_buffering" value="32768"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cache_default_timeout_enabled" value="config.arm.mbedtls.mbedtls_ssl_cache_default_timeout_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cache_default_timeout" value="86400"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cache_default_max_entries_enabled" value="config.arm.mbedtls.mbedtls_ssl_cache_default_max_entries_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cache_default_max_entries" value="50"/>
+      <property id="config.arm.mbedtls.mbedtls_psk_max_len_enabled" value="config.arm.mbedtls.mbedtls_psk_max_len_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_psk_max_len" value="32"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cookie_timeout_enabled" value="config.arm.mbedtls.mbedtls_ssl_cookie_timeout_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_ssl_cookie_timeout" value="60"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_max_intermediate_ca" value="8"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_max_file_path_len_enabled" value="config.arm.mbedtls.mbedtls_x509_max_file_path_len_enabled.disabled"/>
+      <property id="config.arm.mbedtls.mbedtls_x509_max_file_path_len" value="512"/>
+    </config>
+    <config id="config.middleware.rm_wifi">
+      <property id="config.middleware.rm_wifi.param_checking_enable" value="config.middleware.rm_wifi.param_checking_enable.bsp"/>
+      <property id="config.middleware.rm_wifi.watchdog_service_enable" value="config.middleware.rm_wifi.watchdog_service_enable.enabled"/>
+      <property id="config.middleware.rm_wifi.ble_cli" value="config.middleware.rm_wifi.ble_cli.disabled"/>
+      <property id="config.middleware.rm_wifi.mqtt_on_wifi_enable" value="config.middleware.rm_wifi.mqtt_on_wifi_enable.enabled"/>
+      <property id="config.middleware.rm_wifi.atcmd_if_support" value="config.middleware.rm_wifi.atcmd_if_support.disabled"/>
+    </config>
+    <config id="config.middleware.rm_vee_flash_w">
+      <property id="config.middleware.rm_vee_flash_w.checking" value="config.middleware.rm_vee_flash_w.checking.system"/>
+      <property id="config.middleware.rm_vee_flash_w.ref_data_support" value="config.middleware.rm_vee_flash_w.ref_data_support.enabled"/>
+      <property id="config.middleware.rm_vee_flash_w.refresh_buf_size" value="32"/>
+    </config>
+    <config id="config.driver.ospi_w">
+      <property id="config.driver.ospi_w.param_checking_enable" value="config.driver.ospi_w.param_checking_enable.bsp"/>
+      <property id="config.driver.ospi_w.dmac_support" value="config.driver.ospi_w.dmac_support.disabled"/>
+      <property id="config.driver.ospi_w.autocalibration_support" value="config.driver.ospi_w.autocalibration_support.disabled"/>
+      <property id="config.driver.ospi_w.prefetch_function" value="config.driver.ospi_w.prefetch_function.enabled"/>
+      <property id="config.driver.ospi_w.xip_support" value="config.driver.ospi_w.xip_support.enabled"/>
+      <property id="config.driver.ospi_w.dotf_support" value="config.driver.ospi_w.dotf_support.disabled"/>
+    </config>
+    <config id="config.driver.uart_w">
+      <property id="config.driver.uart_w.param_checking_enable" value="config.driver.uart_w.param_checking_enable.bsp"/>
+      <property id="config.driver.uart_w.dma_support" value="config.driver.uart_w.dma_support.disabled"/>
+    </config>
+    <config id="config.driver.ext_irq_w">
+      <property id="config.driver.ext_irq_w.param_checking_enable" value="config.driver.ext_irq_w.param_checking_enable.bsp"/>
+    </config>
+    <config id="config.awsfreertos.thread">
+      <property id="config.awsfreertos.custom_freertosconfig" value=""/>
+      <property id="config.awsfreertos.thread.configuse_preemption" value="config.awsfreertos.thread.configuse_preemption.enabled"/>
+      <property id="config.awsfreertos.thread.configuse_port_optimised_task_selection" value="config.awsfreertos.thread.configuse_port_optimised_task_selection.enabled"/>
+      <property id="config.awsfreertos.thread.configuse_tickless_idle" value="config.awsfreertos.thread.configuse_tickless_idle.enabled"/>
+      <property id="config.awsfreertos.thread.configuse_idle_hook" value="config.awsfreertos.thread.configuse_idle_hook.enabled"/>
+      <property id="config.awsfreertos.thread.configuse_malloc_failed_hook" value="config.awsfreertos.thread.configuse_malloc_failed_hook.enabled"/>
+      <property id="config.awsfreertos.thread.configuse_daemon_task_startup_hook" value="config.awsfreertos.thread.configuse_daemon_task_startup_hook.disabled"/>
+      <property id="config.awsfreertos.thread.configuse_tick_hook" value="config.awsfreertos.thread.configuse_tick_hook.disabled"/>
+      <property id="config.awsfreertos.thread.configcpu_clock_hz" value="SystemCoreClock"/>
+      <property id="config.awsfreertos.thread.configtick_rate_hz" value="512"/>
+      <property id="config.awsfreertos.thread.configmax_priorities" value="32"/>
+      <property id="config.awsfreertos.thread.configminimal_stack_size" value="200"/>
+      <property id="config.awsfreertos.thread.configmax_task_name_len" value="16"/>
+      <property id="config.awsfreertos.thread.configuse_trace_facility" value="config.awsfreertos.thread.configuse_trace_facility.enabled"/>
+      <property id="config.awsfreertos.thread.configuse_stats_formatting_functions" value="config.awsfreertos.thread.configuse_stats_formatting_functions.disabled"/>
+      <property id="config.awsfreertos.thread.configuse_16_bit_ticks" value="config.awsfreertos.thread.configuse_16_bit_ticks.disabled"/>
+      <property id="config.awsfreertos.thread.configidle_should_yield" value="config.awsfreertos.thread.configidle_should_yield.enabled"/>
+      <property id="config.awsfreertos.thread.configuse_task_notifications" value="config.awsfreertos.thread.configuse_task_notifications.enabled"/>
+      <property id="config.awsfreertos.thread.configtask_notifications_array_enteries" value="1"/>
+      <property id="config.awsfreertos.thread.configuse_mutexes" value="config.awsfreertos.thread.configuse_mutexes.enabled"/>
+      <property id="config.awsfreertos.thread.configuse_recursive_mutexes" value="config.awsfreertos.thread.configuse_recursive_mutexes.enabled"/>
+      <property id="config.awsfreertos.thread.configuse_counting_semaphores" value="config.awsfreertos.thread.configuse_counting_semaphores.enabled"/>
+      <property id="config.awsfreertos.thread.configcheck_for_stack_overflow" value="config.awsfreertos.thread.configcheck_for_stack_overflow.enabled"/>
+      <property id="config.awsfreertos.thread.configqueue_registry_size" value="8"/>
+      <property id="config.awsfreertos.thread.configuse_queue_sets" value="config.awsfreertos.thread.configuse_queue_sets.enabled"/>
+      <property id="config.awsfreertos.thread.configuse_time_slicing" value="config.awsfreertos.thread.configuse_time_slicing.disabled"/>
+      <property id="config.awsfreertos.thread.configuse_newlib_reentrant" value="config.awsfreertos.thread.configuse_newlib_reentrant.disabled"/>
+      <property id="config.awsfreertos.thread.configenable_backward_compatibility" value="config.awsfreertos.thread.configenable_backward_compatibility.enabled"/>
+      <property id="config.awsfreertos.thread.confignum_thread_local_storage_pointers" value="1"/>
+      <property id="config.awsfreertos.thread.configstack_depth_type" value="uint32_t"/>
+      <property id="config.awsfreertos.thread.configmessage_buffer_length_type" value="size_t"/>
+      <property id="config.awsfreertos.thread.configheap_clear_memory_on_free" value="config.awsfreertos.thread.configheap_clear_memory_on_free.disabled"/>
+      <property id="config.awsfreertos.thread.configsupport_static_allocation" value="config.awsfreertos.thread.configsupport_static_allocation.enabled"/>
+      <property id="config.awsfreertos.thread.configsupport_dynamic_allocation" value="config.awsfreertos.thread.configsupport_dynamic_allocation.enabled"/>
+      <property id="config.awsfreertos.thread.configtotal_heap_size" value="380000"/>
+      <property id="config.awsfreertos.thread.configrecord_stack_high_address" value="config.awsfreertos.thread.configrecord_stack_high_address.enabled"/>
+      <property id="config.awsfreertos.thread.configapplication_allocated_heap" value="config.awsfreertos.thread.configapplication_allocated_heap.disabled"/>
+      <property id="config.awsfreertos.thread.configgenerate_run_time_stats" value="config.awsfreertos.thread.configgenerate_run_time_stats.disabled"/>
+      <property id="config.awsfreertos.thread.configuse_timers" value="config.awsfreertos.thread.configuse_timers.enabled"/>
+      <property id="config.awsfreertos.thread.configtimer_task_priority" value="31"/>
+      <property id="config.awsfreertos.thread.configtimer_queue_length" value="48"/>
+      <property id="config.awsfreertos.thread.configtimer_task_stack_depth" value="200"/>
+      <property id="config.awsfreertos.thread.configlibrary_max_syscall_interrupt_priority" value="board.icu.common.irq.priority1"/>
+      <property id="config.awsfreertos.thread.configassert" value="assert(x)"/>
+      <property id="config.awsfreertos.thread.configinclude_application_defined_privileged_functions" value="config.awsfreertos.thread.configinclude_application_defined_privileged_functions.disabled"/>
+      <property id="config.awsfreertos.thread.include_vtaskpriorityset" value="config.awsfreertos.thread.include_vtaskpriorityset.enabled"/>
+      <property id="config.awsfreertos.thread.include_uxtaskpriorityget" value="config.awsfreertos.thread.include_uxtaskpriorityget.enabled"/>
+      <property id="config.awsfreertos.thread.include_vtaskdelete" value="config.awsfreertos.thread.include_vtaskdelete.enabled"/>
+      <property id="config.awsfreertos.thread.include_vtasksuspend" value="config.awsfreertos.thread.include_vtasksuspend.enabled"/>
+      <property id="config.awsfreertos.thread.include_xresumefromisr" value="config.awsfreertos.thread.include_xresumefromisr.enabled"/>
+      <property id="config.awsfreertos.thread.include_vtaskdelayuntil" value="config.awsfreertos.thread.include_vtaskdelayuntil.enabled"/>
+      <property id="config.awsfreertos.thread.include_vtaskdelay" value="config.awsfreertos.thread.include_vtaskdelay.enabled"/>
+      <property id="config.awsfreertos.thread.include_xtaskgetschedulerstate" value="config.awsfreertos.thread.include_xtaskgetschedulerstate.enabled"/>
+      <property id="config.awsfreertos.thread.include_xtaskgetcurrenttaskhandle" value="config.awsfreertos.thread.include_xtaskgetcurrenttaskhandle.enabled"/>
+      <property id="config.awsfreertos.thread.include_uxtaskgetstackhighwatermark" value="config.awsfreertos.thread.include_uxtaskgetstackhighwatermark.disabled"/>
+      <property id="config.awsfreertos.thread.include_xtaskgetidletaskhandle" value="config.awsfreertos.thread.include_xtaskgetidletaskhandle.enabled"/>
+      <property id="config.awsfreertos.thread.include_etaskgetstate" value="config.awsfreertos.thread.include_etaskgetstate.enabled"/>
+      <property id="config.awsfreertos.thread.include_xeventgroupsetbitfromisr" value="config.awsfreertos.thread.include_xeventgroupsetbitfromisr.enabled"/>
+      <property id="config.awsfreertos.thread.include_xtimerpendfunctioncall" value="config.awsfreertos.thread.include_xtimerpendfunctioncall.enabled"/>
+      <property id="config.awsfreertos.thread.include_xtaskabortdelay" value="config.awsfreertos.thread.include_xtaskabortdelay.enabled"/>
+      <property id="config.awsfreertos.thread.include_xtaskgethandle" value="config.awsfreertos.thread.include_xtaskgethandle.disabled"/>
+      <property id="config.awsfreertos.thread.include_xtaskresumefromisr" value="config.awsfreertos.thread.include_xtaskresumefromisr.enabled"/>
+      <property id="config.awsfreertos.thread.include_hw_stack_monitor" value="config.awsfreertos.thread.include_hw_stack_monitor.disabled"/>
+      <property id="config.awsfreertos.thread.print_function" value="vLoggingPrint(x)"/>
+      <property id="config.awsfreertos.thread.include_time_and_task" value="config.awsfreertos.thread.include_time_and_task.disabled"/>
+      <property id="config.awsfreertos.thread.debug_logging_name" value="Log Name"/>
+      <property id="config.awsfreertos.thread.logging_level" value="config.awsfreertos.thread.logging_level.log_none"/>
+    </config>
+    <config id="config.driver.r_cc312_openable_w"/>
+    <config id="config.middleware.rm_map_persistant_w"/>
+  </raModuleConfiguration>
+  <raPinConfiguration>
+    <symbolicName propertyId="p006.symbolic_name" value="ADC_WAKEUP_PIN"/>
+    <symbolicName propertyId="p011.symbolic_name" value="EXT_INTR0_PIN"/>
+    <symbolicName propertyId="p012.symbolic_name" value="EXT_INTR2_PIN"/>
+    <symbolicName propertyId="p013.symbolic_name" value="EXT_INTR1_PIN"/>
+    <symbolicName propertyId="p100.symbolic_name" value="BSP_GPIO_LED_0"/>
+    <symbolicName propertyId="p101.symbolic_name" value="BSP_GPIO_LED_1"/>
+    <symbolicName propertyId="p102.symbolic_name" value="BSP_GPIO_LED_2"/>
+    <symbolicName propertyId="p103.symbolic_name" value="BSP_GPIO_LED_3"/>
+    <symbolicName propertyId="p114.symbolic_name" value="LED0"/>
+    <pincfg active="false" name="R7SA6W1CEDZDD.pincfg" selected="false" symbol="">
+      <configSetting altId="p116.swd.swclk" configurationId="p116"/>
+      <configSetting altId="p116.dirctl.dirctl_in" configurationId="p116.dirctl"/>
+      <configSetting altId="p116.gpio_mode.gpio_mode_peripheral" configurationId="p116.gpio_mode"/>
+      <configSetting altId="p117.swd.swdio" configurationId="p117"/>
+      <configSetting altId="p117.dirctl.dirctl_in" configurationId="p117.dirctl"/>
+      <configSetting altId="p117.gpio_mode.gpio_mode_peripheral" configurationId="p117.gpio_mode"/>
+      <configSetting altId="swd.mode.swd.free" configurationId="swd.mode"/>
+      <configSetting altId="swd.swclk.p116" configurationId="swd.swclk"/>
+      <configSetting altId="swd.swdio.p117" configurationId="swd.swdio"/>
+    </pincfg>
+    <pincfg active="true" name="RRQ61xxx-EVB" selected="true" symbol="g_bsp_pin_cfg">
+      <configSetting altId="cgc.mode.custom.free" configurationId="cgc.mode"/>
+      <configSetting altId="cgc.xtal32k_m.p002" configurationId="cgc.xtal32k_m"/>
+      <configSetting altId="cgc.xtal32k_p.p003" configurationId="cgc.xtal32k_p"/>
+      <configSetting altId="ext.ext_intr0.p011" configurationId="ext.ext_intr0"/>
+      <configSetting altId="ext.ext_intr1.p013" configurationId="ext.ext_intr1"/>
+      <configSetting altId="ext.ext_intr2.p012" configurationId="ext.ext_intr2"/>
+      <configSetting altId="ext.mode.custom.free" configurationId="ext.mode"/>
+      <configSetting altId="oqspi.mode.quad.free" configurationId="oqspi.mode"/>
+      <configSetting altId="oqspi.oqspi_clk.p108" configurationId="oqspi.oqspi_clk"/>
+      <configSetting altId="oqspi.oqspi_cs.p109" configurationId="oqspi.oqspi_cs"/>
+      <configSetting altId="oqspi.oqspi_d0.p104" configurationId="oqspi.oqspi_d0"/>
+      <configSetting altId="oqspi.oqspi_d1.p105" configurationId="oqspi.oqspi_d1"/>
+      <configSetting altId="oqspi.oqspi_d2.p106" configurationId="oqspi.oqspi_d2"/>
+      <configSetting altId="oqspi.oqspi_d3.p107" configurationId="oqspi.oqspi_d3"/>
+      <configSetting altId="p000.uart1.uart1_rx" configurationId="p000"/>
+      <configSetting altId="p000.dirctl.dirctl_in" configurationId="p000.dirctl"/>
+      <configSetting altId="p000.gpio_mode.gpio_mode_peripheral" configurationId="p000.gpio_mode"/>
+      <configSetting altId="p000.sr.sr.fast" configurationId="p000.sr"/>
+      <configSetting altId="p001.uart1.uart1_tx" configurationId="p001"/>
+      <configSetting altId="p001.dirctl.dirctl_out" configurationId="p001.dirctl"/>
+      <configSetting altId="p001.gpio_mode.gpio_mode_peripheral" configurationId="p001.gpio_mode"/>
+      <configSetting altId="p001.sr.sr.fast" configurationId="p001.sr"/>
+      <configSetting altId="p002.cgc.xtal32k_m" configurationId="p002"/>
+      <configSetting altId="p002.gpio_mode.gpio_mode_an" configurationId="p002.gpio_mode"/>
+      <configSetting altId="p003.cgc.xtal32k_p" configurationId="p003"/>
+      <configSetting altId="p003.gpio_mode.gpio_mode_an" configurationId="p003.gpio_mode"/>
+      <configSetting altId="p011.ext.ext_intr0" configurationId="p011"/>
+      <configSetting altId="p011.dirctl.dirctl_in" configurationId="p011.dirctl"/>
+      <configSetting altId="p011.gpio_mode.gpio_mode_peripheral" configurationId="p011.gpio_mode"/>
+      <configSetting altId="p011.sr.sr.fast" configurationId="p011.sr"/>
+      <configSetting altId="p012.ext.ext_intr2" configurationId="p012"/>
+      <configSetting altId="p012.dirctl.dirctl_in" configurationId="p012.dirctl"/>
+      <configSetting altId="p012.gpio_mode.gpio_mode_peripheral" configurationId="p012.gpio_mode"/>
+      <configSetting altId="p012.sr.sr.fast" configurationId="p012.sr"/>
+      <configSetting altId="p013.ext.ext_intr1" configurationId="p013"/>
+      <configSetting altId="p013.dirctl.dirctl_in" configurationId="p013.dirctl"/>
+      <configSetting altId="p013.gpio_mode.gpio_mode_peripheral" configurationId="p013.gpio_mode"/>
+      <configSetting altId="p013.sr.sr.fast" configurationId="p013.sr"/>
+      <configSetting altId="p104.oqspi.oqspi_d0" configurationId="p104"/>
+      <configSetting altId="p104.dirctl.dirctl_in" configurationId="p104.dirctl"/>
+      <configSetting altId="p104.gpio_mode.gpio_mode_peripheral" configurationId="p104.gpio_mode"/>
+      <configSetting altId="p104.sr.sr.fast" configurationId="p104.sr"/>
+      <configSetting altId="p105.oqspi.oqspi_d1" configurationId="p105"/>
+      <configSetting altId="p105.dirctl.dirctl_in" configurationId="p105.dirctl"/>
+      <configSetting altId="p105.gpio_mode.gpio_mode_peripheral" configurationId="p105.gpio_mode"/>
+      <configSetting altId="p105.sr.sr.fast" configurationId="p105.sr"/>
+      <configSetting altId="p106.oqspi.oqspi_d2" configurationId="p106"/>
+      <configSetting altId="p106.dirctl.dirctl_in" configurationId="p106.dirctl"/>
+      <configSetting altId="p106.gpio_mode.gpio_mode_peripheral" configurationId="p106.gpio_mode"/>
+      <configSetting altId="p106.sr.sr.fast" configurationId="p106.sr"/>
+      <configSetting altId="p107.oqspi.oqspi_d3" configurationId="p107"/>
+      <configSetting altId="p107.dirctl.dirctl_in" configurationId="p107.dirctl"/>
+      <configSetting altId="p107.gpio_mode.gpio_mode_peripheral" configurationId="p107.gpio_mode"/>
+      <configSetting altId="p107.sr.sr.fast" configurationId="p107.sr"/>
+      <configSetting altId="p108.oqspi.oqspi_clk" configurationId="p108"/>
+      <configSetting altId="p108.dirctl.dirctl_out" configurationId="p108.dirctl"/>
+      <configSetting altId="p108.gpio_mode.gpio_mode_peripheral" configurationId="p108.gpio_mode"/>
+      <configSetting altId="p108.sr.sr.fast" configurationId="p108.sr"/>
+      <configSetting altId="p109.oqspi.oqspi_cs" configurationId="p109"/>
+      <configSetting altId="p109.dirctl.dirctl_out" configurationId="p109.dirctl"/>
+      <configSetting altId="p109.gpio_mode.gpio_mode_peripheral" configurationId="p109.gpio_mode"/>
+      <configSetting altId="p109.sr.sr.fast" configurationId="p109.sr"/>
+      <configSetting altId="p116.swd.swclk" configurationId="p116"/>
+      <configSetting altId="p116.dirctl.dirctl_in" configurationId="p116.dirctl"/>
+      <configSetting altId="p116.gpio_mode.gpio_mode_peripheral" configurationId="p116.gpio_mode"/>
+      <configSetting altId="p117.swd.swdio" configurationId="p117"/>
+      <configSetting altId="p117.dirctl.dirctl_in" configurationId="p117.dirctl"/>
+      <configSetting altId="p117.gpio_mode.gpio_mode_peripheral" configurationId="p117.gpio_mode"/>
+      <configSetting altId="swd.mode.swd.free" configurationId="swd.mode"/>
+      <configSetting altId="swd.swclk.p116" configurationId="swd.swclk"/>
+      <configSetting altId="swd.swdio.p117" configurationId="swd.swdio"/>
+      <configSetting altId="uart1.mode.asynchronousuart.free" configurationId="uart1.mode"/>
+      <configSetting altId="uart1.uart1_rx.p000" configurationId="uart1.uart1_rx"/>
+      <configSetting altId="uart1.uart1_tx.p001" configurationId="uart1.uart1_tx"/>
+    </pincfg>
+  </raPinConfiguration>
+</raConfiguration>

@@ -3,7 +3,7 @@
  * Description  : Contains macros, data structures and functions used  common to the EP
  ***********************************************************************************************************************/
 /***********************************************************************************************************************
- * Copyright (c) 2020 - 2025 Renesas Electronics Corporation and/or its affiliates
+ * Copyright (c) 2020 - 2026 Renesas Electronics Corporation and/or its affiliates
  *
  * SPDX-License-Identifier: BSD-3-Clause
  ***********************************************************************************************************************/
@@ -27,7 +27,7 @@
 #define RESET_VALUE             (0x00)
 
 #define EP_VERSION              ("1.0")
-#define MODULE_NAME             "r_crc"
+#define MODULE_NAME             "r_crc_w"
 #define BANNER_1                "\r\n******************************************************************"
 #define BANNER_2                "\r\n*   Renesas FSP Example Project for "MODULE_NAME" Module              *"
 #define BANNER_3                "\r\n*   Example Project Version %s                                  *"

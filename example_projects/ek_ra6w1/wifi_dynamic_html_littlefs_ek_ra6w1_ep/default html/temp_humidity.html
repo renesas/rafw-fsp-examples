@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renesas Sensor Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 16px;
+    min-height: 100vh;
+  }
+  h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1a1a2e;
+    margin-bottom: 6px;
+  }
+  .subtitle {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 28px;
+  }
+  .cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+    padding: 28px 36px;
+    text-align: center;
+    min-width: 180px;
+  }
+  .card .icon { font-size: 2.2rem; margin-bottom: 8px; }
+  .card .label {
+    font-size: 0.78rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .card .value {
+    font-size: 2.6rem;
+    font-weight: bold;
+    color: #3b5bdb;
+  }
+  .card .unit {
+    font-size: 1.1rem;
+    color: #888;
+    margin-left: 4px;
+  }
+  .status-bar {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 4px;
+  }
+  .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #40c057;
+    margin-right: 5px;
+    animation: blink 2s infinite;
+  }
+  @keyframes blink {
+    0%,100% { opacity: 1; }
+    50%      { opacity: 0.3; }
+  }
+  .error { color: #e03131; }
+</style>
+</head>
+<body>
+
+<h1>&#x1F4F6; Renesas Device Dashboard</h1>
+<p class="subtitle">BME280 &bull; Wi-Fi &bull; LittleFS</p>
+
+<div class="cards">
+  <div class="card">
+    <div class="icon">&#x1F321;</div>
+    <div class="label">Temperature</div>
+    <div class="value" id="temp">--<span class="unit">°C</span></div>
+  </div>
+  <div class="card">
+    <div class="icon">&#x1F4A7;</div>
+    <div class="label">Humidity</div>
+    <div class="value" id="humid">--<span class="unit">%</span></div>
+  </div>
+</div>
+
+<div class="status-bar">
+  <span class="dot"></span>
+  <span id="status">Connecting...</span>
+</div>
+
+<script>
+  var INTERVAL_MS = 5000;
+
+  function fetchValue(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.timeout = 4000;
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        try { callback(null, JSON.parse(xhr.responseText)); }
+        catch(e) { callback('parse error'); }
+      } else {
+        callback('HTTP ' + xhr.status);
+      }
+    };
+    xhr.onerror = xhr.ontimeout = function() { callback('timeout'); };
+    xhr.send();
+  }
+
+  function setDisplay(id, text, isError) {
+    var el = document.getElementById(id);
+    if (isError) {
+      el.innerHTML = '<span class="error">Err</span>';
+    } else {
+      el.innerHTML = text;
+    }
+  }
+
+  function refresh() {
+    fetchValue('/get_values/temp_value', function(err, data) {
+      if (err) {
+        setDisplay('temp', null, true);
+      } else {
+        var v = (typeof data.temp_value !== 'undefined') ? data.temp_value : '--';
+        setDisplay('temp', v + '<span class="unit">&deg;C</span>');
+      }
+    });
+
+    fetchValue('/get_values/humid_value', function(err, data) {
+      if (err) {
+        setDisplay('humid', null, true);
+      } else {
+        var v = (typeof data.humid_value !== 'undefined') ? data.humid_value : '--';
+        setDisplay('humid', v + '<span class="unit">%</span>');
+      }
+    });
+
+    var now = new Date();
+    var hh = now.getHours().toString().padStart(2,'0');
+    var mm = now.getMinutes().toString().padStart(2,'0');
+    var ss = now.getSeconds().toString().padStart(2,'0');
+    document.getElementById('status').textContent =
+      'Auto-refresh: ' + (INTERVAL_MS/1000) + 's  \u2022  Last updated: ' + hh+':'+mm+':'+ss;
+  }
+
+  refresh();
+  setInterval(refresh, INTERVAL_MS);
+</script>
+
+</body>
+</html>

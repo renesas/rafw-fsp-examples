@@ -3,7 +3,7 @@
  * Description  : Contains data structures and functions used in spi_ep.c.
  **********************************************************************************************************************/
 /***********************************************************************************************************************
- * Copyright (c) 2020 - 2025 Renesas Electronics Corporation and/or its affiliates
+ * Copyright (c) 2020 - 2026 Renesas Electronics Corporation and/or its affiliates
  *
  * SPDX-License-Identifier: BSD-3-Clause
  ***********************************************************************************************************************/
@@ -85,9 +85,10 @@ fsp_err_t spi_write_and_read(void)
     uint32_t num_bytes = RESET_VALUE;  // Number of bytes read by SEGGER real-time-terminal
 
     /* Cleaning buffers */
-    memset(&g_master_tx_buff[0], NULL_CHAR, BUFF_LEN);
-    memset(&g_master_rx_buff[0], NULL_CHAR, BUFF_LEN);
-    memset(&g_slave_rx_buff[0], NULL_CHAR, BUFF_LEN);
+    memset(&g_master_tx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
+    memset(&g_master_rx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
+    memset(&g_slave_rx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
+    memset(&g_slave_tx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
 
     /* Input to master buffer */
     APP_PRINT("\r\nEnter text input for Master buffer. Data size should not exceed 64 bytes. \r\n");
@@ -164,8 +165,8 @@ fsp_err_t spi_write_and_read(void)
             /* Do nothing */
         }
     }
-    g_wait_count = MAX_COUNT;
 
+    g_wait_count = MAX_COUNT;
     g_master_event_flag = (spi_event_t) RESET_VALUE;  // Reseting master_event flag
     g_slave_event_flag = (spi_event_t) RESET_VALUE;  // Reseting slave_event flag
 
@@ -263,10 +264,10 @@ fsp_err_t spi_write_read(void)
     uint32_t num_bytes_slave = RESET_VALUE;
 
     /* Cleaning buffers */
-    memset(&g_master_tx_buff[0], NULL_CHAR, BUFF_LEN);
-    memset(&g_master_rx_buff[0], NULL_CHAR, BUFF_LEN);
-    memset(&g_slave_tx_buff[0], NULL_CHAR, BUFF_LEN);
-    memset(&g_slave_rx_buff[0], NULL_CHAR, BUFF_LEN);
+    memset(&g_master_tx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
+    memset(&g_master_rx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
+    memset(&g_slave_tx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
+    memset(&g_slave_rx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
 
     /* Input to master buffer */
     APP_PRINT("\r\nEnter text input for Master buffer. Data size should not exceed 64 bytes.\r\n");
@@ -328,7 +329,7 @@ fsp_err_t spi_write_read(void)
 
     /* Slave send data to Master and receive data from Master */
     err = R_SPI_W_WriteRead(&g_spi_slave_ctrl, g_slave_tx_buff, g_slave_rx_buff, num_bytes_master,
-                             SPI_BIT_WIDTH_32_BITS);
+                            SPI_BIT_WIDTH_32_BITS);
     /* Error handle */
     if (FSP_SUCCESS != err)
     {
@@ -339,7 +340,7 @@ fsp_err_t spi_write_read(void)
 
     /* Master send data to Slave and receive data from Slave */
     err = R_SPI_W_WriteRead(&g_spi_master_ctrl, g_master_tx_buff, g_master_rx_buff, num_bytes_master,
-                             SPI_BIT_WIDTH_32_BITS);
+                            SPI_BIT_WIDTH_32_BITS);
     /* Error handle */
     if (FSP_SUCCESS != err)
     {
@@ -457,7 +458,7 @@ fsp_err_t spi_exit_demo(void)
  * @param[in]  p_args
  * @retval     None
  **********************************************************************************************************************/
-void spi_master_callback(spi_callback_args_t * p_args)
+void spi_master_callback(spi_callback_args_t *p_args)
 {
     if (SPI_EVENT_TRANSFER_COMPLETE == p_args->event)
     {
@@ -474,7 +475,7 @@ void spi_master_callback(spi_callback_args_t * p_args)
  * @param[in]  p_args
  * @retval     None
  **********************************************************************************************************************/
-void spi_slave_callback(spi_callback_args_t * p_args)
+void spi_slave_callback(spi_callback_args_t *p_args)
 {
     if (SPI_EVENT_TRANSFER_COMPLETE == p_args->event)
     {

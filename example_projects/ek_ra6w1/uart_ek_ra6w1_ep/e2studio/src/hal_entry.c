@@ -55,7 +55,7 @@ void hal_entry(void)
     {
         APP_PRINT("\r\n ** UART EP Demo FAILED ** \r\n");
         deinit_uart();
-        APP_ERR_TRAP(err)
+        APP_ERR_TRAP(err);
     }
 
 #if BSP_TZ_SECURE_BUILD
@@ -65,8 +65,9 @@ void hal_entry(void)
 }
 
 /*******************************************************************************************************************//**
- * This function is called at various points during the startup process.  This implementation uses the event that is
- * called right before main() to set up the pins.
+ * This function is called at various points during the startup process.  This implementation uses:
+ *  - the event that is called after the clocks have been configured, to freeze the watchdog
+ *  - the event that is called right before main() to set up the pins
  *
  * @param[in]  event    Where at in the start up process the code is currently at
  **********************************************************************************************************************/
@@ -76,11 +77,21 @@ void R_BSP_WarmStart(bsp_warm_start_event_t event)
     {
     }
 
+    if (BSP_WARM_START_POST_CLOCK == event)
+    {
+        /* System clocks are configured. */
+        /*
+         * Freeze the watchdog, to avoid an unexpected reboot.
+         * The watchdog-freeze setting must be enabled for this to have an effect.
+         */
+        R_BSP_PeripheralFreeze (BSP_FREEZE_PERIPHERAL_SYS_WDOG);
+    }
+
     if (BSP_WARM_START_POST_C == event)
     {
         /* C runtime environment and system clocks are setup. */
         /* Configure pins. */
-        IOPORT_CFG_OPEN(&IOPORT_CFG_CTRL, &IOPORT_CFG_NAME);
+        R_GPIO_W_Open (&g_gpio_w_ctrl, &IOPORT_CFG_NAME);
     }
 }
 

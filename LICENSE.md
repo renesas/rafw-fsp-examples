@@ -1,18 +1,19 @@
-| Component                                             | Copyright                          | License                                                                                     |
-|-------------------------------------------------------|------------------------------------|---------------------------------------------------------------------------------------------|
-|<tr> <td colspan="3"><strong>Renesas example applications and middleware<strong></td></tr>                                                                                                             |
+| Component                                             | Copyright                                | License                                                                                     |
+|-------------------------------------------------------|------------------------------------------|---------------------------------------------------------------------------------------------|
+| <tr><td colspan="3"><strong>Renesas example applications and middleware</strong></td></tr>                                                                                                            |
 | RAFW FSP application code                                 | Renesas Electronics Corporation    | [BSD-3-Clause](#bsd-3-clause-license)                                                       |
 | Renesas QE Tool for BLE                                  | Renesas Electronics Corporation    | [Renesas Software License Agreement](https://www.renesas.com/us/en/document/oth/disclaimer002)|
-|<tr> <td colspan="3"><strong>Third-Party components included in the example applications<strong></td></tr>                                                                                               |
-|[FreeRTOS Kernel](https://github.com/renesas/FreeRTOS)| Amazon.com, Inc. or its affiliates | [MIT](https://github.com/renesas/FreeRTOS/blob/master/LICENSE.md)  |
-|[cJSON](https://github.com/DaveGamble/cJSON)|Dave Gamble and cJSON contributor|[MIT](https://github.com/DaveGamble/cJSON/blob/master/LICENSE)|
-|[PROJECT-CHIP](https://developers.home.google.com/matter)|Google LLC, Project CHIP Authors, Renesas Electronics Corporation, Nest Labs, Inc.|[Apache 2-0 License](https://github.com/project-chip/connectedhomeip/blob/master/LICENSE)|
-|[JSMN](https://developers.home.google.com/matter)|Serge Zaitsev|[MIT](https://github.com/zserge/jsmn/blob/master/LICENSE)|
-|[Segger RTT](https://kb.segger.com/RTT)|Segger Microcontroller GmbH|[Segger Software License Agreement](https://github.com/SEGGERMicro/RTT/blob/main/LICENSE.md)
+| <tr><td colspan="3"><strong>Third-Party components included in the example applications</strong></td></tr>                                                                                              |
+| [azure-iot-sdk-c](https://github.com/Azure/azure-iot-sdk-c) | Microsoft Corporation                     | [MIT](https://github.com/Azure/azure-iot-sdk-c/blob/main/LICENSE)                          |
+| [cJSON](https://github.com/DaveGamble/cJSON)         | Dave Gamble and cJSON contributors        | [MIT](https://github.com/DaveGamble/cJSON/blob/master/LICENSE)                             |
+| [connectedhomeip](https://github.com/project-chip/connectedhomeip) | Connectivity Standards Alliance and contributors | [Apache-2.0](https://github.com/project-chip/connectedhomeip/blob/master/LICENSE)          |
+| [FreeRTOS Real Time Kernel](https://github.com/renesas/FreeRTOS) | Amazon.com, Inc. or its affiliates        | [MIT](https://github.com/renesas/FreeRTOS/blob/master/LICENSE.md)                          |
+| [JSMN](https://github.com/zserge/jsmn)               | Serge Zaitsev                             | [MIT](https://github.com/zserge/jsmn/blob/master/LICENSE)                                  |
+| [Segger RTT](https://kb.segger.com/RTT)              | SEGGER Microcontroller GmbH               | [SEGGER Software License Agreement](https://github.com/SEGGERMicro/RTT/blob/main/LICENSE.md) |
 
 ## BSD 3-Clause License
 
-Copyright 2020 - 2025, Renesas Electronics Corporation and/or its affiliates
+Copyright 2020 - 2026, Renesas Electronics Corporation and/or its affiliates
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

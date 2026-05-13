@@ -3,7 +3,7 @@
  * Description  : Contains data structures and functions used in spi_ep.c.
  **********************************************************************************************************************/
 /***********************************************************************************************************************
- * Copyright (c) 2020 - 2025 Renesas Electronics Corporation and/or its affiliates
+ * Copyright (c) 2020 - 2026 Renesas Electronics Corporation and/or its affiliates
  *
  * SPDX-License-Identifier: BSD-3-Clause
  ***********************************************************************************************************************/
@@ -97,10 +97,10 @@ fsp_err_t spi_write_and_read(void)
     uint32_t num_bytes = RESET_VALUE;  // Number of bytes read by SEGGER real-time-terminal
 
     /* Cleaning buffers */
-    memset(&g_master_tx_buff[0], NULL_CHAR, BUFF_LEN);
-    memset(&g_master_rx_buff[0], NULL_CHAR, BUFF_LEN);
-    memset(&g_slave_rx_buff[0], NULL_CHAR, BUFF_LEN);
-    memset(&g_slave_tx_buff[0], NULL_CHAR, BUFF_LEN);
+    memset(&g_master_tx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
+    memset(&g_master_rx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
+    memset(&g_slave_rx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
+    memset(&g_slave_tx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
 
     /* Input to master buffer */
     APP_PRINT("\r\nEnter text input for Master buffer. Data size should not exceed 64 bytes. \r\n");
@@ -277,10 +277,10 @@ fsp_err_t spi_write_read(void)
     uint32_t num_bytes_slave = RESET_VALUE;
 
     /* Cleaning buffers */
-    memset(&g_master_tx_buff[0], NULL_CHAR, BUFF_LEN);
-    memset(&g_master_rx_buff[0], NULL_CHAR, BUFF_LEN);
-    memset(&g_slave_tx_buff[0], NULL_CHAR, BUFF_LEN);
-    memset(&g_slave_rx_buff[0], NULL_CHAR, BUFF_LEN);
+    memset(&g_master_tx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
+    memset(&g_master_rx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
+    memset(&g_slave_tx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
+    memset(&g_slave_rx_buff[0], NULL_CHAR, sizeof(uint32_t) * BUFF_LEN);
 
     /* Input to master buffer */
     APP_PRINT("\r\nEnter text input for Master buffer. Data size should not exceed 64 bytes.\r\n");

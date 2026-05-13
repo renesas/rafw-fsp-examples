@@ -12,9 +12,9 @@ After 3 seconds, WDOG resets the MCU and turn the blinking the LED 1 OFF.
 When Watchdog reset happens, the LED 2 turns ON.   
 
 2. Software Requirements:
-Renesas Flexible Software Package (FSP): Version 1.0.0
-e²studio: Version 2025-10
-GCC ARM Embedded Toolchain: Version 10.3.1.20210824
+Renesas RAFW (FSP): Version 2.0.1
+e²studio: Version 2025-12
+GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Segger J-Link RTT Viewer
 
 3. Hardware Requirements:
@@ -39,7 +39,7 @@ Connect the USB debug port on the RA6W2 mother board to the host PC via a type C
  1. Import the example project.
  2. Generate the configuration.xml, build the Example project.
  3. Connect the RA6W2 motherboard debug port to the host PC via a type C USB cable.
- 4. Flash the example project to the RA6W2 board.
+ 4. Flash the project onto the RA6W2 board via the debugger.
  5. After flashing the image, press reset. 
  6. Start Segger J-Link RTT viewer and connect.
  7. Input 1 on RTT viewer to start this watchdog project. 
@@ -50,7 +50,7 @@ Connect the USB debug port on the RA6W2 mother board to the host PC via a type C
 Note:
 1) Segger RTT block address may be needed to download and observe EP operation using a hex file with RTT-Viewer.
    RTT Block address for hex file committed in repository are as follows:
-   a. e²studio: 0x20003cd0
+   a. e²studio: 0x20000b7c
 
 2) If an EP is modified, compiled, and downloaded please find the block address (for the variable in RAM called _SEGGER_RTT) 
    in .map file generated in the build configuration folder (Debug/Release).

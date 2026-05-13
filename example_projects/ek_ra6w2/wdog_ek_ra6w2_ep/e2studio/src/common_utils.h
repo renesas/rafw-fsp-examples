@@ -3,7 +3,7 @@
  * Description  : Contains macros, data structures and functions used  common to the EP
  **********************************************************************************************************************/
 /***********************************************************************************************************************
- * Copyright (c) 2025 Renesas Electronics Corporation and/or its affiliates
+ * Copyright (c) 2025 - 2026 Renesas Electronics Corporation and/or its affiliates
  *
  * SPDX-License-Identifier: BSD-3-Clause
  **********************************************************************************************************************/
@@ -36,7 +36,7 @@
 
 #define SEGGER_INDEX            (0)
 
-#define APP_PRINT(fn_, ...)      SEGGER_RTT_printf (SEGGER_INDEX,(fn_), ##__VA_ARGS__);
+#define APP_PRINT(fn_, ...)      SEGGER_RTT_printf (SEGGER_INDEX,(fn_), ##__VA_ARGS__)
 
 #define APP_ERR_PRINT(fn_, ...)  ({\
                                  if(LVL_ERR)\
@@ -51,7 +51,7 @@
                                  }\
                                  })
 
-#define APP_READ(read_data)     SEGGER_RTT_Read (SEGGER_INDEX, read_data, sizeof(read_data));
+#define APP_READ(read_data)     SEGGER_RTT_Read (SEGGER_INDEX, read_data, sizeof(read_data))
 
 #define APP_CHECK_DATA          SEGGER_RTT_HasKey()
 

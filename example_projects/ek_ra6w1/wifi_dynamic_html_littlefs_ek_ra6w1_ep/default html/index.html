@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RRQ61000 Device Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 900px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .card p {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        .card a {
+            display: block;
+            margin-top: 15px;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .card a:hover {
+            background: #5568d3;
+        }
+        
+        .info-section {
+            background: #f0f4ff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .info-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .info-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .info-section li {
+            padding: 8px 0;
+            color: #555;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .info-section li:last-child {
+            border-bottom: none;
+        }
+        
+        .info-section li:before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 RRQ61000 Device Manager</h1>
+            <p>Secure HTTPS Server with LittleFS Support</p>
+        </div>
+        
+        <div class="content">
+            <h2 style="color: #333; margin-bottom: 10px;">Quick Access</h2>
+            <p style="color: #666; margin-bottom: 20px;">Manage your device files and configurations</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">📁</div>
+                    <h3>File Upload</h3>
+                    <p>Upload files to the LittleFS filesystem with automatic space validation</p>
+                    <a href="/upload.html">Go to Upload</a>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>System Status</h3>
+                    <p>View device information and filesystem statistics</p>
+                    <a href="/dashboard.html">View Status</a>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h3>Configuration</h3>
+                    <p>Configure device settings and network parameters</p>
+                    <a href="#" onclick="alert('Configuration page coming soon!'); return false;">Configure</a>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2>📋 System Features</h2>
+                <ul>
+                    <li>Secure HTTPS communication with TLS/SSL</li>
+                    <li>LittleFS embedded filesystem (512KB)</li>
+                    <li>Automatic space validation (5% minimum free)</li>
+                    <li>Real-time upload progress tracking</li>
+                    <li>Multipart form-data upload support</li>
+                    <li>lwIP lightweight TCP/IP stack</li>
+                    <li>FreeRTOS real-time operating system</li>
+                    <li>Wi-Fi connectivity support</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by lwIP Stack • RRQ61000 Platform • © 2025</p>
+        </div>
+    </div>
+</body>
+</html>

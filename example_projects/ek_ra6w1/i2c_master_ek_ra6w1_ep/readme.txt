@@ -10,9 +10,9 @@ On power up after establishing the connection of sensor with RA6W1 board, it dis
 RTTviewer. Any API/event failure will be displayed on RTTviewer.
 
 2. Software Requirements:
-Renesas Flexible Software Package (FSP): Version 1.0.0
-e2 studio: Version 2025-10
-GCC ARM Embedded Toolchain: Version 10.3.1.20210824
+Renesas RAFW (FSP): Version 2.0.1
+e2 studio: Version 2025-12
+GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term or a similar application
 
 3. Hardware Requirements:
@@ -40,7 +40,7 @@ Connect the USB Debug port on the RA6W1 mother board to the host PC via a type C
  2. Generate, build the Example project.
  3. Use Segger/RTTViewer for logging.
  4. Flash the EP project to the RA6W1 board.
- 5. After flashing, press reset
+ 5. After flashing, press reset.
  6. Verify RA6W1 read i2c data correctly from sensor board using segger prints.
 
 
@@ -52,7 +52,7 @@ For the functioning of I2C Master, external pull up resistors of value
 To view console output in RTT Viewer: 
 
 1) Find the RTT block address by searching for the _SEGGER_RTT variable in the .map file located in the Debug or Release folder.
-   eg: 0x20003e34
+   eg: 0x20001ce4
 
 Flashing Procedure:
 1. Open e²studio and connect your JTAG debugger.

@@ -3,7 +3,7 @@
  * Description  : Contains data structures and functions used in timer_setup.c
  **********************************************************************************************************************/
 /***********************************************************************************************************************
- * Copyright (c) 2025 Renesas Electronics Corporation and/or its affiliates
+ * Copyright (c) 2025 - 2026 Renesas Electronics Corporation and/or its affiliates
  *
  * SPDX-License-Identifier: BSD-3-Clause
  **********************************************************************************************************************/
@@ -99,7 +99,7 @@ void gpt_callback(timer_callback_args_t *p_args)
     if (FSP_SUCCESS != err)
     {
         /* Turn ON LED to indicate error, along with output on RTT*/
-        R_GPIO_W_PinWrite(&g_ioport_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_LEVEL_HIGH);
+        R_GPIO_W_PinWrite(&g_gpio_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_LEVEL_HIGH);
 
         /* Print Error on RTT console */
         APP_ERR_PRINT("\r\n ** R_WDOG_W_Refresh API failed ** \r\n");
@@ -108,7 +108,7 @@ void gpt_callback(timer_callback_args_t *p_args)
     {
         /* Toggle LED */
         level_led ^= BSP_IO_LEVEL_HIGH;
-        R_GPIO_W_PinWrite(&g_ioport_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, level_led);
+        R_GPIO_W_PinWrite(&g_gpio_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, level_led);
         APP_PRINT("\r\nWDOG counter Refreshed.");
     }
 }

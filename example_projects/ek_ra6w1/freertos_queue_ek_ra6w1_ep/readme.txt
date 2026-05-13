@@ -10,9 +10,9 @@ Later, Sender and Receiver Tasks will be suspended timer will be stopped. Semaph
 To restart the application, power cycle the board.
 
 2. Software Requirements:
-Renesas Flexible Software Package (FSP): Version 1.0.0
-e2 studio: Version 2025-10
-GCC ARM Embedded Toolchain: Version 10.3.1.20210824
+Renesas RAFW (FSP): Version 2.0.1
+e²studio: Version 2025-12
+GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term or a similar application
 
 3. Hardware Requirements:
@@ -42,7 +42,7 @@ NOTE:
 To view console output in RTT Viewer: 
 
 1) Find the RTT block address by searching for the _SEGGER_RTT variable in the .map file located in the Debug or Release folder.
-   eg: 0x20003d48
+   eg: 0x20003784
 
 Flashing Procedure:
 1. Open e²studio and connect your JTAG debugger.

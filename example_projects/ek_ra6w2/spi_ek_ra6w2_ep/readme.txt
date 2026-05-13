@@ -10,9 +10,9 @@ channels are configured, Master and Slave can transmit and receive data based on
 SPI data transmit and receive is done via DTC module.
 
 2. Software Requirements:
-Renesas Flexible Software Package (FSP): Version 1.0.0
-e2 studio: Version 2025-10
-GCC ARM Embedded Toolchain: Version 10.3.1.20210824
+Renesas RAFW (FSP): Version 2.0.1
+e2 studio: Version 2025-12
+GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term or a similar application
 
 3. Hardware Requirements:
@@ -57,3 +57,6 @@ Flashing Procedure:
 1. Open e²studio and connect your JTAG debugger.
 2. Go to Debug Configurations and select your .img.bin file in the Startup tab.
 3. Start debugging and the image will be flashed automatically to the RA6W2.
+
+Known Issue
+An error is displayed in the r_spi_w component in the Stacks Configuration, but the example runs correctly.

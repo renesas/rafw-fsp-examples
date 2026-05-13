@@ -13,9 +13,9 @@ Any failure will also be displayed using JLinkRTTViewer.
 
 LED on board connected to P0_10
 UART loopback is enabled, no need for any connections.
-Renesas Flexible Software Package (FSP): Version 1.0.0
-e2 studio: Version 2025-10
-GCC ARM Embedded Toolchain: Version 10.3.1.20210824
+Renesas RAFW (FSP): Version 2.0.1
+e2 studio: Version 2025-12
+GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term, RTT viewer or a similar application
 
 3. Hardware settings for the project:
@@ -37,7 +37,7 @@ RA6W1-EK:
 Note:
 1) Segger RTT block address may be needed to download and observe EP operation using a hex file with RTT-Viewer.
    RTT Block address for hex file committed in repository are as follows:
-   a. e2studio: 0x20003CD0
+   a. e2studio: 0x20000b7c
  
 2) If an EP is modified, compiled, and downloaded please find the block address (for the variable in RAM called _SEGGER_RTT) 
    in .map file generated in the build configuration folder (Debug/Release).

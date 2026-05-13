@@ -6,22 +6,23 @@
     <option key="Core" value="CM33"/>
     <option key="#TargetName#" value="R7SA6W1CEDZDD"/>
     <option key="#TargetARCHITECTURE#" value="cortex-m33"/>
-    <option key="#DeviceCommand#" value="R7SA6W1CEDZDD"/>
+    <option key="#DeviceCommand#" value="R7SA6W1CE"/>
     <option key="#RTOS#" value="_none"/>
     <option key="#pinconfiguration#" value="R7SA6W1CEDZDD.pincfg"/>
-    <option key="#FSPVersion#" value="1.0.0"/>
+    <option key="#FSPVersion#" value="2.0.1"/>
+    <option key="#ConfigurationFragments#" value="Renesas##BSP##Board##rrq61xxx_evb##"/>
     <option key="#SELECTED_TOOLCHAIN#" value="gcc-arm-embedded"/>
-    <option key="#ToolchainVersion#" value="10.3.1.20210824"/>
+    <option key="#ToolchainVersion#" value="13.3.1.arm-13-24"/>
   </generalSettings>
   <raBspConfiguration>
     <config id="config.bsp.ra6w1.R7SA6W1CEDZDD">
       <property id="config.bsp.part_number" value="config.bsp.part_number.value"/>
       <property id="config.bsp.rom_size_bytes" value="config.bsp.rom_size_bytes.value"/>
-      <property id="config.bsp.rom_size_bytes_hidden" value="67108864"/>
+      <property id="config.bsp.rom_size_bytes_hidden" value="134217728"/>
       <property id="config.bsp.ram_size_bytes" value="config.bsp.ram_size_bytes.value"/>
-      <property id="config.bsp.data_flash_size_bytes" value="config.bsp.data_flash_size_bytes.value"/>
       <property id="config.bsp.package_style" value="config.bsp.package_style.value"/>
       <property id="config.bsp.package_pins" value="config.bsp.package_pins.value"/>
+      <property id="config.bsp.number_of_cores" value="1"/>
       <property id="config.bsp.irq_count_hidden" value="55"/>
     </config>
     <config id="config.bsp.ra6w1">
@@ -40,127 +41,170 @@
       <property id="config.bsp.fsp.tz.bussara" value="config.bsp.fsp.tz.bussara.both"/>
       <property id="config.bsp.fsp.tz.bussarb" value="config.bsp.fsp.tz.bussarb.both"/>
       <property id="config.bsp.fsp.tz.uninitialized_ns_application_fallback" value="config.bsp.fsp.tz.uninitialized_ns_application_fallback.enabled"/>
-      <property id="config.bsp.fsp.mcu.clock_manager" value="config.bsp.fsp.mcu.clock_manager.enabled"/>
+      <property id="config.bsp.fsp.ivt_copy" value="config.bsp.fsp.ivt_copy.disabled"/>
+      <property id="config.bsp.fsp.mcu.clock_manager" value="config.bsp.fsp.mcu.clock_manager.disabled"/>
       <property id="config.bsp.fsp.mcu.ospi_8_lines_support" value="config.bsp.fsp.mcu.ospi_8_lines_support.disabled"/>
       <property id="config.bsp.fsp.mcu.uart.max_baud" value="5000000"/>
       <property id="config.bsp.fsp.mcu.iic_master.rate.rate_fastplus" value="1"/>
       <property id="config.bsp.fsp.mcu.iic_master.fastplus_channels" value="0x1"/>
-      <property id="config.bsp.fsp.mcu.spi.max_bitrate" value="48000000"/>
+      <property id="config.bsp.fsp.mcu.spi1.max_bitrate" value="48000000"/>
+      <property id="config.bsp.fsp.mcu.spi2.max_bitrate" value="48000000"/>
+      <property id="config.bsp.fsp.mcu.spi1.rx_fifo_threshold_level" value="32"/>
+      <property id="config.bsp.fsp.mcu.spi2.rx_fifo_threshold_level" value="32"/>
+      <property id="config.bsp.fsp.mcu.spi1.tx_fifo_threshold_level" value="32"/>
+      <property id="config.bsp.fsp.mcu.spi2.tx_fifo_threshold_level" value="32"/>
     </config>
     <config id="config.bsp.rrq">
-      <property id="config.bsp.common.main" value="0x1000"/>
-      <property id="config.bsp.common.heap" value="0x2000"/>
+      <property id="config.bsp.common.main" value="0x400"/>
+      <property id="config.bsp.common.heap" value="4096"/>
+      <property id="config.bsp.common.nvm_size" value="0x180000"/>
       <property id="config.bsp.common.checking" value="config.bsp.common.checking.disabled"/>
       <property id="config.bsp.common.assert" value="config.bsp.common.assert.none"/>
       <property id="config.bsp.common.error_log" value="config.bsp.common.error_log.none"/>
+      <property id="config.bsp.common.wakeup_reset_handler_en" value="config.bsp.common.wakeup_reset_handler_en.enabled"/>
       <property id="config.bsp.common.soft_reset" value="config.bsp.common.soft_reset.disabled"/>
-      <property id="config.bsp.common.main_osc_populated" value="config.bsp.common.main_osc_populated.enabled"/>
       <property id="config.bsp.common.c_runtime_init" value="config.bsp.common.c_runtime_init.enabled"/>
       <property id="config.bsp.common.early_init" value="config.bsp.common.early_init.disabled"/>
-      <property id="config.bsp.common.main_osc_clock_source" value="config.bsp.common.main_osc_clock_source.crystal"/>
-      <property id="config.bsp.common.main_osc_stabilization_ms" value="0"/>
+      <property id="config.bsp.common.main_osc_populated" value="config.bsp.common.main_osc_populated.enabled"/>
+      <property id="config.bsp.common.main_osc_stabilization_us" value="0"/>
       <property id="config.bsp.common.subclock_populated" value="config.bsp.common.subclock_populated.enabled"/>
-      <property id="config.bsp.common.subclock_stabilization_ms" value="1000"/>
+      <property id="config.bsp.common.subclock_stabilization_ms" value="600"/>
+      <property id="config.bsp.common.cal_cycles" value="25"/>
+      <property id="config.bsp.common.image_header_version" value="0x00000000"/>
+      <property id="config.bsp.common.headerless" value="config.bsp.common.headerless.false"/>
     </config>
   </raBspConfiguration>
   <raClockConfiguration>
-    <node id="board.clock.peri_clk.freq" option="board.clock.peri_clk.freq.40M"/>
-    <node id="board.clock.spi_clk.freq" option="board.clock.spi_clk.freq.40M"/>
+    <node id="board.clock.xtal40m.freq" option="board.clock.xtal40m.freq.40m"/>
+    <node id="board.clock.xtal.freq" option="board.clock.xtal.freq.32k"/>
+    <node id="board.clock.rcx.freq" option="board.clock.rcx.freq.32k"/>
+    <node id="board.clock.pll480m.freq" option="board.clock.pll480m.freq.480m"/>
+    <node id="board.clock.xtal40m.source" option="board.clock.xtal40m.source.enabled"/>
+    <node id="board.clock.xtal.source" option="board.clock.xtal.source.enabled"/>
+    <node id="board.clock.rcx.source" option="board.clock.rcx.source.enabled"/>
+    <node id="board.clock.pll.source" option="board.clock.pll.source.xtal40m"/>
+    <node id="board.clock.pll.mul" option="board.clock.pll.mul.12"/>
+    <node id="board.clock.lp_clk.source" option="board.clock.lp_clk.source.xtal32k"/>
+    <node id="board.clock.pll_sys.source" option="board.clock.pll_sys.source.pll"/>
+    <node id="board.clock.pll_sys.mul" option="board.clock.pll_sys.mul.1_3"/>
+    <node id="board.clock.sys_clk.source" option="board.clock.sys_clk.source.pll_sys"/>
+    <node id="board.clock.sys_clk.display" option="board.clock.sys_clk.display.value"/>
+    <node id="board.clock.hclk.div" option="board.clock.hclk.div.1"/>
+    <node id="board.clock.qspiclk.div" option="board.clock.qspiclk.div.1"/>
+    <node id="board.clock.pll_spi.source" option="board.clock.pll_spi.source.disabled"/>
+    <node id="board.clock.pll_spi.mul" option="board.clock.pll_spi.mul.1_6"/>
+    <node id="board.clock.spi_clk.source" option="board.clock.spi_clk.source.xtal_sys"/>
+    <node id="board.clock.spi_clk.display" option="board.clock.spi_clk.display.value"/>
+    <node id="board.clock.spi1clk.display" option="board.clock.spi1clk.display.value"/>
+    <node id="board.clock.spi2clk.display" option="board.clock.spi2clk.display.value"/>
+    <node id="board.clock.pll_peri.source" option="board.clock.pll_peri.source.pll"/>
+    <node id="board.clock.pll_peri.div" option="board.clock.pll_peri.div.6"/>
+    <node id="board.clock.peri_clk.source" option="board.clock.peri_clk.source.pll_peri"/>
+    <node id="board.clock.peri_clk.display" option="board.clock.peri_clk.display.value"/>
+    <node id="board.clock.i2c1.div" option="board.clock.i2c1.div.2"/>
+    <node id="board.clock.i2c2.div" option="board.clock.i2c2.div.1"/>
+    <node id="board.clock.i2c1clk.display" option="board.clock.i2c1clk.display.value"/>
+    <node id="board.clock.i2c2clk.display" option="board.clock.i2c2clk.display.value"/>
+    <node id="board.clock.uart1clk.display" option="board.clock.uart1clk.display.value"/>
+    <node id="board.clock.uart2clk.display" option="board.clock.uart2clk.display.value"/>
+    <node id="board.clock.uart3clk.display" option="board.clock.uart3clk.display.value"/>
+    <node id="board.clock.rtc_clk.display" option="board.clock.rtc_clk.display.value"/>
+    <node id="board.clock.wdog.div" option="board.clock.wdog.div.320"/>
+    <node id="board.clock.wdog.div.display" option="board.clock.wdog.div.display.value"/>
   </raClockConfiguration>
   <raComponentSelection>
-    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="1.0.0">
+    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.0.1">
       <description>Board Support Package Common Files</description>
-      <originalPack>Renesas.RAFW.1.0.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="1.0.0">
-      <description>I/O Port</description>
-      <originalPack>Renesas.RAFW.1.0.0.pack</originalPack>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.0.1">
+      <description>I/O Port (W)</description>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
     </component>
-    <component apiversion="" class="CMSIS" condition="" group="CMSIS5" subgroup="CoreM" variant="" vendor="Arm" version="5.9.0+renesas.1.fsp.1.0.0">
-      <description>Arm CMSIS Version 5 - Core (M)</description>
-      <originalPack>Arm.CMSIS5.5.9.0+renesas.1.fsp.1.0.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="R7SA6W1CEDZDD" vendor="Renesas" version="1.0.0">
-      <description>Board support package for R7SA6W1CEDZDD</description>
-      <originalPack>Renesas.RAFW_mcu_ra6w1.1.0.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="" vendor="Renesas" version="1.0.0">
-      <description>Board support package for RA6W1</description>
-      <originalPack>Renesas.RAFW_mcu_ra6w1.1.0.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="fsp" variant="" vendor="Renesas" version="1.0.0">
-      <description>Board support package for RA6W1 - FSP Data</description>
-      <originalPack>Renesas.RAFW_mcu_ra6w1.1.0.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_i2c_master_w" variant="" vendor="Renesas" version="1.0.0">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_i2c_master_w" variant="" vendor="Renesas" version="2.0.1">
       <description>I2C Master Interface</description>
-      <originalPack>Renesas.RAFW.1.0.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
     </component>
-    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq61xxx_evb" variant="" vendor="Renesas" version="1.0.0">
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="R7SA6W1CEDZDD" vendor="Renesas" version="2.0.1">
+      <description>Board support package for R7SA6W1CEDZDD</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="" vendor="Renesas" version="2.0.1">
+      <description>Board support package for RA6W1</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="fsp" variant="" vendor="Renesas" version="2.0.1">
+      <description>Board support package for RA6W1 - FSP Data</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="events" variant="" vendor="Renesas" version="2.0.1">
+      <description>Board support package for RA6W1 - Events</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="linker" variant="" vendor="Renesas" version="2.0.1">
+      <description>Board support package for RA6W1 - Linker</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.0.1">
+      <description>Arm CMSIS Version 6 - Core (M)</description>
+      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.0.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq61xxx_evb" variant="" vendor="Renesas" version="2.0.1">
       <description>RRQ61xxx-EVB Board Support Files</description>
-      <originalPack>Renesas.RAFW_board_rrq61xxx_evb.1.0.0.pack</originalPack>
+      <originalPack>Renesas.RAFW_board_rrq61xxx_evb.2.0.1.pack</originalPack>
     </component>
   </raComponentSelection>
   <raElcConfiguration/>
   <raIcuConfiguration/>
   <raLinkMapConfiguration/>
   <raModuleConfiguration>
-    <module id="module.driver.gpio_w_on_ioport.0">
-      <property id="module.driver.gpio_w.name" value="g_ioport"/>
+    <module id="module.driver.ioport_on_gpio_w.0">
+      <property id="module.driver.gpio_w.name" value="g_gpio_w"/>
       <property id="module.driver.gpio_w.pincfg" value="g_bsp_pin_cfg"/>
     </module>
-    <module id="module.driver.i2c_on_i2c_master_w.1167599128">
-      <property id="module.driver.i2c_master.name" value="g_i2c_master"/>
-      <property id="module.driver.i2c_master.channel" value="0"/>
-      <property id="module.driver.i2c_master.rate" value="module.driver.i2c_master.rate.rate_fast"/>
-      <property id="module.driver.i2c_master.scl_lcnt" value="43"/>
-      <property id="module.driver.i2c_master.scl_hcnt" value="44"/>
-      <property id="module.driver.i2c_master.slave" value="0x1D"/>
-      <property id="module.driver.i2c_master.addr_mode" value="module.driver.i2c_master.addr_mode.addr_mode_7bit"/>
-      <property id="module.driver.i2c_master.p_callback" value="i2c_master_callback"/>
-      <property id="module.driver.i2c_master.ipl" value="board.icu.common.irq.priority12"/>
+    <module id="module.driver.i2c_on_i2c_master_w.1334145686">
+      <property id="module.driver.i2c_master_w.name" value="g_i2c_master"/>
+      <property id="module.driver.i2c_master_w.channel" value="1"/>
+      <property id="module.driver.i2c_master_w.rate" value="module.driver.i2c_master_w.rate.rate_fast"/>
+      <property id="module.driver.i2c_master_w.rate_value" value="0"/>
+      <property id="module.driver.i2c_master_w.rise_time_ns" value="40"/>
+      <property id="module.driver.i2c_master_w.fall_time_ns" value="40"/>
+      <property id="module.driver.i2c_master_w.duty" value="50"/>
+      <property id="module.driver.i2c_master_w.slave" value="0x1D"/>
+      <property id="module.driver.i2c_master_w.addr_mode" value="module.driver.i2c_master_w.addr_mode.addr_mode_7bit"/>
+      <property id="module.driver.i2c_master_w.enable_dma_bursts_tx" value="module.driver.i2c_master_w.enable_dma_bursts_tx.disabled"/>
+      <property id="module.driver.i2c_master_w.enable_dma_bursts_rx" value="module.driver.i2c_master_w.enable_dma_bursts_rx.disabled"/>
+      <property id="module.driver.i2c_master_w.p_callback" value="i2c_master_callback"/>
+      <property id="module.driver.i2c_master_w.ipl" value="_disabled"/>
+      <property id="module.driver.i2c_master_w.gen_ipl" value="board.icu.common.irq.priority12"/>
     </module>
     <context id="_hal.0">
-      <stack module="module.driver.gpio_w_on_ioport.0"/>
-      <stack module="module.driver.i2c_on_i2c_master_w.1167599128"/>
+      <stack module="module.driver.ioport_on_gpio_w.0"/>
+      <stack module="module.driver.i2c_on_i2c_master_w.1334145686"/>
     </context>
     <config id="config.driver.gpio_w">
       <property id="config.driver.gpio_w.checking" value="config.driver.gpio_w.checking.system"/>
     </config>
     <config id="config.driver.i2c_master_w">
       <property id="config.driver.i2c_master_w.param_checking_enable" value="config.driver.i2c_master_w.param_checking_enable.bsp"/>
-      <property id="config.driver.i2c_master_w.dmac_enable" value="config.driver.i2c_master_w.dmac_enable.disabled"/>
-      <property id="config.driver.i2c_master_w.addr_mode_10_bit_enable" value="config.driver.i2c_master_w.addr_mode_10_bit_enable.disabled"/>
+      <property id="config.driver.i2c_master_w.dtc_enable" value="config.driver.i2c_master_w.dtc_enable.disabled"/>
+      <property id="config.driver.i2c_master_w.dma_enable" value="config.driver.i2c_master_w.dma_enable.disabled"/>
+      <property id="config.driver.i2c_master_w.generic_only" value="config.driver.i2c_master_w.generic_only.enabled"/>
+      <property id="config.driver.i2c_master_w.transfer_api_tx_buf_size" value="256"/>
     </config>
   </raModuleConfiguration>
   <raPinConfiguration>
-    <pincfg active="true" name="R7SA6W1CEDZDD.pincfg" selected="true" symbol="g_bsp_pin_cfg">
-      <configSetting altId="i2c0.i2c0_scl.p110" configurationId="i2c0.i2c0_scl"/>
-      <configSetting altId="i2c0.i2c0_sda.p111" configurationId="i2c0.i2c0_sda"/>
-      <configSetting altId="i2c0.mode.i2c.free" configurationId="i2c0.mode"/>
-      <configSetting altId="p110.i2c0.i2c0_scl" configurationId="p110"/>
-      <configSetting altId="p110.dirctl.dirctl_out" configurationId="p110.dirctl"/>
-      <configSetting altId="p110.gpio_mode.gpio_mode_peripheral" configurationId="p110.gpio_mode"/>
-      <configSetting altId="p110.gpio_otype.gpio_otype_n_ch_od" configurationId="p110.gpio_otype"/>
-      <configSetting altId="p110.sr.sr.fast" configurationId="p110.sr"/>
-      <configSetting altId="p111.i2c0.i2c0_sda" configurationId="p111"/>
-      <configSetting altId="p111.gpio_mode.gpio_mode_peripheral" configurationId="p111.gpio_mode"/>
-      <configSetting altId="p111.gpio_otype.gpio_otype_n_ch_od" configurationId="p111.gpio_otype"/>
-      <configSetting altId="p111.sr.sr.fast" configurationId="p111.sr"/>
-      <configSetting altId="p116.swd.swclk" configurationId="p116"/>
-      <configSetting altId="p116.dirctl.dirctl_in" configurationId="p116.dirctl"/>
-      <configSetting altId="p116.gpio_mode.gpio_mode_peripheral" configurationId="p116.gpio_mode"/>
-      <configSetting altId="p117.swd.swdio" configurationId="p117"/>
-      <configSetting altId="p117.dirctl.dirctl_in" configurationId="p117.dirctl"/>
-      <configSetting altId="p117.gpio_mode.gpio_mode_peripheral" configurationId="p117.gpio_mode"/>
-      <configSetting altId="swd.mode.swd.free" configurationId="swd.mode"/>
-      <configSetting altId="swd.swclk.p116" configurationId="swd.swclk"/>
-      <configSetting altId="swd.swdio.p117" configurationId="swd.swdio"/>
-    </pincfg>
-    <pincfg active="false" name="RRQ61xxx-EVB" selected="false" symbol="">
+    <symbolicName propertyId="p100.symbolic_name" value="BSP_GPIO_LED_0"/>
+    <symbolicName propertyId="p101.symbolic_name" value="BSP_GPIO_LED_1"/>
+    <symbolicName propertyId="p102.symbolic_name" value="BSP_GPIO_LED_2"/>
+    <symbolicName propertyId="p103.symbolic_name" value="BSP_GPIO_LED_3"/>
+    <pincfg active="true" name="RRQ61xxx-EVB" selected="true" symbol="g_bsp_pin_cfg">
       <configSetting altId="cgc.mode.custom.free" configurationId="cgc.mode"/>
       <configSetting altId="cgc.xtal32k_m.p002" configurationId="cgc.xtal32k_m"/>
       <configSetting altId="cgc.xtal32k_p.p003" configurationId="cgc.xtal32k_p"/>
+      <configSetting altId="i2c1.i2c1_scl.p110" configurationId="i2c1.i2c1_scl"/>
+      <configSetting altId="i2c1.i2c1_sda.p111" configurationId="i2c1.i2c1_sda"/>
+      <configSetting altId="i2c1.mode.i2c.free" configurationId="i2c1.mode"/>
       <configSetting altId="oqspi.mode.quad.free" configurationId="oqspi.mode"/>
       <configSetting altId="oqspi.oqspi_clk.p108" configurationId="oqspi.oqspi_clk"/>
       <configSetting altId="oqspi.oqspi_cs.p109" configurationId="oqspi.oqspi_cs"/>
@@ -168,11 +212,11 @@
       <configSetting altId="oqspi.oqspi_d1.p105" configurationId="oqspi.oqspi_d1"/>
       <configSetting altId="oqspi.oqspi_d2.p106" configurationId="oqspi.oqspi_d2"/>
       <configSetting altId="oqspi.oqspi_d3.p107" configurationId="oqspi.oqspi_d3"/>
-      <configSetting altId="p000.uart0.uart0_rx" configurationId="p000"/>
+      <configSetting altId="p000.uart1.uart1_rx" configurationId="p000"/>
       <configSetting altId="p000.dirctl.dirctl_in" configurationId="p000.dirctl"/>
       <configSetting altId="p000.gpio_mode.gpio_mode_peripheral" configurationId="p000.gpio_mode"/>
       <configSetting altId="p000.sr.sr.fast" configurationId="p000.sr"/>
-      <configSetting altId="p001.uart0.uart0_tx" configurationId="p001"/>
+      <configSetting altId="p001.uart1.uart1_tx" configurationId="p001"/>
       <configSetting altId="p001.dirctl.dirctl_out" configurationId="p001.dirctl"/>
       <configSetting altId="p001.gpio_mode.gpio_mode_peripheral" configurationId="p001.gpio_mode"/>
       <configSetting altId="p001.sr.sr.fast" configurationId="p001.sr"/>
@@ -180,6 +224,14 @@
       <configSetting altId="p002.gpio_mode.gpio_mode_an" configurationId="p002.gpio_mode"/>
       <configSetting altId="p003.cgc.xtal32k_p" configurationId="p003"/>
       <configSetting altId="p003.gpio_mode.gpio_mode_an" configurationId="p003.gpio_mode"/>
+      <configSetting altId="p100.output.low" configurationId="p100"/>
+      <configSetting altId="p100.gpio_mode.gpio_mode_out.low" configurationId="p100.gpio_mode"/>
+      <configSetting altId="p101.output.low" configurationId="p101"/>
+      <configSetting altId="p101.gpio_mode.gpio_mode_out.low" configurationId="p101.gpio_mode"/>
+      <configSetting altId="p102.output.low" configurationId="p102"/>
+      <configSetting altId="p102.gpio_mode.gpio_mode_out.low" configurationId="p102.gpio_mode"/>
+      <configSetting altId="p103.output.low" configurationId="p103"/>
+      <configSetting altId="p103.gpio_mode.gpio_mode_out.low" configurationId="p103.gpio_mode"/>
       <configSetting altId="p104.oqspi.oqspi_d0" configurationId="p104"/>
       <configSetting altId="p104.dirctl.dirctl_in" configurationId="p104.dirctl"/>
       <configSetting altId="p104.gpio_mode.gpio_mode_peripheral" configurationId="p104.gpio_mode"/>
@@ -204,6 +256,15 @@
       <configSetting altId="p109.dirctl.dirctl_out" configurationId="p109.dirctl"/>
       <configSetting altId="p109.gpio_mode.gpio_mode_peripheral" configurationId="p109.gpio_mode"/>
       <configSetting altId="p109.sr.sr.fast" configurationId="p109.sr"/>
+      <configSetting altId="p110.i2c1.i2c1_scl" configurationId="p110"/>
+      <configSetting altId="p110.dirctl.dirctl_out" configurationId="p110.dirctl"/>
+      <configSetting altId="p110.gpio_mode.gpio_mode_peripheral" configurationId="p110.gpio_mode"/>
+      <configSetting altId="p110.gpio_otype.gpio_otype_n_ch_od" configurationId="p110.gpio_otype"/>
+      <configSetting altId="p110.sr.sr.fast" configurationId="p110.sr"/>
+      <configSetting altId="p111.i2c1.i2c1_sda" configurationId="p111"/>
+      <configSetting altId="p111.gpio_mode.gpio_mode_peripheral" configurationId="p111.gpio_mode"/>
+      <configSetting altId="p111.gpio_otype.gpio_otype_n_ch_od" configurationId="p111.gpio_otype"/>
+      <configSetting altId="p111.sr.sr.fast" configurationId="p111.sr"/>
       <configSetting altId="p116.swd.swclk" configurationId="p116"/>
       <configSetting altId="p116.dirctl.dirctl_in" configurationId="p116.dirctl"/>
       <configSetting altId="p116.gpio_mode.gpio_mode_peripheral" configurationId="p116.gpio_mode"/>
@@ -213,9 +274,20 @@
       <configSetting altId="swd.mode.swd.free" configurationId="swd.mode"/>
       <configSetting altId="swd.swclk.p116" configurationId="swd.swclk"/>
       <configSetting altId="swd.swdio.p117" configurationId="swd.swdio"/>
-      <configSetting altId="uart0.mode.asynchronousuart.free" configurationId="uart0.mode"/>
-      <configSetting altId="uart0.uart0_rx.p000" configurationId="uart0.uart0_rx"/>
-      <configSetting altId="uart0.uart0_tx.p001" configurationId="uart0.uart0_tx"/>
+      <configSetting altId="uart1.mode.asynchronousuart.free" configurationId="uart1.mode"/>
+      <configSetting altId="uart1.uart1_rx.p000" configurationId="uart1.uart1_rx"/>
+      <configSetting altId="uart1.uart1_tx.p001" configurationId="uart1.uart1_tx"/>
+    </pincfg>
+    <pincfg active="false" name="R7SA6W1CEDZDD.pincfg" selected="false" symbol="">
+      <configSetting altId="p116.swd.swclk" configurationId="p116"/>
+      <configSetting altId="p116.dirctl.dirctl_in" configurationId="p116.dirctl"/>
+      <configSetting altId="p116.gpio_mode.gpio_mode_peripheral" configurationId="p116.gpio_mode"/>
+      <configSetting altId="p117.swd.swdio" configurationId="p117"/>
+      <configSetting altId="p117.dirctl.dirctl_in" configurationId="p117.dirctl"/>
+      <configSetting altId="p117.gpio_mode.gpio_mode_peripheral" configurationId="p117.gpio_mode"/>
+      <configSetting altId="swd.mode.swd.free" configurationId="swd.mode"/>
+      <configSetting altId="swd.swclk.p116" configurationId="swd.swclk"/>
+      <configSetting altId="swd.swdio.p117" configurationId="swd.swdio"/>
     </pincfg>
   </raPinConfiguration>
 </raConfiguration>

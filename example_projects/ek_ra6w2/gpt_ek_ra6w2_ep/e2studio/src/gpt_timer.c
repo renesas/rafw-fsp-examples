@@ -10,7 +10,6 @@
 
 #include "common_utils.h"
 #include "gpt_timer.h"
-#include "uart_ep.h"
 
 /*******************************************************************************************************************//**
  * @addtogroup r_timer_ep
@@ -77,24 +76,6 @@ fsp_err_t start_gpt_timer(timer_ctrl_t *const p_timer_ctl)
          * Since, cleanup for GPT open is done in start_gpt_timer,Hence cleanup is not required */
         APP_ERR_PRINT("\r\n ** R_TIM_Start API failed ** \r\n");
     }
-
-    return err;
-}
-
-fsp_err_t set_timer_period(timer_ctrl_t *const p_timer_ctl, uint32_t period_counts)
-{
-    fsp_err_t err = FSP_SUCCESS;
-    timer_info_t info;
-
-    R_TIM_W_InfoGet(p_timer_ctl, &info);
-    uint32_t timer_freq_hz = info.clock_frequency;
-
-    /* Calculate the desired period based on the current clock. Note that this calculation could overflow if the
-     * desired period is larger than UINT32_MAX / pclkd_freq_hz. A cast to uint64_t is used to prevent this. */
-    uint32_t period_count = (uint32_t) (((uint64_t) timer_freq_hz * period_counts) / 1000);
-
-    /* Set the calculated period. */
-    err = R_TIM_W_PeriodSet(p_timer_ctl, period_count);
 
     return err;
 }
@@ -220,14 +201,14 @@ void print_timer_menu(void)
 void g_timer_periodic_cb(timer_callback_args_t * p_args)
 {
     (void) p_args;
+
+    /* Reduce or remove logs below if needs for period < GPT_MIN_PERIOD_COUNT */
     APP_PRINT("\r\n** g_timer_periodic_cb INVOKED ** \r\n");
-    uart_log("\r\n** g_timer_periodic_cb INVOKED ** \r\n");
 }
 
 void g_timer_oneshot_cb(timer_callback_args_t * p_args)
 {
     APP_PRINT("** g_timer_oneshot_cb INVOKED ** \r\n");
-    uart_log("** g_timer_oneshot_cb INVOKED ** \r\n");
 
     if (NULL != p_args)
     {

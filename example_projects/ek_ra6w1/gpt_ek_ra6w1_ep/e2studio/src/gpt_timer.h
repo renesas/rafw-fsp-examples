@@ -28,13 +28,14 @@
 #define TIMER_UNITS_CONV_32K      (32)           /* timer convert factor */
 
 /* GPT Timer Pin for boards */
-#define TIMER_PIN           TIM_W_EVENT_GPIO4
+#define TIMER_PIN                 (0x03)         /* TIM_W_EVENT_GPIO4 */
 
 #if defined (BOARD_RA2A1_EK) || defined (BOARD_RA4W1_EK)
 #define GPT_MAX_PERIOD_COUNT      (0XFFFF)        /* Max Period Count for 16-bit Timer*/
 #else
 #define GPT_MAX_PERIOD_COUNT      (0XFFFFFFFF)    /* Max Period Count for 32-bit Timer*/
 #endif
+#define GPT_MIN_PERIOD_COUNT      (100 * TIMER_UNITS_CONV_FACTOR) /* Min Period 100ms */
 
 #define PERIODIC_MODE             (1U)            /* To check status of GPT Timer in Periodic mode */
 #define PWM_MODE                  (2U)            /* To check status of GPT Timer in PWM mode */
@@ -55,6 +56,5 @@ fsp_err_t set_timer_duty_cycle(uint8_t duty_cycle_percent);
 uint32_t process_input_data(void);
 void deinit_gpt_timer(timer_ctrl_t *const p_timer_ctl);
 void print_timer_menu(void);
-fsp_err_t set_timer_period(timer_ctrl_t *const p_timer_ctl, uint32_t period_counts);
 
 #endif /* GPT_TIMER_H_ */

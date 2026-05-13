@@ -3,7 +3,7 @@
  * Description  : Contains data structures and functions used in hal_entry.c.
  *********************************************************************************************************************/
 /**********************************************************************************************************************
- * Copyright (c) 2020 - 2025 Renesas Electronics Corporation and/or its affiliates
+ * Copyright (c) 2020 - 2026 Renesas Electronics Corporation and/or its affiliates
  *
  * SPDX-License-Identifier: BSD-3-Clause
  *********************************************************************************************************************/
@@ -13,20 +13,17 @@
 #include "hal_data.h"
 #include "timer_setup.h"
 
-#define SYS_CPU_FREEZEEN_DISABLE        (0U)
-#define SYS_CPU_FREEZEEN_ENABLE         (1U)
-
 FSP_CPP_HEADER
 void R_BSP_WarmStart(bsp_warm_start_event_t event);
 FSP_CPP_FOOTER
+
+extern uint32_t g_bsp_reset_stat_reg;
 
 /*
  * private function declarations
  */
 /* function used to read RTT input and proceed */
 static fsp_err_t read_Input_from_RTT(void);
-/* function used to enable wdog in debug mode */
-static void enable_wdog_count_in_debug_mode(void);
 /* function used to check if reset is caused by watchdog or not */
 static void check_reset_status(void);
 /* function used to configure GPIOs that are connected to LEDs */
@@ -40,8 +37,9 @@ static void initialize_led_pin(void);
  **********************************************************************************************************************/
 static void initialize_led_pin(void)
 {
-    R_GPIO_W_PinCfg(&g_ioport_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, IOPORT_CFG_PORT_DIRECTION_OUTPUT);
-    R_GPIO_W_PinCfg(&g_ioport_ctrl, LED_WATCHDOG_RESET_IND, IOPORT_CFG_PORT_DIRECTION_OUTPUT);
+    /* Set the GPIOs for LED as output pin */
+    R_GPIO_W_PinCfg(&g_gpio_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_DIRECTION_OUTPUT);
+    R_GPIO_W_PinCfg(&g_gpio_ctrl, LED_WATCHDOG_RESET_IND, BSP_IO_DIRECTION_OUTPUT);
 }
 
 /***********************************************************************************************************************
@@ -119,21 +117,31 @@ void hal_entry(void)
 }
 
 /***********************************************************************************************************************
- * This function is called at various points during the startup process.  This implementation uses the event that is
- * called right before main() to set up the pins.
+ * This function is called at various points during the startup process.  This implementation uses:
+ *  - the event that is called after the clocks have been configured, to freeze the watchdog
+ *  - the event that is called right before main() to set up the pins
  *
  * @param[in]  event    Where at in the start up process the code is currently at
  **********************************************************************************************************************/
 void R_BSP_WarmStart(bsp_warm_start_event_t event)
 {
-    if (BSP_WARM_START_RESET == event)
+    if (BSP_WARM_START_POST_CLOCK == event)
     {
+        /* System clocks are configured. */
+
+        /*
+         * Freeze the watchdog, to avoid an unexpected reboot.
+         * The watchdog-freeze setting must be enabled for this to have an effect.
+         */
+        R_BSP_PeripheralFreeze(BSP_FREEZE_PERIPHERAL_SYS_WDOG);
     }
 
     if (BSP_WARM_START_POST_C == event)
     {
+        /* C runtime environment and system clocks are setup. */
+
         /* Configure pins. */
-        IOPORT_CFG_OPEN(&IOPORT_CFG_CTRL, &IOPORT_CFG_NAME);
+        R_GPIO_W_Open(&g_gpio_ctrl, &IOPORT_CFG_NAME);
     }
 }
 
@@ -156,76 +164,57 @@ static fsp_err_t read_Input_from_RTT(void)
 
     user_data = (uint8_t) atoi((char*) &rByte);
 
-    switch (user_data)
+    if (user_data == ENABLE_WDOG)
     {
-        case ENABLE_WDOG:
+        R_GPIO_W_PinWrite(&g_gpio_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_LEVEL_LOW);
+        R_GPIO_W_PinWrite(&g_gpio_ctrl, LED_WATCHDOG_RESET_IND, BSP_IO_LEVEL_LOW);
+
+        /* Resume activity of the system watchdog */
+        R_BSP_PeripheralUnFreeze(BSP_FREEZE_PERIPHERAL_SYS_WDOG);
+
+        /* Open WDOG. For every GPT timeout, watchdog will get refreshed. */
+        err = R_WDOG_W_Open(&g_wdog_ctrl, &g_wdog_cfg);
+        if (FSP_SUCCESS != err)
         {
-            R_GPIO_W_PinWrite(&g_ioport_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_LEVEL_LOW);
-            R_GPIO_W_PinWrite(&g_ioport_ctrl, LED_WATCHDOG_RESET_IND, BSP_IO_LEVEL_LOW);
+            APP_ERR_PRINT("\r\n ** R_WDOG_W_Open API Failed ** \r\n");
 
-            /* Enable WDOG to count and generate NMI or Reset when the debugger(JLink) is connected. */
-            enable_wdog_count_in_debug_mode();
-
-            /* Open WDOG. For every GPT timeout, watchdog will get refreshed. */
-            err = R_WDOG_W_Open(&g_wdog_ctrl, &g_wdog_cfg);
-            if (FSP_SUCCESS != err)
-            {
-                APP_ERR_PRINT("\r\n ** R_WDOG_W_Open API Failed ** \r\n");
-
-                return err;
-            }
-
-            /* Start GPT timer in Periodic mode */
-            err = timer_start();
-            if (FSP_SUCCESS != err)
-            {
-                APP_ERR_PRINT("\r\n ** GPT TIMER START FAILED ** \r\n");
-
-                return err;
-            }
-
-            /* Enable External IRQ */
-            err = enable_icu_module();
-            if (FSP_SUCCESS != err)
-            {
-                APP_ERR_PRINT("\r\n ** EXTERNAL IRQ ENABLE FAILED ** \r\n");
-
-                return err;
-            }
-
-            /* Print message to indicate user about application status. */
-            APP_PRINT("\r\nWDOG initialized, GPT Timer Started\r\n")
-            APP_PRINT("To stop WDOG counter from refreshing, press the push button\r\n");
-            break;
+            return err;
         }
 
-        default:
+        /* Start GPT timer in Periodic mode */
+        err = timer_start();
+        if (FSP_SUCCESS != err)
         {
-            /* Menu for User Selection */
-            APP_PRINT("\r\nInvalid Input");
-            APP_PRINT("\r\nPlease provide input from below option");
-            APP_PRINT("\r\nEnter 1 to Enable WDOG\r\n");
-            APP_PRINT("User Input:  ");
-            break;
+            APP_ERR_PRINT("\r\n ** GPT TIMER START FAILED ** \r\n");
+
+            return err;
         }
+
+        /* Enable External IRQ */
+        err = enable_icu_module();
+        if (FSP_SUCCESS != err)
+        {
+            APP_ERR_PRINT("\r\n ** EXTERNAL IRQ ENABLE FAILED ** \r\n");
+
+            return err;
+        }
+
+        /* Print message to indicate user about application status. */
+        APP_PRINT("\r\nWDOG initialized, GPT Timer Started\r\n");
+        APP_PRINT("To stop WDOG counter from refreshing, press the push button\r\n");
+    }
+    else
+    {
+        /* Menu for User Selection */
+        APP_PRINT("\r\nInvalid Input");
+        APP_PRINT("\r\nPlease provide input from below option");
+        APP_PRINT("\r\nEnter 1 to Enable WDOG\r\n");
+        APP_PRINT("User Input:  ");
     }
 
     user_data = RESET_VALUE;
 
     return err;
-}
-
-/***********************************************************************************************************************
- * This function is called to enable WDOG counter in debug mode.
- * @brief    Enables WDOG counter to count in debug mode.
- * @param[IN]   None
- * @retval      None
- **********************************************************************************************************************/
-static void enable_wdog_count_in_debug_mode(void)
-{
-    /* Clear the SYS_CPU_FREEZE_EN bit.
-     * If 1, freezing of the on-chip peripherals is enabled when the Cortex-M33 is halted in DEBUG State */
-    GPREG->DEBUG_REG_b.SYS_CPU_FREEZE_EN = SYS_CPU_FREEZEEN_DISABLE;
 }
 
 /***********************************************************************************************************************
@@ -236,21 +225,17 @@ static void enable_wdog_count_in_debug_mode(void)
  **********************************************************************************************************************/
 static void check_reset_status(void)
 {
-    if (RESET_STATUS_REGISTER_POR_DEFAULT == CRG_TOP->RESET_STAT_REG)
+    if (RESET_STATUS_REGISTER_POR_DEFAULT == g_bsp_reset_stat_reg)
     {
-        /* Clear the RESET_STAT_REG register */
-        CRG_TOP->RESET_STAT_REG = 0;
-
         /* Turn ON LED */
-        R_GPIO_W_PinWrite(&g_ioport_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_LEVEL_HIGH);
+        R_GPIO_W_PinWrite(&g_gpio_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_LEVEL_HIGH);
         APP_PRINT("\r\n************* POR Reset detected ************************\r\n");
     }
 
-    if (RESET_STATUS_REGISTER_DETECT_WDOG_RESET == CRG_TOP->RESET_STAT_REG_b.M33_WDOG_STAT)
+    if (RESET_STATUS_REGISTER_DETECT_WDOG_RESET == g_bsp_reset_stat_reg)
     {
         /* Turn ON LED */
-        R_GPIO_W_PinWrite(&g_ioport_ctrl, LED_WATCHDOG_RESET_IND, BSP_IO_LEVEL_HIGH);
-        APP_PRINT("\r\n************** WDOG_RESET Reset detected *****************\r\n");
+        R_GPIO_W_PinWrite(&g_gpio_ctrl, LED_WATCHDOG_RESET_IND, BSP_IO_LEVEL_HIGH);
     }
 }
 
