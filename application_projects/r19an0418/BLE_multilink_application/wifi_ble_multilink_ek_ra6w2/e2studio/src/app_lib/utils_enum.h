@@ -342,9 +342,9 @@ const char * E_BLE_GAP_EVT_T (e_ble_gap_evt_t status)
             return "BLE_GAP_EVENT_CTE_CONN_REPT";
         }
 
-        case BLE_GAP_EVENT_SUBRATE_CHANGE:
+        case BLE_GAP_EVENT_SUBRATE_CHG:
         {
-            return "BLE_GAP_EVENT_SUBRATE_CHANGE";
+            return "BLE_GAP_EVENT_SUBRATE_CHG";
         }
 
         case BLE_GAP_EVENT_PAST_RECV:

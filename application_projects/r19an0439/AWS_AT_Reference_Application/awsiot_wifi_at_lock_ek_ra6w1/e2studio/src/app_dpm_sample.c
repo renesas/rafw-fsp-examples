@@ -25,7 +25,7 @@
  */
 
 /* 
- * This file was derived and modified from "FleetProvisioningDemoExample.c",
+ * This file was derived and modified from
  * "ShadowDemoMainExample.c" and "JobsDemoExample.c"
  */
 
@@ -84,15 +84,12 @@
 /* corePKCS11 includes. */
 #include "core_pkcs11.h"
 #include "core_pkcs11_config.h"
-/* AWS IoT Fleet Provisioning Library. */
-#include "fleet_provisioning.h"
 /* Demo includes. */
 #include "mqtt_pkcs11_demo_helpers.h"
 #include "pkcs11_operations.h"
 #include "tinycbor_serializer.h"
 #include "transport_mbedtls_pkcs11.h"
 #include "app_atcommand_pal.h"
-#include "config_s3_http.h"
 #undef printf
 
 #include "rm_lwip_w_helper.h"
@@ -233,81 +230,6 @@ static MQTTFixedBuffer_t xBuffer = {ucSharedBuffer,
  */
 static char pcPublishPayload[MAX_PUBLISH_PAYLOAD_LEN] = {0, };
 
-/* ( __USE_FLEET_PROVISION__ ) */
-/* get from "FleetProvisioningDemoExample.c" */
-/**
- * @brief Name of the provisioning template to use for the RegisterThing
- * portion of the Fleet Provisioning workflow.
- *
- * For information about provisioning templates, see the following AWS documentation:
- * https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html#fleet-provision-template
- *
- * The example template used for this demo is available in the
- * example_demo_template.json file in the demo directory. In the example,
- * replace <provisioned-thing-policy> with the policy provisioned devices
- * should have.  The demo template uses Fn::Join to construct the Thing name by
- * concatenating fp_demo_ and the serial number sent by the demo.
- *
- * @note The provisioning template MUST be created in AWS IoT before running the
- * demo.
- *
- * #define PROVISIONING_TEMPLATE_NAME    "...insert here..."
- */
-#define PROVISIONING_TEMPLATE_NAME    "FleetProvisioningDemoTemplate"
-/**
- * @brief The length of #PROVISIONING_TEMPLATE_NAME.
- */
-#define PROVISIONING_TEMPLATE_NAME_LENGTH    ((uint16_t)(sizeof(PROVISIONING_TEMPLATE_NAME) - 1 ) )
-/**
- * @brief The length of #FP_DEMO_ID.
- */
-#define FP_DEMO_ID_LENGTH                    ((uint16_t)(sizeof(FP_DEMO_ID) - 1))
-/**
- * @brief Size of buffer in which to hold the certificate signing request (CSR).
- */
-#define CSR_BUFFER_LENGTH                    2048
-/**
- * @brief Size of buffer in which to hold the certificate.
- */
-#define CERT_BUFFER_LENGTH                   2048
-/**
- * @brief Size of buffer in which to hold the certificate id.
- *
- * See https://docs.aws.amazon.com/iot/latest/apireference/API_Certificate.html#iot-Type-Certificate-certificateId
- */
-#define CERT_ID_BUFFER_LENGTH                64
-/**
- * @brief Size of buffer in which to hold the certificate ownership token.
- */
-#define OWNERSHIP_TOKEN_BUFFER_LENGTH        512
-/**
- * @brief Status values of the Fleet Provisioning response.
- */
-typedef enum
-{
-    ResponseNotReceived,
-    ResponseAccepted,
-    ResponseRejected
-} ResponseStatus_t;
-
-/**
- * @brief Status reported from the MQTT publish callback.
- */
-static ResponseStatus_t xResponseStatus;
-/**
- * @brief Buffer to hold responses received from the AWS IoT Fleet Provisioning
- * APIs. When the MQTT publish callback receives an expected Fleet Provisioning
- * accepted payload, it copies it into this buffer.
- */
-static uint8_t pucPayloadBuffer[NETWORK_BUFFER_SIZE];
-/**
- * @brief Length of the payload stored in #pucPayloadBuffer. This is set by the
- * MQTT publish callback when it copies a received payload into #pucPayloadBuffer.
- */
-static size_t xPayloadLength;
-
-static void app_provinsioning_device_service(void);
-/* ( __USE_FLEET_PROVISION__ ) */
 
 static BaseType_t aws_dpm_app_sample_thread(void);
 static void prvEventCallback(MQTTContext_t *pxMqttContext, MQTTPacketInfo_t *pxPacketInfo, MQTTDeserializedInfo_t *pxDeserializedInfo);
@@ -2263,33 +2185,12 @@ RETRY_CONNECTION:
     if (xAppConnectionEstablished == true)
     {
         IOT_INFO("Disconnecting MQTT session for reconnection...")
-/* [[PCKS11 used or not */
-        if (getFleetProvStatus())
-        {
-            xDisconnectMqttSession(&xMqttContext, &xNetworkContext);
-        }
-        else
-        {
-            xDisconnectMqttSession(&xMqttContext, &xNetworkContext);
-        }
-//]]
+        xDisconnectMqttSession(&xMqttContext, &xNetworkContext);
         xAppConnectionEstablished = false;
     }
     /* Set the pParams member of the network context with desired transport. */
     xNetworkContext.pxParams = &xTlsTransportParams;
-
-/* [[PCKS11 used or not */
-    if (getFleetProvStatus())
-    {
-        xStatus = xEstablishMqttSession_P11(&xMqttContext, &xNetworkContext, &xBuffer, prvEventCallback,
-        pkcs11configLABEL_DEVICE_CERTIFICATE_FOR_TLS,
-        pkcs11configLABEL_DEVICE_PRIVATE_KEY_FOR_TLS);
-    }
-    else
-    {
-        xStatus = xEstablishMqttSession(&xMqttContext, &xNetworkContext, &xBuffer, prvEventCallback);
-    }
-//]]
+    xStatus = xEstablishMqttSession(&xMqttContext, &xNetworkContext, &xBuffer, prvEventCallback);
     if (xStatus != true)
     {
         IOT_ERROR( "Failed to establish MQTT session with provisioned "
@@ -2297,14 +2198,7 @@ RETRY_CONNECTION:
                    "new certificate is active and has an attached IoT "
                    "Policy that allows the \"iot:Connect\" action.")
         /* ToDo::exception process when infinite connection failure happened */
-        if (getFleetProvStatus())
-        {
-            xDisconnectMqttSession(&xMqttContext, &xNetworkContext);
-        }
-        else
-        {
-            xDisconnectMqttSession(&xMqttContext, &xNetworkContext);
-        }
+        xDisconnectMqttSession(&xMqttContext, &xNetworkContext);
         xAppConnectionEstablished = false;
         fail_count++;
         if (fail_count > MAX_RETRY_CNT_TO_SLEEP)
@@ -2926,20 +2820,6 @@ static void DPM_App_Main(UINT32 _data, UINT32 _rtmData, DM_NOTI _status)
             }
             load_aws_credentials();
 
-            if (getFleetProvStatus())
-            {
-                /* check whether this device registered or not */
-                if (0) // Todo: app_is_needed_fleet_provisioning()
-                {
-                    IOT_INFO("fleet provisioning start...")
-                    app_provinsioning_device_service();
-                }
-                else
-                {
-                    IOT_INFO("this is the provisioned device (thing ID: %s) using certi from NVRAM", getAppThingName())
-                }
-            }
-            else
             {
                 app_set_registered_thing_name(getAppThingName()); //pre-registered thing used
                 IOT_INFO("this is the pre-registered device (thing ID: %s) using certi from app_aws_certi.h", getAppThingName())
@@ -3121,9 +3001,6 @@ static BaseType_t aws_dpm_app_sample_thread(void)
             }
             vTaskDelay(portCONVERT_MS_2_TICKS(10));
             strncpy((char*)aws_file_url, (const char*)tmp_url, strlen(tmp_url));
-#if defined(__SUPPORT_OTA__)
-            aws_s3p_http_ota_create();
-#endif
             return status;
         }
         else
@@ -3241,449 +3118,6 @@ void aws_shadow_dpm_auto_start(void *arg)
     vTaskDelete(NULL);
 }
 
-/* ( __USE_FLEET_PROVISION__ ) */
-static bool prvSubscribeToCsrResponseTopics(void)
-{
-    bool xStatus = false;
-
-    if (getFleetProvStatus() == 0)
-    {
-        return xStatus;
-    }
-
-    xStatus = xSubscribeToTopic(&xMqttContext,
-    FP_CBOR_CREATE_CERT_ACCEPTED_TOPIC,
-    FP_CBOR_CREATE_CERT_ACCEPTED_LENGTH);
-
-    if (xStatus == false)
-    {
-        IOT_ERROR( "Failed to subscribe to fleet provisioning topic: %.*s.",
-                   FP_CBOR_CREATE_CERT_ACCEPTED_LENGTH,
-                   FP_CBOR_CREATE_CERT_ACCEPTED_TOPIC)
-    }
-
-    if (xStatus == true)
-    {
-        xStatus = xSubscribeToTopic(&xMqttContext,
-        FP_CBOR_CREATE_CERT_REJECTED_TOPIC,
-        FP_CBOR_CREATE_CERT_REJECTED_LENGTH);
-        if (xStatus == false)
-        {
-            IOT_ERROR( "Failed to subscribe to fleet provisioning topic: %.*s.",
-                       FP_CBOR_CREATE_CERT_REJECTED_LENGTH,
-                       FP_CBOR_CREATE_CERT_REJECTED_TOPIC)
-        }
-    }
-
-    return xStatus;
-}
-
-static bool prvUnsubscribeFromCsrResponseTopics(void)
-{
-    bool xStatus = false;
-
-    if (getFleetProvStatus() == 0)
-    {
-        return xStatus;
-    }
-
-    xStatus = xUnsubscribeFromTopic(&xMqttContext,
-    FP_CBOR_CREATE_CERT_ACCEPTED_TOPIC,
-    FP_CBOR_CREATE_CERT_ACCEPTED_LENGTH);
-
-    if (xStatus == false)
-    {
-        IOT_ERROR("Failed to unsubscribe from fleet provisioning topic: %.*s.",
-                  FP_CBOR_CREATE_CERT_ACCEPTED_LENGTH,
-                  FP_CBOR_CREATE_CERT_ACCEPTED_TOPIC)
-    }
-
-    if (xStatus == true)
-    {
-        xStatus = xUnsubscribeFromTopic(&xMqttContext,
-        FP_CBOR_CREATE_CERT_REJECTED_TOPIC,
-        FP_CBOR_CREATE_CERT_REJECTED_LENGTH);
-
-        if (xStatus == false)
-        {
-            IOT_ERROR("Failed to unsubscribe from fleet provisioning topic: %.*s.",
-                      FP_CBOR_CREATE_CERT_REJECTED_LENGTH,
-                      FP_CBOR_CREATE_CERT_REJECTED_TOPIC)
-        }
-    }
-
-    return xStatus;
-}
-static bool prvSubscribeToRegisterThingResponseTopics(void)
-{
-    bool xStatus = false;
-
-    if (getFleetProvStatus() == 0)
-    {
-        return xStatus;
-    }
-
-    xStatus = xSubscribeToTopic(&xMqttContext, FP_CBOR_REGISTER_ACCEPTED_TOPIC(PROVISIONING_TEMPLATE_NAME),
-                                FP_CBOR_REGISTER_ACCEPTED_LENGTH(PROVISIONING_TEMPLATE_NAME_LENGTH));
-
-    if (xStatus == false)
-    {
-        IOT_ERROR("Failed to subscribe to fleet provisioning topic: %.*s.",
-                  FP_CBOR_REGISTER_ACCEPTED_LENGTH( PROVISIONING_TEMPLATE_NAME_LENGTH),
-                  FP_CBOR_REGISTER_ACCEPTED_TOPIC( PROVISIONING_TEMPLATE_NAME))
-    }
-
-    if (xStatus == true)
-    {
-        xStatus = xSubscribeToTopic(&xMqttContext, FP_CBOR_REGISTER_REJECTED_TOPIC(PROVISIONING_TEMPLATE_NAME),
-                                    FP_CBOR_REGISTER_REJECTED_LENGTH(PROVISIONING_TEMPLATE_NAME_LENGTH));
-        if (xStatus == false)
-        {
-            IOT_ERROR("Failed to subscribe to fleet provisioning topic: %.*s.",
-                      FP_CBOR_REGISTER_REJECTED_LENGTH( PROVISIONING_TEMPLATE_NAME_LENGTH),
-                      FP_CBOR_REGISTER_REJECTED_TOPIC( PROVISIONING_TEMPLATE_NAME))
-        }
-    }
-
-    return xStatus;
-}
-
-static bool prvUnsubscribeFromRegisterThingResponseTopics(void)
-{
-    bool xStatus = false;
-
-    if (getFleetProvStatus() == 0)
-    {
-        return xStatus;
-    }
-
-    xStatus = xUnsubscribeFromTopic(&xMqttContext, FP_CBOR_REGISTER_ACCEPTED_TOPIC(PROVISIONING_TEMPLATE_NAME),
-                                    FP_CBOR_REGISTER_ACCEPTED_LENGTH(PROVISIONING_TEMPLATE_NAME_LENGTH));
-
-    if (xStatus == false)
-    {
-        IOT_ERROR("Failed to unsubscribe from fleet provisioning topic: %.*s.",
-                  FP_CBOR_REGISTER_ACCEPTED_LENGTH( PROVISIONING_TEMPLATE_NAME_LENGTH),
-                  FP_CBOR_REGISTER_ACCEPTED_TOPIC( PROVISIONING_TEMPLATE_NAME))
-    }
-
-    if (xStatus == true)
-    {
-        xStatus = xUnsubscribeFromTopic(&xMqttContext, FP_CBOR_REGISTER_REJECTED_TOPIC(PROVISIONING_TEMPLATE_NAME),
-                                        FP_CBOR_REGISTER_REJECTED_LENGTH(PROVISIONING_TEMPLATE_NAME_LENGTH));
-
-        if (xStatus == false)
-        {
-            IOT_ERROR("Failed to unsubscribe from fleet provisioning topic: %.*s.",
-                      FP_CBOR_REGISTER_REJECTED_LENGTH( PROVISIONING_TEMPLATE_NAME_LENGTH),
-                      FP_CBOR_REGISTER_REJECTED_TOPIC( PROVISIONING_TEMPLATE_NAME))
-        }
-    }
-
-    return xStatus;
-}
-
-static void prvProvisioningPublishCallback(MQTTContext_t *pxMqttContext, MQTTPacketInfo_t *pxPacketInfo,
-    MQTTDeserializedInfo_t *pxDeserializedInfo)
-{
-    if (getFleetProvStatus())
-    {
-        FleetProvisioningStatus_t xStatus;
-        FleetProvisioningTopic_t xApi;
-        MQTTPublishInfo_t *pxPublishInfo;
-
-        configASSERT(pxMqttContext != NULL);
-        configASSERT(pxPacketInfo != NULL);
-        configASSERT(pxDeserializedInfo != NULL);
-
-        /* Suppress the unused parameter warning when asserts are disabled in
-         * build. */
-        (void)pxMqttContext;
-
-        /* Handle an incoming publish. The lower 4 bits of the publish packet
-         * type is used for the dup, QoS, and retain flags. Hence masking
-         * out the lower bits to check if the packet is publish. */
-        if ((pxPacketInfo->type & 0xF0U) == MQTT_PACKET_TYPE_PUBLISH)
-        {
-            configASSERT(pxDeserializedInfo->pPublishInfo != NULL);
-            pxPublishInfo = pxDeserializedInfo->pPublishInfo;
-            xStatus = FleetProvisioning_MatchTopic(pxPublishInfo->pTopicName, pxPublishInfo->topicNameLength, &xApi);
-
-            if (xStatus != FleetProvisioningSuccess)
-            {
-                IOT_WARN("Unexpected publish message received. Topic: %.*s.",
-                         (int)pxPublishInfo->topicNameLength,
-                         (const char *)pxPublishInfo->pTopicName)
-            }
-            else
-            {
-                if (xApi == FleetProvCborCreateCertFromCsrAccepted)
-                {
-                    IOT_INFO( "Received accepted response from Fleet Provisioning CreateCertificateFromCsr API.")
-                    xResponseStatus = ResponseAccepted;
-
-                    /* Copy the payload from the MQTT library's buffer to #pucPayloadBuffer. */
-                    (void)memcpy((void*)pucPayloadBuffer, (const void*)pxPublishInfo->pPayload,
-                                 (size_t)pxPublishInfo->payloadLength);
-                    xPayloadLength = pxPublishInfo->payloadLength;
-                }
-                else if (xApi == FleetProvCborCreateCertFromCsrRejected)
-                {
-                    LogError(("Received rejected response from Fleet Provisioning CreateCertificateFromCsr API."));
-                    xResponseStatus = ResponseRejected;
-                }
-                else if (xApi == FleetProvCborRegisterThingAccepted)
-                {
-                    IOT_INFO("Received accepted response from Fleet Provisioning RegisterThing API.")
-                    xResponseStatus = ResponseAccepted;
-
-                    /* Copy the payload from the MQTT library's buffer to #pucPayloadBuffer. */
-                    (void)memcpy((void*)pucPayloadBuffer, (const void*)pxPublishInfo->pPayload,
-                                 (size_t)pxPublishInfo->payloadLength);
-                    xPayloadLength = pxPublishInfo->payloadLength;
-                }
-                else if (xApi == FleetProvCborRegisterThingRejected)
-                {
-                    LogError(("Received rejected response from Fleet Provisioning RegisterThing API."));
-                    xResponseStatus = ResponseRejected;
-                }
-                else
-                {
-                    LogError(("Received message on unexpected Fleet Provisioning topic. Topic: %.*s.",
-                             (int)pxPublishInfo->topicNameLength,
-                             (const char *)pxPublishInfo->pTopicName));
-                }
-            }
-        }
-        else
-        {
-            vHandleOtherIncomingPacket(pxPacketInfo, pxDeserializedInfo->packetIdentifier);
-            xResponseStatus = ResponseAccepted;
-        }
-    }
-}
-
-static void app_provinsioning_device_service(void)
-{
-    bool xStatus = false;
-    /* Buffer to hold the provisioned AWS IoT Thing name. */
-    static char pcThingName[MAX_THING_NAME_LENGTH];
-    /* Length of the AWS IoT Thing name. */
-    static size_t xThingNameLength;
-    /* Buffer for holding the CSR. */
-    char pcCsr[CSR_BUFFER_LENGTH] = {0 };
-    size_t xCsrLength = 0;
-    /* Buffer for holding received certificate until it is saved. */
-    char pcCertificate[CERT_BUFFER_LENGTH];
-    size_t xCertificateLength;
-    /* Buffer for holding the certificate ID. */
-    char pcCertificateId[CERT_ID_BUFFER_LENGTH];
-    size_t xCertificateIdLength;
-    /* Buffer for holding the certificate ownership token. */
-    char pcOwnershipToken[OWNERSHIP_TOKEN_BUFFER_LENGTH];
-    size_t xOwnershipTokenLength;
-    bool xConnectionEstablished = false;
-    CK_SESSION_HANDLE xP11Session;
-    CK_RV xPkcs11Ret = CKR_OK;
-    /* Create the request payload to publish to the RegisterThing API. */
-    char tmpThingId[128] = {0, };
-    ULONG macmsw = 0, maclsw = 0;
-
-    if (getFleetProvStatus())
-    {
-        /* Initialize the buffer lengths to their max lengths. */
-        xCertificateLength = CERT_BUFFER_LENGTH;
-        xCertificateIdLength = CERT_ID_BUFFER_LENGTH;
-        xOwnershipTokenLength = OWNERSHIP_TOKEN_BUFFER_LENGTH;
-        /* Initialize the PKCS #11 module */
-        xPkcs11Ret = xInitializePkcs11Session(&xP11Session);
-
-        if (xPkcs11Ret != CKR_OK)
-        {
-            LogError(("Failed to initialize PKCS #11."));
-            xStatus = false;
-        }
-        else
-        {
-            xStatus = xGenerateKeyAndCsr(xP11Session,
-            pkcs11configLABEL_DEVICE_PRIVATE_KEY_FOR_TLS,
-            pkcs11configLABEL_DEVICE_PUBLIC_KEY_FOR_TLS, pcCsr,
-            CSR_BUFFER_LENGTH, &xCsrLength);
-
-            if (xStatus == false)
-            {
-                LogError( ( "Failed to generate Key and Certificate Signing Request." ) );
-            }
-
-            xPkcs11CloseSession(xP11Session);
-        }
-
-        /**** Connect to AWS IoT Core with provisioning claim credentials *****/
-
-        /* We first use the claim credentials to connect to the broker. These
-         * credentials should allow use of the RegisterThing API and one of the
-         * CreateCertificatefromCsr or CreateKeysAndCertificate.
-         * In this demo we use CreateCertificatefromCsr. */
-        if (xStatus == true)
-        {
-            /* Set the pParams member of the network context with desired transport. */
-            xNetworkContext.pxParams = &xTlsTransportParams;
-
-            /* Attempts to connect to the AWS IoT MQTT broker. If the
-             * connection fails, retries after a timeout. Timeout value will
-             * exponentially increase until maximum attempts are reached. */
-            IOT_INFO("Establishing MQTT session with claim certificate...")
-            xStatus = xEstablishMqttSession_P11(&xMqttContext, &xNetworkContext, &xBuffer,
-                                                prvProvisioningPublishCallback,
-                                                pkcs11configLABEL_CLAIM_CERTIFICATE,
-                                                pkcs11configLABEL_CLAIM_PRIVATE_KEY);
-            if (xStatus == false)
-            {
-                LogError(("Failed to establish MQTT session."));
-            }
-            else
-            {
-                IOT_INFO("Established connection with claim credentials.")
-                xConnectionEstablished = true;
-            }
-        }
-
-        /**** Call the CreateCertificateFromCsr API ***************************/
-
-        /* We use the CreateCertificatefromCsr API to obtain a client certificate
-         * for a key on the device by means of sending a certificate signing
-         * request (CSR). */
-        if (xStatus == true)
-        {
-            /* Subscribe to the CreateCertificateFromCsr accepted and rejected
-             * topics. In this demo we use CBOR encoding for the payloads,
-             * so we use the CBOR variants of the topics. */
-            xStatus = prvSubscribeToCsrResponseTopics();
-        }
-
-        if (xStatus == true)
-        {
-            /* Create the request payload containing the CSR to publish to the
-             * CreateCertificateFromCsr APIs. */
-            xStatus = xGenerateCsrRequest(pucPayloadBuffer,
-            NETWORK_BUFFER_SIZE, pcCsr, xCsrLength, &xPayloadLength);
-        }
-
-        if (xStatus == true)
-        {
-            /* Publish the CSR to the CreateCertificatefromCsr API. */
-            xPublishToTopic(&xMqttContext,
-            FP_CBOR_CREATE_CERT_PUBLISH_TOPIC,
-            FP_CBOR_CREATE_CERT_PUBLISH_LENGTH, (char*)pucPayloadBuffer, xPayloadLength);
-
-            if (xStatus == false)
-            {
-                LogError(( "Failed to publish to fleet provisioning topic: %.*s.",
-                         FP_CBOR_CREATE_CERT_PUBLISH_LENGTH,
-                         FP_CBOR_CREATE_CERT_PUBLISH_TOPIC));
-            }
-        }
-
-        if (xStatus == true)
-        {
-            /* From the response, extract the certificate, certificate ID, and
-             * certificate ownership token. */
-            xStatus = xParseCsrResponse(pucPayloadBuffer, xPayloadLength, pcCertificate, &xCertificateLength,
-                                        pcCertificateId, &xCertificateIdLength, pcOwnershipToken, &xOwnershipTokenLength);
-
-            if (xStatus == true)
-            {
-                IOT_INFO("Received certificate with Id: %.*s", ( int ) xCertificateIdLength, pcCertificateId)
-            }
-        }
-
-        if (xStatus == true)
-        {
-            /* Save the certificate into PKCS #11. */
-            xStatus = xLoadCertificate(xP11Session, pcCertificate,
-            pkcs11configLABEL_DEVICE_CERTIFICATE_FOR_TLS, xCertificateLength);
-        }
-
-        if (xStatus == true)
-        {
-            /* Unsubscribe from the CreateCertificateFromCsr topics. */
-            xStatus = prvUnsubscribeFromCsrResponseTopics();
-        }
-
-        /**** Call the RegisterThing API **************************************/
-
-        /* We then use the RegisterThing API to activate the received certificate,
-         * provision AWS IoT resources according to the provisioning template, and
-         * receive device configuration. */
-        if (xStatus == true)
-        {
-            /* mac address base[[::tested duplicated thing id for fleet provisioning */
-            macmsw = 0;
-            maclsw = 0;
-
-            getMacAddrMswLsw(WLAN0_IFACE, &macmsw, &maclsw);
-            sprintf(tmpThingId, "%s_%02lX%02lX%02lx", FP_DEMO_ID_SUFFIX, ((maclsw >> 16) & 0x0ff),
-                ((maclsw >> 8) & 0x0ff), ((maclsw >> 0) & 0x0ff));
-            awsiot_app_print_elapse_time_ms("[%s:%d] request thing id: %s", __func__, __LINE__, tmpThingId);
-
-            xStatus = xGenerateRegisterThingRequest(pucPayloadBuffer,
-                                                    NETWORK_BUFFER_SIZE, pcOwnershipToken, xOwnershipTokenLength, tmpThingId, strlen(tmpThingId),
-                                                    &xPayloadLength);
-        }
-
-        if (xStatus == true)
-        {
-            /* Subscribe to the RegisterThing response topics. */
-            xStatus = prvSubscribeToRegisterThingResponseTopics();
-        }
-
-        if (xStatus == true)
-        {
-            /* Publish the RegisterThing request. */
-            xPublishToTopic(&xMqttContext, FP_CBOR_REGISTER_PUBLISH_TOPIC(PROVISIONING_TEMPLATE_NAME),
-                            FP_CBOR_REGISTER_PUBLISH_LENGTH(PROVISIONING_TEMPLATE_NAME_LENGTH), (char*)pucPayloadBuffer,
-                            xPayloadLength);
-
-            if (xStatus == false)
-            {
-                LogError(("Failed to publish to fleet provisioning topic: %.*s.",
-                         FP_CBOR_REGISTER_PUBLISH_LENGTH(PROVISIONING_TEMPLATE_NAME_LENGTH),
-                         FP_CBOR_REGISTER_PUBLISH_TOPIC(PROVISIONING_TEMPLATE_NAME)));
-            }
-        }
-
-        if (xStatus == true)
-        {
-            /* Extract the Thing name from the response. */
-            xThingNameLength = MAX_THING_NAME_LENGTH;
-            xStatus = xParseRegisterThingResponse(pucPayloadBuffer, xPayloadLength, pcThingName, &xThingNameLength);
-
-            if (xStatus == true)
-            {
-                IOT_INFO("Received AWS IoT Thing name: %.*s", (int)xThingNameLength, pcThingName)
-            }
-        }
-
-        if (xStatus == true)
-        {
-            /* Unsubscribe from the RegisterThing topics. */
-            prvUnsubscribeFromRegisterThingResponseTopics();
-        }
-
-        /**** Disconnect from AWS IoT Core ************************************/
-
-        /* As we have completed the provisioning workflow, we disconnect from
-         * the connection using the provisioning claim credentials. We will
-         * establish a new MQTT connection with the newly provisioned
-         * credentials. */
-        if (xConnectionEstablished == true)
-        {
-            xDisconnectMqttSession(&xMqttContext, &xNetworkContext);
-            xConnectionEstablished = false;
-        }
-    }
-}
-/* ( __USE_FLEET_PROVISION__ ) */
 
 /*-----------------------------------------------------------*/
 

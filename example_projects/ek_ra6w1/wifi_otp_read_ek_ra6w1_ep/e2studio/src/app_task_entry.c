@@ -114,7 +114,7 @@ void app_task_entry(void *pvParameters)
     else
     {
         /* OTP operation failed - check error code */
-        printf("OTP read demo failed with error code: %d\r\n", otp_result);
+    	APP_PRINT("OTP read demo failed with error code: %d\r\n", otp_result);
     }
     while (1)
         vTaskDelay(portMAX_DELAY);

@@ -456,7 +456,6 @@
 									<listOptionValue builtIn="false" value="rwnx_drv"/>
 									<listOptionValue builtIn="false" value="macsw"/>
 									<listOptionValue builtIn="false" value="romaclib"/>
-									<listOptionValue builtIn="false" value="supplicant"/>
 									<listOptionValue builtIn="false" value="r_cc312_property_w"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input.83812516" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input">
@@ -1015,7 +1014,6 @@
 									<listOptionValue builtIn="false" value="rwnx_drv"/>
 									<listOptionValue builtIn="false" value="macsw"/>
 									<listOptionValue builtIn="false" value="romaclib"/>
-									<listOptionValue builtIn="false" value="supplicant"/>
 									<listOptionValue builtIn="false" value="r_cc312_property_w"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input.1342775192" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input">

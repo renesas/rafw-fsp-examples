@@ -11,7 +11,6 @@
 #include "otp_example.h"
 #include "hal_data.h"
 #include "common_utils.h"
-#include <stdio.h>
 #include <string.h>
 
 /* Marker for MAC section */
@@ -107,9 +106,9 @@ otp_example_result_t otp_example_read_mac(uint8_t *mac_addr)
  *--------------------------------------------------*/
 static void otp_example_print_mac(uint8_t *mac_addr)
 {
-    printf("MAC Address: %02X:%02X:%02X:%02X:%02X:%02X\r\n",
-           mac_addr[0], mac_addr[1], mac_addr[2],
-           mac_addr[3], mac_addr[4], mac_addr[5]);
+    APP_PRINT("MAC Address: %02X:%02X:%02X:%02X:%02X:%02X\r\n",
+              mac_addr[0], mac_addr[1], mac_addr[2],
+              mac_addr[3], mac_addr[4], mac_addr[5]);
 }
 
 /*--------------------------------------------------
@@ -119,22 +118,22 @@ otp_example_result_t otp_example_run_read_demo(void)
 {
     uint8_t mac_addr[OTP_EXAMPLE_MAC_SIZE];
 
-    printf("\r\n");
-    printf("========================================\r\n");
-    printf("   OTP Read Example Application \r\n");
-    printf("========================================\r\n");
+    APP_PRINT("\r\n");
+    APP_PRINT("========================================\r\n");
+    APP_PRINT("   OTP Read Example Application \r\n");
+    APP_PRINT("========================================\r\n");
 
-    printf("\r\nInitializing OTP controller...\r\n");
+    APP_PRINT("\r\nInitializing OTP controller...\r\n");
 
     if (otp_example_init() != OTP_EXAMPLE_SUCCESS)
     {
-        printf("ERROR: OTP init failed\r\n");
+        APP_PRINT("ERROR: OTP init failed\r\n");
         return OTP_EXAMPLE_ERROR_INIT_FAILED;
     }
 
-    printf("  OTP initialized OK\r\n");
+    APP_PRINT("OTP initialized OK\r\n");
 
-    printf("\r\nReading the MAC Address \r\n \r\n");
+    APP_PRINT("\r\nReading the MAC Address\r\n\r\n");
 
     if (otp_example_read_mac(mac_addr) == OTP_EXAMPLE_SUCCESS)
     {
@@ -142,14 +141,14 @@ otp_example_result_t otp_example_run_read_demo(void)
     }
     else
     {
-        printf("MAC not found\r\n");
+        APP_PRINT("MAC not found\r\n");
     }
 
     otp_example_close();
 
-    printf("\r\n========================================\r\n");
-    printf("        OTP Read Complete      \r\n");
-    printf("========================================\r\n");
+    APP_PRINT("\r\n========================================\r\n");
+    APP_PRINT("        OTP Read Complete      \r\n");
+    APP_PRINT("========================================\r\n");
 
     return OTP_EXAMPLE_SUCCESS;
 }

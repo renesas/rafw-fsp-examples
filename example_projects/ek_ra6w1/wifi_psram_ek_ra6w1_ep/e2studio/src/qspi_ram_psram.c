@@ -56,11 +56,17 @@ static struct
     char *s_size;
 } g_density[] =
 {
-    { (SZ_1M * 16),  "16MB"  },
-    { (SZ_1M * 32),  "32MB"  },
-    { (SZ_1M * 64),  "64MB"  },
-    { (SZ_1M * 128), "128MB" },
-    { (SZ_1M * 256), "256MB" }
+    /* The density code reported by the PSRAM is in Mega-BITS. The usable
+     * size in BYTES is (Mbit / 8). e.g. APS6404L-SQRH = 64Mbit = 8MB.
+     * The size field below must therefore be the byte size, otherwise the
+     * test loops run far past the physical device (which wraps its address),
+     * silently pass the verify (repeating pattern), and hold the QSPI bus
+     * long enough to trip the Wi-Fi watchdog -> reboot. */
+    { (SZ_1M * 16  / 8), "16Mb (2MB)"   },
+    { (SZ_1M * 32  / 8), "32Mb (4MB)"   },
+    { (SZ_1M * 64  / 8), "64Mb (8MB)"   },
+    { (SZ_1M * 128 / 8), "128Mb (16MB)" },
+    { (SZ_1M * 256 / 8), "256Mb (32MB)" }
 };
 
 /*******************************************************************************************************************//**
@@ -94,6 +100,14 @@ static fsp_err_t r_qspi_w_psram_example_init(void)
     mfid = buf[0];
     kgd = buf[1];
     density = buf[2] >> 5;
+
+    /* density is a 3-bit field (0..7) but the table only defines a subset;
+     * reject unknown codes to avoid an out-of-bounds table access. */
+    if (density >= (sizeof(g_density) / sizeof(g_density[0])))
+    {
+        APP_PRINT_ERR("PSRAM unknown density code (0x%02X)\n\r", density);
+        return FSP_ERR_INVALID_DATA;
+    }
 
     APP_PRINT_INFO("ID INFO:\n\r"
                    "\tMF ID  : 0x%02X\n\r"
@@ -203,6 +217,13 @@ static bool psram_full_range_wr_test(void)
                 vPortFree(read_block);
                 return false;
             }
+        }
+
+        /* Yield frequently during the read/verify pass so sustained QSPI
+         * traffic cannot starve the Wi-Fi watchdog on larger devices. */
+        if ((i % SZ_256K) == 0)
+        {
+            vTaskDelay(1);
         }
 
         if ((i % SZ_LOG) == 0)

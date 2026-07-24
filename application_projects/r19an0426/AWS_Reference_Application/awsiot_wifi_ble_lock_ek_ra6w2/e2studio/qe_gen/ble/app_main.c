@@ -1135,6 +1135,23 @@ ble_status_t ble_uninit(void)
     return RM_BLE_ABS_Close(&g_ble_abs0_ctrl);;
 }
 
+static bool WIFI_profile_Exists()
+{
+    int is_profile_present = 0;
+    map_persistant_w_instance_ctrl_t *p_ctrl = RM_MAP_PERSISTANT_W_get_ctrl();
+
+    RM_MAP_PERSISTANT_W_Read_INT(p_ctrl, ENV_GROUP_WIFIPROFILE, WIFI_PROFILE_COMPLETE, &is_profile_present);
+    if(is_profile_present == 1)
+    {
+        printf("Wifi Profile Exists\n");
+        return true;
+    }
+    else
+    {
+        printf("No wifi profile found\n");
+        return false;
+    }
+}
 
 /******************************************************************************
  * Function Name: app_main
@@ -1145,6 +1162,7 @@ ble_status_t ble_uninit(void)
 void app_main(void)
 {
     ble_status_t ret;
+    bool is_sleep3_wakeup;
 
 #if (BSP_CFG_RTOS == 2 || BSP_CFG_RTOS_USED == 1)
     /* Create Event Group */
@@ -1214,6 +1232,13 @@ void app_main(void)
 /* Start user code for process before main loop. Do not edit comment generated here */
     cli_ble_queue_init();
 /* End user code. Do not edit comment generated here */
+
+    is_sleep3_wakeup = RM_PMGR_W_dpm_is_wakeup() || RM_PMGR_W_IsSleep3Wakeup();
+    if (is_sleep3_wakeup || WIFI_profile_Exists())
+    {
+         cli_ble_msg_t msg = { .type = CLI_BLE_MSG_TYPE_SVC_STOP };
+         cli_ble_queue_enqueue(&msg);
+    }
 
    while (1)
     {

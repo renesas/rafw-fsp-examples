@@ -11,8 +11,8 @@
 
 #include "common_utils.h"
 
-#define SSID "username"
-#define PASSPHRASE "password"
+#define SSID "username" /* input your ssid  */
+#define PASSPHRASE "password" /* input your password  */
 #define CHANNEL 0
 #define PASSS_LEN strlen(PASSPHRASE)
 #define SSID_LEN strlen(SSID)

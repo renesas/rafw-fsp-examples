@@ -952,7 +952,7 @@ int prvFleetProvisioningTask( void )
                 LogInfo( ( "PUBLISH MESSAGE: %s\n\rTo TOPIC: %s", SHADOW_MESSAGE, shadow_topic ) );
                 xPublishToTopic( &xMqttContext,
                                  shadow_topic,
-                                 (int32_t) shadow_topic_len,
+                                 (int32_t)strlen(shadow_topic),
                                  ( char * ) SHADOW_MESSAGE,
                                  SHADOW_MESSAGE_LEN);
             }
@@ -1079,7 +1079,7 @@ void connect_to_aws_cloud(void)
                         LogInfo( ( "PUBLISH MESSAGE: %s\n\rTo TOPIC: %s", CONN_MESSAGE, shadow_topic ) );
                         xPublishToTopic( &xMqttContext,
                                          shadow_topic,
-                                         (int32_t) shadow_topic_len,
+                                         (int32_t)strlen(shadow_topic),
                                          ( char * ) CONN_MESSAGE,
                                          CONN_MESSAGE_LEN);
                     }

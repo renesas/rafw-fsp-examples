@@ -14,9 +14,6 @@ The device scans for nearby Wi-Fi networks, shares results with a BLE client, an
 the chosen Wi-Fi network.
 
 2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term or a similar application
 
 

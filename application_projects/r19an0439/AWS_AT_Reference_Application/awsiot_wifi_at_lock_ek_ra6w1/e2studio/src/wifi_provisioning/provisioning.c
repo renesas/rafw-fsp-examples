@@ -112,9 +112,7 @@ static void provisioning_start_thread();
 static fsp_err_t provisioning_add_ap_to_json(provisioning_scan_callback_args_t *p_args);
 
 static void provisioning_get_app_thing_name();
-static int provisioning_get_fleet_provisioning_status();
 static char * provisioning_initialize_string(const char *string_data);
-static void provisioning_get_fleet_provisioning_thing_name();
 
 static void provisioning_mutex_init(provisioning_mutex_t *p_mutex, char *p_name);
 static int32_t provisioning_mutex_lock(provisioning_mutex_t *p_mutex);
@@ -232,7 +230,6 @@ extern bool reset(int flag);
  **********************************************************************************************************************/
 static TaskHandle_t gs_provisioning_task_handle = NULL;
 static char *gs_app_thing_name;
-static char gs_app_fleet_thing_name[128] = {0, };
 
 
 /***********************************************************************************************************************
@@ -3395,51 +3392,14 @@ static void provisioning_get_app_thing_name()
     RM_MAP_PERSISTANT_W_Read_STRING(RM_MAP_PERSISTANT_W_get_ctrl(), ENV_GROUP_APPCFG, provisioning_NVRAM_CFG_THINGNAME, &nvram_saved_name);
 #endif
 
-    if ((GENERIC_AWS == g_provisioning_type) || (ATCMD_AWS == g_provisioning_type))
+    if (nvram_saved_name == NULL)
     {
-        /* If Fleet Provisioning is enabled, get the Thing Name from Fleet Provisioning */
-        if (provisioning_get_fleet_provisioning_status() == 1)
-        {
-            provisioning_get_fleet_provisioning_thing_name();
-        }
-
-        if ((nvram_saved_name == NULL) && (provisioning_get_fleet_provisioning_status() == 1))
-        {
-            gs_app_thing_name = (char *) gs_app_fleet_thing_name;
-        }
-        else if ((nvram_saved_name == NULL) && (provisioning_get_fleet_provisioning_status() == 0))
-        {
-            gs_app_thing_name = provisioning_initialize_string((const char *) PROVISIONING_APP_THING_NAME);
-        }
-        else
-        {
-            if ((provisioning_get_fleet_provisioning_status() == 1) &&
-                (strncmp(nvram_saved_name, gs_app_fleet_thing_name, strlen(gs_app_fleet_thing_name)) != 0))
-            {
-                gs_app_thing_name = (char *) gs_app_fleet_thing_name;
-            }
-            else
-            {
-                gs_app_thing_name = nvram_saved_name;
-            }
-        }
+        gs_app_thing_name = provisioning_initialize_string((const char *) PROVISIONING_APP_THING_NAME);
     }
     else
     {
-        if (nvram_saved_name == NULL)
-        {
-            gs_app_thing_name = provisioning_initialize_string((const char *) PROVISIONING_APP_THING_NAME);
-        }
-        else
-        {
-            gs_app_thing_name = nvram_saved_name;
-        }
+        gs_app_thing_name = nvram_saved_name;
     }
-}
-
-static int provisioning_get_fleet_provisioning_status()
-{
-    return 0;
 }
 
 static char * provisioning_initialize_string(const char *string_data)
@@ -3459,11 +3419,6 @@ static char * provisioning_initialize_string(const char *string_data)
     printf("[%s] cJSON_CreateObject string_length %d [%s]\n", __func__, string_length, target_string);
 
     return target_string;
-}
-
-static void provisioning_get_fleet_provisioning_thing_name ()
-{
-    return;
 }
 
 static void provisioning_mutex_init (provisioning_mutex_t *p_mutex, char *p_name)

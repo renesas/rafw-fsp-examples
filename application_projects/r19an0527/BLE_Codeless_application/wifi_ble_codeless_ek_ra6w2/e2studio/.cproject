@@ -204,6 +204,10 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/arm/mbedtls}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/arm/mbedtls/include/mbedtls}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/src/rm_mbedtls/include/mbedtls}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant/src/crypto}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant/src/wps}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant/src/eap_peer}&quot;"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input.11484445" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input"/>
 							</tool>
@@ -362,6 +366,10 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/arm/mbedtls}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/arm/mbedtls/include/mbedtls}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/src/rm_mbedtls/include/mbedtls}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant/src/crypto}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant/src/wps}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant/src/eap_peer}&quot;"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.393613287" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
 							</tool>
@@ -385,7 +393,6 @@
 									<listOptionValue builtIn="false" value="rwnx_drv"/>
 									<listOptionValue builtIn="false" value="macsw"/>
 									<listOptionValue builtIn="false" value="romaclib"/>
-									<listOptionValue builtIn="false" value="supplicant"/>
 									<listOptionValue builtIn="false" value="r_cc312_property_w"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input.1528411736" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input">
@@ -625,6 +632,10 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/arm/mbedtls}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/arm/mbedtls/include/mbedtls}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/src/rm_mbedtls/include/mbedtls}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant/src/crypto}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant/src/wps}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant/src/eap_peer}&quot;"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input.780167489" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input"/>
 							</tool>
@@ -771,6 +782,10 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/arm/mbedtls}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/arm/mbedtls/include/mbedtls}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/src/rm_mbedtls/include/mbedtls}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant/src/crypto}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant/src/wps}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/ra/fsp/lib/rm_wifi/wifiip_a/src/projects/rrq61000/sdk/interfaces/wifi/stack/supplicant/src/eap_peer}&quot;"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.1266606756" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
 							</tool>
@@ -794,7 +809,6 @@
 									<listOptionValue builtIn="false" value="rwnx_drv"/>
 									<listOptionValue builtIn="false" value="macsw"/>
 									<listOptionValue builtIn="false" value="romaclib"/>
-									<listOptionValue builtIn="false" value="supplicant"/>
 									<listOptionValue builtIn="false" value="r_cc312_property_w"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input.1655972286" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.input">

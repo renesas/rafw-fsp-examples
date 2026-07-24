@@ -9,9 +9,6 @@ A TCP server listens on port 5000 and creates a handler task for each connected 
 Two clients connect to the server, send hello messages, and receive the same messages back.
 
 2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term or a similar application
 
 

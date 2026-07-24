@@ -27,17 +27,17 @@
     <stringAttribute key="com.renesas.cdt.core.targetDevice" value="RRQ61001"/>
     <booleanAttribute key="com.renesas.cdt.core.useRemoteTarget" value="true"/>
     <booleanAttribute key="com.renesas.cdt.core.verboseMode" value="false"/>
-    <stringAttribute key="com.renesas.cdt.launch.dsf.IO_MAP" value="${support_area_loc}"/>
+    <stringAttribute key="com.renesas.cdt.launch.dsf.IO_MAP" value="${support_area_loc}../../../.."/>
     <booleanAttribute key="com.renesas.cdt.launch.dsf.USE_DEFAULT_IO_MAP" value="true"/>
     <listAttribute key="com.renesas.cdt.launch.dsf.downloadImages">
         <listEntry value="|true|false|true|0|true|No core|INTERNAL_MEMORY||false"/>
-        <listEntry value="${workspace_loc:\matter_wifi_at_lock_ek_ra6w1\Debug\matter_wifi_at_lock_ek_ra6w1.img.bin}|true|false|false|0a000000|true|No core|INTERNAL_MEMORY||true"/>
+        <listEntry value="${workspace_loc:/matter_wifi_at_lock_ek_ra6w1/Debug/matter_wifi_at_lock_ek_ra6w1.img.bin}|true|false|false|0a000000|true|No core|INTERNAL_MEMORY||true"/>
     </listAttribute>
     <booleanAttribute key="com.renesas.cdt.launch.dsf.downloadImagesUpgradedV30" value="true"/>
     <listAttribute key="com.renesas.cdt.launch.dsf.externalFlashDestinationAddresses"/>
     <listAttribute key="com.renesas.cdt.launch.dsf.externalFlashDownloadModules"/>
     <stringAttribute key="com.renesas.cdt.launch.dsf.launchSeqType" value="com.renesas.cdt.launch.dsf.launchSequence.e2GdbServer"/>
-    <stringAttribute key="com.renesas.cdt.launch.dsf.serverPath" value="${renesas.support.targetLoc:com.renesas.ide.supportfiles.rrq.debug.debugSupportFileTarget}\e2-server-gdb"/>
+    <stringAttribute key="com.renesas.cdt.launch.dsf.serverPath" value="${renesas.support.targetLoc:com.renesas.ide.supportfiles.rrq.debug.debugSupportFileTarget}/e2-server-gdb"/>
     <booleanAttribute key="com.renesas.hardwaredebug.arm.e2.traceMTB" value="false"/>
     <stringAttribute key="com.renesas.hardwaredebug.arm.e2.traceSizeMTB" value="1024"/>
     <booleanAttribute key="com.renesas.hardwaredebug.arm.e2lite.allow.clock.source.internal" value="true"/>
@@ -58,6 +58,7 @@
     <booleanAttribute key="com.renesas.hardwaredebug.arm.e2lite.enable_dwt" value="false"/>
     <booleanAttribute key="com.renesas.hardwaredebug.arm.e2lite.eraseDataRomOnDownload" value="false"/>
     <booleanAttribute key="com.renesas.hardwaredebug.arm.e2lite.eraseRomOnDownload" value="false"/>
+    <booleanAttribute key="com.renesas.hardwaredebug.arm.e2lite.eraseSipRomOnDownload" value="false"/>
     <booleanAttribute key="com.renesas.hardwaredebug.arm.e2lite.externalFlash" value="false"/>
     <stringAttribute key="com.renesas.hardwaredebug.arm.e2lite.externalFlash.libraryFile" value=""/>
     <stringAttribute key="com.renesas.hardwaredebug.arm.e2lite.hook_Stop_func" value=""/>
@@ -167,11 +168,12 @@
     <booleanAttribute key="com.renesas.hardwaredebug.arm.jlink.setTZBoundaries" value="false"/>
     <intAttribute key="com.renesas.hardwaredebug.arm.jlink.supply_voltage_asp" value="0"/>
     <booleanAttribute key="com.renesas.hardwaredebug.arm.jlink.use_multidevice_synchronous_debug" value="false"/>
+    <stringAttribute key="com.renesas.hardwaredebug.boardName" value=""/>
     <booleanAttribute key="com.renesas.hardwaredebug.timemeasurement" value="true"/>
     <intAttribute key="org.eclipse.cdt.debug.gdbjtag.core.delay" value="0"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.doHalt" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.doReset" value="false"/>
-    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value="C:\Users\MyPC\e2_studio\workspace_fspversion\matter_wifi_at_lock_ek_ra6w1\Debug\matter_wifi_at_lock_ek_ra6w1.elf"/>
+    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value="/home/developer/Music/Application_rebasingto_2_1_0/RA6W1_AT/WORKSPACE_AT/matter_wifi_at_lock_ek_ra6w1/Debug/matter_wifi_at_lock_ek_ra6w1.elf"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageOffset" value="0"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.initCommands" value=""/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.loadImage" value="false"/>
@@ -182,7 +184,7 @@
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setResume" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setStopAt" value="true"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.stopAt" value="main"/>
-    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsFileName" value="C:\Users\MyPC\e2_studio\workspace_fspversion\matter_wifi_at_lock_ek_ra6w1\Debug\matter_wifi_at_lock_ek_ra6w1.elf"/>
+    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsFileName" value="/home/developer/Music/Application_rebasingto_2_1_0/RA6W1_AT/WORKSPACE_AT/matter_wifi_at_lock_ek_ra6w1/Debug/matter_wifi_at_lock_ek_ra6w1.elf"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsOffset" value="0"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useFileForImage" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useFileForSymbols" value="false"/>
@@ -206,6 +208,5 @@
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
         <listEntry value="4"/>
     </listAttribute>
-    <stringAttribute key="org.eclipse.dsf.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;memoryBlockExpressionList context=&quot;reserved-for-future-use&quot;/&gt;"/>
     <stringAttribute key="process_factory_id" value="org.eclipse.cdt.dsf.gdb.GdbProcessFactory"/>
 </launchConfiguration>

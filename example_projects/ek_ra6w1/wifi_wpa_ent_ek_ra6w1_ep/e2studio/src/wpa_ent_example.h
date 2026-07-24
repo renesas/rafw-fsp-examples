@@ -29,7 +29,7 @@
 typedef unsigned long uint32_t;
 typedef unsigned long long uint64_t;
 
-#define MAX_WIFI_SCAN_RESULTS    30
+#define MAX_WIFI_SCAN_RESULTS    50
 #define RTT_LINE_MAX_LEN         128
 #define BUF_SIZE                 (128U)
 #define INITIAL_VALUE            '\0'

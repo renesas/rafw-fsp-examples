@@ -9,9 +9,6 @@ This example project demonstrates a secure HTTPS server over Wi-Fi with LittleFS
 
 2. Software Requirements:
 
-Renesas RAFW(FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term / J-Link RTT Viewer
 
 3. Hardware Requirements:
@@ -19,6 +16,8 @@ Terminal Console Application: Tera Term / J-Link RTT Viewer
 Renesas RA6W1 Mother board.
 Renesas RA6W1 Module.
 Type C USB cable for programming and debugging or type C USB cable.
+External I²C temperature and humidity sensor (BME280/BMP280)
+
 
 4. Hardware Connections:
 
@@ -36,12 +35,19 @@ Connect the USB Debug port on the RA6W1 mother board to the host PC via a type C
 	J210 ={1,2} [reset]
 	SWCLK(c) = SWCLK
 	SWDIO(c) = SWDIO
+	
+The example requires an external I²C sensor to be connected to the board. Without the sensor, the I²C master 
+will not receive an ACK, and the application will not be able to read sensor data
+
+The sensor used for this example is a BME/BMP280, connected as follows:
 
 	I2C Sensor Connections:
         VIN  -> VIN
         GND  -> GND
         SCL  -> P010 (I2C1_SCL) 
         SDA  -> P007 (I2C1_SDA)
+		
+Note: For SCL AND SDA can use any available pin configuration
 	
 6. Verifying Operation:
  

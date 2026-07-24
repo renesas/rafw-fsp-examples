@@ -438,12 +438,6 @@ int app_iot_set_feature_parser(int argc, char *argv[])
         RM_MAP_PERSISTANT_W_Write_STRING(RM_MAP_PERSISTANT_W_get_ctrl(), ENV_GROUP_APPCFG,
                                          AWSIOT_CFG_THINGNAME, argv[2]);
     }
-    else if (strcmp(argv[1], USE_FLEET_PROVISION) == 0)
-    {
-        /* Fleet Provisioning */
-        RM_MAP_PERSISTANT_W_Write_INT(RM_MAP_PERSISTANT_W_get_ctrl(), ENV_GROUP_APPCFG,
-                                         AWSIOT_CFG_USE_FLEET_PROVISION, atoi(argv[2]));
-    }
     else if (strcmp(argv[1], AWS_NVRAM_CONFIG_BROKER_URL) == 0)
     {
         /* Broker URL */

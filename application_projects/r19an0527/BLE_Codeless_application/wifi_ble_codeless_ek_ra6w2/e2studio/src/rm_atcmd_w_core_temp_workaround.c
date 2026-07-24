@@ -79,8 +79,6 @@ ATCmdOpenCallback_t atcmd_close_user_app_callback = NULL;
 /***********************************************************************************************************************
  * Exported global variables (to be accessed by other files)
  **********************************************************************************************************************/
-atcmd_w_uart_input_buff_t at_cmd_input_buff;
-uint16_t atcmd_echo_on;
 
 /***********************************************************************************************************************
  * Function Prototypes
@@ -93,23 +91,23 @@ static EventGroupHandle_t init_rsp_evt_grp = NULL;
   #define DEF_MCU_WAKEUP_DONE    (0)
  #endif                                /* ASSUME_MCU_ALWAYS_ON */
 
- #if (ATCMD_DA14XXX_CODELESS == 1)
-TaskHandle_t rm_atcmd_w_core_task_hdl = NULL;
- #endif
-static TaskHandle_t       rm_atcmd_w_core_parser_task     = NULL;
-static const unsigned int rm_atcmd_w_core_paser_task_size = (1024 * 12 / 4);
-
 static int                    rm_atcmd_w_core_wait_ready(atcmd_w_ctrl_t * const p_at_ctrl, uint32_t timeout_ms);
 static fsp_err_atcmd_err_code rm_atcmd_w_core_common_parser(atcmd_w_ctrl_t * const       p_at_ctrl,
                                                             atcmd_w_core_module_list_t * p_list,
                                                             atcmd_w_uart_input_buff_t  * p_in);
 static void      rm_atcmd_w_core_parser_main(void * pvParameters);
 static fsp_err_t rm_atcmd_w_core_init_parser(atcmd_w_ctrl_t * const p_at_ctrl);
+static fsp_err_t rm_atcmd_w_core_deinit_parser(atcmd_w_ctrl_t * const p_at_ctrl);
+static void      rm_atcmd_w_core_reading_finish(atcmd_w_ctrl_t * const p_at_ctrl);
 
 #endif
 static fsp_err_t rm_atcmd_w_core_write(atcmd_w_ctrl_t * const p_at_ctrl,
                                        uint8_t const * const  p_src,
                                        uint32_t const         bytes);
+static fsp_err_t rm_atcmd_w_core_read(atcmd_w_ctrl_t * const p_at_ctrl,
+                                      uint8_t * const        p_dest,
+                                      uint32_t const         bytes,
+                                      bool                   read_next_command);
 
 #if (ATCMD_SECURE_CHANNEL == 1)
 static fsp_err_t rm_atcmd_w_core_secchan_write(atcmd_w_ctrl_t * const p_at_ctrl,
@@ -121,18 +119,16 @@ static fsp_err_t rm_atcmd_w_core_secchan_write(atcmd_w_ctrl_t * const p_at_ctrl,
 /* AT HAL API mapping for AT interface */
 const atcmd_w_api_t g_at_core =
 {
-    .open               = RM_ATCMD_W_CORE_Open,
-    .close              = RM_ATCMD_W_CORE_Close,
-    .write              = RM_ATCMD_W_CORE_Write,
-    .read               = RM_ATCMD_W_CORE_Read,
-    .infoGet            = RM_ATCMD_W_CORE_InfoGet,
-    .communicationAbort = RM_ATCMD_W_CORE_Abort,
-    .callbackSet        = RM_ATCMD_W_CORE_CallbackSet,
-    .readStop           = RM_ATCMD_W_CORE_ReadStop,
+    .open     = RM_ATCMD_W_CORE_Open,
+    .close    = RM_ATCMD_W_CORE_Close,
+    .write    = RM_ATCMD_W_CORE_Write,
+    .read     = RM_ATCMD_W_CORE_Read,
+    .dataRead = RM_ATCMD_W_CORE_DataRead,
+    .infoGet  = RM_ATCMD_W_CORE_InfoGet,
 };
 
 /*******************************************************************************************************************//**
- * @addtogroup AT
+ * @addtogroup ATCMD_W
  * @{
  **********************************************************************************************************************/
 
@@ -168,32 +164,21 @@ fsp_err_t RM_ATCMD_W_CORE_Open (atcmd_w_ctrl_t * const p_at_ctrl, atcmd_w_cfg_t 
 
     p_ctrl->open = ATCMD_W_CORE_OPEN_KEY;
 
-    p_ctrl->p_cfg             = p_cfg;
-    p_ctrl->p_callback        = p_cfg->p_callback;
-    p_ctrl->p_context         = p_cfg->p_context;
-    p_ctrl->p_callback_memory = NULL;
-    p_ctrl->p_tx_src          = NULL;
-    p_ctrl->tx_src_bytes      = 0U;
-    p_ctrl->rx_dest_bytes     = 0;
-    p_ctrl->rx_dest_idx       = 0;
+    p_ctrl->p_cfg         = p_cfg;
+    p_ctrl->p_tx_src      = NULL;
+    p_ctrl->tx_src_bytes  = 0U;
+    p_ctrl->rx_dest_bytes = 0;
+    p_ctrl->rx_dest_idx   = 0;
 
-    p_ctrl->p_transport_instance = (atcmd_transport_w_instance_t *) p_cfg->p_context;
+    p_ctrl->p_transport_instance = p_cfg->p_transport_instance;
 
 #if (ATCMD_SECURE_CHANNEL == 1)
     p_ctrl->ctx_rx         = &(p_ctrl->ctx_rx_body);
     p_ctrl->ctx_tx         = &(p_ctrl->ctx_tx_body);
     p_ctrl->secure_channel = 0;
-#endif
 
-#if (ATCMD_W_CORE_ECHO_EN)
-    memset(at_cmd_input_buff.at_cmd_resp_str, 0x00, ATCMD_W_RESP_LEN_MAX);
-#endif
-    memset(at_cmd_input_buff.at_cmd_req_str, 0x00, ATCMD_W_RESP_LEN_MAX);
-#if (ATCMD_SECURE_CHANNEL == 1)
     memset(p_ctrl->key, 0, ATCMD_W_SECURE_KEY_MAX);
 #endif
-
-    at_cmd_input_buff.at_cmd_req_idx = 0;
 
 #if (ATCMD_IF_SUPPORT == 1)
     rm_atcmd_w_core_init_parser(p_at_ctrl);
@@ -231,8 +216,36 @@ fsp_err_t RM_ATCMD_W_CORE_Open (atcmd_w_ctrl_t * const p_at_ctrl, atcmd_w_cfg_t 
  * @retval  FSP_ERR_ASSERTION             NULL pointer to control or destination parameters or transfer length is zero.
  * @retval  FSP_ERR_NOT_OPEN              The transport has not been opened. Open transport first.
  * @retval  FSP_ERR_IN_USE                A transfer is already in progress.
+ * @retval  FSP_ERR_TIMEOUT               Timeout reading data.
  **********************************************************************************************************************/
 fsp_err_t RM_ATCMD_W_CORE_Read (atcmd_w_ctrl_t * const p_at_ctrl, uint8_t * const p_dest, uint32_t const bytes)
+{
+    return rm_atcmd_w_core_read(p_at_ctrl, p_dest, bytes, true);
+}
+
+/*******************************************************************************************************************//**
+ * This function receives data from a AT input command buffer. Implements @ref atcmd_w_api_t::dataRead.
+ *
+ * The function performs the following tasks:
+ * - Performs parameter checking and processes error conditions.
+ * - Sets up the instance to complete a AT read operation.
+ *
+ * @retval  FSP_SUCCESS                   Read operation successfully completed.
+ * @retval  FSP_ERR_ASSERTION             NULL pointer to control or destination parameters or transfer length is zero.
+ * @retval  FSP_ERR_NOT_OPEN              The transport has not been opened. Open transport first.
+ * @retval  FSP_ERR_IN_USE                A transfer is already in progress.
+ * @retval  FSP_ERR_TIMEOUT               Timeout reading data.
+ * @retval  FSP_ERR_BUFFER_EMPTY          Incomplete or invalid command received.
+ **********************************************************************************************************************/
+fsp_err_t RM_ATCMD_W_CORE_DataRead (atcmd_w_ctrl_t * const p_at_ctrl, uint8_t * const p_dest, uint32_t const bytes)
+{
+    return rm_atcmd_w_core_read(p_at_ctrl, p_dest, bytes, false);
+}
+
+static fsp_err_t rm_atcmd_w_core_read (atcmd_w_ctrl_t * const p_at_ctrl,
+                                       uint8_t * const        p_dest,
+                                       uint32_t const         bytes,
+                                       bool                   read_next_command)
 {
 #if (ATCMD_W_CFG_PARAM_CHECKING_ENABLE)
     FSP_ASSERT(p_at_ctrl);
@@ -242,12 +255,12 @@ fsp_err_t RM_ATCMD_W_CORE_Read (atcmd_w_ctrl_t * const p_at_ctrl, uint8_t * cons
 
 #if (ATCMD_IF_SUPPORT == 1)
     atcmd_w_core_instance_ctrl_t * p_ctrl = (atcmd_w_core_instance_ctrl_t *) p_at_ctrl;
-    uint32_t timeout   = portMAX_DELAY;
-    uint32_t available = p_ctrl->rx_dest_bytes - p_ctrl->rx_dest_idx;
-    uint32_t to_read   = bytes;
+    uint32_t timeout = portMAX_DELAY;
+    uint32_t to_read = bytes;
 
     while (0 != to_read)
     {
+        uint32_t available  = p_ctrl->rx_dest_bytes - p_ctrl->rx_dest_idx;
         uint32_t copy_bytes = MIN(to_read, available);
 
         if (0 != copy_bytes)
@@ -259,11 +272,19 @@ fsp_err_t RM_ATCMD_W_CORE_Read (atcmd_w_ctrl_t * const p_at_ctrl, uint8_t * cons
         }
         else
         {
-            size_t ret =
-                p_ctrl->p_transport_instance->p_api->bufferRecv(p_ctrl->p_transport_instance->p_ctrl,
-                                                                (const char *) p_ctrl->rx_dest,
-                                                                sizeof(p_ctrl->rx_dest),
-                                                                timeout);
+            if ((ATCMD_TRANSPORT_W_TYPE_COMMAND == p_ctrl->p_transport_instance->p_cfg->type) && !read_next_command)
+            {
+                /* Current command context requires a new data to be read, but there is none. Throw an error as the
+                 * command seems to be malformed.
+                 */
+
+                return FSP_ERR_BUFFER_EMPTY;
+            }
+
+            size_t ret = p_ctrl->p_transport_instance->p_api->bufferRecv(p_ctrl->p_transport_instance->p_ctrl,
+                                                                         (char *) p_ctrl->rx_dest,
+                                                                         sizeof(p_ctrl->rx_dest),
+                                                                         timeout);
             p_ctrl->rx_dest_bytes = ret;
             p_ctrl->rx_dest_idx   = 0;
 
@@ -271,8 +292,6 @@ fsp_err_t RM_ATCMD_W_CORE_Read (atcmd_w_ctrl_t * const p_at_ctrl, uint8_t * cons
             {
                 return FSP_ERR_TIMEOUT;
             }
-
-            available = p_ctrl->rx_dest_bytes - p_ctrl->rx_dest_idx;
         }
     }
 
@@ -282,6 +301,29 @@ fsp_err_t RM_ATCMD_W_CORE_Read (atcmd_w_ctrl_t * const p_at_ctrl, uint8_t * cons
     return FSP_SUCCESS;
 #endif
 }
+
+#if (ATCMD_IF_SUPPORT == 1)
+static void rm_atcmd_w_core_reading_finish (atcmd_w_ctrl_t * const p_at_ctrl)
+{
+    atcmd_w_core_instance_ctrl_t * p_ctrl = (atcmd_w_core_instance_ctrl_t *) p_at_ctrl;
+
+    if ((ATCMD_TRANSPORT_W_TYPE_COMMAND != p_ctrl->p_transport_instance->p_cfg->type))
+    {
+        /* Non-command transports have a continuous stream of data and read operation in that case
+         * cannot be finalized.
+         */
+
+        return;
+    }
+
+    /* Mark current read command operation as complete. This will clear any data leftovers which were transferred by
+     * mistake. Next RM_ATCMD_W_CORE_Read call will request from transport the data of next command.
+     */
+
+    p_ctrl->rx_dest_idx = p_ctrl->rx_dest_bytes;
+}
+
+#endif
 
 static fsp_err_t rm_atcmd_w_core_write (atcmd_w_ctrl_t * const p_at_ctrl,
                                         uint8_t const * const  p_src,
@@ -473,48 +515,6 @@ fsp_err_t RM_ATCMD_W_CORE_InfoGet (atcmd_w_ctrl_t * const p_at_ctrl, atcmd_w_inf
     return FSP_SUCCESS;
 }
 
-/*******************************************************************************************************************/ /**
- * Provides API to abort ongoing transfer. Transmission is aborted after the current character is transmitted.
- * Reception is still enabled after abort(). Any characters received after abort() and before the transfer
- * is reset in the next call to read(), will arrive via the callback function.
- * Implements @ref atcmd_w_api_t::communicationAbort
- *
- * @retval  FSP_SUCCESS                  AT transaction aborted successfully.
- * @retval  FSP_ERR_ASSERTION            Pointer to AT control block is NULL.
- * @retval  FSP_ERR_NOT_OPEN             The control block has not been opened.
- * @retval  FSP_ERR_UNSUPPORTED          The requested Abort direction is unsupported.
- *
- * @return                       See @ref RENESAS_ERROR_CODES or functions called by this function for other possible
- *                               return codes. This function calls: @ref transfer_api_t::disable
- **********************************************************************************************************************/
-fsp_err_t RM_ATCMD_W_CORE_Abort (atcmd_w_ctrl_t * const p_at_ctrl)
-{
-    FSP_PARAMETER_NOT_USED(p_at_ctrl);
-
-    return FSP_SUCCESS;
-}
-
-/*******************************************************************************************************************//**
- * Updates the user callback and has option of providing memory for callback structure.
- * Implements atcmd_w_api_t::callbackSet
- *
- * @retval  FSP_SUCCESS                  Callback updated successfully.
- * @retval  FSP_ERR_ASSERTION            A required pointer is NULL.
- * @retval  FSP_ERR_NOT_OPEN             The control block has not been opened.
- **********************************************************************************************************************/
-fsp_err_t RM_ATCMD_W_CORE_CallbackSet (atcmd_w_ctrl_t * const          p_at_ctrl,
-                                       void (                        * p_callback)(atcmd_w_callback_args_t *),
-                                       void const * const              p_context,
-                                       atcmd_w_callback_args_t * const p_callback_memory)
-{
-    FSP_PARAMETER_NOT_USED(p_at_ctrl);
-    FSP_PARAMETER_NOT_USED(p_callback);
-    FSP_PARAMETER_NOT_USED(p_context);
-    FSP_PARAMETER_NOT_USED(p_callback_memory);
-
-    return FSP_SUCCESS;
-}
-
 /*******************************************************************************************************************//**
  * This function manages the closing of the module by the following task. Implements @ref atcmd_w_api_t::close.
  *
@@ -536,43 +536,18 @@ fsp_err_t RM_ATCMD_W_CORE_Close (atcmd_w_ctrl_t * const p_at_ctrl)
     FSP_ERROR_RETURN(ATCMD_W_CORE_OPEN_KEY == p_ctrl->open, FSP_ERR_NOT_OPEN);
 #endif
 
-    p_ctrl->p_cfg             = NULL;
-    p_ctrl->p_callback        = NULL;
-    p_ctrl->p_context         = NULL;
-    p_ctrl->p_callback_memory = NULL;
-    p_ctrl->p_tx_src          = NULL;
-    p_ctrl->rx_dest_bytes     = 0;
-    p_ctrl->rx_dest_idx       = 0;
+#if (ATCMD_IF_SUPPORT == 1)
+    rm_atcmd_w_core_deinit_parser(p_at_ctrl);
+#endif
+
+    p_ctrl->p_cfg         = NULL;
+    p_ctrl->p_tx_src      = NULL;
+    p_ctrl->rx_dest_bytes = 0;
+    p_ctrl->rx_dest_idx   = 0;
 
     p_ctrl->p_transport_instance = NULL;
 
-#if (ATCMD_W_CORE_ECHO_EN)
-    memset(at_cmd_input_buff.at_cmd_resp_str, 0x00, ATCMD_W_RESP_LEN_MAX);
-#endif
-    memset(at_cmd_input_buff.at_cmd_req_str, 0x00, ATCMD_W_RESP_LEN_MAX);
-    at_cmd_input_buff.at_cmd_req_idx = 0;
-
     p_ctrl->open = ATCMD_W_CORE_CLOSE_KEY;
-
-    return FSP_SUCCESS;
-}
-
-/*******************************************************************************************************************//**
- * Provides API to abort ongoing read. Reception is still enabled after abort(). Any characters received after abort()
- * and before the transfer is reset in the next call to read().
- * Implements @ref atcmd_w_api_t::readStop
- *
- * @retval  FSP_SUCCESS                  AT transaction aborted successfully.
- * @retval  FSP_ERR_ASSERTION            Pointer to AT control block is NULL.
- * @retval  FSP_ERR_NOT_OPEN             The control block has not been opened.
- * @return                       See @ref RENESAS_ERROR_CODES or functions called by this function for other possible
- *                               return codes. This function calls:
- *                                   * @ref transfer_api_t::disable
- **********************************************************************************************************************/
-fsp_err_t RM_ATCMD_W_CORE_ReadStop (atcmd_w_ctrl_t * const p_at_ctrl, uint32_t * remaining_bytes)
-{
-    FSP_PARAMETER_NOT_USED(p_at_ctrl);
-    FSP_PARAMETER_NOT_USED(remaining_bytes);
 
     return FSP_SUCCESS;
 }
@@ -601,7 +576,7 @@ fsp_err_t RM_ATCMD_W_CORE_SecureChannelKeySet (atcmd_w_ctrl_t * const p_at_ctrl,
 }
 
 /*******************************************************************************************************************//**
- * @} (end addtogroup AT)
+ * @} (end addtogroup ATCMD_W)
  **********************************************************************************************************************/
 
 /***********************************************************************************************************************
@@ -1045,7 +1020,7 @@ end:
             {
                 if (p_ctrl->q_result == 1)
                 {
-                    strcpy(ret_msg, "\r\nOK\r\n");
+                    bsp_safe_strcpy(ret_msg, "\r\nOK\r\n", sizeof(ret_msg));
  #if (ATCMD_TRANSPORT_SDIO_W == 1)
                     RM_ATCMD_W_CORE_Write(p_at_ctrl, (uint8_t const *) ret_msg, strlen(ret_msg));
  #else
@@ -1379,19 +1354,18 @@ static void rm_atcmd_w_core_parser_main (void * pvParameters)
     atcmd_w_ctrl_t * const         p_at_ctrl = (atcmd_w_ctrl_t * const) pvParameters;
     atcmd_w_core_instance_ctrl_t * p_ctrl    = (atcmd_w_core_instance_ctrl_t *) p_at_ctrl;
 
-    fsp_err_t                 err       = FSP_SUCCESS;
-    fsp_err_atcmd_err_code    atcmd_err = FSP_ERR_AT_CMD_ERR_CMD_OK;
-    uint8_t                   ch        = 0;
-    atcmd_w_uart_input_buff_t rx_data   = {0x00, };
+    fsp_err_t                         err       = FSP_SUCCESS;
+    fsp_err_atcmd_err_code            atcmd_err = FSP_ERR_AT_CMD_ERR_CMD_OK;
+    uint8_t                           ch        = 0;
+    atcmd_w_uart_input_buff_t * const p_rx_data = &p_ctrl->rx_data;
 
     atcmd_w_core_module_list_t * p_list = &p_ctrl->list;
+
+    memset(p_rx_data, 0x00, sizeof(atcmd_w_uart_input_buff_t));
 
     /* Set default value */
     p_ctrl->q_result    = 1;
     p_ctrl->mcu_wu_done = DEF_MCU_WAKEUP_DONE;
-
-    /* NOTE: It's temporray code. It must be removed after code cleanup */
-    vTaskDelay(portCONVERT_MS_2_TICKS(100));
 
     /* Register AT-CMD */
     RM_ATCMD_W_CORE_BASIC_register(p_list);
@@ -1471,16 +1445,9 @@ static void rm_atcmd_w_core_parser_main (void * pvParameters)
         goto exit;
     }
   #endif
-
-    rm_atcmd_w_core_task_hdl = xTaskGetCurrentTaskHandle();
  #endif
 
- #if (ATCMD_BLE_BRG == 1)
-    p_ctrl->core_task_is_running = true;
     while (p_ctrl->run_mode == AT_MODE_RUN)
- #else
-    while (1)
- #endif
     {
         /* Process data from the host */
         err = RM_ATCMD_W_CORE_Read(p_at_ctrl, &ch, 1);
@@ -1501,12 +1468,12 @@ static void rm_atcmd_w_core_parser_main (void * pvParameters)
             uint8_t uch = (uint8_t) ch;
 
             /* Check AT-Command length */
-            if (rx_data.at_cmd_req_idx >= (ATCMD_W_RESP_LEN_MAX - 2))
+            if (p_rx_data->at_cmd_req_idx >= (ATCMD_W_RESP_LEN_MAX - 2))
             {
                 if ((uch == AT_CMD_NEW_LINE_CHAR) || (uch == AT_CMD_LINE_FEED_CHAR))
                 {
                     /* Input command too long. So, clear buffer */
-                    memset(&rx_data, 0x00, sizeof(rx_data));
+                    memset(p_rx_data, 0x00, sizeof(atcmd_w_uart_input_buff_t));
                     continue;
                 }
 
@@ -1532,22 +1499,22 @@ static void rm_atcmd_w_core_parser_main (void * pvParameters)
             }
  #endif
 
-            if (('\r' == ch) && (rx_data.at_cmd_req_idx == 0))
+            if (('\r' == ch) && (p_rx_data->at_cmd_req_idx == 0))
             {
                 RM_ATCMD_W_CORE_DA14xxx_BinaryWrite(p_at_ctrl, (const uint8_t * const) &ch, sizeof(ch));
             }
 
  #if (ATCMD_SECURE_CHANNEL == 1)
-            if (!((p_ctrl->secure_channel == 1) && (rx_data.sec_active == 1)) &&
+            if (!((p_ctrl->secure_channel == 1) && (p_rx_data->sec_active == 1)) &&
                 ((uch == AT_CMD_DEL_TXT_CHAR) || (uch == AT_CMD_BS_KEY_CHAR)))
  #else
             if ((uch == AT_CMD_DEL_TXT_CHAR) || (uch == AT_CMD_BS_KEY_CHAR))
  #endif                                /* ATCMD_SECURE_CHANNEL */
             {
-                if (rx_data.at_cmd_req_idx > 0)
+                if (p_rx_data->at_cmd_req_idx > 0)
                 {
-                    rx_data.at_cmd_req_str[rx_data.at_cmd_req_idx] = AT_CMD_END_OF_STR;
-                    rx_data.at_cmd_req_idx--;
+                    p_rx_data->at_cmd_req_str[p_rx_data->at_cmd_req_idx] = AT_CMD_END_OF_STR;
+                    p_rx_data->at_cmd_req_idx--;
                 }
             }
 
@@ -1560,49 +1527,52 @@ static void rm_atcmd_w_core_parser_main (void * pvParameters)
  #if (ATCMD_SECURE_CHANNEL == 1)
 
                 /* ================= Secure-channel: ciphertext capture ================= */
-                if ((p_ctrl->secure_channel == 1) && (rx_data.sec_active == 1))
+                if ((p_ctrl->secure_channel == 1) && (p_rx_data->sec_active == 1))
                 {
                     /* In LEN framing, CR/LF are valid ciphertext bytes */
-                    if (rx_data.at_cmd_req_idx < (ATCMD_W_RESP_LEN_MAX - 1))
+                    if (p_rx_data->at_cmd_req_idx < (ATCMD_W_RESP_LEN_MAX - 1))
                     {
-                        rx_data.at_cmd_req_str[rx_data.at_cmd_req_idx++] = (char) uch;
+                        p_rx_data->at_cmd_req_str[p_rx_data->at_cmd_req_idx++] = (char) uch;
                     }
                     else
                     {
-                        memset(&rx_data, 0x00, sizeof(rx_data));
+                        memset(p_rx_data, 0x00, sizeof(atcmd_w_uart_input_buff_t));
+                        rm_atcmd_w_core_reading_finish(p_at_ctrl);
                         continue;
                     }
 
-                    uint16_t got = (uint16_t) (rx_data.at_cmd_req_idx - rx_data.sec_start_idx);
+                    uint16_t got = (uint16_t) (p_rx_data->at_cmd_req_idx - p_rx_data->sec_start_idx);
 
-                    if (got < rx_data.sec_expected)
+                    if (got < p_rx_data->sec_expected)
                     {
                         continue;
                     }
 
-                    if (got > rx_data.sec_expected)
+                    if (got > p_rx_data->sec_expected)
                     {
-                        memset(&rx_data, 0x00, sizeof(rx_data));
+                        memset(p_rx_data, 0x00, sizeof(atcmd_w_uart_input_buff_t));
+                        rm_atcmd_w_core_reading_finish(p_at_ctrl);
                         continue;
                     }
 
-                    rx_data.at_cmd_req_str[rx_data.at_cmd_req_idx] = AT_CMD_END_OF_STR;
-                    atcmd_err = rm_atcmd_w_core_common_parser(p_at_ctrl, p_list, &rx_data);
-                    memset(&rx_data, 0x00, sizeof(rx_data));
+                    p_rx_data->at_cmd_req_str[p_rx_data->at_cmd_req_idx] = AT_CMD_END_OF_STR;
+                    atcmd_err = rm_atcmd_w_core_common_parser(p_at_ctrl, p_list, p_rx_data);
+                    memset(p_rx_data, 0x00, sizeof(atcmd_w_uart_input_buff_t));
+                    rm_atcmd_w_core_reading_finish(p_at_ctrl);
                     continue;
                 }
 
                 /* ================= Secure-channel: seen '=' but not armed yet ================= */
-                if ((p_ctrl->secure_channel == 1) && (rx_data.sec_active == 0))
+                if ((p_ctrl->secure_channel == 1) && (p_rx_data->sec_active == 0))
                 {
-                    if (rx_data.at_cmd_req_idx < (ATCMD_W_RESP_LEN_MAX - 1))
+                    if (p_rx_data->at_cmd_req_idx < (ATCMD_W_RESP_LEN_MAX - 1))
                     {
-                        rx_data.at_cmd_req_str[rx_data.at_cmd_req_idx] = AT_CMD_END_OF_STR;
+                        p_rx_data->at_cmd_req_str[p_rx_data->at_cmd_req_idx] = AT_CMD_END_OF_STR;
                     }
 
-                    if (strchr((char *) rx_data.at_cmd_req_str, '=') != NULL)
+                    if (strchr((char *) p_rx_data->at_cmd_req_str, '=') != NULL)
                     {
-                        if (secchan_try_arm_len(&rx_data))
+                        if (secchan_try_arm_len(p_rx_data))
                         {
                             continue;
                         }
@@ -1611,73 +1581,83 @@ static void rm_atcmd_w_core_parser_main (void * pvParameters)
  #endif                                /* ATCMD_SECURE_CHANNEL */
 
                 /* ================= Normal plaintext EOL ================= */
-                if (rx_data.at_cmd_req_idx == 0)
+                if (p_rx_data->at_cmd_req_idx == 0)
                 {
                     continue;
                 }
 
-                atcmd_err = rm_atcmd_w_core_common_parser(p_at_ctrl, p_list, &rx_data);
-                memset(&rx_data, 0x00, sizeof(rx_data));
+                atcmd_err = rm_atcmd_w_core_common_parser(p_at_ctrl, p_list, p_rx_data);
+                memset(p_rx_data, 0x00, sizeof(atcmd_w_uart_input_buff_t));
+                rm_atcmd_w_core_reading_finish(p_at_ctrl);
             }
             else
             {
-                if (rx_data.at_cmd_req_idx < (ATCMD_W_RESP_LEN_MAX - 1))
+                if (p_rx_data->at_cmd_req_idx < (ATCMD_W_RESP_LEN_MAX - 1))
                 {
-                    rx_data.at_cmd_req_str[rx_data.at_cmd_req_idx++] = (char) uch;
+                    p_rx_data->at_cmd_req_str[p_rx_data->at_cmd_req_idx++] = (char) uch;
                 }
 
  #if (ATCMD_SECURE_CHANNEL == 1)
                 if (p_ctrl->secure_channel == 1)
                 {
-                    if (rx_data.sec_active == 1)
+                    if (p_rx_data->sec_active == 1)
                     {
-                        uint16_t got = (uint16_t) (rx_data.at_cmd_req_idx - rx_data.sec_start_idx);
+                        uint16_t got = (uint16_t) (p_rx_data->at_cmd_req_idx - p_rx_data->sec_start_idx);
 
-                        if (got < rx_data.sec_expected)
+                        if (got < p_rx_data->sec_expected)
                         {
                             continue;  /* still collecting */
                         }
 
-                        if (got > rx_data.sec_expected)
+                        if (got > p_rx_data->sec_expected)
                         {
-                            memset(&rx_data, 0x00, sizeof(rx_data));
+                            memset(p_rx_data, 0x00, sizeof(atcmd_w_uart_input_buff_t));
+                            rm_atcmd_w_core_reading_finish(p_at_ctrl);
                             continue;
                         }
 
                         /* got == expected: exact completion */
-                        if (rx_data.at_cmd_req_idx < (ATCMD_W_RESP_LEN_MAX - 1))
+                        if (p_rx_data->at_cmd_req_idx < (ATCMD_W_RESP_LEN_MAX - 1))
                         {
-                            rx_data.at_cmd_req_str[rx_data.at_cmd_req_idx] = AT_CMD_END_OF_STR;
+                            p_rx_data->at_cmd_req_str[p_rx_data->at_cmd_req_idx] = AT_CMD_END_OF_STR;
                         }
 
-                        atcmd_err = rm_atcmd_w_core_common_parser(p_at_ctrl, p_list, &rx_data);
-                        memset(&rx_data, 0x00, sizeof(rx_data));
+                        atcmd_err = rm_atcmd_w_core_common_parser(p_at_ctrl, p_list, p_rx_data);
+                        memset(p_rx_data, 0x00, sizeof(atcmd_w_uart_input_buff_t));
+                        rm_atcmd_w_core_reading_finish(p_at_ctrl);
                         continue;
                     }
 
-                    if (rx_data.at_cmd_req_idx < (ATCMD_W_RESP_LEN_MAX - 1))
+                    if (p_rx_data->at_cmd_req_idx < (ATCMD_W_RESP_LEN_MAX - 1))
                     {
-                        rx_data.at_cmd_req_str[rx_data.at_cmd_req_idx] = AT_CMD_END_OF_STR;
+                        p_rx_data->at_cmd_req_str[p_rx_data->at_cmd_req_idx] = AT_CMD_END_OF_STR;
                     }
 
-                    if (strchr((char *) rx_data.at_cmd_req_str, '=') != NULL)
+                    if (strchr((char *) p_rx_data->at_cmd_req_str, '=') != NULL)
                     {
-                        (void) secchan_try_arm_len(&rx_data);
+                        (void) secchan_try_arm_len(p_rx_data);
                         continue;
                     }
                 }
  #endif                                /* ATCMD_SECURE_CHANNEL */
 
                 /* Checked unfixed AT-CMD */
-                atcmd_err = rm_atcmd_w_core_unfixed_parser(p_at_ctrl, p_list, &rx_data);
+                atcmd_err = rm_atcmd_w_core_unfixed_parser(p_at_ctrl, p_list, p_rx_data);
                 if (atcmd_err != FSP_ERR_AT_CMD_ERR_UNKNOWN_CMD)
                 {
                     /* Clear RX buffer */
-                    memset(&rx_data, 0x00, sizeof(rx_data));
+                    memset(p_rx_data, 0x00, sizeof(atcmd_w_uart_input_buff_t));
+                    rm_atcmd_w_core_reading_finish(p_at_ctrl);
                 }
             }
         }
     }
+
+ #if (ATCMD_DA14XXX_CODELESS == 1)
+  #if (ATCMD_PMGR_SUPPORT_ENABLE == 1)
+exit:
+  #endif
+ #endif
 
     /* Deregister AT-CMD */
     RM_ATCMD_W_CORE_BASIC_deregister(p_list);
@@ -1700,8 +1680,10 @@ static void rm_atcmd_w_core_parser_main (void * pvParameters)
     RM_ATCMD_W_CORE_HTTP_deregister(p_list);
     RM_ATCMD_W_CORE_HTTP_close(p_at_ctrl);
 
+  #if (SUPPORT_FSP_RM_OTA_W == 1)
     RM_ATCMD_W_CORE_OTA_deregister(p_list);
     RM_ATCMD_W_CORE_OTA_close(p_at_ctrl);
+  #endif
 
   #if CFG_PMGR
     RM_ATCMD_W_CORE_DPM_deregister(p_list);
@@ -1728,33 +1710,41 @@ static void rm_atcmd_w_core_parser_main (void * pvParameters)
  #endif
 
  #if (ATCMD_DA14XXX_CODELESS == 1)
-    err = RM_ATCMD_W_CORE_DA14xxx_Unregister(p_list);
-    if (err != FSP_SUCCESS)
-    {
-        goto exit;
-    }
-
-    err = RM_ATCMD_W_CORE_DA14xxx_Close(p_at_ctrl);
-    if (err != FSP_SUCCESS)
-    {
-        goto exit;
-    }
-exit:
+    RM_ATCMD_W_CORE_DA14xxx_Unregister(p_list);
+    RM_ATCMD_W_CORE_DA14xxx_Close(p_at_ctrl);
  #endif
 
- #if (ATCMD_BLE_BRG == 1)
-    p_ctrl->core_task_is_running = false;
- #endif
-
-    rm_atcmd_w_core_parser_task = NULL;
+    p_ctrl->parser_task_handle = NULL;
 
     vTaskDelete(NULL);
 }
 
 static fsp_err_t rm_atcmd_w_core_init_parser (atcmd_w_ctrl_t * const p_at_ctrl)
 {
-    xTaskCreate(rm_atcmd_w_core_parser_main, "AT-CORE-PARSER", (rm_atcmd_w_core_paser_task_size), (void *) p_at_ctrl,
-                (OS_TASK_PRIORITY_LOWEST + ATCMD_W_MAIN_PARSER_PRIO), &rm_atcmd_w_core_parser_task);
+    atcmd_w_core_instance_ctrl_t * p_ctrl = (atcmd_w_core_instance_ctrl_t *) p_at_ctrl;
+
+ #if (ATCMD_W_CFG_PARAM_CHECKING_ENABLE)
+
+    /* Check parameters. */
+    FSP_ASSERT(p_ctrl);
+ #endif
+
+    p_ctrl->run_mode = AT_MODE_RUN;
+
+    xTaskCreate(rm_atcmd_w_core_parser_main, "AT-CORE-PARSER", RM_ATCMD_W_CORE_PARSER_TASK_SIZE, (void *) p_at_ctrl,
+                (OS_TASK_PRIORITY_LOWEST + ATCMD_W_MAIN_PARSER_PRIO), &p_ctrl->parser_task_handle);
+
+    return FSP_SUCCESS;
+}
+
+static fsp_err_t rm_atcmd_w_core_deinit_parser (atcmd_w_ctrl_t * const p_at_ctrl)
+{
+    atcmd_w_core_instance_ctrl_t * p_ctrl = (atcmd_w_core_instance_ctrl_t *) p_at_ctrl;
+
+    if (p_ctrl->parser_task_handle)
+    {
+        p_ctrl->run_mode = AT_MODE_STOP;
+    }
 
     return FSP_SUCCESS;
 }

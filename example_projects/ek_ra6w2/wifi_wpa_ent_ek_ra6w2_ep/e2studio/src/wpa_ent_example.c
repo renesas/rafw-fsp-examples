@@ -14,6 +14,7 @@
 #include "config.h"
 #include "app_task.h"
 #include "dhcp_util.h"
+#include "lwip/dhcp.h"
 #include "wpa_ent_example.h"
 
 void print_ep_info()
@@ -37,15 +38,25 @@ char *wpa_ent_connect_info()
 	APP_PRINT("Net Mask: %s\n", ipaddr_ntoa(&iface_sta->netmask));
 	APP_PRINT("Gateway IP: %s\n", ipaddr_ntoa(&iface_sta->gw));
 
-    ip_addr_t srv;
-    int rc = dhcp_get_server_ip(iface_sta, &srv);
-    if (rc == 0) {
-    	APP_PRINT("DHCP server: %s\n", ipaddr_ntoa(&srv));
-    } else {
-    	APP_PRINT("Failed to get DHCP server IP (rc=%d)\n", rc);
-    }
+	ip_addr_t srv;
+    WIFIReturnCode_t err;
 
-	return ipaddr_ntoa(&srv);
+    err = dhcp_start(iface_sta);
+    if (err)
+    {
+    	APP_PRINT("DHCP client start failed with wifi_err=%d\n", err);
+    }
+    else
+    {
+    	int rc = dhcp_get_server_ip(iface_sta, &srv);
+		if (rc == 0) {
+			APP_PRINT("DHCP server: %s\n", ipaddr_ntoa(&srv));
+			return ipaddr_ntoa(&srv);
+		} else {
+			APP_PRINT("Failed to get DHCP server IP (rc=%d)\n", rc);
+		}
+    }
+    return NULL;
 }
 
 void display_scan_result(WIFIScanResult_t * scan_data)

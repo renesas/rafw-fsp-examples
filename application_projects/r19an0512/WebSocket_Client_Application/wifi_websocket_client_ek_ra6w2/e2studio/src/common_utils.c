@@ -12,9 +12,9 @@
 #include "common_utils.h"
 
 #define BANNER_1	"******************************************************************\n\r"
-#define BANNER_2	"*   Renesas RAFW (FSP) Example Project for %s Module\n\r"
+#define BANNER_2	"*   Renesas FSP Example Project for %s Module\n\r"
 #define BANNER_3	"*   Example Project Version %s\n\r"
-#define BANNER_4	"*   Renesas RAFW (FSP) Version  %d.%d.%d\n\r"
+#define BANNER_4	"*   Flex Software Pack Version  %d.%d.%d\n\r"
 #define BANNER_5	"******************************************************************\n\r"
 #define BANNER_6    "Overview:\n\r%s\n\r"
 #define BANNER_7	"Refer to readme.txt file for more details on Example Project and\n\r" \

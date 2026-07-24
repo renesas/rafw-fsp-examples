@@ -30,7 +30,7 @@
     <booleanAttribute key="com.renesas.cdt.launch.dsf.USE_DEFAULT_IO_MAP" value="true"/>
     <listAttribute key="com.renesas.cdt.launch.dsf.downloadImages">
         <listEntry value="|true|false|true|0|true|No core|INTERNAL_MEMORY||false"/>
-        <listEntry value="${workspace_loc:\${project_name}\Debug\${project_name}.img.bin}|true|false|false|0a000000|true|No core|INTERNAL_MEMORY||true"/>
+        <listEntry value="Debug/dma_spi_ek_ra6w2_ep.img.bin|true|false|false|A000000|true|No core|INTERNAL_MEMORY||true"/>
     </listAttribute>
     <booleanAttribute key="com.renesas.cdt.launch.dsf.downloadImagesUpgradedV30" value="true"/>
     <listAttribute key="com.renesas.cdt.launch.dsf.externalFlashDestinationAddresses"/>
@@ -109,6 +109,7 @@
     <booleanAttribute key="com.renesas.hardwaredebug.arm.jlink.setTZBoundaries" value="false"/>
     <intAttribute key="com.renesas.hardwaredebug.arm.jlink.supply_voltage_asp" value="0"/>
     <booleanAttribute key="com.renesas.hardwaredebug.arm.jlink.use_multidevice_synchronous_debug" value="false"/>
+    <stringAttribute key="com.renesas.hardwaredebug.boardName" value="RRQ614xx-EVB"/>
     <booleanAttribute key="com.renesas.hardwaredebug.timemeasurement" value="true"/>
     <intAttribute key="org.eclipse.cdt.debug.gdbjtag.core.delay" value="3"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.doHalt" value="false"/>
@@ -147,5 +148,6 @@
         <listEntry value="4"/>
     </listAttribute>
     <booleanAttribute key="org.eclipse.debug.ui.ATTR_LAUNCH_IN_BACKGROUND" value="false"/>
+    <stringAttribute key="org.eclipse.dsf.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;memoryBlockExpressionList context=&quot;reserved-for-future-use&quot;/&gt;"/>
     <stringAttribute key="process_factory_id" value="org.eclipse.cdt.dsf.gdb.GdbProcessFactory"/>
 </launchConfiguration>

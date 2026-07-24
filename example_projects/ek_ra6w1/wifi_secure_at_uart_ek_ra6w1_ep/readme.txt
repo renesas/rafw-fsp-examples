@@ -10,9 +10,6 @@ a secure asset from the AT Secure Channel Key, using the SBOOT Tool, before prog
 designated AT Secure Channel Key address in the SFLASH.
 
 2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term or a similar application
 
 
@@ -80,20 +77,46 @@ Connect the USB Debug port on the RA6W1 mother board to the programming PC via a
  In order to unpack the Secure Asset on the device, the Kcp that was used to encrypt it must be provisioned to
  the OTP of the RA6W1, and this is done as part of the Secure Boot Image provisioning.
  Follow the below steps to prepare and Flash the Secure Boot image to the device:
- 1.  Run the option Secure Boot on the security tool interface. Secure Boot images with the certificate chain are
+
+ Before starting to prepare the Secure boot image you need the following files:
+
+	a.RA6Wx_cache.bin: The binary to sign/encrypt. For example: build the rm_wifi_test_app target,then copy the binary file (Critical: not the “.img.bin”, but the real “.bin” file).Copy and rename the binary and place it in the SBTOOL image directory and rename it: RA6Wx_cache.bin
+	b.krtl.key: have this file ready. You will need it in later step.
+
+ 1.  Execute the script: CM.1.secuman.bat
+ 2.  Make sure you placed RA6Wx_cahce.bin in the image directory
+ 3.  Press “SECURE KEY GENERATION”
+ 4.  An alert will pop – press “Yes to All”
+ 5.  Once the procedure is completed, the TOP window will re-appear.
+ 6.  Verify that the files icv_request_pkg.bin and oem_request_pkg.bin were generated in the public directory
+ 7.  Place krtl.key in the cmsecret directory (Note it will be deleted after the operation)
+ 8.  Press “SECURE KEY CONFIRMATION”
+ 9.  In the popup alert press “Yes to all”
+ 10. Once the procedure is completed, the TOP window will re-appear.
+ 11. Verify that the files icv_response_pkg.bin and oem_response_pkg.bin were generated in the public directory
+ 12. Press “SECURE PRODUCTION”
+ 13. In the popup alert press “Yes to all”
+ 14. In all following windows – simply press “UPDATE” and in the last window press "PASS"
+ 15. Once the procedure is completed, the TOP window will re-appear.
+ 16. Verify that the files cmpu.pkg.bin.txt and dmpu.pkg.bin.txt were generated in the public directory
+ 17. Copy the contents of the files from previous step and place them in the file ra/fsp/src/rm_cli_w/rm_cli_w_sbrom.c replacing the placeholder structs “cmpu_hex_list” and “dmpu_hex_list”
+ 18. Also, in rm_cli_w_sbrom.c, modify the define “SUPPORT_SECURE_PRODUCTION” to be 1 (it is 0 by default in the file)
+ 19. Build the relevant target once again and copy the generated “.bin” file into the “image” directory, and rename it to be RA6Wx_cache.bin
+ 20. Press “SECURE BOOT”
+ 21. Run the option Secure Boot on the security tool interface. Secure Boot images with the certificate chain are
      generated in the public directory. Secure Boot images in FreeRTOS SDK. RTOS image (XXRTOSXX.img) built from our
      SDK contains RTOS binaries
- 2.  Load the RTOS Image into the RRQ610X00 board and in the console perform below commands:
+ 22. Load the RTOS Image into the RRQ610X00 board and in the console perform below commands:
      [/RRQ61000] sbrom
      [/RRQ61000/sbrom] run cmpu
- 3.  Power on Reset the board (the Board will be booted with a new lifecycle).
- 4.  You can verify the lifecycle state change in the console using the following command:
+ 23. Power on Reset the board (the Board will be booted with a new lifecycle).
+ 24. You can verify the lifecycle state change in the console using the following command:
      [/RRQ61000/sbrom] run socid
- 5.  You can verify that the life cycle is changed to DM. In the next step, you can run the dmpu:
+ 25. You can verify that the life cycle is changed to DM. In the next step, you can run the dmpu:
      [/RRQ61000/sbrom] run dmpu
- 6.  Power on Reset the board. When the board is rebooted, verify the LCS again.
+ 26. Power on Reset the board. When the board is rebooted, verify the LCS again.
      [/RRQ61000/sbrom] run socid
- 7.  Verify that the board LCS is changed to SECURE from the result of above step, also the Soc-ID field is filled
+ 27. Verify that the board LCS is changed to SECURE from the result of above step, also the Soc-ID field is filled
      with values. After the successful execution of the above steps, the board is moved to the Secure State.
 
  AT Secure Channel requires synchronization between the Host PC and the target device (RA6W). 

@@ -13,9 +13,6 @@ Any failure will also be displayed using JLinkRTTViewer.
 
 LED on board connected to P0_10
 UART loopback is enabled, no need for any connections.
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term, RTT viewer or a similar application
 
 3. Hardware settings for the project:
@@ -32,12 +29,14 @@ RA6W1-EK:
 3) Start a Debug session. This will automatically flash the image to the board.
 4) After the debug session starts, click Run to execute the program (no need to press the board's reset button).
 5) Open a SEGGER RTT Viewer on the host PC to view the console output.
-6) Check the console log "CRC Operation is successful.". LED will be blinked for a few seconds.
+6) When the message "Press any key for CRC operation" is displayed, click the "Enter" button
+   located at the bottom-right corner of the SEGGER RTT Viewer.
+7) Check the console log "CRC Operation is successful.". LED will be blinked for a few seconds.
 
 Note:
 1) Segger RTT block address may be needed to download and observe EP operation using a hex file with RTT-Viewer.
    RTT Block address for hex file committed in repository are as follows:
-   a. e2studio: 0x20000b7c
+   a. e2studio: 0x20000b84
  
 2) If an EP is modified, compiled, and downloaded please find the block address (for the variable in RAM called _SEGGER_RTT) 
    in .map file generated in the build configuration folder (Debug/Release).

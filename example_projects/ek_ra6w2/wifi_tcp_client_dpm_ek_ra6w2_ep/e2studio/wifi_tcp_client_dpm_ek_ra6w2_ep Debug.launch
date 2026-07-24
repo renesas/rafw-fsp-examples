@@ -171,7 +171,7 @@
     <intAttribute key="org.eclipse.cdt.debug.gdbjtag.core.delay" value="0"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.doHalt" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.doReset" value="false"/>
-    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value="C:\Users\a.anjana\e2_studio\workspace-migration\wifi_tcp_client_dpm_ek_ra6w2_ep\Debug\wifi_tcp_client_dpm_ek_ra6w2_ep.elf"/>
+    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value="C:\Users\aleena.maria\e2_studio\workspace_gateway_ble_last_july_15\wifi_tcp_client_dpm_ek_ra6w2_ep\Debug\wifi_tcp_client_dpm_ek_ra6w2_ep.elf"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageOffset" value="0"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.initCommands" value=""/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.loadImage" value="false"/>
@@ -182,7 +182,7 @@
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setResume" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setStopAt" value="true"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.stopAt" value="main"/>
-    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsFileName" value="C:\Users\a.anjana\e2_studio\workspace-migration\wifi_tcp_client_dpm_ek_ra6w2_ep\Debug\wifi_tcp_client_dpm_ek_ra6w2_ep.elf"/>
+    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsFileName" value="C:\Users\aleena.maria\e2_studio\workspace_gateway_ble_last_july_15\wifi_tcp_client_dpm_ek_ra6w2_ep\Debug\wifi_tcp_client_dpm_ek_ra6w2_ep.elf"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsOffset" value="0"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useFileForImage" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useFileForSymbols" value="false"/>

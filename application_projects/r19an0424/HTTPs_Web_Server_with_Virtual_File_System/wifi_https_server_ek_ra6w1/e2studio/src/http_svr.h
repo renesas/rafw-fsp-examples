@@ -11,8 +11,8 @@
 
 #include "common_utils.h"
 
-#define SSID "ASUS_KEYSGT_24G"
-#define PASSPHRASE "12345678"
+#define SSID "username"  /* input your ssid  */
+#define PASSPHRASE "password"  /* input your password  */
 #define CHANNEL 0
 #define PASSS_LEN strlen(PASSPHRASE)
 #define SSID_LEN strlen(SSID)

@@ -87,13 +87,13 @@ void hal_entry(void)
                     err = spi_write_read();
                     if (FSP_SUCCESS != err)
                     {
-                        APP_PRINT("\r\n** SPI WRITE Demo failed **  \r\n");
+                        APP_PRINT("\r\n** SPI WRITE READ Demo failed **  \r\n");
                         spi_clean_up();
                         APP_ERR_TRAP(err);
                     }
                     else
                     {
-                        APP_PRINT("** SPI WRITE AND READ Demo Successful**  \r\n");
+                        APP_PRINT("** SPI WRITE READ Demo Successful**  \r\n");
                     }
                     break;
 

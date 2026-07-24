@@ -10,9 +10,6 @@ a secure asset from the AT Secure Channel Key, using the SBOOT Tool, before prog
 designated AT Secure Channel Key address in the SFLASH.
 
 2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term or a similar application
 
 

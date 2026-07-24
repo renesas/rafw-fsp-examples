@@ -15,9 +15,6 @@ To see user input values on Serial terminal, enable local echo option.
 2. Hardware and Software Requirements:
 
 Three jumper wires are required to connect UART RX/TX lines and LED.
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term, RTT viewer or a similar application
 
 3. Hardware settings for the project:
@@ -44,7 +41,7 @@ RA6W1-EK:
 Note:
 1) Segger RTT block address may be needed to download and observe EP operation using a hex file with RTT-Viewer.
    RTT Block address for hex file committed in repository are as follows:
-   a. e2studio: 0x20000B7C
+   a. e2studio: 0x20000B84
  
 2) If an EP is modified, compiled, and downloaded please find the block address (for the variable in RAM called _SEGGER_RTT) 
    in .map file generated in the build configuration folder (Debug/Release).

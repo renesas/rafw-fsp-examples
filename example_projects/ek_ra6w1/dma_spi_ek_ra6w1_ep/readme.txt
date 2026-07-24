@@ -9,23 +9,17 @@ DMA support SPI channels (Channel 0 and Channel 1) in Master and Slave mode. Onc
 channels are configured, Master and Slave can transmit and receive data based on commands from user sent through JLinkRTTViewer.
 SPI data transmit and receive are done via DMAC module.
 
-2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
-Segger J-Link RTT Viewer
-
-3. Hardware Requirements:
+2. Hardware Requirements:
 Renesas EK-RA6W1 Mother board. (RTK7WBA6W1S03000BK)
 Renesas RA6W1 daughter board. (RTKRRQ61000)
 Type C USB cable for programming and debugging
 Four Jumper Wires that type is Female to Female.
 
-4. Hardware Connections:
+3. Hardware Connections:
 Attach RA6W1 daughter board to the motherboard via the extension socket.
 Connect the USB debug port on the EK-RA6W1 mother board to the host PC via a type C USB cable.
 
-5. Hardware settings for the project:
+4. Hardware settings for the project:
 1. Jumper Configurations
     Pin Connection for EK-RRQ61xxx
     MISO  ----> P0_06 - P1_11
@@ -33,7 +27,7 @@ Connect the USB debug port on the EK-RA6W1 mother board to the host PC via a typ
     CLK   ----> P0_04 - P1_10
     CS    ----> P0_07 - P1_13
 
-6. Verifying Operation:
+5. Verifying Operation:
  1. Import the example project.
  2. Generate the configuration.xml, build the Example project.
  3. Connect the EK-RA6W1 motherboard debug port to the host PC via a type C USB cable.

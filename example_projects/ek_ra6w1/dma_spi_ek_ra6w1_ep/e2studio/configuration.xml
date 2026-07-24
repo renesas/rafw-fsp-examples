@@ -9,7 +9,7 @@
     <option key="#DeviceCommand#" value="R7SA6W1CE"/>
     <option key="#RTOS#" value="_none"/>
     <option key="#pinconfiguration#" value="R7SA6W1CEDZDD.pincfg"/>
-    <option key="#FSPVersion#" value="2.0.1"/>
+    <option key="#FSPVersion#" value="2.1.0"/>
     <option key="#ConfigurationFragments#" value="Renesas##BSP##Board##rrq61xxx_evb##"/>
     <option key="#SELECTED_TOOLCHAIN#" value="gcc-arm-embedded"/>
     <option key="#ToolchainVersion#" value="13.3.1.arm-13-24"/>
@@ -43,6 +43,8 @@
       <property id="config.bsp.fsp.tz.uninitialized_ns_application_fallback" value="config.bsp.fsp.tz.uninitialized_ns_application_fallback.enabled"/>
       <property id="config.bsp.fsp.ivt_copy" value="config.bsp.fsp.ivt_copy.disabled"/>
       <property id="config.bsp.fsp.mcu.clock_manager" value="config.bsp.fsp.mcu.clock_manager.disabled"/>
+      <property id="config.bsp.fsp.mcu.ppm_compensation" value="config.bsp.fsp.mcu.ppm_compensation.disabled"/>
+      <property id="config.bsp.fsp.mcu.ppm_recomp_period_ms" value="8000U"/>
       <property id="config.bsp.fsp.mcu.ospi_8_lines_support" value="config.bsp.fsp.mcu.ospi_8_lines_support.disabled"/>
       <property id="config.bsp.fsp.mcu.uart.max_baud" value="5000000"/>
       <property id="config.bsp.fsp.mcu.iic_master.rate.rate_fastplus" value="1"/>
@@ -78,7 +80,6 @@
     <node id="board.clock.xtal40m.freq" option="board.clock.xtal40m.freq.40m"/>
     <node id="board.clock.xtal.freq" option="board.clock.xtal.freq.32k"/>
     <node id="board.clock.rcx.freq" option="board.clock.rcx.freq.32k"/>
-    <node id="board.clock.pll480m.freq" option="board.clock.pll480m.freq.480m"/>
     <node id="board.clock.xtal40m.source" option="board.clock.xtal40m.source.enabled"/>
     <node id="board.clock.xtal.source" option="board.clock.xtal.source.enabled"/>
     <node id="board.clock.rcx.source" option="board.clock.rcx.source.enabled"/>
@@ -87,9 +88,10 @@
     <node id="board.clock.lp_clk.source" option="board.clock.lp_clk.source.xtal32k"/>
     <node id="board.clock.pll_sys.source" option="board.clock.pll_sys.source.pll"/>
     <node id="board.clock.pll_sys.mul" option="board.clock.pll_sys.mul.1_3"/>
-    <node id="board.clock.sys_clk.source" option="board.clock.sys_clk.source.pll_sys"/>
+    <node id="board.clock.sys_clk.source" option="board.clock.sys_clk.source.xtal_sys"/>
     <node id="board.clock.sys_clk.display" option="board.clock.sys_clk.display.value"/>
     <node id="board.clock.hclk.div" option="board.clock.hclk.div.1"/>
+    <node id="board.clock.oqspiclk.div" option="board.clock.oqspiclk.div.2"/>
     <node id="board.clock.qspiclk.div" option="board.clock.qspiclk.div.1"/>
     <node id="board.clock.pll_spi.source" option="board.clock.pll_spi.source.disabled"/>
     <node id="board.clock.pll_spi.mul" option="board.clock.pll_spi.mul.1_6"/>
@@ -99,7 +101,7 @@
     <node id="board.clock.spi2clk.display" option="board.clock.spi2clk.display.value"/>
     <node id="board.clock.pll_peri.source" option="board.clock.pll_peri.source.pll"/>
     <node id="board.clock.pll_peri.div" option="board.clock.pll_peri.div.6"/>
-    <node id="board.clock.peri_clk.source" option="board.clock.peri_clk.source.pll_peri"/>
+    <node id="board.clock.peri_clk.source" option="board.clock.peri_clk.source.xtal_sys"/>
     <node id="board.clock.peri_clk.display" option="board.clock.peri_clk.display.value"/>
     <node id="board.clock.i2c1.div" option="board.clock.i2c1.div.1"/>
     <node id="board.clock.i2c2.div" option="board.clock.i2c2.div.1"/>
@@ -113,49 +115,49 @@
     <node id="board.clock.wdog.div.display" option="board.clock.wdog.div.display.value"/>
   </raClockConfiguration>
   <raComponentSelection>
-    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.0.1">
+    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.1.0">
       <description>Board Support Package Common Files</description>
-      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.0.1">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.1.0">
       <description>I/O Port (W)</description>
-      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
     </component>
-    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.0.1">
+    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.1.0">
       <description>Arm CMSIS Version 6 - Core (M)</description>
-      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.0.1.pack</originalPack>
+      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.1.0.pack</originalPack>
     </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="R7SA6W1CEDZDD" vendor="Renesas" version="2.0.1">
-      <description>Board support package for R7SA6W1CEDZDD</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board support package for RA6W1</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="fsp" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board support package for RA6W1 - FSP Data</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="events" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board support package for RA6W1 - Events</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="linker" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board support package for RA6W1 - Linker</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq61xxx_evb" variant="" vendor="Renesas" version="2.0.1">
+    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq61xxx_evb" variant="" vendor="Renesas" version="2.1.0">
       <description>RRQ61xxx-EVB Board Support Files</description>
-      <originalPack>Renesas.RAFW_board_rrq61xxx_evb.2.0.1.pack</originalPack>
+      <originalPack>Renesas.RAFW_board_rrq61xxx_evb.2.1.0.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_dmac_w" variant="" vendor="Renesas" version="2.0.1">
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="R7SA6W1CEDZDD" vendor="Renesas" version="2.1.0">
+      <description>Board support package for R7SA6W1CEDZDD</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board support package for RA6W1</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="fsp" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board support package for RA6W1 - FSP Data</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="events" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board support package for RA6W1 - Events</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="linker" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board support package for RA6W1 - Linker</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_dmac_w" variant="" vendor="Renesas" version="2.1.0">
       <description>Direct Memory Access Controller</description>
-      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_spi_w" variant="" vendor="Renesas" version="2.0.1">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_spi_w" variant="" vendor="Renesas" version="2.1.0">
       <description>Serial Peripheral Interface</description>
-      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
     </component>
   </raComponentSelection>
   <raElcConfiguration/>
@@ -166,7 +168,7 @@
       <property id="module.driver.gpio_w.name" value="g_gpio_w"/>
       <property id="module.driver.gpio_w.pincfg" value="g_bsp_pin_cfg"/>
     </module>
-    <module id="module.driver.spi_on_spi_w.221064271">
+    <module id="module.driver.spi_on_spi_w.754370225">
       <property id="module.driver.spi_w.name" value="g_spi_master"/>
       <property id="module.driver.spi_w.channel" value="1"/>
       <property id="module.driver.spi_w.gen_ipl" value="board.icu.common.irq.priority12"/>
@@ -189,7 +191,7 @@
       <property id="module.driver.spi_w.skip_disable" value="module.driver.spi_w.skip_disable.disabled"/>
       <property id="module.driver.spi_w.skip_busy_check" value="module.driver.spi_w.skip_busy_check.disabled"/>
     </module>
-    <module id="module.driver.spi_on_spi_w.601572600">
+    <module id="module.driver.spi_on_spi_w.1406920481">
       <property id="module.driver.spi_w.name" value="g_spi_slave"/>
       <property id="module.driver.spi_w.channel" value="2"/>
       <property id="module.driver.spi_w.gen_ipl" value="board.icu.common.irq.priority12"/>
@@ -212,7 +214,7 @@
       <property id="module.driver.spi_w.skip_disable" value="module.driver.spi_w.skip_disable.disabled"/>
       <property id="module.driver.spi_w.skip_busy_check" value="module.driver.spi_w.skip_busy_check.disabled"/>
     </module>
-    <module id="module.driver.transfer_on_dmac_w.847704609">
+    <module id="module.driver.transfer_on_dmac_w.379271766">
       <property id="module.driver.transfer.name" value="g_transfer0"/>
       <property id="module.driver.transfer.channel" value="0"/>
       <property id="module.driver.transfer.mode" value="module.driver.transfer.mode.mode_normal"/>
@@ -224,13 +226,13 @@
       <property id="module.driver.transfer.activation_event" value="enum.mcu.bsp.dma_trig.none"/>
       <property id="module.driver.transfer.p_callback" value="NULL"/>
       <property id="module.driver.transfer.ipl" value="board.icu.common.irq.priority2"/>
-      <property id="module.driver.transfer.start_mode" value="module.driver.transfer.start_mode.start_mode_immediately"/>
+      <property id="module.driver.transfer.start_mode" value="enum.mcu.bsp.dma_start_mode.start_mode_immediately"/>
       <property id="module.driver.transfer.idle_mode" value="module.driver.transfer.idle_mode.idle_mode_blocking"/>
       <property id="module.driver.transfer.init_mode" value="module.driver.transfer.init_mode.init_mode_ax_bx_ay_by"/>
       <property id="module.driver.transfer.burst_mode" value="module.driver.transfer.burst_mode.burst_mode_disabled"/>
       <property id="module.driver.transfer.channel_prio" value="0"/>
     </module>
-    <module id="module.driver.transfer_on_dmac_w.863107379">
+    <module id="module.driver.transfer_on_dmac_w.150610539">
       <property id="module.driver.transfer.name" value="g_transfer1"/>
       <property id="module.driver.transfer.channel" value="1"/>
       <property id="module.driver.transfer.mode" value="module.driver.transfer.mode.mode_normal"/>
@@ -242,13 +244,13 @@
       <property id="module.driver.transfer.activation_event" value="enum.mcu.bsp.dma_trig.none"/>
       <property id="module.driver.transfer.p_callback" value="NULL"/>
       <property id="module.driver.transfer.ipl" value="board.icu.common.irq.priority2"/>
-      <property id="module.driver.transfer.start_mode" value="module.driver.transfer.start_mode.start_mode_immediately"/>
+      <property id="module.driver.transfer.start_mode" value="enum.mcu.bsp.dma_start_mode.start_mode_immediately"/>
       <property id="module.driver.transfer.idle_mode" value="module.driver.transfer.idle_mode.idle_mode_blocking"/>
       <property id="module.driver.transfer.init_mode" value="module.driver.transfer.init_mode.init_mode_ax_bx_ay_by"/>
       <property id="module.driver.transfer.burst_mode" value="module.driver.transfer.burst_mode.burst_mode_disabled"/>
       <property id="module.driver.transfer.channel_prio" value="0"/>
     </module>
-    <module id="module.driver.transfer_on_dmac_w.785967268">
+    <module id="module.driver.transfer_on_dmac_w.1796646982">
       <property id="module.driver.transfer.name" value="g_transfer2"/>
       <property id="module.driver.transfer.channel" value="2"/>
       <property id="module.driver.transfer.mode" value="module.driver.transfer.mode.mode_normal"/>
@@ -260,13 +262,13 @@
       <property id="module.driver.transfer.activation_event" value="enum.mcu.bsp.dma_trig.none"/>
       <property id="module.driver.transfer.p_callback" value="NULL"/>
       <property id="module.driver.transfer.ipl" value="board.icu.common.irq.priority2"/>
-      <property id="module.driver.transfer.start_mode" value="module.driver.transfer.start_mode.start_mode_immediately"/>
+      <property id="module.driver.transfer.start_mode" value="enum.mcu.bsp.dma_start_mode.start_mode_immediately"/>
       <property id="module.driver.transfer.idle_mode" value="module.driver.transfer.idle_mode.idle_mode_blocking"/>
       <property id="module.driver.transfer.init_mode" value="module.driver.transfer.init_mode.init_mode_ax_bx_ay_by"/>
       <property id="module.driver.transfer.burst_mode" value="module.driver.transfer.burst_mode.burst_mode_disabled"/>
       <property id="module.driver.transfer.channel_prio" value="0"/>
     </module>
-    <module id="module.driver.transfer_on_dmac_w.1313327480">
+    <module id="module.driver.transfer_on_dmac_w.836708886">
       <property id="module.driver.transfer.name" value="g_transfer3"/>
       <property id="module.driver.transfer.channel" value="3"/>
       <property id="module.driver.transfer.mode" value="module.driver.transfer.mode.mode_normal"/>
@@ -278,7 +280,7 @@
       <property id="module.driver.transfer.activation_event" value="enum.mcu.bsp.dma_trig.none"/>
       <property id="module.driver.transfer.p_callback" value="NULL"/>
       <property id="module.driver.transfer.ipl" value="board.icu.common.irq.priority2"/>
-      <property id="module.driver.transfer.start_mode" value="module.driver.transfer.start_mode.start_mode_immediately"/>
+      <property id="module.driver.transfer.start_mode" value="enum.mcu.bsp.dma_start_mode.start_mode_immediately"/>
       <property id="module.driver.transfer.idle_mode" value="module.driver.transfer.idle_mode.idle_mode_blocking"/>
       <property id="module.driver.transfer.init_mode" value="module.driver.transfer.init_mode.init_mode_ax_bx_ay_by"/>
       <property id="module.driver.transfer.burst_mode" value="module.driver.transfer.burst_mode.burst_mode_disabled"/>
@@ -286,13 +288,13 @@
     </module>
     <context id="_hal.0">
       <stack module="module.driver.ioport_on_gpio_w.0"/>
-      <stack module="module.driver.spi_on_spi_w.221064271">
-        <stack module="module.driver.transfer_on_dmac_w.847704609" requires="module.driver.spi_on_spi_w.requires.transfer_tx"/>
-        <stack module="module.driver.transfer_on_dmac_w.863107379" requires="module.driver.spi_on_spi_w.requires.transfer_rx"/>
+      <stack module="module.driver.spi_on_spi_w.754370225">
+        <stack module="module.driver.transfer_on_dmac_w.379271766" requires="module.driver.spi_on_spi_w.requires.transfer_tx"/>
+        <stack module="module.driver.transfer_on_dmac_w.150610539" requires="module.driver.spi_on_spi_w.requires.transfer_rx"/>
       </stack>
-      <stack module="module.driver.spi_on_spi_w.601572600">
-        <stack module="module.driver.transfer_on_dmac_w.785967268" requires="module.driver.spi_on_spi_w.requires.transfer_tx"/>
-        <stack module="module.driver.transfer_on_dmac_w.1313327480" requires="module.driver.spi_on_spi_w.requires.transfer_rx"/>
+      <stack module="module.driver.spi_on_spi_w.1406920481">
+        <stack module="module.driver.transfer_on_dmac_w.1796646982" requires="module.driver.spi_on_spi_w.requires.transfer_tx"/>
+        <stack module="module.driver.transfer_on_dmac_w.836708886" requires="module.driver.spi_on_spi_w.requires.transfer_rx"/>
       </stack>
     </context>
     <config id="config.driver.spi_w">

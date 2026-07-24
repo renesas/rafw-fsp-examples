@@ -145,7 +145,10 @@ void app_task_entry(void *pvParameters)
     dhcp_server_ip = wpa_ent_connect_info();
 
 #if PING_DUT
+    if(dhcp_server_ip != NULL)
+    {
     ret = lwip_ping((const char *) dhcp_server_ip, PING_COUNT, PING_TIMEOUT);
+    }
 #else
 	FSP_PARAMETER_NOT_USED (dhcp_server_ip);
 	APP_PRINT("PING IP address: %s\n", PING_IP_ADDRESS);

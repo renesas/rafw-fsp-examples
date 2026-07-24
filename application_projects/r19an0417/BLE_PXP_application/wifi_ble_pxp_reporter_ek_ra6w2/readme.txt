@@ -9,9 +9,9 @@ through the GTL interface which is connected to the DA14531 BLE chip. It can be 
 Renesas Smartbond APP in mobile phone APP store and works as BLE proximity reporter.
 
 2. Software Requirements:
-Renesas RAFW(FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
+Renesas RAFW(FSP)
+e2 studio
+GCC ARM Embedded Toolchain
 Terminal Console Application: Tera Term
 Mobile phone and BLE host application like Smart bond APP.
 

@@ -9,22 +9,16 @@ SPI channels (Channel 0 and Channel 1) in Master and Slave mode. Once the module
 channels are configured, Master and Slave can transmit and receive data based on commands from user sent through JLinkRTTViewer.
 SPI data transmit and receive is done via DTC module.
 
-2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
-Terminal Console Application: Tera Term or a similar application
-
-3. Hardware Requirements:
+2. Hardware Requirements:
 Renesas RA6W1 Mother board.
 Renesas RA6W1 Module.
 Type C USB cable for programming and debugging.
 
-4. Hardware Connections:
+3. Hardware Connections:
 Attach RA6W1 module to the motherboard via the extension socket.
 Connect the USB Debug port on the RA6W1 mother board to the host PC via a type C USB cable.
 
-5. Hardware Settings for the project
+4. Hardware Settings for the project
  1. Hardware Connection
     Pin Connection for EK-RRQ61xxx
     MISO  ----> P0_06 - P1_11
@@ -32,7 +26,7 @@ Connect the USB Debug port on the RA6W1 mother board to the host PC via a type C
     CLK   ----> P0_04 - P1_10
     CS	  ----> P0_07 - P1_13	
 
-6. Verification:
+5. Verification:
  1. Import the example project.
  2. Generate, build the Example project.
  3. Use Segger/RTTViewer for logging.
@@ -57,3 +51,6 @@ Flashing Procedure:
 1. Open e²studio and connect your JTAG debugger.
 2. Go to Debug Configurations and select your .img.bin file in the Startup tab.
 3. Start debugging and the image will be flashed automatically to the RA6W1.
+
+Known Issue
+SPI Slave write data limited to 36 bytes.

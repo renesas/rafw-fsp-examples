@@ -48,7 +48,6 @@ EventGroupHandle_t  g_ble_event_group_handle;
 #include "r_ble_gaps.h"
 #include "r_ble_gats.h"
 #include "r_ble_wifi_provisionings.h"
-#include "provisioning.h"
 
 /******************************************************************************
  User file includes
@@ -131,6 +130,7 @@ static bool_t gap_cb_user(uint16_t type, ble_status_t result, st_ble_evt_data_t 
 static int_t ble_reset(void);
 void custom_conf_ble(void);
 static const char *ble_address_to_string(const uint8_t *address);
+static char * unescape_special_characters(int len, char * output, const char * input, size_t dst_size);
 /* End user code. Do not edit comment generated here */
 
 /******************************************************************************
@@ -1720,6 +1720,7 @@ static fsp_err_t store_provisioning_params(const WIFINetworkParams_t *net_params
 static int_t wifi_ext_connect(const prov_cmd_select_ap_t* params)
 {
     APP_PRINT_INFO("\n");
+    char unescaped_ssid[PROV_SSID_LEN + 1];
     uint32_t ssid_len = strnlen(params->ssid, sizeof(params->ssid));
     uint32_t pass_len = strnlen(params->password, sizeof(params->password));
     WIFISecurity_app_t security_app = (WIFISecurity_t) params->security_type;
@@ -1746,8 +1747,10 @@ static int_t wifi_ext_connect(const prov_cmd_select_ap_t* params)
 
     net_ext_params.hidden_ssid = (params->is_hidden == 1) ? true : false;
     APP_PRINT_INFO("Hidden SSID: %s\n", net_ext_params.hidden_ssid ? "YES" : "NO");
-    strncpy(p_net_params->ucSSID, params->ssid, sizeof(p_net_params->ucSSID));
-    p_net_params->ucSSIDLength = ssid_len;
+
+    unescape_special_characters(ssid_len, unescaped_ssid, params->ssid, sizeof(unescaped_ssid));
+    strncpy(p_net_params->ucSSID, unescaped_ssid, sizeof(p_net_params->ucSSID));
+    p_net_params->ucSSIDLength = strlen(unescaped_ssid);
     switch (security)
     {
         case eWiFiSecurityOpen_ext:
@@ -1784,9 +1787,9 @@ static int_t wifi_ext_connect(const prov_cmd_select_ap_t* params)
             p_net_enterprise_params->ucEntAuthType = (WIFIEntAuthTypeExt_t) params->eap_auth_mode;
             p_net_enterprise_params->ucEntAuthProto = (WIFIEntAuthProtoExt_t) params->eap_phase2;
 
-            strncpy(p_net_enterprise_params->ucID, params->ssid,
-                sizeof(p_net_enterprise_params->ucID));
-            p_net_enterprise_params->ucIDLength = ssid_len;
+            unescape_special_characters(ssid_len, unescaped_ssid, params->ssid, sizeof(unescaped_ssid));
+            strncpy(p_net_enterprise_params->ucID, unescaped_ssid, sizeof(p_net_enterprise_params->ucID));
+            p_net_enterprise_params->ucIDLength = strlen(unescaped_ssid);
 
             strncpy(p_net_enterprise_params->ucPassword, params->password,
                 sizeof(p_net_enterprise_params->ucPassword));
@@ -2110,5 +2113,35 @@ static const char *ble_address_to_string(const uint8_t *address)
             address[0]);
 
     return buf;
+}
+
+static char * unescape_special_characters(int len, char * output, const char * input, size_t dst_size)
+{
+    size_t j = 0;
+
+    for (int i = 0; i < len && j + 1 < dst_size; i++)
+    {
+        char c = input[i];
+        if (c == '\\' && i + 1 < len)
+        {
+            char next = input[i + 1];
+            switch (next)
+            {
+                case '\\': output[j++] = '\\'; i++; break;
+                case '"':  output[j++] = '"';  i++; break;
+                case '/':  output[j++] = '/';  i++; break;
+                case '\'': output[j++] = '\''; i++; break;
+                case 't':  output[j++] = '\t'; i++; break;
+                default:
+                    output[j++] = '\\';
+                    break;
+            }
+            continue;
+        }
+        output[j++] = c;
+    }
+
+    output[j] = '\0';
+    return output;
 }
 /* End user code. Do not edit comment generated here */

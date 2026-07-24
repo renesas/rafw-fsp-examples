@@ -71,25 +71,6 @@ typedef enum _door_lock_command
 
 #define SENSOR_REF_FACTORY_LED                      6    /* GPIOC 6 */
 
-#if defined ( __SUPPORT_AWS_IOT_W__ ) 
-/**
- ***************************************************************************************
- * @brief Fleet Provisioning ThingID define
- ****************************************************************************************
- */
-#define FP_DEMO_ID_SUFFIX                           "Renesas_DoorLockID"
-#define USE_FLEET_PROVISION                         "AWS_USE_FP"
-
-/**
- ****************************************************************************************
- * @brief Fleet Provisioning set status
- * @param[in] void
- * @return 0: disable default, 1: enable
- ****************************************************************************************
- */
-uint8_t getFleetProvStatus(void);
-#endif  // ( __SUPPORT_AWS_IOT_W__ ) 
-
 /**
  ****************************************************************************************
  * @brief get app thing name for AWS or Azure sever

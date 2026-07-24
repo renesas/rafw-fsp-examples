@@ -10,10 +10,7 @@ Later, Sender and Receiver Tasks will be suspended timer will be stopped. Semaph
 To restart the application, power cycle the board.
 
 2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e²studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
-Terminal Console Application: Tera Term or a similar application
+Segger J-Link RTT Viewer.
 
 3. Hardware Requirements:
 Renesas RA6W2 Mother board.
@@ -38,11 +35,10 @@ Connect the USB Debug port on the RA6W2 mother board to the host PC via a type C
 
 
 NOTE: 
-
 To view console output in RTT Viewer: 
 
 1) Find the RTT block address by searching for the _SEGGER_RTT variable in the .map file located in the Debug or Release folder.
-   eg: 0x20003784
+   eg: 0x20002784
 
 Flashing Procedure:
 1. Open e²studio and connect your JTAG debugger.

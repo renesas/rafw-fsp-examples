@@ -17,6 +17,7 @@ collapse/module.driver.uart_w.675151502=false
 collapse/module.middleware.atcmd_w.1402566225=false
 collapse/module.middleware.ble_abs_gtl_b.282808179=false
 collapse/module.middleware.mqtt_port_w.2003303475=false
+collapse/module.middleware.ota_on_ota_w.88265168=false
 collapse/module.middleware.rm_block_media_on_rm_block_media_spi_w.2006414304=false
 collapse/module.middleware.rm_lwip_w.1794671328=false
 collapse/module.middleware.rm_map_persistant_w.136778472=false

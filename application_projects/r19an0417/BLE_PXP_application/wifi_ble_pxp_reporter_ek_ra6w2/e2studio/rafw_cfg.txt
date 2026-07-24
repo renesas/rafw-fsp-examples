@@ -26,7 +26,9 @@ FSP Configuration
     Security: BUS Accessibility: Bus Security Attribution Register B: Both Secure and Non-Secure State
     Security: Uninitialized Non-Secure Application Fallback: Enable Uninitialized Non-Secure Application Fallback
     General: Copy IVT to SRAM: Disable
-    General: Use clock manager: Enable
+    General: Use Radio clock manager: Enable
+    General: Enable XTAL PPM compensation: Disable
+    General: XTAL PPM recompensation period (ms): 8000U
     General: 8-lines OQSPI support: Disable
 
   RA6W2 Device Options
@@ -51,9 +53,21 @@ FSP Configuration
     Headerless Mode: False
 
   Clocks
+    XTAL40M_CLK Enabled
+    XTAL_CLK Enabled
     RCX_CLK Enabled
+    LP_CLK Src: XTAL
+    PLL_SYS Src: PLL
+    PLL_SYS Mul 1/3
+    SYS_CLK Src: PLL_SYS
+    HCLK Div /1
+    OQSPICLK Div /2
     QSPICLK Div /1
-    PERI_CLK Src: PLL
+    PLL_SPI Disabled
+    PLL_SPI Mul 1/6
+    SPI_CLK Src: XTAL_SYS
+    PLL_PERI Src: PLL
+    PERI_CLK Src: PLL_PERI
     I2C1 Div /1
     I2C2 Div /1
 
@@ -252,6 +266,55 @@ FSP Configuration
     BLE CLI: Enabled
     Enable MQTT on WI-FI: Enabled
     ATCMD Task Support: Enable
+    Regulatory TX Power Override: Master Enable: Disabled
+    Regulatory TX Power Override: FCC NCC IC ANATEL: Enable: Enabled
+    Regulatory TX Power Override: FCC NCC IC ANATEL: 2.4 GHz OFDM: CH 1-11 (11 hex bytes, CSV): 0x09,0x09,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c
+    Regulatory TX Power Override: FCC NCC IC ANATEL: 2.4 GHz OFDM: CH 12-14 (3 hex bytes, CSV): 0x7f,0x7f,0x7f
+    Regulatory TX Power Override: FCC NCC IC ANATEL: 2.4 GHz DSSS: CH 1-11 (11 hex bytes, CSV): 0x0c,0x0c,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11
+    Regulatory TX Power Override: FCC NCC IC ANATEL: 2.4 GHz DSSS: CH 12-14 (3 hex bytes, CSV): 0x7f,0x7f,0x7f
+    Regulatory TX Power Override: FCC NCC IC ANATEL: 5 GHz Low: UNII-1 CH 36-48 (4 hex bytes, CSV): 0x0c,0x0c,0x0c,0x0a
+    Regulatory TX Power Override: FCC NCC IC ANATEL: 5 GHz Low: UNII-2 CH 52-64 DFS (4 hex bytes, CSV): 0x0b,0x0b,0x0b,0x09
+    Regulatory TX Power Override: FCC NCC IC ANATEL: 5 GHz Mid: UNII-2e CH 100-144 DFS (12 hex bytes, CSV): 0x0c,0x0c,0x0c,0x0c,0x12,0x12,0x12,0x12,0x12,0x12,0x0f,0x0f
+    Regulatory TX Power Override: FCC NCC IC ANATEL: 5 GHz Mid: UNII-3 CH 149-161 (4 hex bytes, CSV): 0x0a,0x0a,0x0c,0x0c
+    Regulatory TX Power Override: FCC NCC IC ANATEL: 5 GHz High: ISM CH 165 (1 hex byte): 0x0c
+    Regulatory TX Power Override: FCC NCC IC ANATEL: 5 GHz High: UNII-4-1 CH 169 (1 hex byte): 0x7f
+    Regulatory TX Power Override: FCC NCC IC ANATEL: 5 GHz High: UNII-4-2 CH 173-177 (2 hex bytes, CSV): 0x7f,0x7f
+    Regulatory TX Power Override: ETSI: Enable: Enabled
+    Regulatory TX Power Override: ETSI: 2.4 GHz OFDM: CH 1-11 (11 hex bytes, CSV): 0x0d,0x0d,0x0e,0x0e,0x0e,0x0e,0x0e,0x0e,0x0e,0x0e,0x0e
+    Regulatory TX Power Override: ETSI: 2.4 GHz OFDM: CH 12-14 (3 hex bytes, CSV): 0x0d,0x0d,0x7f
+    Regulatory TX Power Override: ETSI: 2.4 GHz DSSS: CH 1-11 (11 hex bytes, CSV): 0x10,0x10,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c
+    Regulatory TX Power Override: ETSI: 2.4 GHz DSSS: CH 12-14 (3 hex bytes, CSV): 0x0c,0x0c,0x7f
+    Regulatory TX Power Override: ETSI: 5 GHz Low: UNII-1 CH 36-48 (4 hex bytes, CSV): 0x0b,0x0b,0x0b,0x0c
+    Regulatory TX Power Override: ETSI: 5 GHz Low: UNII-2 CH 52-64 DFS (4 hex bytes, CSV): 0x0b,0x0b,0x0b,0x0b
+    Regulatory TX Power Override: ETSI: 5 GHz Mid: UNII-2e CH 100-144 DFS (12 hex bytes, CSV): 0x0b,0x0b,0x0b,0x0b,0x0b,0x0b,0x0b,0x0b,0x0b,0x0b,0x0b,0x0b
+    Regulatory TX Power Override: ETSI: 5 GHz Mid: UNII-3 CH 149-161 (4 hex bytes, CSV): 0x09,0x09,0x09,0x09
+    Regulatory TX Power Override: ETSI: 5 GHz High: ISM CH 165 (1 hex byte): 0x09
+    Regulatory TX Power Override: ETSI: 5 GHz High: UNII-4-1 CH 169 (1 hex byte): 0x7f
+    Regulatory TX Power Override: ETSI: 5 GHz High: UNII-4-2 CH 173-177 (2 hex bytes, CSV): 0x7f,0x7f
+    Regulatory TX Power Override: Telec JP: Enable: Enabled
+    Regulatory TX Power Override: Telec JP: 2.4 GHz OFDM: CH 1-11 (11 hex bytes, CSV): 0x0d,0x0d,0x0e,0x0e,0x0e,0x0e,0x0e,0x0e,0x0e,0x0e,0x0e
+    Regulatory TX Power Override: Telec JP: 2.4 GHz OFDM: CH 12-14 (3 hex bytes, CSV): 0x0d,0x0d,0x0a
+    Regulatory TX Power Override: Telec JP: 2.4 GHz DSSS: CH 1-11 (11 hex bytes, CSV): 0x0e,0x0e,0x12,0x12,0x12,0x12,0x12,0x12,0x12,0x12,0x12
+    Regulatory TX Power Override: Telec JP: 2.4 GHz DSSS: CH 12-14 (3 hex bytes, CSV): 0x10,0x10,0x0a
+    Regulatory TX Power Override: Telec JP: 5 GHz Low: UNII-1 CH 36-48 (4 hex bytes, CSV): 0x0a,0x0a,0x0a,0x04
+    Regulatory TX Power Override: Telec JP: 5 GHz Low: UNII-2 CH 52-64 DFS (4 hex bytes, CSV): 0x04,0x0a,0x0a,0x09
+    Regulatory TX Power Override: Telec JP: 5 GHz Mid: UNII-2e CH 100-144 DFS (12 hex bytes, CSV): 0x0a,0x0a,0x0a,0x0a,0x0a,0x0a,0x0a,0x0a,0x0a,0x0a,0x07,0x07
+    Regulatory TX Power Override: Telec JP: 5 GHz Mid: UNII-3 CH 149-161 (4 hex bytes, CSV): 0x7f,0x7f,0x7f,0x7f
+    Regulatory TX Power Override: Telec JP: 5 GHz High: ISM CH 165 (1 hex byte): 0x7f
+    Regulatory TX Power Override: Telec JP: 5 GHz High: UNII-4-1 CH 169 (1 hex byte): 0x7f
+    Regulatory TX Power Override: Telec JP: 5 GHz High: UNII-4-2 CH 173-177 (2 hex bytes, CSV): 0x7f,0x7f
+    Regulatory TX Power Override: KC Korea: Enable: Enabled
+    Regulatory TX Power Override: KC Korea: 2.4 GHz OFDM: CH 1-11 (11 hex bytes, CSV): 0x10,0x10,0x10,0x10,0x10,0x10,0x10,0x10,0x10,0x10,0x10
+    Regulatory TX Power Override: KC Korea: 2.4 GHz OFDM: CH 12-14 (3 hex bytes, CSV): 0x10,0x10,0x7f
+    Regulatory TX Power Override: KC Korea: 2.4 GHz DSSS: CH 1-11 (11 hex bytes, CSV): 0x16,0x16,0x16,0x16,0x16,0x16,0x16,0x16,0x16,0x16,0x16
+    Regulatory TX Power Override: KC Korea: 2.4 GHz DSSS: CH 12-14 (3 hex bytes, CSV): 0x16,0x16,0x7f
+    Regulatory TX Power Override: KC Korea: 5 GHz Low: UNII-1 CH 36-48 (4 hex bytes, CSV): 0x0f,0x0f,0x0f,0x0c
+    Regulatory TX Power Override: KC Korea: 5 GHz Low: UNII-2 CH 52-64 DFS (4 hex bytes, CSV): 0x0e,0x0e,0x0e,0x0e
+    Regulatory TX Power Override: KC Korea: 5 GHz Mid: UNII-2e CH 100-144 DFS (12 hex bytes, CSV): 0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0e,0x0e,0x0e,0x0e
+    Regulatory TX Power Override: KC Korea: 5 GHz Mid: UNII-3 CH 149-161 (4 hex bytes, CSV): 0x0e,0x0e,0x0e,0x0e
+    Regulatory TX Power Override: KC Korea: 5 GHz High: ISM CH 165 (1 hex byte): 0x0b
+    Regulatory TX Power Override: KC Korea: 5 GHz High: UNII-4-1 CH 169 (1 hex byte): 0x7f
+    Regulatory TX Power Override: KC Korea: 5 GHz High: UNII-4-2 CH 173-177 (2 hex bytes, CSV): 0x7f,0x7f
 
   Module "lwIP (rm_lwip_w)"
     Watchdog Service Support: Enabled
@@ -272,7 +335,6 @@ FSP Configuration
     Key Exchange: MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED: Undefine
     SSL Options: MBEDTLS_SSL_CIPHERSUITES: Undefine
     SSL Options: MBEDTLS_SSL_CIPHERSUITES Custom Value: MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA256,MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA256,MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,MBEDTLS_TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA256,MBEDTLS_TLS_PSK_WITH_NULL_SHA256,MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256,MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256,MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA256,MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA256,MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA256,MBEDTLS_TLS_RSA_WITH_NULL_SHA256
-    X509 Options: MBEDTLS_X509_MAX_INTERMEDIATE_CA: Undefine
     SSL Options: MBEDTLS_SSL_ALL_ALERT_MESSAGES: Undefine
     SSL Options: MBEDTLS_SSL_DTLS_CONNECTION_ID: Undefine
     SSL Options: MBEDTLS_SSL_DTLS_CONNECTION_ID_COMPAT: Undefine
@@ -334,8 +396,6 @@ FSP Configuration
     SSL Options: MBEDTLS_SSL_CID_OUT_LEN_MAX Value: 32
     SSL Options: MBEDTLS_SSL_CID_TLS1_3_PADDING_GRANULARITY: Undefine
     SSL Options: MBEDTLS_SSL_CID_TLS1_3_PADDING_GRANULARITY Value: 16
-    SSL Options: MBEDTLS_SSL_CID_PADDING_GRANULARITY: Undefine
-    SSL Options: MBEDTLS_SSL_CID_PADDING_GRANULARITY Value: 16
     SSL Options: MBEDTLS_SSL_OUT_CONTENT_LEN: Undefine
     SSL Options: MBEDTLS_SSL_OUT_CONTENT_LEN Value: 16384
     SSL Options: MBEDTLS_SSL_DTLS_MAX_BUFFERING: Undefine
@@ -348,6 +408,7 @@ FSP Configuration
     General: MBEDTLS_PSK_MAX_LEN Value: 32
     SSL Options: MBEDTLS_SSL_COOKIE_TIMEOUT: Undefine
     SSL Options: MBEDTLS_SSL_COOKIE_TIMEOUT Value: 60
+    X509 Options: MBEDTLS_X509_MAX_INTERMEDIATE_CA: Undefine
     X509 Options: MBEDTLS_X509_MAX_INTERMEDIATE_CA Value: 8
     X509 Options: MBEDTLS_X509_MAX_FILE_PATH_LEN: Undefine
     X509 Options: MBEDTLS_X509_MAX_FILE_PATH_LEN Value: 512
@@ -681,23 +742,22 @@ FSP Configuration
   Module "RTC_W Realtime Clock (r_rtc_w)"
     Parameter Checking: Default (BSP)
 
-  Module "OSPI Flash (r_ospi_w)"
+  Module "OSPI FLASH (r_ospi_w)"
     Parameter Checking: Default (BSP)
-    DMAC Support: Disable
-    Autocalibration Support: Disable
-    Memory-mapping Support: Prefetch Function: Enable
-    Memory-mapping Support: XiP Support: Enable
-    DOTF Support: Disable
 
   Module "MQTT Port (rm_mqtt_port_w)"
     Parameter Checking: Default (BSP)
     Watchdog Service Support: Enabled
+    MQTT port Max topic length: 64
+    MQTT port publish message max length: 2048
 
   Module "Eclipse Mosquitto (MQTT)"
     Clean Session Mode: Enabled
     Watchdog Service Support: Disabled
     TLS Mode: Disabled
     Debug Mode: Disabled
+    MQTT Max topic length: 64
+    MQTT publish message max length: 2048
 
   Module "External IRQ (r_ext_irq_w)"
     Parameter Checking: Default (BSP)
@@ -719,6 +779,7 @@ FSP Configuration
     SDIO Support: Disable
     ATCMD BLEBRG Support: Disable
     RF Support: Enable
+    ATCMD response max len: 1024
     AT+PMGRMCUWUDONE Wait Maximum Timeout (ms): 150
     AT+PMGRCONSTRAINT Wait Maximum Timeout (ms): 100
 
@@ -914,67 +975,164 @@ FSP Configuration
             Base Address: 0x2A300000
             Callback Function: rm_vee_media_callback
 
-            Instance "g_ospi OSPI Flash (r_ospi_w)"
+            Instance "g_ospi OSPI FLASH (r_ospi_w)"
               General: Name: g_ospi
               General: Channel: 0
-              General: Initial Protocol Mode: SPI (1S-1S-1S)
-              General: Initial Address Bytes: 3
-              General: Address line for page program: SPI_FLASH_DATA_LINES_4
-              General: Write Status Bit: 0
-              General: Write Enable Bit: 1
-              General: Sector Erase Size: 4096
-              General: Block Erase Size: 32768
-              General: Block[64k] Erase Size: 65536
-              Defaults: Command Definitions: Page Program Command: 0x32
-              Defaults: Command Definitions: Read Command: 0xEB
-              Defaults: Command Definitions: Write Enable Command: 0x06
-              Defaults: Command Definitions: Status Command: 0x05
-              Defaults: Erase Command Definitions: Sector Erase Command: 0x20
-              Defaults: Erase Command Definitions: Block Erase Command: 0x52
-              Defaults: Erase Command Definitions: Block(64k) Erase Command: 0xD8
-              High-speed Mode: Protocol: QSPI (1S-4S-4S)
-              High-speed Mode: Command Length Bytes: 1
-              High-speed Mode: Command Definitions: Page Program Command: 0x32
-              High-speed Mode: Command Definitions: Dual Read Command: 0xEB
-              High-speed Mode: Command Definitions: Write Enable Command: 0x06
-              High-speed Mode: Command Definitions: Status Command: 0x05
-              High-speed Mode: Command Definitions: Sector Erase Command: 0
-              High-speed Mode: Command Definitions: Block Erase Command: 0
-              High-speed Mode: Command Definitions: Chip Erase Command: 0
-              High-speed Mode: Memory Read Dummy Cycles: 0x02
-              High-speed Mode: Status Read Dummy Cycles: 0
-              HW config: Clk_div: Divide by 2
-              HW config: Clock mode: Mode 1
-              HW config: IO2 pad direction: Auto Sel
-              HW config: IO2 pad value: Low
-              HW config: IO3 pad direction: Auto Sel
-              HW config: IO3 pad value: Low
-              HW config: IO4_7 pad direction: Auto Sel
-              HW config: IO4_7 pad value: 0000
-              HW config: HREADY mode: Wait
-              HW config: Sampling edge: Edge neg
-              HW config: Read pipe setting: Enable
-              HW config: Pipe delay: Pipe delay 7
-              HW config: Slew rate control: Slew rate 0
-              HW config: Drive current: 12mA
-              Flash model config: Instr bus mode: Single mode
-              Flash model config: Bus mode: Quad mode
-              Flash model config: Instruction size: 1byte
-              Flash model config: Read opcode: 0xEB
-              Flash model config: Erase opcode: 0x20
-              Flash model config: Suspend opcode: 0x75
-              Flash model config: Resume opcode: 0x7A
-              Flash model config: Read status opcode: 0x05
-              Flash model config: Write enable opcode: 0x06
-              Flash model config: Dummy cycles: 0x02
-              Flash model config: Address size: 24bit address size
-              Flash model config: Instruction mode: Once
-              Flash model config: Extra byte setting: Enable
-              Flash model config: Extra byte value: 0xA0
-              Flash model config: Busy bit: 0
+              General: Address Bytes: 3
+              General: Page Size Bytes: 256
+              General: Select Mode: SDR
+              General: Drive Current: 4 mA
+              General: Slew Rate: Rise=1.7 V/ns, Fall=1.9 V/ns (weak)
+              General: SPI Clock Mode: High
+              General: Wrap Mode: Disabled
+              General: Memory Burst Length: Not supported
+              General: Instructions Bus Lines: 1
+              General: Address and Data Bus Lines: 4
+              Flash Boot Configuration Command: Command definition: Command0: Opcode: 0x31
+              Flash Boot Configuration Command: Command definition: Command0: Data0-3: 0x02
+              Flash Boot Configuration Command: Command definition: Command0: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command0: Opcode+Data Length: 2
+              Flash Boot Configuration Command: Command definition: Command1: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command1: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command1: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command1: Opcode+Data Length: 0
+              Flash Boot Configuration Command: Command definition: Command2: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command2: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command2: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command2: Opcode+Data Length: 0
+              Flash Boot Configuration Command: Command definition: Command3: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command3: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command3: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command3: Opcode+Data Length: 0
+              Flash Boot Configuration Command: Command definition: Command4: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command4: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command4: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command4: Opcode+Data Length: 0
+              Flash Boot Configuration Command: Command definition: Command5: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command5: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command5: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command5: Opcode+Data Length: 0
+              Flash Boot Configuration Command: Command definition: Command6: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command6: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command6: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command6: Opcode+Data Length: 0
+              Flash Boot Configuration Command: Command definition: Command7: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command7: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command7: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command7: Opcode+Data Length: 0
+              Command Definitions: Read Command: Read Mode Opcode: 0xEB
+              Command Definitions: Read Command: Read Mode Wrapping Burst Opcode: 0
+              Command Definitions: Read Command: Extra Byte Value: 0xFF
+              Command Definitions: Read Command: Extra Byte Enable: Enabled
+              Command Definitions: Read Command: CS High Minimum Cycles: 1
+              Command Definitions: Read Command: Dummy Clocks: 6
+              Command Definitions: Read Command: Instruction Mode: TX Instr Only At First Access (Enter XIP mode by default)
+              Command Definitions: Read Command: Length of Wrapping Burst: 4-Beat Wrapping Burst
+              Command Definitions: Read Command: Data Size of Wrapping Burst: Byte access (8-bit)
+              Command Definitions: Page Program Command: Page Program Command Opcode: 0x32
+              Command Definitions: Page Program Command: Page Program Command Wrapping Burst Opcode: 0
+              Command Definitions: Page Program Command: Address Lines: 1
+              Command Definitions: Page Program Command: Dummy Clock Lines: 1
+              Command Definitions: Page Program Command: Data Lines: 4
+              Command Definitions: Page Program Command: CS High Minimum Cycles: 1
+              Command Definitions: Page Program Command: Dummy Clocks: 0
+              Command Definitions: Status Command: Opcode: 0x05
+              Command Definitions: Status Command: Write Status Bit Pos: 0
+              Command Definitions: Status Command: Write Status Level: 1
+              Command Definitions: Write Enable Command: Opcode: 0x06
+              Command Definitions: Write Enable Command: Write Enable Bit Pos: 1
+              Command Definitions: Erase Command: Sector Erase Opcode: 0x20
+              Command Definitions: Erase Command: Sector Erase Size: 4096
+              Command Definitions: Erase Command: Block Erase Opcode: 0x52
+              Command Definitions: Erase Command: Block Erase Size: 32768
+              Command Definitions: Erase Command: Block Erase 32KB Opcode: 0x52
+              Command Definitions: Erase Command: Block Erase 32KB Size: 32768
+              Command Definitions: Erase Command: Chip Erase Opcode: 0xD8
+              Command Definitions: XIP Command: Enter Command: 0xA5
+              Command Definitions: XIP Command: Exit Command: 0xFF
+              Command Definitions: QPI Command: QPI Enter Opcode: 0x38
+              Command Definitions: QPI Command: QPI Exit Opcode: 0xFF
 
       Instance "PMGR - Power Manager (rm_pmgr_w)"
       Instance "RTC_W Realtime Clock (r_rtc_w)"
+      Instance "g_ospi OSPI FLASH (r_ospi_w)"
+        General: Name: g_ospi
+        General: Channel: 0
+        General: Address Bytes: 3
+        General: Page Size Bytes: 256
+        General: Select Mode: SDR
+        General: Drive Current: 4 mA
+        General: Slew Rate: Rise=1.7 V/ns, Fall=1.9 V/ns (weak)
+        General: SPI Clock Mode: High
+        General: Wrap Mode: Disabled
+        General: Memory Burst Length: Not supported
+        General: Instructions Bus Lines: 1
+        General: Address and Data Bus Lines: 4
+        Flash Boot Configuration Command: Command definition: Command0: Opcode: 0x31
+        Flash Boot Configuration Command: Command definition: Command0: Data0-3: 0x02
+        Flash Boot Configuration Command: Command definition: Command0: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command0: Opcode+Data Length: 2
+        Flash Boot Configuration Command: Command definition: Command1: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command1: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command1: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command1: Opcode+Data Length: 0
+        Flash Boot Configuration Command: Command definition: Command2: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command2: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command2: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command2: Opcode+Data Length: 0
+        Flash Boot Configuration Command: Command definition: Command3: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command3: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command3: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command3: Opcode+Data Length: 0
+        Flash Boot Configuration Command: Command definition: Command4: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command4: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command4: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command4: Opcode+Data Length: 0
+        Flash Boot Configuration Command: Command definition: Command5: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command5: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command5: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command5: Opcode+Data Length: 0
+        Flash Boot Configuration Command: Command definition: Command6: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command6: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command6: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command6: Opcode+Data Length: 0
+        Flash Boot Configuration Command: Command definition: Command7: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command7: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command7: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command7: Opcode+Data Length: 0
+        Command Definitions: Read Command: Read Mode Opcode: 0xEB
+        Command Definitions: Read Command: Read Mode Wrapping Burst Opcode: 0
+        Command Definitions: Read Command: Extra Byte Value: 0xFF
+        Command Definitions: Read Command: Extra Byte Enable: Enabled
+        Command Definitions: Read Command: CS High Minimum Cycles: 1
+        Command Definitions: Read Command: Dummy Clocks: 6
+        Command Definitions: Read Command: Instruction Mode: TX Instr Only At First Access (Enter XIP mode by default)
+        Command Definitions: Read Command: Length of Wrapping Burst: 4-Beat Wrapping Burst
+        Command Definitions: Read Command: Data Size of Wrapping Burst: Byte access (8-bit)
+        Command Definitions: Page Program Command: Page Program Command Opcode: 0x32
+        Command Definitions: Page Program Command: Page Program Command Wrapping Burst Opcode: 0
+        Command Definitions: Page Program Command: Address Lines: 1
+        Command Definitions: Page Program Command: Dummy Clock Lines: 1
+        Command Definitions: Page Program Command: Data Lines: 4
+        Command Definitions: Page Program Command: CS High Minimum Cycles: 1
+        Command Definitions: Page Program Command: Dummy Clocks: 0
+        Command Definitions: Status Command: Opcode: 0x05
+        Command Definitions: Status Command: Write Status Bit Pos: 0
+        Command Definitions: Status Command: Write Status Level: 1
+        Command Definitions: Write Enable Command: Opcode: 0x06
+        Command Definitions: Write Enable Command: Write Enable Bit Pos: 1
+        Command Definitions: Erase Command: Sector Erase Opcode: 0x20
+        Command Definitions: Erase Command: Sector Erase Size: 4096
+        Command Definitions: Erase Command: Block Erase Opcode: 0x52
+        Command Definitions: Erase Command: Block Erase Size: 32768
+        Command Definitions: Erase Command: Block Erase 32KB Opcode: 0x52
+        Command Definitions: Erase Command: Block Erase 32KB Size: 32768
+        Command Definitions: Erase Command: Chip Erase Opcode: 0xD8
+        Command Definitions: XIP Command: Enter Command: 0xA5
+        Command Definitions: XIP Command: Exit Command: 0xFF
+        Command Definitions: QPI Command: QPI Enter Opcode: 0x38
+        Command Definitions: QPI Command: QPI Exit Opcode: 0xFF
+
     Instance "MQTT Port (rm_mqtt_port_w)"
       Name: g_mqtt_client0
       Certificates: MQTT Certificates Header File:
@@ -1208,6 +1366,84 @@ FSP Configuration
         Interrupts: Capture/Compare match H Interrupt Priority: Disabled
         Interrupts: Underflow Interrupt Priority: Disabled
 
+      Instance "g_ospi OSPI FLASH (r_ospi_w)"
+        General: Name: g_ospi
+        General: Channel: 0
+        General: Address Bytes: 3
+        General: Page Size Bytes: 256
+        General: Select Mode: SDR
+        General: Drive Current: 4 mA
+        General: Slew Rate: Rise=1.7 V/ns, Fall=1.9 V/ns (weak)
+        General: SPI Clock Mode: High
+        General: Wrap Mode: Disabled
+        General: Memory Burst Length: Not supported
+        General: Instructions Bus Lines: 1
+        General: Address and Data Bus Lines: 4
+        Flash Boot Configuration Command: Command definition: Command0: Opcode: 0x31
+        Flash Boot Configuration Command: Command definition: Command0: Data0-3: 0x02
+        Flash Boot Configuration Command: Command definition: Command0: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command0: Opcode+Data Length: 2
+        Flash Boot Configuration Command: Command definition: Command1: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command1: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command1: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command1: Opcode+Data Length: 0
+        Flash Boot Configuration Command: Command definition: Command2: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command2: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command2: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command2: Opcode+Data Length: 0
+        Flash Boot Configuration Command: Command definition: Command3: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command3: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command3: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command3: Opcode+Data Length: 0
+        Flash Boot Configuration Command: Command definition: Command4: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command4: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command4: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command4: Opcode+Data Length: 0
+        Flash Boot Configuration Command: Command definition: Command5: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command5: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command5: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command5: Opcode+Data Length: 0
+        Flash Boot Configuration Command: Command definition: Command6: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command6: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command6: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command6: Opcode+Data Length: 0
+        Flash Boot Configuration Command: Command definition: Command7: Opcode: 0x00
+        Flash Boot Configuration Command: Command definition: Command7: Data0-3: 0x00
+        Flash Boot Configuration Command: Command definition: Command7: Data4-7: 0x00
+        Flash Boot Configuration Command: Command definition: Command7: Opcode+Data Length: 0
+        Command Definitions: Read Command: Read Mode Opcode: 0xEB
+        Command Definitions: Read Command: Read Mode Wrapping Burst Opcode: 0
+        Command Definitions: Read Command: Extra Byte Value: 0xFF
+        Command Definitions: Read Command: Extra Byte Enable: Enabled
+        Command Definitions: Read Command: CS High Minimum Cycles: 1
+        Command Definitions: Read Command: Dummy Clocks: 6
+        Command Definitions: Read Command: Instruction Mode: TX Instr Only At First Access (Enter XIP mode by default)
+        Command Definitions: Read Command: Length of Wrapping Burst: 4-Beat Wrapping Burst
+        Command Definitions: Read Command: Data Size of Wrapping Burst: Byte access (8-bit)
+        Command Definitions: Page Program Command: Page Program Command Opcode: 0x32
+        Command Definitions: Page Program Command: Page Program Command Wrapping Burst Opcode: 0
+        Command Definitions: Page Program Command: Address Lines: 1
+        Command Definitions: Page Program Command: Dummy Clock Lines: 1
+        Command Definitions: Page Program Command: Data Lines: 4
+        Command Definitions: Page Program Command: CS High Minimum Cycles: 1
+        Command Definitions: Page Program Command: Dummy Clocks: 0
+        Command Definitions: Status Command: Opcode: 0x05
+        Command Definitions: Status Command: Write Status Bit Pos: 0
+        Command Definitions: Status Command: Write Status Level: 1
+        Command Definitions: Write Enable Command: Opcode: 0x06
+        Command Definitions: Write Enable Command: Write Enable Bit Pos: 1
+        Command Definitions: Erase Command: Sector Erase Opcode: 0x20
+        Command Definitions: Erase Command: Sector Erase Size: 4096
+        Command Definitions: Erase Command: Block Erase Opcode: 0x52
+        Command Definitions: Erase Command: Block Erase Size: 32768
+        Command Definitions: Erase Command: Block Erase 32KB Opcode: 0x52
+        Command Definitions: Erase Command: Block Erase 32KB Size: 32768
+        Command Definitions: Erase Command: Chip Erase Opcode: 0xD8
+        Command Definitions: XIP Command: Enter Command: 0xA5
+        Command Definitions: XIP Command: Exit Command: 0xFF
+        Command Definitions: QPI Command: QPI Enter Opcode: 0x38
+        Command Definitions: QPI Command: QPI Exit Opcode: 0xFF
+
     Instance "CLI - (rm_cli_w) "
   Thread "New Thread"
     Symbol: new_thread0
@@ -1360,64 +1596,83 @@ FSP Configuration
             Base Address: 0x2A300000
             Callback Function: rm_vee_media_callback
 
-            Instance "g_ospi OSPI Flash (r_ospi_w)"
+            Instance "g_ospi OSPI FLASH (r_ospi_w)"
               General: Name: g_ospi
               General: Channel: 0
-              General: Initial Protocol Mode: SPI (1S-1S-1S)
-              General: Initial Address Bytes: 3
-              General: Address line for page program: SPI_FLASH_DATA_LINES_4
-              General: Write Status Bit: 0
-              General: Write Enable Bit: 1
-              General: Sector Erase Size: 4096
-              General: Block Erase Size: 32768
-              General: Block[64k] Erase Size: 65536
-              Defaults: Command Definitions: Page Program Command: 0x32
-              Defaults: Command Definitions: Read Command: 0xEB
-              Defaults: Command Definitions: Write Enable Command: 0x06
-              Defaults: Command Definitions: Status Command: 0x05
-              Defaults: Erase Command Definitions: Sector Erase Command: 0x20
-              Defaults: Erase Command Definitions: Block Erase Command: 0x52
-              Defaults: Erase Command Definitions: Block(64k) Erase Command: 0xD8
-              High-speed Mode: Protocol: QSPI (1S-4S-4S)
-              High-speed Mode: Command Length Bytes: 1
-              High-speed Mode: Command Definitions: Page Program Command: 0x32
-              High-speed Mode: Command Definitions: Dual Read Command: 0xEB
-              High-speed Mode: Command Definitions: Write Enable Command: 0x06
-              High-speed Mode: Command Definitions: Status Command: 0x05
-              High-speed Mode: Command Definitions: Sector Erase Command: 0
-              High-speed Mode: Command Definitions: Block Erase Command: 0
-              High-speed Mode: Command Definitions: Chip Erase Command: 0
-              High-speed Mode: Memory Read Dummy Cycles: 0x02
-              High-speed Mode: Status Read Dummy Cycles: 0
-              HW config: Clk_div: Divide by 2
-              HW config: Clock mode: Mode 1
-              HW config: IO2 pad direction: Auto Sel
-              HW config: IO2 pad value: Low
-              HW config: IO3 pad direction: Auto Sel
-              HW config: IO3 pad value: Low
-              HW config: IO4_7 pad direction: Auto Sel
-              HW config: IO4_7 pad value: 0000
-              HW config: HREADY mode: Wait
-              HW config: Sampling edge: Edge neg
-              HW config: Read pipe setting: Enable
-              HW config: Pipe delay: Pipe delay 7
-              HW config: Slew rate control: Slew rate 0
-              HW config: Drive current: 12mA
-              Flash model config: Instr bus mode: Single mode
-              Flash model config: Bus mode: Quad mode
-              Flash model config: Instruction size: 1byte
-              Flash model config: Read opcode: 0xEB
-              Flash model config: Erase opcode: 0x20
-              Flash model config: Suspend opcode: 0x75
-              Flash model config: Resume opcode: 0x7A
-              Flash model config: Read status opcode: 0x05
-              Flash model config: Write enable opcode: 0x06
-              Flash model config: Dummy cycles: 0x02
-              Flash model config: Address size: 24bit address size
-              Flash model config: Instruction mode: Once
-              Flash model config: Extra byte setting: Enable
-              Flash model config: Extra byte value: 0xA0
-              Flash model config: Busy bit: 0
+              General: Address Bytes: 3
+              General: Page Size Bytes: 256
+              General: Select Mode: SDR
+              General: Drive Current: 4 mA
+              General: Slew Rate: Rise=1.7 V/ns, Fall=1.9 V/ns (weak)
+              General: SPI Clock Mode: High
+              General: Wrap Mode: Disabled
+              General: Memory Burst Length: Not supported
+              General: Instructions Bus Lines: 1
+              General: Address and Data Bus Lines: 4
+              Flash Boot Configuration Command: Command definition: Command0: Opcode: 0x31
+              Flash Boot Configuration Command: Command definition: Command0: Data0-3: 0x02
+              Flash Boot Configuration Command: Command definition: Command0: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command0: Opcode+Data Length: 2
+              Flash Boot Configuration Command: Command definition: Command1: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command1: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command1: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command1: Opcode+Data Length: 0
+              Flash Boot Configuration Command: Command definition: Command2: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command2: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command2: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command2: Opcode+Data Length: 0
+              Flash Boot Configuration Command: Command definition: Command3: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command3: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command3: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command3: Opcode+Data Length: 0
+              Flash Boot Configuration Command: Command definition: Command4: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command4: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command4: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command4: Opcode+Data Length: 0
+              Flash Boot Configuration Command: Command definition: Command5: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command5: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command5: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command5: Opcode+Data Length: 0
+              Flash Boot Configuration Command: Command definition: Command6: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command6: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command6: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command6: Opcode+Data Length: 0
+              Flash Boot Configuration Command: Command definition: Command7: Opcode: 0x00
+              Flash Boot Configuration Command: Command definition: Command7: Data0-3: 0x00
+              Flash Boot Configuration Command: Command definition: Command7: Data4-7: 0x00
+              Flash Boot Configuration Command: Command definition: Command7: Opcode+Data Length: 0
+              Command Definitions: Read Command: Read Mode Opcode: 0xEB
+              Command Definitions: Read Command: Read Mode Wrapping Burst Opcode: 0
+              Command Definitions: Read Command: Extra Byte Value: 0xFF
+              Command Definitions: Read Command: Extra Byte Enable: Enabled
+              Command Definitions: Read Command: CS High Minimum Cycles: 1
+              Command Definitions: Read Command: Dummy Clocks: 6
+              Command Definitions: Read Command: Instruction Mode: TX Instr Only At First Access (Enter XIP mode by default)
+              Command Definitions: Read Command: Length of Wrapping Burst: 4-Beat Wrapping Burst
+              Command Definitions: Read Command: Data Size of Wrapping Burst: Byte access (8-bit)
+              Command Definitions: Page Program Command: Page Program Command Opcode: 0x32
+              Command Definitions: Page Program Command: Page Program Command Wrapping Burst Opcode: 0
+              Command Definitions: Page Program Command: Address Lines: 1
+              Command Definitions: Page Program Command: Dummy Clock Lines: 1
+              Command Definitions: Page Program Command: Data Lines: 4
+              Command Definitions: Page Program Command: CS High Minimum Cycles: 1
+              Command Definitions: Page Program Command: Dummy Clocks: 0
+              Command Definitions: Status Command: Opcode: 0x05
+              Command Definitions: Status Command: Write Status Bit Pos: 0
+              Command Definitions: Status Command: Write Status Level: 1
+              Command Definitions: Write Enable Command: Opcode: 0x06
+              Command Definitions: Write Enable Command: Write Enable Bit Pos: 1
+              Command Definitions: Erase Command: Sector Erase Opcode: 0x20
+              Command Definitions: Erase Command: Sector Erase Size: 4096
+              Command Definitions: Erase Command: Block Erase Opcode: 0x52
+              Command Definitions: Erase Command: Block Erase Size: 32768
+              Command Definitions: Erase Command: Block Erase 32KB Opcode: 0x52
+              Command Definitions: Erase Command: Block Erase 32KB Size: 32768
+              Command Definitions: Erase Command: Chip Erase Opcode: 0xD8
+              Command Definitions: XIP Command: Enter Command: 0xA5
+              Command Definitions: XIP Command: Exit Command: 0xFF
+              Command Definitions: QPI Command: QPI Enter Opcode: 0x38
+              Command Definitions: QPI Command: QPI Exit Opcode: 0xFF
 
   Object "g_sys_init_semaphore Counting Semaphore"
     Symbol: g_sys_init_semaphore

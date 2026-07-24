@@ -26,16 +26,21 @@
  */
 int dhcp_get_server_ip(const struct netif *netif, ip_addr_t *out) {
 #if LWIP_DHCP
-    if (!netif || !out) return -1;
+    if (!netif || !out) return INVALID_ARGS;
 
     // In lwIP 2.x, DHCP client data is stored as "client data" on netif.
     struct dhcp *dhcp = (struct dhcp *)netif_get_client_data((struct netif *)netif,
                                    LWIP_NETIF_CLIENT_DATA_INDEX_DHCP);
-    if (!dhcp) return -2;
+    if (!dhcp) return DHCP_NOT_ENABLE;
 
-    // Ensure we are bound (i.e., have a lease).
-    if (dhcp->state != DHCP_STATE_BOUND) {
-        return -3; // Not bound yet
+    // Ensure we are bound (i.e., have a lease, retry to 5 seconds)
+    int retry = DHCP_FINE_TIMER_RETRY_CNT;
+    while (retry && (dhcp->state != DHCP_STATE_BOUND))
+    {
+        dhcp_fine_tmr();
+        vTaskDelay(portCONVERT_MS_2_TICKS(DHCP_FINE_TIMER_MSECS));
+
+        if (--retry == 0) return DHCP_NOT_BOUND;
     }
 
     // dhcp->server_ip_addr holds the DHCP server's IPv4 address (ip_addr_t)

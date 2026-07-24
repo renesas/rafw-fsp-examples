@@ -11,9 +11,6 @@ The actual door lock hardware is expected to be controlled by an external MCU wh
 The mobile application communicates with AWS IoT Core through the internet to remotely control the door lock via RA6W1 and MCU.
 
 2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term or a similar application
 
 
@@ -148,25 +145,27 @@ kg61geirHUDYgog9XzGKATXc3K/m7JdyOcWdbf54nhzcEqjRv1DhCA==
  15. Press on "open door" or "close door" to toggle between lock and unlock after the connection with device is successfull. 
  16. When the lock/unlock is done from the mobile application, the AT command: +AWSIOT=SERVER_DATA 0 app_door <close/open>
      will sent from RA6W1 to external MCU
- 17. Now, the MCU should do the door lock/unlock action and sent back the door status
-     (along with other shadow details like battery if needed):
+ 17. Now, the MCU should do the door open/close action and responds with the command: AT+AWS=CMD MCU_DATA 4 DeviceControl <message>. The message can be something like "door_opened" or "door_closed". The message in the command is updated in the application, because the application is subscribing to the topic
+<Thingname>/DeviceControl.
+ 18. Next, RA6W1 again sends the command +AWSIOT=CMD_TO_MCU update to get the status from the MCU, and it waits for a response until timeout.
+ 19. Now, the MCU should sent back the door status (along with other shadow details like battery if needed):
      AT+AWS=CMD MCU_DATA 2 doorStat <opened/closed> 3 battery 89, when the AT command: +AWSIOT=CMD_TO_MCU update is received from RA6W1
- 18. Now, when this door status is received, the door lock state will change in the application.
+ 20. Now, when this door status is received, the door lock state will change in the application.
 
 When DPM is enabled follow the steps below:
 
- 19. continue until the step 7 and add the following commands to configure DPM:
+ 21. continue until the step 7 and add the following commands to configure DPM:
      AT command to configure sleep mode (currently only sleep mode 3 is used): AT+AWS=SET,SLEEP_MODE,3
      AT command to enable DPM: AT+AWS=SET,USE_DPM,1
- 20. Now do the steps from 8 to 17. After publishing the state of doorlock, RA6W1 will go to sleep and the AT command: +PMGR:1
+ 22. Now do the steps from 8 to 17. After publishing the state of doorlock, RA6W1 will go to sleep and the AT command: +PMGR:1
      will be sent by RA6W1 when it goes to sleep.
- 21. When open/close door button is clicked in the application, RA6W1 will wakeup from sleep.
- 22. Now the AT command: +INIT:WAKEUP,UC will be sent from RA6W1 at wakeup.
- 23. When the MCU receives the wakeup AT command, it should sent the following AT commands to RA6W1:
+ 23. When open/close door button is clicked in the application, RA6W1 will wakeup from sleep.
+ 24. Now the AT command: +INIT:WAKEUP,UC will be sent from RA6W1 at wakeup.
+ 25. When the MCU receives the wakeup AT command, it should sent the following AT commands to RA6W1:
      Add sleep constraint to hold RA6W1 from entering sleep: AT+PMGRCONSTRAINT=1,4
      Notify RA6W1 that MCU is ready to receive AT commands: AT+PMGRMCUWUDONE
- 24. Follow steps 15 and 17. And release the RA6W1 to enter in to sleep by sending the AT command: AT+PMGRCONSTRAINT=2,4.
- 25. Now, RA6W1 will go to sleep.
+ 26. Follow steps 15 to 19. And release the RA6W1 to enter in to sleep by sending the AT command: AT+PMGRCONSTRAINT=2,4.
+ 27. Now, RA6W1 will go to sleep.
 
 Note:
 Apply the door open or close button only after the device goes to sleep after giving the command, ble svc_stop.

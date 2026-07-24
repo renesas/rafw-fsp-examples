@@ -109,11 +109,12 @@
     <booleanAttribute key="com.renesas.hardwaredebug.arm.jlink.setTZBoundaries" value="false"/>
     <intAttribute key="com.renesas.hardwaredebug.arm.jlink.supply_voltage_asp" value="0"/>
     <booleanAttribute key="com.renesas.hardwaredebug.arm.jlink.use_multidevice_synchronous_debug" value="false"/>
+    <stringAttribute key="com.renesas.hardwaredebug.boardName" value="RRQ61xxx-EVB"/>
     <booleanAttribute key="com.renesas.hardwaredebug.timemeasurement" value="true"/>
     <intAttribute key="org.eclipse.cdt.debug.gdbjtag.core.delay" value="3"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.doHalt" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.doReset" value="false"/>
-    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value="C:\work\fsp_v2_0_1\uart_ek_ra6w1_ep\Debug\uart_ek_ra6w1_ep.elf"/>
+    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value="C:\work\fsp_v2_1_0\uart_ek_ra6w1_ep\Debug\uart_ek_ra6w1_ep.elf"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageOffset" value="0"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.initCommands" value=""/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.loadImage" value="false"/>
@@ -124,7 +125,7 @@
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setResume" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setStopAt" value="true"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.stopAt" value="main"/>
-    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsFileName" value="C:\work\fsp_v2_0_1\uart_ek_ra6w1_ep\Debug\uart_ek_ra6w1_ep.elf"/>
+    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsFileName" value="C:\work\fsp_v2_1_0\uart_ek_ra6w1_ep\Debug\uart_ek_ra6w1_ep.elf"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsOffset" value="0"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useFileForImage" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useFileForSymbols" value="false"/>

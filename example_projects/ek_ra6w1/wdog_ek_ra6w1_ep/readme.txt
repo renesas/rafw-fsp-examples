@@ -12,10 +12,7 @@ After 3 seconds, WDOG resets the MCU and turn the blinking the LED 1 OFF.
 When Watchdog reset happens, the LED 2 turns ON.   
 
 2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e²studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
-Segger J-Link RTT Viewer
+Segger J-Link RTT Viewer.
 
 3. Hardware Requirements:
 Renesas RA6W1 Mother board.
@@ -48,12 +45,10 @@ Connect the USB debug port on the RA6W1 mother board to the host PC via a type C
     LED 1 stops blinking and LED 2 turns on after WDOG reset has happened.
 
 Note:
-1) Segger RTT block address may be needed to download and observe EP operation using a hex file with RTT-Viewer.
-   RTT Block address for hex file committed in repository are as follows:
-   a. e²studio: 0x20000b7c
+To view console output in RTT Viewer: 
 
-2) If an EP is modified, compiled, and downloaded please find the block address (for the variable in RAM called _SEGGER_RTT) 
-   in .map file generated in the build configuration folder (Debug/Release).
+1) Find the RTT block address by searching for the _SEGGER_RTT variable in the .map file located in the Debug or Release folder.
+   eg: 0x20000b7c
 
 Flashing Procedure:
 1. Open e²studio and connect your JTAG debugger.

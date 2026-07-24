@@ -9,9 +9,7 @@ Server will initialize first and then create 2 threads.
 Each client will send hello message to server, and server will send the same back.
 
 2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
+
 Terminal Console Application: Tera Term or a similar application
 
 

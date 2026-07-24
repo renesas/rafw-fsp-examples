@@ -9,9 +9,9 @@ The application project demonstrates how we can transfer raw data in a binary mo
 
 2. Software Requirements:
 
-Renesas RAFW(FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
+Renesas RAFW(FSP)
+e2 studio
+GCC ARM Embedded Toolchain
 Mobile app: Renesas SmartConsole
 
 3. Hardware Requirements:
@@ -51,7 +51,8 @@ Connect P0_5(12 of J201) pin to MOSI(32 of J203) for UART1 TX.
 
  Note:
 
-To view console output in RTT Viewer:
-
-1) Find the RTT block address by searching for the _SEGGER_RTT variable in the .map file located in the Debug or Release folder.
+1) To view console output in RTT Viewer:
+   Find the RTT block address by searching for the _SEGGER_RTT variable in the .map file located in the Debug or Release folder.
    eg: 0x20052794
+2) Pairing mode should be enabled before using the AT+SEC command. For more information,
+   refer to: https://www.renesas.com/en/document/mat/commands-manual

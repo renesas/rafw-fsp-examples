@@ -31,7 +31,7 @@
     <booleanAttribute key="com.renesas.cdt.launch.dsf.USE_DEFAULT_IO_MAP" value="true"/>
     <listAttribute key="com.renesas.cdt.launch.dsf.downloadImages">
         <listEntry value="|true|false|true|0|true|No core|INTERNAL_MEMORY||false"/>
-        <listEntry value="${workspace_loc:\${project_name}\Debug\${project_name}.img.bin}|true|false|false|0a000000|true|No core|INTERNAL_MEMORY||true"/>
+        <listEntry value="Debug/freertos_queue_ek_ra6w1_ep.img.bin|true|false|false|A000000|true|No core|INTERNAL_MEMORY||true"/>
     </listAttribute>
     <booleanAttribute key="com.renesas.cdt.launch.dsf.downloadImagesUpgradedV30" value="true"/>
     <listAttribute key="com.renesas.cdt.launch.dsf.externalFlashDestinationAddresses"/>
@@ -110,11 +110,12 @@
     <booleanAttribute key="com.renesas.hardwaredebug.arm.jlink.setTZBoundaries" value="false"/>
     <intAttribute key="com.renesas.hardwaredebug.arm.jlink.supply_voltage_asp" value="0"/>
     <booleanAttribute key="com.renesas.hardwaredebug.arm.jlink.use_multidevice_synchronous_debug" value="false"/>
+    <stringAttribute key="com.renesas.hardwaredebug.boardName" value="RRQ61xxx-EVB"/>
     <booleanAttribute key="com.renesas.hardwaredebug.timemeasurement" value="true"/>
     <intAttribute key="org.eclipse.cdt.debug.gdbjtag.core.delay" value="3"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.doHalt" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.doReset" value="false"/>
-    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value="C:\Users\a5130219\e2_studio\workspace-v8.0.2\freertos_queue_ek_ra6w1_ep\Debug\freertos_queue_ek_ra6w1_ep.elf"/>
+    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value="C:\Repository\rafw_fsp_example_projects\ek_ra6w1_20260713\freertos_queue_ek_ra6w1_ep\e2studio\Debug\freertos_queue_ek_ra6w1_ep.elf"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageOffset" value="0"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.initCommands" value=""/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.loadImage" value="false"/>
@@ -125,7 +126,7 @@
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setResume" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setStopAt" value="true"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.stopAt" value="main"/>
-    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsFileName" value="C:\Users\a5130219\e2_studio\workspace-v8.0.2\freertos_queue_ek_ra6w1_ep\Debug\freertos_queue_ek_ra6w1_ep.elf"/>
+    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsFileName" value="C:\Repository\rafw_fsp_example_projects\ek_ra6w1_20260713\freertos_queue_ek_ra6w1_ep\e2studio\Debug\freertos_queue_ek_ra6w1_ep.elf"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsOffset" value="0"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useFileForImage" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useFileForSymbols" value="false"/>

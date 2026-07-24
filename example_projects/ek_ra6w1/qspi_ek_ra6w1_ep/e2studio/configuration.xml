@@ -9,7 +9,7 @@
     <option key="#DeviceCommand#" value="R7SA6W1CE"/>
     <option key="#RTOS#" value="_none"/>
     <option key="#pinconfiguration#" value="R7SA6W1CEDZDD.pincfg"/>
-    <option key="#FSPVersion#" value="2.0.1"/>
+    <option key="#FSPVersion#" value="2.1.0"/>
     <option key="#ConfigurationFragments#" value="Renesas##BSP##Board##rrq61xxx_evb##"/>
     <option key="#SELECTED_TOOLCHAIN#" value="gcc-arm-embedded"/>
     <option key="#ToolchainVersion#" value="13.3.1.arm-13-24"/>
@@ -43,6 +43,8 @@
       <property id="config.bsp.fsp.tz.uninitialized_ns_application_fallback" value="config.bsp.fsp.tz.uninitialized_ns_application_fallback.enabled"/>
       <property id="config.bsp.fsp.ivt_copy" value="config.bsp.fsp.ivt_copy.disabled"/>
       <property id="config.bsp.fsp.mcu.clock_manager" value="config.bsp.fsp.mcu.clock_manager.disabled"/>
+      <property id="config.bsp.fsp.mcu.ppm_compensation" value="config.bsp.fsp.mcu.ppm_compensation.disabled"/>
+      <property id="config.bsp.fsp.mcu.ppm_recomp_period_ms" value="8000U"/>
       <property id="config.bsp.fsp.mcu.ospi_8_lines_support" value="config.bsp.fsp.mcu.ospi_8_lines_support.disabled"/>
       <property id="config.bsp.fsp.mcu.uart.max_baud" value="5000000"/>
       <property id="config.bsp.fsp.mcu.iic_master.rate.rate_fastplus" value="1"/>
@@ -78,7 +80,6 @@
     <node id="board.clock.xtal40m.freq" option="board.clock.xtal40m.freq.40m"/>
     <node id="board.clock.xtal.freq" option="board.clock.xtal.freq.32k"/>
     <node id="board.clock.rcx.freq" option="board.clock.rcx.freq.32k"/>
-    <node id="board.clock.pll480m.freq" option="board.clock.pll480m.freq.480m"/>
     <node id="board.clock.xtal40m.source" option="board.clock.xtal40m.source.enabled"/>
     <node id="board.clock.xtal.source" option="board.clock.xtal.source.enabled"/>
     <node id="board.clock.rcx.source" option="board.clock.rcx.source.enabled"/>
@@ -87,9 +88,10 @@
     <node id="board.clock.lp_clk.source" option="board.clock.lp_clk.source.xtal32k"/>
     <node id="board.clock.pll_sys.source" option="board.clock.pll_sys.source.pll"/>
     <node id="board.clock.pll_sys.mul" option="board.clock.pll_sys.mul.1_3"/>
-    <node id="board.clock.sys_clk.source" option="board.clock.sys_clk.source.pll_sys"/>
+    <node id="board.clock.sys_clk.source" option="board.clock.sys_clk.source.xtal_sys"/>
     <node id="board.clock.sys_clk.display" option="board.clock.sys_clk.display.value"/>
     <node id="board.clock.hclk.div" option="board.clock.hclk.div.1"/>
+    <node id="board.clock.oqspiclk.div" option="board.clock.oqspiclk.div.2"/>
     <node id="board.clock.qspiclk.div" option="board.clock.qspiclk.div.1"/>
     <node id="board.clock.pll_spi.source" option="board.clock.pll_spi.source.disabled"/>
     <node id="board.clock.pll_spi.mul" option="board.clock.pll_spi.mul.1_6"/>
@@ -99,7 +101,7 @@
     <node id="board.clock.spi2clk.display" option="board.clock.spi2clk.display.value"/>
     <node id="board.clock.pll_peri.source" option="board.clock.pll_peri.source.pll"/>
     <node id="board.clock.pll_peri.div" option="board.clock.pll_peri.div.6"/>
-    <node id="board.clock.peri_clk.source" option="board.clock.peri_clk.source.pll_peri"/>
+    <node id="board.clock.peri_clk.source" option="board.clock.peri_clk.source.xtal_sys"/>
     <node id="board.clock.peri_clk.display" option="board.clock.peri_clk.display.value"/>
     <node id="board.clock.i2c1.div" option="board.clock.i2c1.div.1"/>
     <node id="board.clock.i2c2.div" option="board.clock.i2c2.div.1"/>
@@ -113,45 +115,45 @@
     <node id="board.clock.wdog.div.display" option="board.clock.wdog.div.display.value"/>
   </raClockConfiguration>
   <raComponentSelection>
-    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board Support Package Common Files</description>
-      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.0.1">
-      <description>I/O Port (W)</description>
-      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ospi_w" variant="" vendor="Renesas" version="2.0.1">
-      <description>Octa Serial Peripheral Interface Flash</description>
-      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="R7SA6W1CEDZDD" vendor="Renesas" version="2.0.1">
-      <description>Board support package for R7SA6W1CEDZDD</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board support package for RA6W1</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="fsp" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board support package for RA6W1 - FSP Data</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="events" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board support package for RA6W1 - Events</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="linker" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board support package for RA6W1 - Linker</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.0.1">
-      <description>Arm CMSIS Version 6 - Core (M)</description>
-      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq61xxx_evb" variant="" vendor="Renesas" version="2.0.1">
+    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq61xxx_evb" variant="" vendor="Renesas" version="2.1.0">
       <description>RRQ61xxx-EVB Board Support Files</description>
-      <originalPack>Renesas.RAFW_board_rrq61xxx_evb.2.0.1.pack</originalPack>
+      <originalPack>Renesas.RAFW_board_rrq61xxx_evb.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.1.0">
+      <description>Arm CMSIS Version 6 - Core (M)</description>
+      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="R7SA6W1CEDZDD" vendor="Renesas" version="2.1.0">
+      <description>Board support package for R7SA6W1CEDZDD</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board support package for RA6W1</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="fsp" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board support package for RA6W1 - FSP Data</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="events" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board support package for RA6W1 - Events</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="linker" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board support package for RA6W1 - Linker</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board Support Package Common Files</description>
+      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.1.0">
+      <description>I/O Port (W)</description>
+      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ospi_w" variant="" vendor="Renesas" version="2.1.0">
+      <description>Octa Serial Peripheral Interface Flash</description>
+      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
     </component>
   </raComponentSelection>
   <raElcConfiguration/>
@@ -162,79 +164,93 @@
       <property id="module.driver.gpio_w.name" value="g_gpio_w"/>
       <property id="module.driver.gpio_w.pincfg" value="g_bsp_pin_cfg"/>
     </module>
-    <module id="module.driver.ospi_on_ospi_w.622602442">
+    <module id="module.driver.ospi_on_ospi_w.768158932">
       <property id="module.driver.ospi_w.name" value="g_qspi"/>
       <property id="module.driver.ospi_w.channel" value="0"/>
-      <property id="module.driver.ospi_w.spi_protocol" value="module.driver.ospi_w.protocol_mode.protocol_1S_1S_1S"/>
       <property id="module.driver.ospi_w.address_bytes" value="module.driver.ospi_w.address_bytes.address_bytes_3"/>
-      <property id="module.driver.ospi_w.page_program_addr_line" value="module.driver.ospi_w.page_program_addr_line.data_line_4"/>
+      <property id="module.driver.ospi_w.page_size_bytes" value="256"/>
+      <property id="module.driver.ospi_w.ospi_mode" value="module.driver.ospi_w.ospi_mode.ospi_mode_sdr"/>
+      <property id="module.driver.ospi_w.ospi_drive_current" value="module.driver.ospi_w.drive_current.drive_current_4"/>
+      <property id="module.driver.ospi_w.ospi_slew_rate" value="module.driver.ospi_w.slew_rate.slew_rate_0"/>
+      <property id="module.driver.ospi_w.clk_mode" value="module.driver.ospi_w.clk_mode.high"/>
+      <property id="module.driver.ospi_w.wrap_mode" value="module.driver.ospi_w.wrap_mode.disabled"/>
+      <property id="module.driver.ospi_w.memblen" value="module.driver.ospi_w.memblen.not_supported"/>
+      <property id="module.driver.ospi_w.instr_lines" value="module.driver.ospi_w.instr_lines.lines_1"/>
+      <property id="module.driver.ospi_w.address_data_lines" value="module.driver.ospi_w.address_data_lines.lines_4"/>
+      <property id="module.driver.ospi_w.boot_flash_command.opcode0" value="0x31"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data0_0" value="0x02"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data0_1" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.length0" value="2"/>
+      <property id="module.driver.ospi_w.boot_flash_command.opcode1" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data1_0" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data1_1" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.length1" value="0"/>
+      <property id="module.driver.ospi_w.boot_flash_command.opcode2" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data2_0" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data2_1" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.length2" value="0"/>
+      <property id="module.driver.ospi_w.boot_flash_command.opcode3" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data3_0" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data3_1" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.length3" value="0"/>
+      <property id="module.driver.ospi_w.boot_flash_command.opcode4" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data4_0" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data4_1" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.length4" value="0"/>
+      <property id="module.driver.ospi_w.boot_flash_command.opcode5" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data5_0" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data5_1" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.length5" value="0"/>
+      <property id="module.driver.ospi_w.boot_flash_command.opcode6" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data6_0" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data6_1" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.length6" value="0"/>
+      <property id="module.driver.ospi_w.boot_flash_command.opcode7" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data7_0" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.data7_1" value="0x00"/>
+      <property id="module.driver.ospi_w.boot_flash_command.length7" value="0"/>
+      <property id="module.driver.ospi_w.read_mode" value="0xEB"/>
+      <property id="module.driver.ospi_w.read_mode_wb" value="0"/>
+      <property id="module.driver.ospi_w.extra_byte_val" value="0xFF"/>
+      <property id="module.driver.ospi_w.extra_byte_en" value="module.driver.ospi_w.extra_byte_en.enable"/>
+      <property id="module.driver.ospi_w.rd_cs_hi_min_cycles" value="1"/>
+      <property id="module.driver.ospi_w.rd_dummy_clocks" value="module.driver.ospi_w.dummy_clocks.dummy_clocks_6"/>
+      <property id="module.driver.ospi_w.instr_mode" value="module.driver.ospi_w.instr_mode.tx_only_at_first_access"/>
+      <property id="module.driver.ospi_w.wrap_len" value="module.driver.ospi_w.wrap_len.wrap_len_4"/>
+      <property id="module.driver.ospi_w.wrap_size" value="module.driver.ospi_w.wrap_size.wrap_size_8"/>
+      <property id="module.driver.ospi_w.page_program_command" value="0x32"/>
+      <property id="module.driver.ospi_w.page_program_command_wb" value="0"/>
+      <property id="module.driver.ospi_w.pp_address_lines" value="module.driver.ospi_w.pp_address_lines.lines_1"/>
+      <property id="module.driver.ospi_w.pp_dummy_lines" value="module.driver.ospi_w.pp_dummy_lines.lines_1"/>
+      <property id="module.driver.ospi_w.pp_data_lines" value="module.driver.ospi_w.pp_data_lines.lines_4"/>
+      <property id="module.driver.ospi_w.pp_cs_hi_min_cycles" value="1"/>
+      <property id="module.driver.ospi_w.pp_dummy_clocks" value="module.driver.ospi_w.dummy_clocks.dummy_clocks_0"/>
+      <property id="module.driver.ospi_w.status_command" value="0x05"/>
       <property id="module.driver.ospi_w.write_status_bit" value="0"/>
+      <property id="module.driver.ospi_w.write_status_level" value="module.driver.ospi_w.write_status_level.high"/>
+      <property id="module.driver.ospi_w.write_enable_command" value="0x06"/>
       <property id="module.driver.ospi_w.write_enable_bit" value="1"/>
-      <property id="module.driver.ospi_w.sector_erase_size" value="4096"/>
-      <property id="module.driver.ospi_w.block_erase_size" value="32768"/>
-      <property id="module.driver.ospi_w.block_64k_erase_size" value="65536"/>
-      <property id="module.driver.ospi_w.spi_page_program_command" value="0x32"/>
-      <property id="module.driver.ospi_w.spi_read_command" value="0xEB"/>
-      <property id="module.driver.ospi_w.spi_write_enable_command" value="0x06"/>
-      <property id="module.driver.ospi_w.spi_status_command" value="0x05"/>
       <property id="module.driver.ospi_w.sector_erase_command" value="0x20"/>
-      <property id="module.driver.ospi_w.block_erase_command" value="0x52"/>
-      <property id="module.driver.ospi_w.chip_erase_command" value="0xD8"/>
-      <property id="module.driver.ospi_w.high_speed_protocol" value="module.driver.ospi_w.protocol_mode.protocol_1S_4S_4S"/>
-      <property id="module.driver.ospi_w.high_speed_command_length" value="module.driver.opi.high_speed_command_length.1"/>
-      <property id="module.driver.ospi_w.high_speed_page_program_command" value="0x32"/>
-      <property id="module.driver.ospi_w.high_speed_read_command" value="0xEB"/>
-      <property id="module.driver.ospi_w.high_speed_write_enable_command" value="0x06"/>
-      <property id="module.driver.ospi_w.high_speed_status_command" value="0x05"/>
-      <property id="module.driver.ospi_w.high_speed_sector_erase_command" value="0"/>
-      <property id="module.driver.ospi_w.high_speed_block_erase_command" value="0"/>
-      <property id="module.driver.ospi_w.high_speed_chip_erase_command" value="0"/>
-      <property id="module.driver.ospi_w.mem_read_dummy_cycles" value="0x02"/>
-      <property id="module.driver.ospi_w.status_read_dummy_cycles" value="0"/>
-      <property id="module.driver.ospi_w.hw_cfg.device_clk_div" value="module.driver.ospi_w.hw_cfg.device_clk_div_2"/>
-      <property id="module.driver.ospi_w.hw_cfg.clock_mode" value="module.driver.ospi_w.hw_cfg.clock_mode_1"/>
-      <property id="module.driver.ospi_w.hw_cfg.io2_dir" value="module.driver.ospi_w.hw_cfg.io2_dir_auto"/>
-      <property id="module.driver.ospi_w.hw_cfg.io2_value" value="module.driver.ospi_w.hw_cfg.io2_value_low"/>
-      <property id="module.driver.ospi_w.hw_cfg.io3_dir" value="module.driver.ospi_w.hw_cfg.io3_dir_auto"/>
-      <property id="module.driver.ospi_w.hw_cfg.io3_value" value="module.driver.ospi_w.hw_cfg.io3_value_low"/>
-      <property id="module.driver.ospi_w.hw_cfg.io4_7_dir" value="module.driver.ospi_w.hw_cfg.io4_7_dir_auto"/>
-      <property id="module.driver.ospi_w.hw_cfg.io4_7_value" value="module.driver.ospi_w.hw_cfg.io4_7_value_0000"/>
-      <property id="module.driver.ospi_w.hw_cfg.hready_mode" value="module.driver.ospi_w.hw_cfg.hready_mode_wait"/>
-      <property id="module.driver.ospi_w.hw_cfg.sampling_edge" value="module.driver.ospi_w.hw_cfg.sampling_edge_neg"/>
-      <property id="module.driver.ospi_w.hw_cfg.read_pipe" value="module.driver.ospi_w.hw_cfg.read_pipe_en"/>
-      <property id="module.driver.ospi_w.hw_cfg.pipe_delay" value="module.driver.ospi_w.hw_cfg.pipe_delay_7"/>
-      <property id="module.driver.ospi_w.hw_cfg.slew_rate" value="module.driver.ospi_w.hw_cfg.slew_rate_0"/>
-      <property id="module.driver.ospi_w.hw_cfg.drive_current" value="module.driver.ospi_w.hw_cfg.drive_current_12"/>
-      <property id="module.driver.ospi_w.flash_cfg.instr_bus_mode" value="module.driver.ospi_w.flash_cfg.instr_bus_mode_single"/>
-      <property id="module.driver.ospi_w.flash_cfg.bus_mode" value="module.driver.ospi_w.flash_cfg.bus_mode_quad"/>
-      <property id="module.driver.ospi_w.flash_cfg.instr_size" value="module.driver.ospi_w.flash_cfg.instr_size_1byte"/>
-      <property id="module.driver.ospi_w.flash_cfg.read_opcode" value="0xEB"/>
-      <property id="module.driver.ospi_w.flash_cfg.erase_opcode" value="0x20"/>
-      <property id="module.driver.ospi_w.flash_cfg.suspend_opcode" value="0x75"/>
-      <property id="module.driver.ospi_w.flash_cfg.resume_opcode" value="0x7A"/>
-      <property id="module.driver.ospi_w.flash_cfg.read_status_opcode" value="0x05"/>
-      <property id="module.driver.ospi_w.flash_cfg.write_enable_opcode" value="0x06"/>
-      <property id="module.driver.ospi_w.flash_cfg.dummy_cycles" value="0x02"/>
-      <property id="module.driver.ospi_w.flash_cfg.addr_size" value="module.driver.ospi_w.flash_cfg.addr_size_24"/>
-      <property id="module.driver.ospi_w.flash_cfg.instr_mode" value="module.driver.ospi_w.flash_cfg.instr_mode_once"/>
-      <property id="module.driver.ospi_w.flash_cfg.extra_byte_setting" value="module.driver.ospi_w.flash_cfg.extra_byte_en"/>
-      <property id="module.driver.ospi_w.flash_cfg.extra_byte" value="0xA0"/>
-      <property id="module.driver.ospi_w.flash_cfg.busy_bit" value="0"/>
+      <property id="module.driver.ospi_w.sector_erase_size" value="4096"/>
+      <property id="module.driver.ospi_w.block_erase_command" value="0xD8"/>
+      <property id="module.driver.ospi_w.block_erase_size" value="65536"/>
+      <property id="module.driver.ospi_w.block_erase_32kb_command" value="0x52"/>
+      <property id="module.driver.ospi_w.block_erase_32kb_size" value="32768"/>
+      <property id="module.driver.ospi_w.chip_erase_command" value="0xC7"/>
+      <property id="module.driver.ospi_w.xip_enter_command" value="0xA5"/>
+      <property id="module.driver.ospi_w.xip_exit_command" value="0xFF"/>
+      <property id="module.driver.ospi_w.qpi_enter_command" value="0x38"/>
+      <property id="module.driver.ospi_w.qpi_exit_command" value="0xFF"/>
     </module>
     <context id="_hal.0">
       <stack module="module.driver.ioport_on_gpio_w.0"/>
-      <stack module="module.driver.ospi_on_ospi_w.622602442"/>
+      <stack module="module.driver.ospi_on_ospi_w.768158932"/>
     </context>
     <config id="config.driver.gpio_w">
       <property id="config.driver.gpio_w.checking" value="config.driver.gpio_w.checking.system"/>
     </config>
     <config id="config.driver.ospi_w">
       <property id="config.driver.ospi_w.param_checking_enable" value="config.driver.ospi_w.param_checking_enable.bsp"/>
-      <property id="config.driver.ospi_w.dmac_support" value="config.driver.ospi_w.dmac_support.disabled"/>
-      <property id="config.driver.ospi_w.autocalibration_support" value="config.driver.ospi_w.autocalibration_support.disabled"/>
-      <property id="config.driver.ospi_w.prefetch_function" value="config.driver.ospi_w.prefetch_function.enabled"/>
-      <property id="config.driver.ospi_w.xip_support" value="config.driver.ospi_w.xip_support.enabled"/>
-      <property id="config.driver.ospi_w.dotf_support" value="config.driver.ospi_w.dotf_support.disabled"/>
     </config>
   </raModuleConfiguration>
   <raPinConfiguration>

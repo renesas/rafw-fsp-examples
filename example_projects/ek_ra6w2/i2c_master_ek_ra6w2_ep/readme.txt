@@ -10,10 +10,7 @@ On power up after establishing the connection of sensor with RA6W2 board, it dis
 RTTviewer. Any API/event failure will be displayed on RTTviewer.
 
 2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
-Terminal Console Application: Tera Term or a similar application
+Segger J-Link RTT Viewer
 
 3. Hardware Requirements:
 Renesas RA6W2 Mother board.
@@ -28,12 +25,17 @@ Connect the USB Debug port on the RA6W2 mother board to the host PC via a type C
  1. Hardware Connection
     PMOD ACL has two on board connectors. J2 is used for I2C communication.
 
-    EK-RA6W2
+    Jumper configuration
     --------
-    SDA P0_05  ----> SDA (on PMOD-ACL)
-    SCL P0_04  ----> SCL (on PMOD-ACL)
-    VCC pin   ----> VCC (on PMOD-ACL)
-    GND pin   ----> GND (on PMOD-ACL)
+    I2C_SCK_0 = P0_08
+    I2C_SDA_0 = P0_09
+
+    Additional wire configuration
+    --------
+    I2C_SCK (on Arduino interface J207)  ----> SCL (on PMOD-ACL)
+    I2C_SDA (on Arduino interface J207)  ----> SDA (on PMOD-ACL)
+    GND     (on Arduino interface J207)  ----> GND (on PMOD-ACL)
+    VDDIO   (on Arduino interface J207, or J221)  ----> VCC (on PMOD-ACL)
 
 6. Verification:
  1. Import the example project.
@@ -43,16 +45,15 @@ Connect the USB Debug port on the RA6W2 mother board to the host PC via a type C
  5. After flashing, press reset.
  6. Verify RA6W2 read i2c data correctly from sensor board using segger prints.
 
+7. Limitation
+ 1. The actual I2C clock output frequency may be approximately half of the configured value.
+
 
 Note:
-
-For the functioning of I2C Master, external pull up resistors of value
-3.9 or 4.7K ohms are required to be connected on I2C(SDA/SCL) lines.
-
 To view console output in RTT Viewer: 
 
 1) Find the RTT block address by searching for the _SEGGER_RTT variable in the .map file located in the Debug or Release folder.
-   eg: 0x20001ce4
+   eg: 0x20001cec
 
 Flashing Procedure:
 1. Open e²studio and connect your JTAG debugger.

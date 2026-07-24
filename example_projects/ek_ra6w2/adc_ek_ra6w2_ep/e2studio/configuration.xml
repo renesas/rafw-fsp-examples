@@ -9,7 +9,7 @@
     <option key="#DeviceCommand#" value="R7JA6W2DE"/>
     <option key="#RTOS#" value="rtos.awsfreertos"/>
     <option key="#pinconfiguration#" value="R7SA6W1CEDZDD.pincfg"/>
-    <option key="#FSPVersion#" value="2.0.1"/>
+    <option key="#FSPVersion#" value="2.1.0"/>
     <option key="#ConfigurationFragments#" value="Renesas##BSP##Board##rrq614xx_evb##"/>
     <option key="#SELECTED_TOOLCHAIN#" value="gcc-arm-embedded"/>
     <option key="#ToolchainVersion#" value="13.3.1.arm-13-24"/>
@@ -43,6 +43,8 @@
       <property id="config.bsp.fsp.tz.uninitialized_ns_application_fallback" value="config.bsp.fsp.tz.uninitialized_ns_application_fallback.enabled"/>
       <property id="config.bsp.fsp.ivt_copy" value="config.bsp.fsp.ivt_copy.disabled"/>
       <property id="config.bsp.fsp.mcu.clock_manager" value="config.bsp.fsp.mcu.clock_manager.disabled"/>
+      <property id="config.bsp.fsp.mcu.ppm_compensation" value="config.bsp.fsp.mcu.ppm_compensation.disabled"/>
+      <property id="config.bsp.fsp.mcu.ppm_recomp_period_ms" value="8000U"/>
       <property id="config.bsp.fsp.mcu.ospi_8_lines_support" value="config.bsp.fsp.mcu.ospi_8_lines_support.disabled"/>
       <property id="config.bsp.fsp.mcu.uart.max_baud" value="5000000"/>
       <property id="config.bsp.fsp.mcu.iic_master.rate.rate_fastplus" value="1"/>
@@ -78,7 +80,6 @@
     <node id="board.clock.xtal40m.freq" option="board.clock.xtal40m.freq.40m"/>
     <node id="board.clock.xtal.freq" option="board.clock.xtal.freq.32k"/>
     <node id="board.clock.rcx.freq" option="board.clock.rcx.freq.32k"/>
-    <node id="board.clock.pll480m.freq" option="board.clock.pll480m.freq.480m"/>
     <node id="board.clock.xtal40m.source" option="board.clock.xtal40m.source.enabled"/>
     <node id="board.clock.xtal.source" option="board.clock.xtal.source.enabled"/>
     <node id="board.clock.rcx.source" option="board.clock.rcx.source.enabled"/>
@@ -90,6 +91,7 @@
     <node id="board.clock.sys_clk.source" option="board.clock.sys_clk.source.pll_sys"/>
     <node id="board.clock.sys_clk.display" option="board.clock.sys_clk.display.value"/>
     <node id="board.clock.hclk.div" option="board.clock.hclk.div.1"/>
+    <node id="board.clock.oqspiclk.div" option="board.clock.oqspiclk.div.2"/>
     <node id="board.clock.qspiclk.div" option="board.clock.qspiclk.div.1"/>
     <node id="board.clock.pll_spi.source" option="board.clock.pll_spi.source.disabled"/>
     <node id="board.clock.pll_spi.mul" option="board.clock.pll_spi.mul.1_6"/>
@@ -113,45 +115,45 @@
     <node id="board.clock.wdog.div.display" option="board.clock.wdog.div.display.value"/>
   </raClockConfiguration>
   <raComponentSelection>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="device" variant="R7JA6W2DEDZNR" vendor="Renesas" version="2.0.1">
-      <description>Board support package for R7JA6W2DEDZNR</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="device" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board support package for RA6W2</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="fsp" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board support package for RA6W2 - FSP Data</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="events" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board support package for RA6W2 - Events</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="linker" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board support package for RA6W2 - Linker</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.0.1">
-      <description>Board Support Package Common Files</description>
-      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_adc_w" variant="" vendor="Renesas" version="2.0.1">
-      <description>A/D Converter</description>
-      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.0.1">
-      <description>I/O Port (W)</description>
-      <originalPack>Renesas.RAFW.2.0.1.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq614xx_evb" variant="" vendor="Renesas" version="2.0.1">
+    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq614xx_evb" variant="" vendor="Renesas" version="2.1.0">
       <description>RRQ614xx-EVB Board Support Files</description>
-      <originalPack>Renesas.RAFW_board_rrq614xx_evb.2.0.1.pack</originalPack>
+      <originalPack>Renesas.RAFW_board_rrq614xx_evb.2.1.0.pack</originalPack>
     </component>
-    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.0.1">
+    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.1.0">
       <description>Arm CMSIS Version 6 - Core (M)</description>
-      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.0.1.pack</originalPack>
+      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board Support Package Common Files</description>
+      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_adc_w" variant="" vendor="Renesas" version="2.1.0">
+      <description>A/D Converter</description>
+      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.1.0">
+      <description>I/O Port (W)</description>
+      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="device" variant="R7JA6W2DEDZNR" vendor="Renesas" version="2.1.0">
+      <description>Board support package for R7JA6W2DEDZNR</description>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="device" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board support package for RA6W2</description>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="fsp" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board support package for RA6W2 - FSP Data</description>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="events" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board support package for RA6W2 - Events</description>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="linker" variant="" vendor="Renesas" version="2.1.0">
+      <description>Board support package for RA6W2 - Linker</description>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
     </component>
   </raComponentSelection>
   <raElcConfiguration/>

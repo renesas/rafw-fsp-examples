@@ -9,9 +9,6 @@ data such as Wi-Fi credentials and attestation keys using the CC312 Security Lib
 on Renesas RA6W1 microcontrollers.
 
 2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term, RTT viewer or a similar application
 
 3. Hardware Requirements:
@@ -45,7 +42,7 @@ Jumper Configurations
 6. Verify that the output shows:
 	Successful secure asset creation and storage (USER and PROD examples).
 	Correct display of stored and retrieved payloads (e.g., SSID, Password, AT Key). 
-	Log message indicating “Secure asset store complete” for both USER and PROD(VEE) assets.
+	Log message indicating “Secure asset VEE delete operation successful.” 
 	
 Note:
 To view console output in RTT Viewer: 

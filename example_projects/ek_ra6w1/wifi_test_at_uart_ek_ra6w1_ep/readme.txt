@@ -7,9 +7,6 @@
 This is a general-purpose Wi-Fi test application for the RA6W1, designed to establish Wi-Fi connectivity using AT commands.
 
 2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term or a similar application
 
 

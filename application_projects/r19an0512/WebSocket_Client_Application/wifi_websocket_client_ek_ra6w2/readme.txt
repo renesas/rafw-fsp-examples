@@ -7,8 +7,8 @@
 This application demonstrates a secure WebSocket (WSS) client running on the EK-RA6W2. It establishes a TLS-secured WebSocket connection to a remote server, sends periodic text messages, and prints received server responses to the console.
 
 3.Software Requirements
-Renesas RAFW (FSP): Version 2.0.1
-e² studio Version 2025-12
+Renesas RAFW (FSP): Version 2.1.0
+e² studio Version 2026-04.2
 GCC ARM Embedded Toolchain Version 13.3.1.arm-13-24
 Serial terminal application (e.g., Tera Term)
 

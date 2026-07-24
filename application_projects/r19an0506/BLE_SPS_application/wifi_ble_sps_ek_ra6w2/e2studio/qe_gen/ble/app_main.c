@@ -142,21 +142,16 @@ static uint8_t gs_advertising_data[] =
 /* Scan Response Data */
 static uint8_t gs_scan_response_data[] =
 {
-    /* Complete List of 128-bit Service Class UUIDs */
-    0x11,                                                                                           /**< Data Size */
-    0x07,                                                                                           /**< Data Type */
-    0xb7, 0x5c, 0x49, 0xd2, 0x04, 0xa3, 0x40, 0x71, 0xa0, 0xb5, 0x35, 0x85, 0x3e, 0xb0, 0x83, 0x07, /**< Data Value */
-
     /* Complete Local Name */
-    0x0A,                                                                                           /**< Data Size */
-    0x09,                                                                                           /**< Data Type */
-    0x53, 0x50, 0x53, 0x2d, 0x52, 0x41, 0x36, 0x57, 0x32,                                           /**< Data Value */
+    0x0A,                                                 /**< Data Size */
+    0x09,                                                 /**< Data Type */
+    0x53, 0x50, 0x53, 0x2d, 0x52, 0x41, 0x36, 0x57, 0x32, /**< Data Value */
 };
 
 ble_abs_legacy_advertising_parameter_t g_ble_advertising_parameter =
 {
     .p_peer_address             = NULL,                                                        ///< Peer address.
-    .slow_advertising_interval  = 0x000000A0,                                                  ///< Slow advertising interval. 100.0(ms)
+    .slow_advertising_interval  = 0x00000640,                                                  ///< Slow advertising interval. 1,000.0(ms)
     .slow_advertising_period    = 0x0000,                                                      ///< Slow advertising period.
     .p_advertising_data         = gs_advertising_data,                                         ///< Advertising data. If p_advertising_data is specified as NULL, advertising data is not set.
     .advertising_data_length    = ARRAY_SIZE(gs_advertising_data),                             ///< Advertising data length (in bytes).
@@ -1054,6 +1049,7 @@ void app_main (void)
                             g_adv_hdl = BLE_GAP_INVALID_ADV_HDL;
                         }
                     }
+
                     break;
                 }
 
@@ -1190,6 +1186,7 @@ void app_main (void)
                 vTaskDelay(10);
             }
         }
+
 /* End user code. Do not edit comment generated here */
     }
 

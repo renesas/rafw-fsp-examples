@@ -18,6 +18,7 @@
 #endif
 #include "mqtt_client.h"
 #include "mqtt.h"
+#include "mqtt_fsp_conf.h"
 #include "common_utils.h"
 
 extern mqttParamForRtm mqttParams;
@@ -140,53 +141,81 @@ void new_thread0_entry(void *pvParameters)
 
     if (!RM_PMGR_W_dpm_is_wakeup())
     {
-    /* enabled mqtt TLS */
-    set_mqtt_param_int(RRQ61X_CONF_INT_MQTT_TLS, 1);
+        const int mqtt_tls_enable = MQTT_USE_TLS;
+        const int mqtt_port = mqtt_tls_enable ? MQTT_BROKER_PORT_TLS : MQTT_BROKER_PORT;
 
-    mqtt_client_cfg_sync_rtm(0, NULL, RRQ61X_CONF_INT_MQTT_TLS, 1);
+        printf("MQTT Mode : %s\n",
+               mqtt_tls_enable ? "TLS" : "Non-TLS");
 
-    set_mqtt_param_str(RRQ61X_CONF_STR_MQTT_BROKER_IP, MQTT_BROKER_IP);
+        /* Provision the MQTT TLS certificate store on cold boot.
+         * The certificates live in serial flash (MQTT slot #0) and are read
+         * back by "cert status all". Setting the TLS config flags alone does
+         * NOT populate them, so without this the store stays Empty and the
+         * TLS handshake fails. */
+        if (mqtt_tls_enable)
+        {
+            struct mosq_config cert_cfg = {0};
 
-    set_mqtt_param_int(RRQ61X_CONF_INT_MQTT_PORT, MQTT_BROKER_PORT);
+            cert_cfg.cacert_ptr      = (char *) ROOT_CA;
+            cert_cfg.cacert_buflen   = sizeof(ROOT_CA);      /* PEM: include NUL */
+            cert_cfg.cert_ptr        = (char *) CLIENT_CERT;
+            cert_cfg.cert_buflen     = sizeof(CLIENT_CERT);
+            cert_cfg.priv_key_ptr    = (char *) PRIVATE_KEY;
+            cert_cfg.priv_key_buflen = sizeof(PRIVATE_KEY);
+            cert_cfg.dh_param_ptr    = NULL;
+            cert_cfg.dh_param_buflen = 0;
 
-    mqtt_client_cfg_sync_rtm(RRQ61X_CONF_STR_MQTT_BROKER_IP,
-                             MQTT_BROKER_IP,
-                             0, 0);
+            if (mqtt_client_cert_write(&cert_cfg) != pdPASS)
+            {
+                printf("MQTT: certificate provisioning FAILED\n");
+            }
+            else
+            {
+                printf("MQTT: certificates written to flash\n");
+            }
+        }
 
-    mqtt_client_cfg_sync_rtm(0,
-                             NULL,
-                             RRQ61X_CONF_INT_MQTT_PORT,
-                             MQTT_BROKER_PORT);
+        set_mqtt_param_int(RRQ61X_CONF_INT_MQTT_TLS, mqtt_tls_enable);
+        mqtt_client_cfg_sync_rtm(0, NULL,
+                                 RRQ61X_CONF_INT_MQTT_TLS,
+                                 mqtt_tls_enable);
 
-    /* save subscribed topic */
-    set_mqtt_param_str(RRQ61X_CONF_STR_MQTT_SUB_TOPIC, MQTT_SUB_TOPIC);
+        set_mqtt_param_str(RRQ61X_CONF_STR_MQTT_BROKER_IP, MQTT_BROKER_IP);
+        mqtt_client_cfg_sync_rtm(RRQ61X_CONF_STR_MQTT_BROKER_IP,
+                                 MQTT_BROKER_IP,
+                                 0,
+                                 0);
 
-    mqtt_client_cfg_sync_rtm(RRQ61X_CONF_STR_MQTT_SUB_TOPIC,
-                             MQTT_SUB_TOPIC,
-                             0,
-                             0);
+        set_mqtt_param_int(RRQ61X_CONF_INT_MQTT_PORT, mqtt_port);
+        mqtt_client_cfg_sync_rtm(0, NULL,
+                                 RRQ61X_CONF_INT_MQTT_PORT,
+                                 mqtt_port);
 
-    /* Save to DPM memory */
-    mqtt_client_save_to_dpm_user_mem();
+        set_mqtt_param_str(RRQ61X_CONF_STR_MQTT_SUB_TOPIC, MQTT_SUB_TOPIC);
+        mqtt_client_cfg_sync_rtm(RRQ61X_CONF_STR_MQTT_SUB_TOPIC,
+                                 MQTT_SUB_TOPIC,
+                                 0,
+                                 0);
 
-    set_mqtt_param_str(RRQ61X_CONF_STR_MQTT_PUB_TOPIC, MQTT_PUB_TOPIC);
+        /* Save to DPM memory */
+        mqtt_client_save_to_dpm_user_mem();
 
-    mqtt_client_cfg_sync_rtm(RRQ61X_CONF_STR_MQTT_PUB_TOPIC,
-                             MQTT_PUB_TOPIC,
-                             0,
-                             0);
+        set_mqtt_param_str(RRQ61X_CONF_STR_MQTT_PUB_TOPIC, MQTT_PUB_TOPIC);
+        mqtt_client_cfg_sync_rtm(RRQ61X_CONF_STR_MQTT_PUB_TOPIC,
+                                 MQTT_PUB_TOPIC,
+                                 0,
+                                 0);
 
-    /* Enable AUTO reconnect (critical for DPM) */
-    set_mqtt_param_int(RRQ61X_CONF_INT_MQTT_AUTO, 1);
+        /* Enable AUTO reconnect (critical for DPM) */
+        set_mqtt_param_int(RRQ61X_CONF_INT_MQTT_AUTO, 1);
+        mqtt_client_cfg_sync_rtm(0, NULL,
+                                 RRQ61X_CONF_INT_MQTT_AUTO,
+                                 MQTT_AUTO_MODE);
 
-    mqtt_client_cfg_sync_rtm(0, NULL,
-                             RRQ61X_CONF_INT_MQTT_AUTO,
-                             MQTT_AUTO_MODE);
-    set_mqtt_param_int(RRQ61X_CONF_INT_MQTT_SUB, 1);
-    
-    mqtt_client_cfg_sync_rtm(0, NULL,
-                             RRQ61X_CONF_INT_MQTT_SUB,
-                             1);
+        set_mqtt_param_int(RRQ61X_CONF_INT_MQTT_SUB, 1);
+        mqtt_client_cfg_sync_rtm(0, NULL,
+                                 RRQ61X_CONF_INT_MQTT_SUB,
+                                 1);
     }
 
 #if CFG_PMGR

@@ -12,7 +12,7 @@
 #define __PROVISIONING_H__
 
 #define PROV_SSID_LEN 32
-#define PROV_PASS_LEN 64
+#define PROV_PASS_LEN 128
 
 typedef struct {
 } prov_cmd_factory_reset_t;

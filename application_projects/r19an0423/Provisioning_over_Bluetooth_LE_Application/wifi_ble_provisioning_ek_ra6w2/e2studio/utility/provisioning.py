@@ -1,14 +1,14 @@
-/***********************************************************************************************************************
- * File Name    : provisioning.py
- * Description  : Command line utility for discovering BLE devices and performing WiFi provisioning commands.
- ***********************************************************************************************************************/
-/***********************************************************************************************************************
-* Copyright (c) 2020 - 2025 Renesas Electronics Corporation and/or its affiliates
-*
-* SPDX-License-Identifier: BSD-3-Clause
-***********************************************************************************************************************/
-
 #!/usr/bin/env python3
+# **********************************************************************************************************************
+# File Name    : provisioning.py
+# Description  : Command line utility for discovering BLE devices and performing WiFi provisioning commands.
+# **********************************************************************************************************************
+#
+# Copyright (c) 2020 - 2026 Renesas Electronics Corporation and/or its affiliates
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+# **********************************************************************************************************************
 
 from importlib.metadata import version
 

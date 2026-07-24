@@ -440,7 +440,14 @@ static void rm_comms_bridge_dispatch_thread_func_b (void * p_param)
         uint32_t data_idx          = 0;
         uint32_t rx_buffered_bytes =
             MODULO((int) (p_ctrl->head_b - p_ctrl->tail_b), RM_COMMS_BRIDGE_RX_BUFF_SIZE);
+        FSP_CRITICAL_SECTION_EXIT;
+        if (rx_buffered_bytes == 0)
+        {
+            continue;
+        }
+
         unsigned char * p_data = pvPortMalloc(rx_buffered_bytes);
+        FSP_CRITICAL_SECTION_ENTER;
 
         if (NULL == p_data)
         {

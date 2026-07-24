@@ -9,9 +9,6 @@ The application connects to an MQTT broker over a Wi-Fi network and supports MQT
 Messages are exchanged using configured MQTT topics and handled through registered callback and enabling periodic wakeup and low-power operation.
 
 3.Software Requirements
-Renesas RAFW (FSP): Version 2.0.1
-e² studio v2025-12
-GCC ARM Embedded Toolchain Version 13.3.1.arm-13-24
 Serial terminal application (e.g., Tera Term)
 
 4.Hardware Requirements

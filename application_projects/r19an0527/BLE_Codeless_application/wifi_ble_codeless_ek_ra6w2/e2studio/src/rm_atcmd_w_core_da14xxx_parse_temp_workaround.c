@@ -59,6 +59,7 @@
  #define RM_ATCMD_W_DA14XXX_ATCMD_OVERFLOW             "\r\nERROR: DA14XXX Rx buffer overflow\r\n"
 
  #define RM_ATCMD_W_DA14XXX_BINMOD_ESCSEQ_SZ           (3)
+ #define ATCMD_W_DISPATCH                              (11)
 
 /* UART boot protocol message types */
  #define RM_ATCMD_W_DA14XXX_BOOT_STX                   0x02
@@ -984,13 +985,14 @@ static bool da14xxx_binary_check_exit_condition (uint8_t byte, bool h2d)
     static uint32_t d2h_seq_idx = 0;
     static uint32_t h2d_cfm_idx = 0;
     static uint32_t d2h_cfm_idx = 0;
-
     if (h2d)
     {
         if (d2h_seq_idx >= RM_ATCMD_W_DA14XXX_BINMOD_ESCSEQ_SZ)
         {
             /* Escape sequence detected in d2h direction, look for confirmation */
-            if (RM_ATCMD_W_DA14XXX_ATCMD_AT[h2d_cfm_idx++] != byte)
+
+            if (!((h2d_cfm_idx == 0) && (byte == '\r')) &&
+                (RM_ATCMD_W_DA14XXX_ATCMD_AT[h2d_cfm_idx++] != byte))
             {
                 h2d_cfm_idx = 0;
                 d2h_seq_idx = 0;
@@ -1017,17 +1019,24 @@ static bool da14xxx_binary_check_exit_condition (uint8_t byte, bool h2d)
     }
     else
     {
-        if (g_da14xxx_atcmd.esc_seq.seq.u8[h2d_seq_idx] != byte)
+        if (d2h_seq_idx)
         {
-            if (RM_ATCMD_W_DA14XXX_ATCMD_OK[d2h_cfm_idx++] != byte)
+            if (d2h_cfm_idx || ((byte != '\r') && (byte != '\n')))
             {
-                d2h_cfm_idx = 0;
-                h2d_seq_idx = 0;
-            }
+                /* Escape sequence detected in d2h direction, look for confirmation */
+                if (RM_ATCMD_W_DA14XXX_ATCMD_OK[d2h_cfm_idx++] != byte)
+                {
+                    d2h_cfm_idx = 0;
+                    if (byte != g_da14xxx_atcmd.esc_seq.seq.u8[d2h_seq_idx - 1])
+                    {
+                        d2h_seq_idx = 0;
+                    }
+                }
 
-            if (d2h_cfm_idx == sizeof(RM_ATCMD_W_DA14XXX_ATCMD_OK) - 1)
-            {
-                goto exit_binary;
+                if (d2h_cfm_idx == sizeof(RM_ATCMD_W_DA14XXX_ATCMD_OK) - 1)
+                {
+                    goto exit_binary;
+                }
             }
         }
         else
@@ -1041,7 +1050,6 @@ static bool da14xxx_binary_check_exit_condition (uint8_t byte, bool h2d)
     }
 
     return false;
-
 exit_binary:
     h2d_seq_idx = 0;
     h2d_cfm_idx = 0;
@@ -1561,7 +1569,7 @@ fsp_err_t RM_ATCMD_W_CORE_DA14xxx_Open (atcmd_w_ctrl_t * const p_at_ctrl)
                                            "ATCMD_DA14XX_RX_DISPATCH",
                                            RM_ATCMD_W_DA14XXX_TASK_STACK_SIZE,
                                            p_at_ctrl,
-                                           OS_TASK_PRIORITY_LOWEST + ATCMD_W_MAIN_PARSER_PRIO,
+                                           OS_TASK_PRIORITY_LOWEST + ATCMD_W_DISPATCH,
                                            g_rx_dispatch_task_stack,
                                            &g_rx_dispatch_task_data);
 
@@ -1836,7 +1844,7 @@ static fsp_err_atcmd_err_code rm_atcmd_w_da14xxx_proc_cmd (atcmd_w_ctrl_t * cons
     static char cmdstr[ATCMD_W_RESP_LEN_MAX];
     uint32_t    cmdlen = 0;
 
-    strcpy(&cmdstr[cmdlen], cmd);
+    bsp_safe_strcpy(&cmdstr[cmdlen], cmd, ATCMD_W_RESP_LEN_MAX - cmdlen);
     cmdlen += strlen(cmd);
 
     if (argc > 1)

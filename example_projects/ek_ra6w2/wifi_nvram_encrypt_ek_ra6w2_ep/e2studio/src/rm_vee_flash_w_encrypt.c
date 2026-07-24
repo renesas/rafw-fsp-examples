@@ -166,7 +166,7 @@ static fsp_err_t secure_asset_storage_read(uint8_t storage_type, uint32_t asset_
         }
 
         /* Direct memory copy from flash */
-        memcpy(ctx->package_buffer, (void *) (BSP_FEATURE_OSPI_W_DEVICE_0_START_ADDRESS | read_addr), ctx->package_size);
+        memcpy(ctx->package_buffer, (void *) (BSP_FEATURE_OSPI_DEVICE_0_START_ADDRESS | read_addr), ctx->package_size);
     }
     else if (storage_type == STORAGE_TYPE_VEE)
     {
@@ -282,7 +282,7 @@ static fsp_err_t secure_asset_storage_write(uint8_t storage_type, uint32_t asset
         data = malloc(SECURE_ASSET_MAX_SIZE * 2);
 
         memcpy(data,
-               (void *)(BSP_FEATURE_OSPI_W_DEVICE_0_START_ADDRESS | SF_SECURE_ASSET_PROD),
+               (void *)(BSP_FEATURE_OSPI_DEVICE_0_START_ADDRESS | SF_SECURE_ASSET_PROD),
                SECURE_ASSET_MAX_SIZE * 2);
         memcpy(data + offset, ctx->package_buffer, ctx->package_size);
 

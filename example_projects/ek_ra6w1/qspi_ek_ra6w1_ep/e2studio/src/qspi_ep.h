@@ -29,7 +29,7 @@
 #define USER_DATA_START_ADDR            (0x00700000)
 #define QSPI_DEVICE_START_ADDRESS       USER_DATA_START_ADDR
 #define QSPI_FLASH_ADDRESS(page_no)     (uint8_t *) (QSPI_DEVICE_START_ADDRESS + (page_no * PAGE_WRITE_SIZE))
-#define QSPI_FLASH_READ_ADDR(page_no)   (uint8_t *) ((QSPI_DEVICE_START_ADDRESS + (page_no * PAGE_WRITE_SIZE))|BSP_FEATURE_OSPI_W_DEVICE_0_START_ADDRESS)
+#define QSPI_FLASH_READ_ADDR(page_no)   (uint8_t *) ((QSPI_DEVICE_START_ADDRESS + (page_no * PAGE_WRITE_SIZE))|BSP_FEATURE_OSPI_DEVICE_0_START_ADDRESS)
 
 /* Status register pay-load */
 #define STATUS_REG_PAYLOAD              {0x01,0x40,0x00}

@@ -20,24 +20,24 @@
 #define WS_APP_TAG                      "WS_APP"
 
 /* ---- User Configuration ---- */
-#define WS_APP_SERVER_URI               "wss://192.168.49.33:8765"  /* WebSocket server address (secure) */
+#define WS_APP_SERVER_URI               "wss://<ip address>:8765"  /* WebSocket server address (secure), Ex: "wss://192.168.50.111:8765" */
 #define WS_APP_SEND_INTERVAL_MS         (5000)                      /* Send every 5 seconds */
 #define WS_APP_TASK_STACK               (1024)                      /* 1K words = 4KB */
 #define WS_APP_TASK_PRIORITY            (6)
 #define WS_APP_MAX_RETRIES              (5)
 
 /* ---- Root CA certificate for server verification (CN=IP of server) ---- */
+/* ---- Below certificate can vary according to your ca certificate ---- */
 #define WS_APP_ROOT_CA \
 "-----BEGIN CERTIFICATE-----\n" \
-"MIIBhTCCASugAwIBAgIUYL0n+1kNjMJbonqs1mzhCdi/vUMwCgYIKoZIzj0EAwIw\n" \
-"GDEWMBQGA1UEAwwNMTkyLjE2OC40OS4zMzAeFw0yNjA0MjIwNTMzMDZaFw0zNjA0\n" \
-"MTkwNTMzMDZaMBgxFjAUBgNVBAMMDTE5Mi4xNjguNDkuMzMwWTATBgcqhkjOPQIB\n" \
-"BggqhkjOPQMBBwNCAAQ13hSmf3/YEKR+UZX4p+05+90AxCIip0S8dFtfz+aFkbdl\n" \
-"C0G6m2CXnIzcnqHgwrySljcuw4RXIwJiPcWJLgzto1MwUTAdBgNVHQ4EFgQU2sEi\n" \
-"M0jxtznu1l2zeHEbX0WFsOUwHwYDVR0jBBgwFoAU2sEiM0jxtznu1l2zeHEbX0WF\n" \
-"sOUwDwYDVR0TAQH/BAUwAwEB/zAKBggqhkjOPQQDAgNIADBFAiAr2T8l/4KFPVc1\n" \
-"IsMgoXBh5EHztkDRpO3fWDJftTJ2bwIhAJTa13VY5rPWmMfCTfG719LD6naKgAbo\n" \
-"ETa7NeU4tK+V\n" \
+"MIIBejCCASGgAwIBAgIUdVAoEFU7PPYkFqVatXfVF8Q1ZgkwCgYIKoZIzj0EAwIw\n" \
+"EzERMA8GA1UEAwwITXlSb290Q0EwHhcNMjYwNjIzMDM0OTU5WhcNMzYwNjIwMDM0\n" \
+"OTU5WjATMREwDwYDVQQDDAhNeVJvb3RDQTBZMBMGByqGSM49AgEGCCqGSM49AwEH\n" \
+"A0IABFu+WVBM6ZnilTzapG3mblwYQl5GxM159wUj6bdW9jpHim83IN0S/97a+TzS\n" \
+"jjkvcdux9qe9W4asGRGqT7XvuVijUzBRMB0GA1UdDgQWBBTeuIJq6xjVANRh61ua\n" \
+"Fc9Iymk1jzAfBgNVHSMEGDAWgBTeuIJq6xjVANRh61uaFc9Iymk1jzAPBgNVHRMB\n" \
+"Af8EBTADAQH/MAoGCCqGSM49BAMCA0cAMEQCIBgG8Nb0JsdqdmMkZ0p2328VrsCa\n" \
+"FT+OwzKcBDV6dWx2AiB5/eul6mcj6fLdMT/foPqpklZJ+RRAl9aQ2V9xWYBNDw==\n" \
 "-----END CERTIFICATE-----\n"
 
 /* ---- Internal state ---- */

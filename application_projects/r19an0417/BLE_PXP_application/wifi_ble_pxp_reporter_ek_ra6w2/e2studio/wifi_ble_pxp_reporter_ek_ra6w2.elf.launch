@@ -31,17 +31,17 @@
     <stringAttribute key="com.renesas.cdt.core.targetDevice" value="R7JA6W2DE"/>
     <booleanAttribute key="com.renesas.cdt.core.useRemoteTarget" value="true"/>
     <stringAttribute key="com.renesas.cdt.debug.ioview.dsf.registerSelection0" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;selectedRegisterList ioFilePath=&quot;C:\Users\a5159409\.eclipse\com.renesas.platform_2099836530\DebugComp\rrq&quot;/&gt;&#13;&#10;"/>
-    <stringAttribute key="com.renesas.cdt.launch.dsf.IO_MAP" value="${support_area_loc}"/>
+    <stringAttribute key="com.renesas.cdt.launch.dsf.IO_MAP" value="${support_area_loc}../../../.."/>
     <booleanAttribute key="com.renesas.cdt.launch.dsf.USE_DEFAULT_IO_MAP" value="true"/>
     <listAttribute key="com.renesas.cdt.launch.dsf.downloadImages">
         <listEntry value="|true|false|true|0|true|No core|INTERNAL_MEMORY||false"/>
-        <listEntry value="${workspace_loc:\wifi_ble_pxp_reporter_ek_ra6w2\Debug\wifi_ble_pxp_reporter_ek_ra6w2.img.bin}|true|false|false|a000000|true|No core|INTERNAL_MEMORY||true"/>
+        <listEntry value="${workspace_loc:/wifi_ble_pxp_reporter_ek_ra6w2/Debug/wifi_ble_pxp_reporter_ek_ra6w2.img.bin}|true|false|false|a000000|true|No core|INTERNAL_MEMORY||true"/>
     </listAttribute>
     <booleanAttribute key="com.renesas.cdt.launch.dsf.downloadImagesUpgradedV30" value="true"/>
     <listAttribute key="com.renesas.cdt.launch.dsf.externalFlashDestinationAddresses"/>
     <listAttribute key="com.renesas.cdt.launch.dsf.externalFlashDownloadModules"/>
     <stringAttribute key="com.renesas.cdt.launch.dsf.launchSeqType" value="com.renesas.cdt.launch.dsf.launchSequence.e2GdbServer"/>
-    <stringAttribute key="com.renesas.cdt.launch.dsf.serverPath" value="${renesas.support.targetLoc:com.renesas.ide.supportfiles.rrq.debug.debugSupportFileTarget}\e2-server-gdb"/>
+    <stringAttribute key="com.renesas.cdt.launch.dsf.serverPath" value="${renesas.support.targetLoc:com.renesas.ide.supportfiles.rrq.debug.debugSupportFileTarget}/e2-server-gdb"/>
     <booleanAttribute key="com.renesas.hardwaredebug.arm.jlink.break.allowSimulation" value="false"/>
     <booleanAttribute key="com.renesas.hardwaredebug.arm.jlink.break.useFlashBreakpoints.resetorrepurposed" value="true"/>
     <booleanAttribute key="com.renesas.hardwaredebug.arm.jlink.cfiFlash.enable" value="false"/>
@@ -118,7 +118,7 @@
     <intAttribute key="org.eclipse.cdt.debug.gdbjtag.core.delay" value="0"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.doHalt" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.doReset" value="false"/>
-    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value="C:\Users\a5159409\e2_studio\ra6w2_da_apps\wifi_ble_pxp_reporter_ek_ra6w2\e2studio\Debug\wifi_ble_pxp_reporter_ek_ra6w2.elf"/>
+    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value="/home/developer/e2_studio/workspace_bugfix/wifi_ble_pxp_reporter_ek_ra6w2/Debug/wifi_ble_pxp_reporter_ek_ra6w2.elf"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageOffset" value="0"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.initCommands" value=""/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.loadImage" value="false"/>
@@ -129,7 +129,7 @@
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setResume" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setStopAt" value="true"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.stopAt" value="main"/>
-    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsFileName" value="C:\Users\a5159409\e2_studio\ra6w2_da_apps\wifi_ble_pxp_reporter_ek_ra6w2\e2studio\Debug\wifi_ble_pxp_reporter_ek_ra6w2.elf"/>
+    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsFileName" value="/home/developer/e2_studio/workspace_bugfix/wifi_ble_pxp_reporter_ek_ra6w2/Debug/wifi_ble_pxp_reporter_ek_ra6w2.elf"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsOffset" value="0"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useFileForImage" value="false"/>
     <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useFileForSymbols" value="false"/>

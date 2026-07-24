@@ -9,13 +9,13 @@
 	connection, this central device is considered the main device. If the main device disconnects, advertising is started again. The next device that
 	connects will become the main device. Event and connection information is printed to UART. A connected central can use the Multilink service (see below)
 	to use the device's Central role and command it to connect to other peripheral devices that advertise. The main device can write a peer BD address
-	to the Peripheral Address characteristic and the MULTILINK-RA6W2 device will initiate a connection procedure to this peer. This way it is possible
+	to the Peripheral Address characteristic and the Renesas Multi-link device will initiate a connection procedure to this peer. This way it is possible
 	to connect to more than one devices.
 
 2. Software Requirements:
-Renesas RAFW(FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
+Renesas RAFW(FSP)
+e2 studio
+GCC ARM Embedded Toolchain
 
 3. Hardware Requirements:
 
@@ -43,11 +43,11 @@ GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 	5. Flash the application project to the RA6W2 board.
 	6. After flashing, press reset.
 	7. Setup a terminal in a host device with baudrate 115200 8N1
-	8. Use a mobile device or a device with BLE_CLI capability and connect to MULTILINK-RA6W2
+	8. Use a mobile device or a device with BLE_CLI capability and connect to Renesas Multi-link
 	9. After a successful connection, your device will become the main device: the main device controls
-	   which peers the MULTILINK-RA6W2 shall connect to.
+	   which peers the Renesas Multi-link shall connect to.
    10. Find the Peripheral Address characteristic and write one or more BD addresses of peripheral
-	   devices which you would like MULTILINK-RA6W2 to connect to.
+	   devices which you would like Renesas Multi-link to connect to.
 
 	   The first octet of data written to Peripheral Address characteristic is the address type, either
 	   public (0x00) or private (0x01). The next 6 octets represent the BD address.

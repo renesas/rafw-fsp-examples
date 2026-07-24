@@ -9,9 +9,6 @@ The example project demonstrates the typical use of the PMGR HAL module APIs usi
 
 2. Software Requirements:
 
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term or a similar application
     
 3. Hardware Requirements:
@@ -43,13 +40,16 @@ Jumper Configurations
 	SWCLK(c) = SWCLK
 	SWDIO(c) = SWDIO
 
-5. Verifying Operation:
+6. Verifying Operation:
+
 1. Import the Example project into e2 studio.
 2. Build the project.
 3. Flash the project onto the RA6W1 board via the debugger.
 4. Reset the board.
 4. Open a SEGGER RTT Viewer on the host PC to view the console output.
 ﻿5. Press BTN1 to wake device from sleep.
+   To use BTN1, connecting the J213 PIN is mandatory in addition to P0_13.
+   J213 ={1,2} = [BTN1]
 
 Note: 
 

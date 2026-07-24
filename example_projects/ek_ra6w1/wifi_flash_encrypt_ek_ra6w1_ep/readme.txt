@@ -8,9 +8,6 @@ This project demonstrates how to securely store and retrieve data in the flash m
 on Renesas RA6W1 microcontrollers.
 
 2. Software Requirements:
-Renesas RAFW (FSP): Version 2.0.1
-e2 studio: Version 2025-12
-GCC ARM Embedded Toolchain: Version 13.3.1.arm-13-24
 Terminal Console Application: Tera Term, RTT viewer or a similar application
 
 3. Hardware Requirements:

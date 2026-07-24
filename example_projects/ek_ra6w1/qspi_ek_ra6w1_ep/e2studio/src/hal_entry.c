@@ -59,7 +59,7 @@ void hal_entry(void)
 
     /* Erase flash before writing */
     err = R_OSPI_W_Erase(&user_ospi_ctrl, QSPI_FLASH_ADDRESS(PAGE_FIRST),
-    FLASH_SECTOR_SIZE);
+    SECTOR_SIZE);
     if (FSP_SUCCESS != err)
     {
         APP_ERR_PRINT("R_OSPI_W_Erase Failed\r\n");

@@ -125,6 +125,10 @@ void hal_entry(void)
  **********************************************************************************************************************/
 void R_BSP_WarmStart(bsp_warm_start_event_t event)
 {
+    if (BSP_WARM_START_RESET == event)
+    {
+    }
+
     if (BSP_WARM_START_POST_CLOCK == event)
     {
         /* System clocks are configured. */

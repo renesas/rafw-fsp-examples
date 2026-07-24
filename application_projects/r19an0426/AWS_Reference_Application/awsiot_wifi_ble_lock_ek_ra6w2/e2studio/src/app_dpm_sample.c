@@ -632,7 +632,6 @@ extern uint32_t wifi_svc_get_provisioning_flag(void);
 extern UCHAR get_last_abnormal_act(void);
 extern void reboot_func(UINT flag);
 extern int getMacAddrMswLsw(UINT iface, ULONG *macmsw, ULONG *maclsw);
-extern bool cmd_ble_stop_svc(int argc, char *argv[]);
 
 MQTTContext_t* app_get_mqtt_context(void)
 {
@@ -2989,7 +2988,6 @@ static void DPM_App_Main(UINT32 _data, UINT32 _rtmData, DM_NOTI _status)
 #endif
 #if (1 == AWS_IOT_DPM_APP_ENABLE)       
             aws_dpm_app_finish_loop(rtmData);
-            cmd_ble_stop_svc(0, NULL);
 #endif        
             free_aws_credentials();
         }

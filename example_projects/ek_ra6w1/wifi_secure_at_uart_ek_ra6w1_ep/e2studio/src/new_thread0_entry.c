@@ -30,7 +30,7 @@ void new_thread0_entry(void *pvParameters)
 #if ATCMD_SECURE_CHANNEL
     fsp_err_t err;
     uint8_t asset[16];
-    uint32_t package_addr = BSP_FEATURE_OSPI_W_DEVICE_0_START_ADDRESS | (SF_ASSET_PROD_BASE_ADDR + SECURE_ASSET_ATKEY_OFFSET); // Example address
+    uint32_t package_addr = BSP_FEATURE_OSPI_DEVICE_0_START_ADDRESS | (SF_ASSET_PROD_BASE_ADDR + SECURE_ASSET_ATKEY_OFFSET); // Example address
     uint8_t package_buffer[64];
     size_t package_buffer_size = sizeof(package_buffer);
     int32_t asset_size;

@@ -8,7 +8,7 @@
 
 /***********************************************************************************************************************
 
-* Copyright (c) 2020 - 2025 Renesas Electronics Corporation and/or its affiliates
+* Copyright (c) 2020 - 2026 Renesas Electronics Corporation and/or its affiliates
 
 *
 
@@ -27,6 +27,9 @@
 #include "tcp_client_dpm.h"
 #include "common_utils.h"
 #include "config.h"
+#if CFG_PMGR
+#include "rm_pmgr_w_instance.h"
+#endif // CFG_PMGR
 
 #define EP_APP_VERSION      1.0
 #define EP_APP_MODULE_NAME  "rm_tcp_client_w"
@@ -34,7 +37,7 @@
     "This example acts as a TCP client in DPM mode and " \
     "establishes a connection with a TCP server running on the Wi-Fi network."
 
-TaskHandle_t g_app_main_task_handle = NULL;
+extern TaskHandle_t app_task;
 uint32_t event = EVENT_VAL;
 #if !CFG_CLI
 WIFINetworkParams_t net_params =
@@ -70,7 +73,10 @@ static void netif_status_callback(struct netif *p_netif)
         WIFI_SetPsMode(true);
         APP_PRINT_INFO("Sleep 4 enabled\n");
 #endif //CFG_PMGR
-        xTaskNotify(g_app_main_task_handle, WIFI_EVENT_CONNECTED, eSetBits);
+        if (app_task != NULL)
+        {
+            xTaskNotify(app_task, WIFI_EVENT_CONNECTED, eSetBits);
+        }
     }
 
 }
@@ -138,24 +144,27 @@ void app_task_entry(void *pvParameters)
 #endif // __SUPPORT_APP_CONSOLE_INPUT__
 
 #endif // CFG_CLI
+
+#if CFG_PMGR
+    if (RM_PMGR_W_dpm_is_wakeup() == pdFALSE)
+    {
+#endif
+        /* Wait for Wi-Fi Connection Event */
+        while (event != WIFI_EVENT_CONNECTED)
+        {
+            xTaskNotifyWait(0x00, 0xFFFFFFFF, &event, portMAX_DELAY);
+        }
+        APP_PRINT_INFO("WiFi connected\n");
+#if CFG_PMGR
+    }
+#endif
+
     /* tcp_client task */
     tcp_client_init();
-
-    xTaskNotifyWait(0x00, 0xFFFFFFFF, &event, portMAX_DELAY);
-    switch (event)
-    {
-        case WIFI_EVENT_CONNECTED:
-            APP_PRINT_INFO("WiFi connected\n");
-        break;
-
-        default:
-            APP_PRINT_INFO("Unexpected event received: %ld\n", event);
-        break;
-
-    }
 
     while (1)
         vTaskDelay (portMAX_DELAY);
 
     WIFI_Off();
 }
+

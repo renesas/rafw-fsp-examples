@@ -313,7 +313,7 @@ fsp_err_t flash_read(char *p_buf, uint32_t buf_size)
 
     /* ---- Read encrypted package via XIP ---- */
     memcpy(ctx.package_buffer,
-           (void *)(BSP_FEATURE_OSPI_W_DEVICE_0_START_ADDRESS | FLASH_ADDR),
+           (void *)(BSP_FEATURE_OSPI_DEVICE_0_START_ADDRESS | FLASH_ADDR),
            ctx.package_size);
 
     /* ---- Decrypt with CC312 ---- */
