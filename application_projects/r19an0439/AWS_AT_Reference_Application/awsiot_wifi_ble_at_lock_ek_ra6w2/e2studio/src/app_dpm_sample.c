@@ -2346,6 +2346,7 @@ static void aws_dpm_app_recv(app_dpm_info_rtm *_rtmData)
 {
     MQTTStatus_t rc = commonRC;
     UINT8 wait_cnt = 0;
+    UINT8 stale_reconnect_done = 0;
 
 #if defined(__SUPPORT_OTA__)
     int flag = 1;
@@ -2388,6 +2389,31 @@ static void aws_dpm_app_recv(app_dpm_info_rtm *_rtmData)
                 wait_cnt++;
                 continue;
             }
+#if CFG_PMGR
+            /* A DPM packet wakeup means a command arrived and woke us, but on a
+             * DPM wakeup the MQTT/TLS session is resumed from RTM and can be
+             * out-of-sync/stale with the broker (the ciphertext that triggered
+             * the wakeup may be undecryptable and the socket half-open). In that
+             * case ProcessLoop returns success but no command is ever delivered.
+             * Detect that (no command received across the whole initial window)
+             * and do ONE clean reconnect to obtain a healthy persistent session
+             * (sessionPresent=1), then wait once more so the app's (retried)
+             * command is received quickly instead of stalling until the finish
+             * loop eventually reconnects. */
+            if ((!mobile_app_cmd_received) && (!stale_reconnect_done)
+                && RM_PMGR_W_dpm_is_wakeup())
+            {
+                stale_reconnect_done = 1;
+                IOT_INFO("[%s] no command on DPM-restored session -> clean reconnect", __func__)
+                aws_dpm_app_connect(_rtmData);
+                if (app_get_mqtt_status() == MQTTSuccess)
+                {
+                    aws_dpm_app_boot_or_report(_rtmData, DM_WAKEUP_RECV);
+                }
+                wait_cnt = 0;
+                continue;
+            }
+#endif
         }
 
         printf("\n");
@@ -2727,8 +2753,24 @@ CHECK_SLEEP_COND:
             } 
             else
             {
+                /* Network is up (ICMP ping OK) but PUB ACK/Job-next is still not
+                 * received => the DPM-restored MQTT/TLS session is stale (the
+                 * broker has already dropped it). ICMP reachability does NOT prove
+                 * the MQTT session is alive, so force a fresh MQTT reconnect here
+                 * instead of only counting toward a reboot. The reconnect resends
+                 * the pending publishes and lets the broker redeliver any queued
+                 * command (e.g. app_door close). Reboot only after the retry
+                 * budget is exhausted. */
                 if (exception_count++ > MAX_RETRY_CNT_TO_SLEEP) {
                     goSleepAppOnException(exception_count);
+                }
+                else
+                {
+                    aws_dpm_app_connect(_rtmData);
+                    if (app_get_mqtt_status() == MQTTSuccess)
+                    {
+                        aws_dpm_app_boot_or_report(_rtmData, DM_FINISH_DEVICE);
+                    }
                 }
             }
         }
@@ -2779,6 +2821,7 @@ CHECK_SLEEP_COND:
     sprintf(strRetWakeup, "%s", "no CFG_PMGR");
 #endif
 
+    UINT8 finish_loop_logged = 0;
     while (1)
     {
 #if CFG_PMGR
@@ -2790,7 +2833,26 @@ CHECK_SLEEP_COND:
         }
 #endif
         awsiot_app_print_elapse_time_ms("[%s:%d][%s] recv loop timeout = %d", __func__, __LINE__, strRetWakeup, FINISH_LOOP_RECV_TIMEOUT);
-        IOT_INFO("[%s]: Start last prvProcessLoopWithTimeout: %dms", __func__, FINISH_LOOP_RECV_TIMEOUT)
+        /* Log only on the first pass: this loop iterates every 50ms until the DPM
+         * sleep-prohibit constraint clears, so printing every iteration spams the
+         * console. Behavior is unchanged; only the repeated log is suppressed. */
+        if (!finish_loop_logged)
+        {
+            finish_loop_logged = 1;
+            IOT_INFO("[%s]: DPM finish loop - servicing MQTT (recv/ack) while the PMGR sleep-prohibit constraint is held; will sleep when it clears", __func__)
+        }
+#if CFG_PMGR
+        {
+            /* DEBUG: dump DPM sleep state every ~5s while waiting to sleep */
+            static TickType_t last_dbg_tick = 0;
+            TickType_t now_tick = xTaskGetTickCount();
+            if ((now_tick - last_dbg_tick) >= pdMS_TO_TICKS(5000))
+            {
+                last_dbg_tick = now_tick;
+                RM_PMGR_W_dpm_dbg_info_get();
+            }
+        }
+#endif
         rc = prvProcessLoopWithTimeout(&xMqttContext, FINISH_LOOP_RECV_TIMEOUT); //50ms
 
         if (rc != MQTTSuccess)

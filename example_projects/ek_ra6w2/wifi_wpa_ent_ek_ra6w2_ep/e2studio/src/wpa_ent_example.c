@@ -59,85 +59,193 @@ char *wpa_ent_connect_info()
     return NULL;
 }
 
+/*******************************************************************************************************************//**
+ * Right align (string)
+ **********************************************************************************************************************/
+static void pad_right(char * dst, size_t width, const char * src)
+{
+    size_t len = strlen(src);
+
+    if (len > width)
+    {
+        len = width;
+    }
+
+    memset(dst, ' ', width);
+    memcpy(dst, src, len);
+    dst[width] = '\0';
+}
+
+/*******************************************************************************************************************//**
+ * Left align (number string)
+ **********************************************************************************************************************/
+static void pad_left(char * dst, size_t width, const char * src)
+{
+    size_t len = strlen(src);
+
+    if (len > width)
+    {
+        len = width;
+    }
+
+    memset(dst, ' ', width);
+    memcpy(dst + (width - len), src, len);
+    dst[width] = '\0';
+}
+
+/*******************************************************************************************************************//**
+ * Display Wi-Fi Scan Result
+ **********************************************************************************************************************/
 void display_scan_result(WIFIScanResult_t * scan_data)
 {
-    if (scan_data)
+    if (NULL == scan_data)
     {
-        APP_PRINT("==================================================");
-        APP_PRINT("\nNUM | SSID: RSSI CH Encryption");
-        for (uint8_t i = 0; i < MAX_WIFI_SCAN_RESULTS; ++i) {
-            if(scan_data[i].cRSSI != 0)
-            {
-                /* Print wifi_normal_scan_exampleSSID and RSSI for each network */
-                APP_PRINT("\n%3d | ", i);
+        APP_PRINT("\nNo scan result..\n");
 
-                if (scan_data[i].ucSSID[0] == HIDDEN_SSID_DETECTION_CHAR)
-                {
-                	APP_PRINT(" %-32s: ", "[Hidden]");
-                }
-                else
-                {
-                    APP_PRINT("%-32s: ", scan_data[i].ucSSID);
-                }
-                APP_PRINT("%4d ", scan_data[i].cRSSI);
-                APP_PRINT("%3d ", scan_data[i].ucChannel);
-                switch ((WIFISecurityExt_t) scan_data[i].xSecurity) {
-                    case eWiFiSecurityOpen:
-                        APP_PRINT("Open");
-                        break;
-                    case eWiFiSecurityWEP:
-                        APP_PRINT("WEP");
-                        break;
-                    case eWiFiSecurityWPA:
-                        APP_PRINT("WPA");
-                        break;
-                    case eWiFiSecurityWPA2:
-                        APP_PRINT("WPA2");
-                        break;
-                    case eWiFiSecurityWPA2_ent:
-                        APP_PRINT("WPA2_ENT");
-                        break;
-                    case eWiFiSecurityWPA3:
-                        APP_PRINT("WPA3");
-                        break;
-                    case eWiFiSecurityWPA_ent_ext:
-                    	APP_PRINT("WPA_ENT");
-                        break;
-                    case eWiFiSecurityWPA_WPA2_ent_ext:
-                    	APP_PRINT("WPA_WPA2_ENT");
-                        break;
-                    case eWiFiSecurityWPA2_WPA3_ent_ext:
-                    	APP_PRINT("WPA2_WPA3_ENT");
-                        break;
-                    case eWiFiSecurityWPA3_ent_ext:
-                    	APP_PRINT("WPA3_ENT");
-                        break;
-                    case eWiFiSecurityWPA3_192B_ent_ext:
-                    	APP_PRINT("WPA3_192B_ENT");
-                        break;
-                    case eWiFiSecurityWPA_WPA2_ext:
-                    	APP_PRINT("WPA_WPA2");
-                        break;
-                    case eWiFiSecurityWPA2_WPA3_ext:
-                    	APP_PRINT("WPA2_WPA3");
-                        break;
-                    case eWiFiSecurityWPA3_OWE_ext:
-                    	APP_PRINT("WPA3_OWE");
-                        break;
-                    case eWiFiSecurityNotSupported:
-                        APP_PRINT("NotSupported");
-                        break;
-                    default:
-                        APP_PRINT("-");
-                        break;
-                }
-            }
-        }
-        APP_PRINT("\n==================================================\n");
-        vTaskDelay(pdMS_TO_TICKS(10));
-    }else {
-        APP_PRINT("\nNo scan result..");
+        return;
     }
+
+    APP_PRINT("\n================================================================================");
+    APP_PRINT("\nNUM | SSID                             | RSSI  | CH   | Encryption     ");
+    APP_PRINT("\n================================================================================");
+
+    for (uint8_t i = 0; i < MAX_WIFI_SCAN_RESULTS; i++)
+    {
+        if (scan_data[i].cRSSI == 0)
+        {
+            continue;
+        }
+
+        const char * security_str = "-";
+
+        switch ((WIFISecurityExt_t) scan_data[i].xSecurity)
+        {
+            case eWiFiSecurityOpen:
+                security_str = "Open";
+                break;
+
+            case eWiFiSecurityWEP:
+                security_str = "WEP";
+                break;
+
+            case eWiFiSecurityWPA:
+                security_str = "WPA";
+                break;
+
+            case eWiFiSecurityWPA2:
+                security_str = "WPA2";
+                break;
+
+            case eWiFiSecurityWPA2_ent:
+                security_str = "WPA2_ENT";
+                break;
+
+            case eWiFiSecurityWPA3:
+                security_str = "WPA3";
+                break;
+
+            case eWiFiSecurityWPA_ent_ext:
+                security_str = "WPA_ENT";
+                break;
+
+            case eWiFiSecurityWPA_WPA2_ent_ext:
+                security_str = "WPA_WPA2_ENT";
+                break;
+
+            case eWiFiSecurityWPA2_WPA3_ent_ext:
+                security_str = "WPA2_WPA3_ENT";
+                break;
+
+            case eWiFiSecurityWPA3_ent_ext:
+                security_str = "WPA3_ENT";
+                break;
+
+            case eWiFiSecurityWPA3_192B_ent_ext:
+                security_str = "WPA3_192B_ENT";
+                break;
+
+            case eWiFiSecurityWPA_WPA2_ext:
+                security_str = "WPA_WPA2";
+                break;
+
+            case eWiFiSecurityWPA2_WPA3_ext:
+                security_str = "WPA2_WPA3";
+                break;
+
+            case eWiFiSecurityWPA3_OWE_ext:
+                security_str = "WPA3_OWE";
+                break;
+
+            case eWiFiSecurityNotSupported:
+                security_str = "NotSupported";
+                break;
+
+            default:
+                break;
+        }
+
+        char ssid_field[SSID_DISPLAY_WIDTH + 1];
+        char rssi_field[RSSI_DISPLAY_WIDTH + 1];
+        char ch_field[CH_DISPLAY_WIDTH + 1];
+        char enc_field[ENC_DISPLAY_WIDTH + 1];
+
+        char tmp[32];
+        char ssid_buf[SSID_DISPLAY_WIDTH + 1] = {0};
+
+        /* SSID */
+        if (scan_data[i].ucSSID[0] == HIDDEN_SSID_DETECTION_CHAR)
+        {
+            strcpy(ssid_buf, "[Hidden]");
+        }
+        else
+        {
+            memcpy(ssid_buf,
+                   scan_data[i].ucSSID,
+                   SSID_DISPLAY_WIDTH);
+
+            ssid_buf[SSID_DISPLAY_WIDTH] = '\0';
+        }
+
+        pad_right(ssid_field,
+                  SSID_DISPLAY_WIDTH,
+                  ssid_buf);
+
+        /* RSSI */
+        snprintf(tmp,
+                 sizeof(tmp),
+                 "%d",
+                 scan_data[i].cRSSI);
+
+        pad_left(rssi_field,
+                 RSSI_DISPLAY_WIDTH,
+                 tmp);
+
+        /* Channel */
+        snprintf(tmp,
+                 sizeof(tmp),
+                 "%d",
+                 scan_data[i].ucChannel);
+
+        pad_left(ch_field,
+                 CH_DISPLAY_WIDTH,
+                 tmp);
+
+        /* Encryption */
+        pad_right(enc_field,
+                  ENC_DISPLAY_WIDTH,
+                  security_str);
+
+        APP_PRINT("\n%3d | %s | %s | %s | %s",
+                  i,
+                  ssid_field,
+                  rssi_field,
+                  ch_field,
+                  enc_field);
+    }
+
+    APP_PRINT("\n================================================================================\n\n");
+
+    vTaskDelay(pdMS_TO_TICKS(10));
 }
 
 char *process_input_data(void) {

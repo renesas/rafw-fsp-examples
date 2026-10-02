@@ -21,14 +21,14 @@
 #define TASK_COMPLETE_EVENT 5
 #define LOOP_ITR_MAX 3
 
-#define SSID    "Netgear-WiFi"
-#define PASSPHRASE "WiFiNetge@r@1"
+#define SSID    "SSID"
+#define PASSPHRASE "PASSWORD"
 #define CHANNEL 0
 #define WIFI_SECURITY eWiFiSecurityWPA2
 /*  example HOST 192.168.30.220  */
-#define HOST    "172.27.26.52"
+#define HOST    "HOST_IP_ADDRESS"
 /*  example PATH http://192.168.30.220/wifi_psram_ek_ra6w1_ep_ota.img   */
-#define PATH "http://172.27.26.52/wifi_psram_ek_ra6w1_ep_ota.img"
+#define PATH "http://HOST_IP_ADDRESS/ota.img"
 #ifdef HTTPS
 #define PORT 443
 #define AUTH_MODE   MBEDTLS_SSL_VERIFY_NONE

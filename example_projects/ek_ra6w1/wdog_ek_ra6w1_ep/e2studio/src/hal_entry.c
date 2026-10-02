@@ -38,8 +38,8 @@ static void initialize_led_pin(void);
 static void initialize_led_pin(void)
 {
     /* Set the GPIOs for LED as output pin */
-    R_GPIO_W_PinCfg(&g_gpio_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_DIRECTION_OUTPUT);
-    R_GPIO_W_PinCfg(&g_gpio_ctrl, LED_WATCHDOG_RESET_IND, BSP_IO_DIRECTION_OUTPUT);
+    R_GPIO_W_PinCfg(&g_gpio_w_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_DIRECTION_OUTPUT);
+    R_GPIO_W_PinCfg(&g_gpio_w_ctrl, LED_WATCHDOG_RESET_IND, BSP_IO_DIRECTION_OUTPUT);
 }
 
 /***********************************************************************************************************************
@@ -145,7 +145,7 @@ void R_BSP_WarmStart(bsp_warm_start_event_t event)
         /* C runtime environment and system clocks are setup. */
 
         /* Configure pins. */
-        R_GPIO_W_Open(&g_gpio_ctrl, &IOPORT_CFG_NAME);
+        R_GPIO_W_Open(&g_gpio_w_ctrl, &IOPORT_CFG_NAME);
     }
 }
 
@@ -170,8 +170,8 @@ static fsp_err_t read_Input_from_RTT(void)
 
     if (user_data == ENABLE_WDOG)
     {
-        R_GPIO_W_PinWrite(&g_gpio_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_LEVEL_LOW);
-        R_GPIO_W_PinWrite(&g_gpio_ctrl, LED_WATCHDOG_RESET_IND, BSP_IO_LEVEL_LOW);
+        R_GPIO_W_PinWrite(&g_gpio_w_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_LEVEL_LOW);
+        R_GPIO_W_PinWrite(&g_gpio_w_ctrl, LED_WATCHDOG_RESET_IND, BSP_IO_LEVEL_LOW);
 
         /* Resume activity of the system watchdog */
         R_BSP_PeripheralUnFreeze(BSP_FREEZE_PERIPHERAL_SYS_WDOG);
@@ -232,14 +232,14 @@ static void check_reset_status(void)
     if (RESET_STATUS_REGISTER_POR_DEFAULT == g_bsp_reset_stat_reg)
     {
         /* Turn ON LED */
-        R_GPIO_W_PinWrite(&g_gpio_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_LEVEL_HIGH);
+        R_GPIO_W_PinWrite(&g_gpio_w_ctrl, LED_POR_AND_TIMER_ACTIVE_IND, BSP_IO_LEVEL_HIGH);
         APP_PRINT("\r\n************* POR Reset detected ************************\r\n");
     }
 
     if (RESET_STATUS_REGISTER_DETECT_WDOG_RESET == g_bsp_reset_stat_reg)
     {
         /* Turn ON LED */
-        R_GPIO_W_PinWrite(&g_gpio_ctrl, LED_WATCHDOG_RESET_IND, BSP_IO_LEVEL_HIGH);
+        R_GPIO_W_PinWrite(&g_gpio_w_ctrl, LED_WATCHDOG_RESET_IND, BSP_IO_LEVEL_HIGH);
     }
 }
 

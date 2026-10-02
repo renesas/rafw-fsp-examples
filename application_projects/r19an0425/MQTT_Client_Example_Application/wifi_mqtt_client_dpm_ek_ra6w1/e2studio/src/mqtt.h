@@ -29,7 +29,7 @@
 #define MQTT_PUB_TOPIC             "rrq61x_pub"
 #define MQTT_PUBLISH_MSG           "Hello from RA6W1"
 #define MQTT_AUTO_MODE              MQTT_INIT_MAGIC
-#define DPM_WAKEUP_INTERVAL_US      20000
+#define DPM_WAKEUP_INTERVAL_MS      20000
 
 void print_ep_info_banner();
 void netif_status_callback();

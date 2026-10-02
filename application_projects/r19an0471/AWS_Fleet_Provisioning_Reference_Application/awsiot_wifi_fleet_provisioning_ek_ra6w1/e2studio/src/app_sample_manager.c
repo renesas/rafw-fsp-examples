@@ -9,7 +9,7 @@
 ***********************************************************************************************************************/
 
 #include "FreeRTOS.h"
-#include "custom_config_sdk.h"
+#include "rm_wifi.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

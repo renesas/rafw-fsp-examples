@@ -1949,7 +1949,7 @@ LOAD /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-no
 LOAD /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libm.a
 END GROUP
 
-.text           0x00000000     0xdd50
+.text           0x00000000     0xdd44
                 0x00000000                        __tz_FLASH_S = ABSOLUTE (FLASH_START)
                 0x00000000                        __ROM_Start = .
  *(.fixed_vectors*)
@@ -1975,1271 +1975,1271 @@ END GROUP
  .text.frame_dummy
                 0x0000022c       0x24 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtbegin.o
  .text.SdioTxWorkerTask
-                0x00000250      0x210 ./src/sdio/sdio_cmd.o
+                0x00000250      0x204 ./src/sdio/sdio_cmd.o
                 0x00000250                SdioTxWorkerTask
  .text.SDIO_cmd_init
-                0x00000460       0x7c ./src/sdio/sdio_cmd.o
-                0x00000460                SDIO_cmd_init
+                0x00000454       0x7c ./src/sdio/sdio_cmd.o
+                0x00000454                SDIO_cmd_init
  .text.SDIO_Write_To_DA16xxx
-                0x000004dc       0x84 ./src/sdio/sdio_cmd.o
-                0x000004dc                SDIO_Write_To_DA16xxx
+                0x000004d0       0x84 ./src/sdio/sdio_cmd.o
+                0x000004d0                SDIO_Write_To_DA16xxx
  .text.Received_SDIO_Data_From_DA16xxx
-                0x00000560      0x150 ./src/sdio/sdio_cmd.o
-                0x00000560                Received_SDIO_Data_From_DA16xxx
+                0x00000554      0x150 ./src/sdio/sdio_cmd.o
+                0x00000554                Received_SDIO_Data_From_DA16xxx
  .text.Transfer_ATCmd_To_SDIO
-                0x000006b0      0x410 ./src/sdio/sdio_cmd.o
-                0x000006b0                Transfer_ATCmd_To_SDIO
+                0x000006a4      0x410 ./src/sdio/sdio_cmd.o
+                0x000006a4                Transfer_ATCmd_To_SDIO
  .text.user_sdio_transfer_callback
-                0x00000ac0       0x18 ./src/sdio/sdio_drv.o
-                0x00000ac0                user_sdio_transfer_callback
+                0x00000ab4       0x18 ./src/sdio/sdio_drv.o
+                0x00000ab4                user_sdio_transfer_callback
  .text.sdio_read_ext
-                0x00000ad8       0xc4 ./src/sdio/sdio_drv.o
-                0x00000ad8                sdio_read_ext
+                0x00000acc       0xc4 ./src/sdio/sdio_drv.o
+                0x00000acc                sdio_read_ext
  .text.sdio_write_ext
-                0x00000b9c       0xbc ./src/sdio/sdio_drv.o
-                0x00000b9c                sdio_write_ext
+                0x00000b90       0xbc ./src/sdio/sdio_drv.o
+                0x00000b90                sdio_write_ext
  .text.sdio_initialize
-                0x00000c58      0x1e8 ./src/sdio/sdio_drv.o
-                0x00000c58                sdio_initialize
+                0x00000c4c      0x1e8 ./src/sdio/sdio_drv.o
+                0x00000c4c                sdio_initialize
  .text.get_sdhi_init_status
-                0x00000e40       0x2c ./src/sdio/sdio_drv.o
-                0x00000e40                get_sdhi_init_status
+                0x00000e34       0x2c ./src/sdio/sdio_drv.o
+                0x00000e34                get_sdhi_init_status
  .text.init_drv_sdio
-                0x00000e6c       0xbc ./src/sdio/sdio_drv.o
-                0x00000e6c                init_drv_sdio
- .text.PRINTF   0x00000f28       0x3c ./src/atcmd/at_cmd.o
-                0x00000f28                PRINTF
+                0x00000e60       0xbc ./src/sdio/sdio_drv.o
+                0x00000e60                init_drv_sdio
+ .text.PRINTF   0x00000f1c       0x3c ./src/atcmd/at_cmd.o
+                0x00000f1c                PRINTF
  .text.PRINTF_ATCMD
-                0x00000f64       0x4c ./src/atcmd/at_cmd.o
-                0x00000f64                PRINTF_ATCMD
+                0x00000f58       0x4c ./src/atcmd/at_cmd.o
+                0x00000f58                PRINTF_ATCMD
  .text.aws_iot_atcmd_stm_it
-                0x00000fb0      0x280 ./src/atcmd/at_cmd.o
-                0x00000fb0                aws_iot_atcmd_stm_it
+                0x00000fa4      0x280 ./src/atcmd/at_cmd.o
+                0x00000fa4                aws_iot_atcmd_stm_it
  .text.PRINTF_ATCMD_WAITRES
-                0x00001230       0x5c ./src/atcmd/at_cmd.o
-                0x00001230                PRINTF_ATCMD_WAITRES
+                0x00001224       0x5c ./src/atcmd/at_cmd.o
+                0x00001224                PRINTF_ATCMD_WAITRES
  .text.PRINTF_ATCMD_PUT
-                0x0000128c        0x4 ./src/atcmd/at_cmd.o
-                0x0000128c                PRINTF_ATCMD_PUT
+                0x00001280        0x4 ./src/atcmd/at_cmd.o
+                0x00001280                PRINTF_ATCMD_PUT
  .text.wake_up_wifi
-                0x00001290       0x2c ./src/atcmd/at_cmd.o
-                0x00001290                wake_up_wifi
+                0x00001284       0x2c ./src/atcmd/at_cmd.o
+                0x00001284                wake_up_wifi
  .text.blink_auto_LED
-                0x000012bc       0x2c ./src/atcmd/at_cmd.o
-                0x000012bc                blink_auto_LED
+                0x000012b0       0x2c ./src/atcmd/at_cmd.o
+                0x000012b0                blink_auto_LED
  .text.set_dev_status
-                0x000012e8        0xc ./src/atcmd/at_cmd.o
-                0x000012e8                set_dev_status
+                0x000012dc        0xc ./src/atcmd/at_cmd.o
+                0x000012dc                set_dev_status
  .text.get_device_status
-                0x000012f4       0x24 ./src/atcmd/at_cmd.o
-                0x000012f4                get_device_status
+                0x000012e8       0x24 ./src/atcmd/at_cmd.o
+                0x000012e8                get_device_status
  .text.fast_crc_nbit_lookup
-                0x00001318       0x98 ./src/atcmd/at_cmd.o
-                0x00001318                fast_crc_nbit_lookup
+                0x0000130c       0x98 ./src/atcmd/at_cmd.o
+                0x0000130c                fast_crc_nbit_lookup
  .text.atcmd_ota_image_check
-                0x000013b0       0xf4 ./src/atcmd/at_cmd.o
-                0x000013b0                atcmd_ota_image_check
+                0x000013a4       0xf4 ./src/atcmd/at_cmd.o
+                0x000013a4                atcmd_ota_image_check
  .text.atcmd_ota_set
-                0x000014a4      0x128 ./src/atcmd/at_cmd.o
-                0x000014a4                atcmd_ota_set
+                0x00001498      0x128 ./src/atcmd/at_cmd.o
+                0x00001498                atcmd_ota_set
  .text.command_parser
-                0x000015cc      0x330 ./src/atcmd/at_cmd.o
-                0x000015cc                command_parser
+                0x000015c0      0x330 ./src/atcmd/at_cmd.o
+                0x000015c0                command_parser
  .text.atcmd_config_set
-                0x000018fc       0x58 ./src/atcmd/at_cmd.o
-                0x000018fc                atcmd_config_set
+                0x000018f0       0x58 ./src/atcmd/at_cmd.o
+                0x000018f0                atcmd_config_set
  .text.atcmd_certificate
-                0x00001954       0x9c ./src/atcmd/at_cmd.o
-                0x00001954                atcmd_certificate
+                0x00001948       0x9c ./src/atcmd/at_cmd.o
+                0x00001948                atcmd_certificate
  .text.ath_timer_reset
-                0x000019f0       0x10 ./src/atcmd/at_cmd.o
-                0x000019f0                ath_timer_reset
+                0x000019e4       0x10 ./src/atcmd/at_cmd.o
+                0x000019e4                ath_timer_reset
  .text.common_init
-                0x00001a00       0x30 ./src/common_init.o
-                0x00001a00                common_init
+                0x000019f4       0x30 ./src/common_init.o
+                0x000019f4                common_init
  .text.RemoveCRLF
-                0x00001a30       0x24 ./src/common_support.o
-                0x00001a30                RemoveCRLF
+                0x00001a24       0x24 ./src/common_support.o
+                0x00001a24                RemoveCRLF
  .text.make_argv
-                0x00001a54       0x70 ./src/common_support.o
-                0x00001a54                make_argv
+                0x00001a48       0x70 ./src/common_support.o
+                0x00001a48                make_argv
  .text.AnalyzeCommand
-                0x00001ac4        0x4 ./src/common_support.o
-                0x00001ac4                AnalyzeCommand
+                0x00001ab8        0x4 ./src/common_support.o
+                0x00001ab8                AnalyzeCommand
  .text.R_BSP_WarmStart
-                0x00001ac8       0x18 ./src/hal_entry.o
-                0x00001ac8                R_BSP_WarmStart
+                0x00001abc       0x18 ./src/hal_entry.o
+                0x00001abc                R_BSP_WarmStart
  .text.read_temperature
-                0x00001ae0       0x2c ./src/main_thread_entry.o
-                0x00001ae0                read_temperature
+                0x00001ad4       0x2c ./src/main_thread_entry.o
+                0x00001ad4                read_temperature
  .text.main_thread_entry
-                0x00001b0c      0x470 ./src/main_thread_entry.o
-                0x00001b0c                main_thread_entry
+                0x00001b00      0x470 ./src/main_thread_entry.o
+                0x00001b00                main_thread_entry
  .text.rxcmd_thread_entry
-                0x00001f7c       0x64 ./src/rxcmd_thread_entry.o
-                0x00001f7c                rxcmd_thread_entry
+                0x00001f70       0x64 ./src/rxcmd_thread_entry.o
+                0x00001f70                rxcmd_thread_entry
  .text.button_irq10_callback
-                0x00001fe0       0x4c ./src/rxcmd_thread_entry.o
-                0x00001fe0                button_irq10_callback
+                0x00001fd4       0x4c ./src/rxcmd_thread_entry.o
+                0x00001fd4                button_irq10_callback
  .text.external_irq0_callback
-                0x0000202c       0x4c ./src/rxcmd_thread_entry.o
-                0x0000202c                external_irq0_callback
+                0x00002020       0x4c ./src/rxcmd_thread_entry.o
+                0x00002020                external_irq0_callback
  .text.external_irq09_callback
-                0x00002078       0x50 ./src/rxcmd_thread_entry.o
-                0x00002078                external_irq09_callback
+                0x0000206c       0x50 ./src/rxcmd_thread_entry.o
+                0x0000206c                external_irq09_callback
  .text.system_monitor_entry
-                0x000020c8       0xcc ./src/system_monitor_entry.o
-                0x000020c8                system_monitor_entry
+                0x000020bc       0xcc ./src/system_monitor_entry.o
+                0x000020bc                system_monitor_entry
  .text.check_end
-                0x00002194       0xb8 ./src/txcmd_thread_entry.o
-                0x00002194                check_end
+                0x00002188       0xb8 ./src/txcmd_thread_entry.o
+                0x00002188                check_end
  .text.txcmd_thread_entry
-                0x0000224c      0x204 ./src/txcmd_thread_entry.o
-                0x0000224c                txcmd_thread_entry
+                0x00002240      0x204 ./src/txcmd_thread_entry.o
+                0x00002240                txcmd_thread_entry
  .text.usb_console_entry
-                0x00002450       0x10 ./src/usb_console_entry.o
-                0x00002450                usb_console_entry
+                0x00002444       0x10 ./src/usb_console_entry.o
+                0x00002444                usb_console_entry
  .text.rtos_callback
-                0x00002460       0x80 ./src/usb_console_main.o
-                0x00002460                rtos_callback
+                0x00002454       0x80 ./src/usb_console_main.o
+                0x00002454                rtos_callback
  .text.usb_console_main
-                0x000024e0      0x324 ./src/usb_console_main.o
-                0x000024e0                usb_console_main
+                0x000024d4      0x324 ./src/usb_console_main.o
+                0x000024d4                usb_console_main
  .text.print_to_console
-                0x00002804       0x58 ./src/usb_console_main.o
-                0x00002804                print_to_console
+                0x000027f8       0x58 ./src/usb_console_main.o
+                0x000027f8                print_to_console
  .text.g_common_init
-                0x0000285c       0x50 ./ra_gen/common_data.o
-                0x0000285c                g_common_init
+                0x00002850       0x50 ./ra_gen/common_data.o
+                0x00002850                g_common_init
  .text.g_hal_init
-                0x000028ac        0x4 ./ra_gen/hal_data.o
-                0x000028ac                g_hal_init
+                0x000028a0        0x4 ./ra_gen/hal_data.o
+                0x000028a0                g_hal_init
  .text.rtos_startup_err_callback_internal
-                0x000028b0        0x4 ./ra_gen/main.o
-                0x000028b0                rtos_startup_err_callback_internal
-                0x000028b0                rtos_startup_err_callback
+                0x000028a4        0x4 ./ra_gen/main.o
+                0x000028a4                rtos_startup_err_callback_internal
+                0x000028a4                rtos_startup_err_callback
  .text.rtos_startup_common_init
-                0x000028b4       0x68 ./ra_gen/main.o
-                0x000028b4                rtos_startup_common_init
+                0x000028a8       0x68 ./ra_gen/main.o
+                0x000028a8                rtos_startup_common_init
  .text.startup.main
-                0x0000291c       0x54 ./ra_gen/main.o
-                0x0000291c                main
+                0x00002910       0x54 ./ra_gen/main.o
+                0x00002910                main
  .text.vApplicationGetIdleTaskMemory
-                0x00002970       0x1c ./ra_gen/main.o
-                0x00002970                vApplicationGetIdleTaskMemory
+                0x00002964       0x1c ./ra_gen/main.o
+                0x00002964                vApplicationGetIdleTaskMemory
  .text.vApplicationGetTimerTaskMemory
-                0x0000298c       0x1c ./ra_gen/main.o
-                0x0000298c                vApplicationGetTimerTaskMemory
+                0x00002980       0x1c ./ra_gen/main.o
+                0x00002980                vApplicationGetTimerTaskMemory
  .text.main_thread_func
-                0x000029a8       0x14 ./ra_gen/main_thread.o
+                0x0000299c       0x14 ./ra_gen/main_thread.o
  .text.main_thread_create
-                0x000029bc       0x58 ./ra_gen/main_thread.o
-                0x000029bc                main_thread_create
+                0x000029b0       0x58 ./ra_gen/main_thread.o
+                0x000029b0                main_thread_create
  .text.rxcmd_thread_func
-                0x00002a14       0x14 ./ra_gen/rxcmd_thread.o
+                0x00002a08       0x14 ./ra_gen/rxcmd_thread.o
  .text.rxcmd_thread_create
-                0x00002a28       0x58 ./ra_gen/rxcmd_thread.o
-                0x00002a28                rxcmd_thread_create
+                0x00002a1c       0x58 ./ra_gen/rxcmd_thread.o
+                0x00002a1c                rxcmd_thread_create
  .text.system_monitor_func
-                0x00002a80       0x14 ./ra_gen/system_monitor.o
+                0x00002a74       0x14 ./ra_gen/system_monitor.o
  .text.system_monitor_create
-                0x00002a94       0x58 ./ra_gen/system_monitor.o
-                0x00002a94                system_monitor_create
+                0x00002a88       0x58 ./ra_gen/system_monitor.o
+                0x00002a88                system_monitor_create
  .text.txcmd_thread_func
-                0x00002aec       0x14 ./ra_gen/txcmd_thread.o
+                0x00002ae0       0x14 ./ra_gen/txcmd_thread.o
  .text.txcmd_thread_create
-                0x00002b00       0x58 ./ra_gen/txcmd_thread.o
-                0x00002b00                txcmd_thread_create
+                0x00002af4       0x58 ./ra_gen/txcmd_thread.o
+                0x00002af4                txcmd_thread_create
  .text.usb_console_func
-                0x00002b58       0x14 ./ra_gen/usb_console.o
+                0x00002b4c       0x14 ./ra_gen/usb_console.o
  .text.usb_console_create
-                0x00002b6c       0x58 ./ra_gen/usb_console.o
-                0x00002b6c                usb_console_create
+                0x00002b60       0x58 ./ra_gen/usb_console.o
+                0x00002b60                usb_console_create
  .text.prvTaskExitError
-                0x00002bc4        0x4 ./ra/fsp/src/rm_freertos_port/port.o
+                0x00002bb8        0x4 ./ra/fsp/src/rm_freertos_port/port.o
  .text.SVC_Handler
-                0x00002bc8       0x18 ./ra/fsp/src/rm_freertos_port/port.o
-                0x00002bc8                SVC_Handler
+                0x00002bbc       0x18 ./ra/fsp/src/rm_freertos_port/port.o
+                0x00002bbc                SVC_Handler
  .text.PendSV_Handler
-                0x00002be0       0x44 ./ra/fsp/src/rm_freertos_port/port.o
-                0x00002be0                PendSV_Handler
+                0x00002bd4       0x44 ./ra/fsp/src/rm_freertos_port/port.o
+                0x00002bd4                PendSV_Handler
  .text.rm_freertos_port_restore_task_stackless
-                0x00002c24       0x24 ./ra/fsp/src/rm_freertos_port/port.o
-                0x00002c24                rm_freertos_port_restore_task_stackless
+                0x00002c18       0x24 ./ra/fsp/src/rm_freertos_port/port.o
+                0x00002c18                rm_freertos_port_restore_task_stackless
  .text.SysTick_Handler
-                0x00002c48       0x24 ./ra/fsp/src/rm_freertos_port/port.o
-                0x00002c48                SysTick_Handler
+                0x00002c3c       0x24 ./ra/fsp/src/rm_freertos_port/port.o
+                0x00002c3c                SysTick_Handler
  .text.vPortSVCHandler_C
-                0x00002c6c       0x34 ./ra/fsp/src/rm_freertos_port/port.o
-                0x00002c6c                vPortSVCHandler_C
+                0x00002c60       0x34 ./ra/fsp/src/rm_freertos_port/port.o
+                0x00002c60                vPortSVCHandler_C
  .text.pxPortInitialiseStack
-                0x00002ca0       0x34 ./ra/fsp/src/rm_freertos_port/port.o
-                0x00002ca0                pxPortInitialiseStack
+                0x00002c94       0x34 ./ra/fsp/src/rm_freertos_port/port.o
+                0x00002c94                pxPortInitialiseStack
  .text.vPortEnterCritical
-                0x00002cd4       0x50 ./ra/fsp/src/rm_freertos_port/port.o
-                0x00002cd4                vPortEnterCritical
+                0x00002cc8       0x50 ./ra/fsp/src/rm_freertos_port/port.o
+                0x00002cc8                vPortEnterCritical
  .text.vPortExitCritical
-                0x00002d24       0x3c ./ra/fsp/src/rm_freertos_port/port.o
-                0x00002d24                vPortExitCritical
+                0x00002d18       0x3c ./ra/fsp/src/rm_freertos_port/port.o
+                0x00002d18                vPortExitCritical
  .text.vPortSetupTimerInterrupt
-                0x00002d60       0x44 ./ra/fsp/src/rm_freertos_port/port.o
-                0x00002d60                vPortSetupTimerInterrupt
+                0x00002d54       0x44 ./ra/fsp/src/rm_freertos_port/port.o
+                0x00002d54                vPortSetupTimerInterrupt
  .text.xPortStartScheduler
-                0x00002da4       0x3c ./ra/fsp/src/rm_freertos_port/port.o
-                0x00002da4                xPortStartScheduler
+                0x00002d98       0x3c ./ra/fsp/src/rm_freertos_port/port.o
+                0x00002d98                xPortStartScheduler
  .text.vPortValidateInterruptPriority
-                0x00002de0       0x5c ./ra/fsp/src/rm_freertos_port/port.o
-                0x00002de0                vPortValidateInterruptPriority
+                0x00002dd4       0x5c ./ra/fsp/src/rm_freertos_port/port.o
+                0x00002dd4                vPortValidateInterruptPriority
  .text.usb_pcdc_read_complete
-                0x00002e3c       0x6c ./ra/fsp/src/r_usb_pcdc/src/r_usb_pcdc_driver.o
-                0x00002e3c                usb_pcdc_read_complete
+                0x00002e30       0x6c ./ra/fsp/src/r_usb_pcdc/src/r_usb_pcdc_driver.o
+                0x00002e30                usb_pcdc_read_complete
  .text.usb_pcdc_write_complete
-                0x00002ea8       0x60 ./ra/fsp/src/r_usb_pcdc/src/r_usb_pcdc_driver.o
-                0x00002ea8                usb_pcdc_write_complete
+                0x00002e9c       0x60 ./ra/fsp/src/r_usb_pcdc/src/r_usb_pcdc_driver.o
+                0x00002e9c                usb_pcdc_write_complete
  .text.usb_cstd_get_buf_size
-                0x00002f08       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
-                0x00002f08                usb_cstd_get_buf_size
+                0x00002efc       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
+                0x00002efc                usb_cstd_get_buf_size
  .text.usb_cstd_pipe_init
-                0x00002f38      0x150 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
-                0x00002f38                usb_cstd_pipe_init
+                0x00002f2c      0x150 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
+                0x00002f2c                usb_cstd_pipe_init
  .text.usb_cstd_clr_pipe_cnfg
-                0x00003088       0xdc ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
-                0x00003088                usb_cstd_clr_pipe_cnfg
+                0x0000307c       0xdc ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
+                0x0000307c                usb_cstd_clr_pipe_cnfg
  .text.usb_cstd_set_nak
-                0x00003164       0x2c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
-                0x00003164                usb_cstd_set_nak
+                0x00003158       0x2c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
+                0x00003158                usb_cstd_set_nak
  .text.usb_cstd_is_set_frdy
-                0x00003190       0x5c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
-                0x00003190                usb_cstd_is_set_frdy
+                0x00003184       0x5c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
+                0x00003184                usb_cstd_is_set_frdy
  .text.usb_cstd_chg_curpipe
-                0x000031ec       0x2c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
-                0x000031ec                usb_cstd_chg_curpipe
+                0x000031e0       0x2c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
+                0x000031e0                usb_cstd_chg_curpipe
  .text.usb_cstd_set_transaction_counter
-                0x00003218       0x24 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
-                0x00003218                usb_cstd_set_transaction_counter
+                0x0000320c       0x24 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
+                0x0000320c                usb_cstd_set_transaction_counter
  .text.usb_cstd_clr_transaction_counter
-                0x0000323c       0x18 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
-                0x0000323c                usb_cstd_clr_transaction_counter
+                0x00003230       0x18 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
+                0x00003230                usb_cstd_clr_transaction_counter
  .text.hw_usb_read_syscfg
-                0x00003254       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003254                hw_usb_read_syscfg
+                0x00003248       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003248                hw_usb_read_syscfg
  .text.hw_usb_read_syssts
-                0x00003288       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003288                hw_usb_read_syssts
+                0x0000327c       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x0000327c                hw_usb_read_syssts
  .text.hw_usb_read_dvstctr
-                0x000032bc       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x000032bc                hw_usb_read_dvstctr
+                0x000032b0       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x000032b0                hw_usb_read_dvstctr
  .text.hw_usb_read_fifo16
-                0x000032f0       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x000032f0                hw_usb_read_fifo16
+                0x000032e4       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x000032e4                hw_usb_read_fifo16
  .text.hw_usb_write_fifo16
-                0x00003324       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003324                hw_usb_write_fifo16
+                0x00003318       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003318                hw_usb_write_fifo16
  .text.hw_usb_write_fifo8
-                0x00003360       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003360                hw_usb_write_fifo8
+                0x00003354       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003354                hw_usb_write_fifo8
  .text.hw_usb_read_fifosel
-                0x0000339c       0x6c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x0000339c                hw_usb_read_fifosel
+                0x00003390       0x6c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003390                hw_usb_read_fifosel
  .text.hw_usb_rmw_fifosel
-                0x00003408       0x7c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003408                hw_usb_rmw_fifosel
+                0x000033fc       0x7c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x000033fc                hw_usb_rmw_fifosel
  .text.hw_usb_set_mbw
-                0x00003484       0x8c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003484                hw_usb_set_mbw
+                0x00003478       0x8c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003478                hw_usb_set_mbw
  .text.hw_usb_read_fifoctr
-                0x00003510       0x6c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003510                hw_usb_read_fifoctr
+                0x00003504       0x6c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003504                hw_usb_read_fifoctr
  .text.hw_usb_set_bval
-                0x0000357c       0x74 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x0000357c                hw_usb_set_bval
+                0x00003570       0x74 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003570                hw_usb_set_bval
  .text.hw_usb_set_bclr
-                0x000035f0       0x74 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x000035f0                hw_usb_set_bclr
+                0x000035e4       0x74 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x000035e4                hw_usb_set_bclr
  .text.hw_usb_set_brdyenb
-                0x00003664       0x40 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003664                hw_usb_set_brdyenb
+                0x00003658       0x40 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003658                hw_usb_set_brdyenb
  .text.hw_usb_clear_brdyenb
-                0x000036a4       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x000036a4                hw_usb_clear_brdyenb
+                0x00003698       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003698                hw_usb_clear_brdyenb
  .text.hw_usb_set_nrdyenb
-                0x000036e0       0x40 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x000036e0                hw_usb_set_nrdyenb
+                0x000036d4       0x40 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x000036d4                hw_usb_set_nrdyenb
  .text.hw_usb_clear_nrdyenb
-                0x00003720       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003720                hw_usb_clear_nrdyenb
+                0x00003714       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003714                hw_usb_clear_nrdyenb
  .text.hw_usb_set_bempenb
-                0x0000375c       0x40 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x0000375c                hw_usb_set_bempenb
+                0x00003750       0x40 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003750                hw_usb_set_bempenb
  .text.hw_usb_clear_bempenb
-                0x0000379c       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x0000379c                hw_usb_clear_bempenb
+                0x00003790       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003790                hw_usb_clear_bempenb
  .text.hw_usb_read_intsts
-                0x000037d8       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x000037d8                hw_usb_read_intsts
+                0x000037cc       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x000037cc                hw_usb_read_intsts
  .text.hw_usb_clear_sts_brdy
-                0x000037f8       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x000037f8                hw_usb_clear_sts_brdy
+                0x000037ec       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x000037ec                hw_usb_clear_sts_brdy
  .text.hw_usb_clear_status_nrdy
-                0x00003834       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003834                hw_usb_clear_status_nrdy
+                0x00003828       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003828                hw_usb_clear_status_nrdy
  .text.hw_usb_clear_status_bemp
-                0x00003870       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003870                hw_usb_clear_status_bemp
+                0x00003864       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003864                hw_usb_clear_status_bemp
  .text.hw_usb_read_frmnum
-                0x000038ac       0x38 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x000038ac                hw_usb_read_frmnum
+                0x000038a0       0x38 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x000038a0                hw_usb_read_frmnum
  .text.hw_usb_read_usbreq
-                0x000038e4       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x000038e4                hw_usb_read_usbreq
+                0x000038d8       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x000038d8                hw_usb_read_usbreq
  .text.hw_usb_read_usbval
-                0x00003904       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003904                hw_usb_read_usbval
+                0x000038f8       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x000038f8                hw_usb_read_usbval
  .text.hw_usb_read_usbindx
-                0x00003924       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003924                hw_usb_read_usbindx
+                0x00003918       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003918                hw_usb_read_usbindx
  .text.hw_usb_read_usbleng
-                0x00003944       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003944                hw_usb_read_usbleng
+                0x00003938       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003938                hw_usb_read_usbleng
  .text.hw_usb_read_dcpcfg
-                0x00003964       0x38 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003964                hw_usb_read_dcpcfg
+                0x00003958       0x38 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003958                hw_usb_read_dcpcfg
  .text.hw_usb_write_dcpcfg
-                0x0000399c       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x0000399c                hw_usb_write_dcpcfg
+                0x00003990       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003990                hw_usb_write_dcpcfg
  .text.hw_usb_read_dcpmaxp
-                0x000039cc       0x38 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x000039cc                hw_usb_read_dcpmaxp
+                0x000039c0       0x38 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x000039c0                hw_usb_read_dcpmaxp
  .text.hw_usb_write_dcpmxps
-                0x00003a04       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003a04                hw_usb_write_dcpmxps
+                0x000039f8       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x000039f8                hw_usb_write_dcpmxps
  .text.hw_usb_read_dcpctr
-                0x00003a34       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003a34                hw_usb_read_dcpctr
+                0x00003a28       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003a28                hw_usb_read_dcpctr
  .text.hw_usb_write_pipesel
-                0x00003a54       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003a54                hw_usb_write_pipesel
+                0x00003a48       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003a48                hw_usb_write_pipesel
  .text.hw_usb_read_pipecfg
-                0x00003a84       0x38 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003a84                hw_usb_read_pipecfg
+                0x00003a78       0x38 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003a78                hw_usb_read_pipecfg
  .text.hw_usb_write_pipecfg
-                0x00003abc       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003abc                hw_usb_write_pipecfg
+                0x00003ab0       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003ab0                hw_usb_write_pipecfg
  .text.hw_usb_read_pipemaxp
-                0x00003aec       0x38 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003aec                hw_usb_read_pipemaxp
+                0x00003ae0       0x38 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003ae0                hw_usb_read_pipemaxp
  .text.hw_usb_write_pipemaxp
-                0x00003b24       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003b24                hw_usb_write_pipemaxp
+                0x00003b18       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003b18                hw_usb_write_pipemaxp
  .text.hw_usb_write_pipeperi
-                0x00003b54       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003b54                hw_usb_write_pipeperi
+                0x00003b48       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003b48                hw_usb_write_pipeperi
  .text.hw_usb_read_pipectr
-                0x00003b84       0x68 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003b84                hw_usb_read_pipectr
+                0x00003b78       0x68 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003b78                hw_usb_read_pipectr
  .text.hw_usb_set_csclr
-                0x00003bec       0x38 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003bec                hw_usb_set_csclr
+                0x00003be0       0x38 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003be0                hw_usb_set_csclr
  .text.hw_usb_set_aclrm
-                0x00003c24       0x44 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003c24                hw_usb_set_aclrm
+                0x00003c18       0x44 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003c18                hw_usb_set_aclrm
  .text.hw_usb_clear_aclrm
-                0x00003c68       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003c68                hw_usb_clear_aclrm
+                0x00003c5c       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003c5c                hw_usb_clear_aclrm
  .text.hw_usb_set_sqclr
-                0x00003ca4       0x74 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003ca4                hw_usb_set_sqclr
+                0x00003c98       0x74 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003c98                hw_usb_set_sqclr
  .text.hw_usb_set_pid
-                0x00003d18       0x58 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003d18                hw_usb_set_pid
+                0x00003d0c       0x58 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003d0c                hw_usb_set_pid
  .text.hw_usb_clear_pid
-                0x00003d70       0x50 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003d70                hw_usb_clear_pid
+                0x00003d64       0x50 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003d64                hw_usb_clear_pid
  .text.hw_usb_set_trenb
-                0x00003dc0       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003dc0                hw_usb_set_trenb
+                0x00003db4       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003db4                hw_usb_set_trenb
  .text.hw_usb_clear_trenb
-                0x00003dfc       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003dfc                hw_usb_clear_trenb
+                0x00003df0       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003df0                hw_usb_clear_trenb
  .text.hw_usb_set_trclr
-                0x00003e38       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003e38                hw_usb_set_trclr
+                0x00003e2c       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003e2c                hw_usb_set_trclr
  .text.hw_usb_write_pipetrn
-                0x00003e74       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003e74                hw_usb_write_pipetrn
+                0x00003e68       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003e68                hw_usb_write_pipetrn
  .text.hw_usb_set_suspendm
-                0x00003ea8        0x4 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003ea8                hw_usb_set_suspendm
+                0x00003e9c        0x4 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003e9c                hw_usb_set_suspendm
  .text.hw_usb_clear_suspm
-                0x00003eac        0x4 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
-                0x00003eac                hw_usb_clear_suspm
+                0x00003ea0        0x4 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+                0x00003ea0                hw_usb_clear_suspm
  .text.usb_module_start
-                0x00003eb0       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
-                0x00003eb0                usb_module_start
+                0x00003ea4       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
+                0x00003ea4                usb_module_start
  .text.usb_cpu_usbint_init
-                0x00003ee4       0xe4 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
-                0x00003ee4                usb_cpu_usbint_init
+                0x00003ed8       0xe4 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
+                0x00003ed8                usb_cpu_usbint_init
  .text.usb_cpu_delay_1us
-                0x00003fc8        0x8 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
-                0x00003fc8                usb_cpu_delay_1us
+                0x00003fbc        0x8 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
+                0x00003fbc                usb_cpu_delay_1us
  .text.usb_cpu_delay_xms
-                0x00003fd0        0x4 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
-                0x00003fd0                usb_cpu_delay_xms
+                0x00003fc4        0x4 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
+                0x00003fc4                usb_cpu_delay_xms
  .text.usbfs_interrupt_handler
-                0x00003fd4       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
-                0x00003fd4                usbfs_interrupt_handler
+                0x00003fc8       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
+                0x00003fc8                usbfs_interrupt_handler
  .text.usbfs_resume_handler
-                0x00004008       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
-                0x00004008                usbfs_resume_handler
+                0x00003ffc       0x34 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
+                0x00003ffc                usbfs_resume_handler
  .text.usbfs_d0fifo_handler
-                0x0000403c       0x24 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
-                0x0000403c                usbfs_d0fifo_handler
+                0x00004030       0x24 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
+                0x00004030                usbfs_d0fifo_handler
  .text.usbfs_d1fifo_handler
-                0x00004060       0x24 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
-                0x00004060                usbfs_d1fifo_handler
+                0x00004054       0x24 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
+                0x00004054                usbfs_d1fifo_handler
  .text.usb_pstd_interrupt_handler
-                0x00004084      0x1fc ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x00004084                usb_pstd_interrupt_handler
+                0x00004078      0x1fc ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x00004078                usb_pstd_interrupt_handler
  .text.usb_pstd_save_request
-                0x00004280       0x48 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x00004280                usb_pstd_save_request
+                0x00004274       0x48 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x00004274                usb_pstd_save_request
  .text.usb_pstd_chk_configured
-                0x000042c8       0x1c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x000042c8                usb_pstd_chk_configured
+                0x000042bc       0x1c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x000042bc                usb_pstd_chk_configured
  .text.usb_pstd_remote_wakeup
-                0x000042e4       0x48 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x000042e4                usb_pstd_remote_wakeup
+                0x000042d8       0x48 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x000042d8                usb_pstd_remote_wakeup
  .text.usb_pstd_test_mode
-                0x0000432c        0x4 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x0000432c                usb_pstd_test_mode
+                0x00004320        0x4 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x00004320                usb_pstd_test_mode
  .text.usb_pstd_resume_process
-                0x00004330       0x18 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x00004330                usb_pstd_resume_process
+                0x00004324       0x18 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x00004324                usb_pstd_resume_process
  .text.usb_pstd_set_stall
-                0x00004348        0xc ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x00004348                usb_pstd_set_stall
+                0x0000433c        0xc ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x0000433c                usb_pstd_set_stall
  .text.usb_pstd_set_stall_pipe0
-                0x00004354        0x8 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x00004354                usb_pstd_set_stall_pipe0
+                0x00004348        0x8 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x00004348                usb_pstd_set_stall_pipe0
  .text.usb_pstd_write_fifo
-                0x0000435c       0x5c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x0000435c                usb_pstd_write_fifo
+                0x00004350       0x5c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x00004350                usb_pstd_write_fifo
  .text.usb_pstd_read_fifo
-                0x000043b8       0x48 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x000043b8                usb_pstd_read_fifo
+                0x000043ac       0x48 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x000043ac                usb_pstd_read_fifo
  .text.usb_pstd_forced_termination
-                0x00004400       0xb4 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x00004400                usb_pstd_forced_termination
+                0x000043f4       0xb4 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x000043f4                usb_pstd_forced_termination
  .text.usb_pstd_interrupt_clock
-                0x000044b4       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x000044b4                usb_pstd_interrupt_clock
+                0x000044a8       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x000044a8                usb_pstd_interrupt_clock
  .text.usb_pstd_self_clock
-                0x000044d4       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x000044d4                usb_pstd_self_clock
+                0x000044c8       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x000044c8                usb_pstd_self_clock
  .text.usb_pstd_stop_clock
-                0x000044f4       0x10 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
-                0x000044f4                usb_pstd_stop_clock
+                0x000044e8       0x10 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+                0x000044e8                usb_pstd_stop_clock
  .text.hw_usb_pset_dprpu
-                0x00004504       0x28 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
-                0x00004504                hw_usb_pset_dprpu
+                0x000044f8       0x28 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
+                0x000044f8                hw_usb_pset_dprpu
  .text.hw_usb_pclear_dprpu
-                0x0000452c       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
-                0x0000452c                hw_usb_pclear_dprpu
+                0x00004520       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
+                0x00004520                hw_usb_pclear_dprpu
  .text.hw_usb_pset_wkup
-                0x0000454c       0x28 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
-                0x0000454c                hw_usb_pset_wkup
+                0x00004540       0x28 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
+                0x00004540                hw_usb_pset_wkup
  .text.hw_usb_pset_enb_rsme
-                0x00004574       0x28 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
-                0x00004574                hw_usb_pset_enb_rsme
+                0x00004568       0x28 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
+                0x00004568                hw_usb_pset_enb_rsme
  .text.hw_usb_pclear_enb_rsme
-                0x0000459c       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
-                0x0000459c                hw_usb_pclear_enb_rsme
+                0x00004590       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
+                0x00004590                hw_usb_pclear_enb_rsme
  .text.hw_usb_pclear_sts_resm
-                0x000045bc       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
-                0x000045bc                hw_usb_pclear_sts_resm
+                0x000045b0       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
+                0x000045b0                hw_usb_pclear_sts_resm
  .text.hw_usb_pclear_sts_valid
-                0x000045dc       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
-                0x000045dc                hw_usb_pclear_sts_valid
+                0x000045d0       0x20 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
+                0x000045d0                hw_usb_pclear_sts_valid
  .text.hw_usb_pset_ccpl
-                0x000045fc       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
-                0x000045fc                hw_usb_pset_ccpl
+                0x000045f0       0x30 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
+                0x000045f0                hw_usb_pset_ccpl
  .text.hw_usb_pmodule_init
-                0x0000462c       0x40 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
-                0x0000462c                hw_usb_pmodule_init
+                0x00004620       0x40 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
+                0x00004620                hw_usb_pmodule_init
  .text.hw_usb_pcontrol_dcpctr_pid
-                0x0000466c       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
-                0x0000466c                hw_usb_pcontrol_dcpctr_pid
+                0x00004660       0x3c ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
+                0x00004660                hw_usb_pcontrol_dcpctr_pid
  .text.usb_ctrl_read
-                0x000046a8       0x50 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cdataio.o
-                0x000046a8                usb_ctrl_read
+                0x0000469c       0x50 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cdataio.o
+                0x0000469c                usb_ctrl_read
  .text.usb_ctrl_write
-                0x000046f8       0x94 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cdataio.o
-                0x000046f8                usb_ctrl_write
+                0x000046ec       0x94 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cdataio.o
+                0x000046ec                usb_ctrl_write
  .text.usb_data_read
-                0x0000478c       0x44 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cdataio.o
-                0x0000478c                usb_data_read
+                0x00004780       0x44 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cdataio.o
+                0x00004780                usb_data_read
  .text.usb_data_write
-                0x000047d0       0x68 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cdataio.o
-                0x000047d0                usb_data_write
+                0x000047c4       0x68 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cdataio.o
+                0x000047c4                usb_data_write
  .text.usb_cstd_nrdy_enable
-                0x00004838        0xc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
-                0x00004838                usb_cstd_nrdy_enable
+                0x0000482c        0xc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
+                0x0000482c                usb_cstd_nrdy_enable
  .text.usb_cstd_get_pid
-                0x00004844       0x14 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
-                0x00004844                usb_cstd_get_pid
+                0x00004838       0x14 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
+                0x00004838                usb_cstd_get_pid
  .text.usb_cstd_get_maxpacket_size
-                0x00004858       0x28 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
-                0x00004858                usb_cstd_get_maxpacket_size
+                0x0000484c       0x28 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
+                0x0000484c                usb_cstd_get_maxpacket_size
  .text.usb_cstd_get_pipe_dir
-                0x00004880       0x1c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
-                0x00004880                usb_cstd_get_pipe_dir
+                0x00004874       0x1c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
+                0x00004874                usb_cstd_get_pipe_dir
  .text.usb_cstd_get_pipe_type
-                0x0000489c       0x1c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
-                0x0000489c                usb_cstd_get_pipe_type
+                0x00004890       0x1c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
+                0x00004890                usb_cstd_get_pipe_type
  .text.usb_cstd_do_aclrm
-                0x000048b8       0x1c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
-                0x000048b8                usb_cstd_do_aclrm
+                0x000048ac       0x1c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
+                0x000048ac                usb_cstd_do_aclrm
  .text.usb_cstd_set_buf
-                0x000048d4        0xc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
-                0x000048d4                usb_cstd_set_buf
+                0x000048c8        0xc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
+                0x000048c8                usb_cstd_set_buf
  .text.usb_cstd_clr_stall
-                0x000048e0       0x20 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
-                0x000048e0                usb_cstd_clr_stall
+                0x000048d4       0x20 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
+                0x000048d4                usb_cstd_clr_stall
  .text.usb_cstd_port_speed
-                0x00004900       0x18 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
-                0x00004900                usb_cstd_port_speed
+                0x000048f4       0x18 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
+                0x000048f4                usb_cstd_port_speed
  .text.usb_set_event
-                0x00004918       0xf4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
-                0x00004918                usb_set_event
+                0x0000490c       0xf4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
+                0x0000490c                usb_set_event
  .text.usb_rtos_configuration
-                0x00004a0c       0x98 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
-                0x00004a0c                usb_rtos_configuration
+                0x00004a00       0x98 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
+                0x00004a00                usb_rtos_configuration
  .text.usb_cstd_rec_msg
-                0x00004aa4       0x3c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
-                0x00004aa4                usb_cstd_rec_msg
+                0x00004a98       0x3c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
+                0x00004a98                usb_cstd_rec_msg
  .text.usb_cstd_snd_msg
-                0x00004ae0       0x34 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
-                0x00004ae0                usb_cstd_snd_msg
+                0x00004ad4       0x34 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
+                0x00004ad4                usb_cstd_snd_msg
  .text.usb_cstd_isnd_msg
-                0x00004b14       0x4c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
-                0x00004b14                usb_cstd_isnd_msg
+                0x00004b08       0x4c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
+                0x00004b08                usb_cstd_isnd_msg
  .text.usb_cstd_pipe_msg_clear
-                0x00004b60       0x40 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
-                0x00004b60                usb_cstd_pipe_msg_clear
+                0x00004b54       0x40 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
+                0x00004b54                usb_cstd_pipe_msg_clear
  .text.usb_cstd_pipe0_msg_clear
-                0x00004ba0       0x40 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
-                0x00004ba0                usb_cstd_pipe0_msg_clear
+                0x00004b94       0x40 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
+                0x00004b94                usb_cstd_pipe0_msg_clear
  .text.usb_cstd_pipe_msg_re_forward
-                0x00004be0       0x64 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
-                0x00004be0                usb_cstd_pipe_msg_re_forward
+                0x00004bd4       0x64 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
+                0x00004bd4                usb_cstd_pipe_msg_re_forward
  .text.usb_cstd_pipe_msg_forward
-                0x00004c44       0x34 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
-                0x00004c44                usb_cstd_pipe_msg_forward
+                0x00004c38       0x34 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
+                0x00004c38                usb_cstd_pipe_msg_forward
  .text.usb_pstd_ctrl_read
-                0x00004c78       0x88 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pcontrolrw.o
-                0x00004c78                usb_pstd_ctrl_read
+                0x00004c6c       0x88 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pcontrolrw.o
+                0x00004c6c                usb_pstd_ctrl_read
  .text.usb_pstd_ctrl_write
-                0x00004d00       0x54 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pcontrolrw.o
-                0x00004d00                usb_pstd_ctrl_write
+                0x00004cf4       0x54 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pcontrolrw.o
+                0x00004cf4                usb_pstd_ctrl_write
  .text.usb_pstd_ctrl_end
-                0x00004d54       0x78 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pcontrolrw.o
-                0x00004d54                usb_pstd_ctrl_end
+                0x00004d48       0x78 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pcontrolrw.o
+                0x00004d48                usb_pstd_ctrl_end
  .text.usb_peri_configured
-                0x00004dcc       0x2c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00004dcc                usb_peri_configured
+                0x00004dc0       0x2c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00004dc0                usb_peri_configured
  .text.usb_peri_suspended
-                0x00004df8       0x1c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00004df8                usb_peri_suspended
+                0x00004dec       0x1c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00004dec                usb_peri_suspended
  .text.usb_peri_resume
-                0x00004e14       0x20 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00004e14                usb_peri_resume
+                0x00004e08       0x20 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00004e08                usb_peri_resume
  .text.usb_peri_interface
-                0x00004e34        0x4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00004e34                usb_peri_interface
+                0x00004e28        0x4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00004e28                usb_peri_interface
  .text.usb_peri_detach
-                0x00004e38       0x2c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00004e38                usb_peri_detach
+                0x00004e2c       0x2c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00004e2c                usb_peri_detach
  .text.usb_pstd_set_submitutr
-                0x00004e64       0x58 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00004e64                usb_pstd_set_submitutr
+                0x00004e58       0x58 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00004e58                usb_pstd_set_submitutr
  .text.usb_pstd_pcd_task
-                0x00004ebc      0x22c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00004ebc                usb_pstd_pcd_task
+                0x00004eb0      0x22c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00004eb0                usb_pstd_pcd_task
  .text.usb_pstd_clr_mem
-                0x000050e8       0x28 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x000050e8                usb_pstd_clr_mem
+                0x000050dc       0x28 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x000050dc                usb_pstd_clr_mem
  .text.usb_pstd_set_config_num
-                0x00005110       0x1c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00005110                usb_pstd_set_config_num
+                0x00005104       0x1c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00005104                usb_pstd_set_config_num
  .text.usb_pstd_clr_eptbl_index
-                0x0000512c       0x20 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x0000512c                usb_pstd_clr_eptbl_index
+                0x00005120       0x20 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00005120                usb_pstd_clr_eptbl_index
  .text.usb_pstd_get_interface_num
-                0x0000514c        0xc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x0000514c                usb_pstd_get_interface_num
+                0x00005140        0xc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00005140                usb_pstd_get_interface_num
  .text.usb_pstd_get_alternate_num
-                0x00005158       0x48 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00005158                usb_pstd_get_alternate_num
+                0x0000514c       0x48 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x0000514c                usb_pstd_get_alternate_num
  .text.usb_pstd_set_eptbl_index
-                0x000051a0       0xa8 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x000051a0                usb_pstd_set_eptbl_index
+                0x00005194       0xa8 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00005194                usb_pstd_set_eptbl_index
  .text.usb_pstd_chk_remote
-                0x00005248       0x1c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00005248                usb_pstd_chk_remote
+                0x0000523c       0x1c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x0000523c                usb_pstd_chk_remote
  .text.usb_pstd_get_current_power
-                0x00005264       0x10 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00005264                usb_pstd_get_current_power
+                0x00005258       0x10 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00005258                usb_pstd_get_current_power
  .text.usb_pstd_fifo_to_buf
-                0x00005274       0x70 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00005274                usb_pstd_fifo_to_buf
+                0x00005268       0x70 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00005268                usb_pstd_fifo_to_buf
  .text.usb_pstd_buf_to_fifo
-                0x000052e4       0x70 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x000052e4                usb_pstd_buf_to_fifo
+                0x000052d8       0x70 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x000052d8                usb_pstd_buf_to_fifo
  .text.usb_pstd_transfer_start
-                0x00005354       0x4c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00005354                usb_pstd_transfer_start
+                0x00005348       0x4c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00005348                usb_pstd_transfer_start
  .text.usb_peri_registration
-                0x000053a0       0x70 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x000053a0                usb_peri_registration
+                0x00005394       0x70 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00005394                usb_peri_registration
  .text.usb_peri_pipe_info
-                0x00005410       0x6c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x00005410                usb_peri_pipe_info
+                0x00005404       0x6c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00005404                usb_peri_pipe_info
  .text.usb_peri_devdefault
-                0x0000547c       0xac ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
-                0x0000547c                usb_peri_devdefault
+                0x00005470       0xac ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+                0x00005470                usb_peri_devdefault
  .text.usb_pstd_brdy_pipe
-                0x00005528       0x60 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pintfifo.o
-                0x00005528                usb_pstd_brdy_pipe
+                0x0000551c       0x60 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pintfifo.o
+                0x0000551c                usb_pstd_brdy_pipe
  .text.usb_pstd_nrdy_pipe
-                0x00005588        0xc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pintfifo.o
-                0x00005588                usb_pstd_nrdy_pipe
+                0x0000557c        0xc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pintfifo.o
+                0x0000557c                usb_pstd_nrdy_pipe
  .text.usb_pstd_bemp_pipe
-                0x00005594       0x48 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pintfifo.o
-                0x00005594                usb_pstd_bemp_pipe
+                0x00005588       0x48 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pintfifo.o
+                0x00005588                usb_pstd_bemp_pipe
  .text.usb_pstd_usb_handler
-                0x000055dc       0x70 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pinthandler_usbip0.o
-                0x000055dc                usb_pstd_usb_handler
+                0x000055d0       0x70 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pinthandler_usbip0.o
+                0x000055d0                usb_pstd_usb_handler
  .text.usb_pstd_data_end.part.0
-                0x0000564c       0x88 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005640       0x88 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
  .text.usb_pstd_epadr2pipe
-                0x000056d4       0x48 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x000056d4                usb_pstd_epadr2pipe
+                0x000056c8       0x48 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x000056c8                usb_pstd_epadr2pipe
  .text.usb_pstd_pipe2fport
-                0x0000571c        0x4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x0000571c                usb_pstd_pipe2fport
+                0x00005710        0x4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005710                usb_pstd_pipe2fport
  .text.usb_pstd_hi_speed_enable
-                0x00005720        0xc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x00005720                usb_pstd_hi_speed_enable
+                0x00005714        0xc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005714                usb_pstd_hi_speed_enable
  .text.usb_pstd_send_start
-                0x0000572c       0x5c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x0000572c                usb_pstd_send_start
+                0x00005720       0x5c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005720                usb_pstd_send_start
  .text.usb_pstd_write_data
-                0x00005788      0x10c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x00005788                usb_pstd_write_data
+                0x0000577c      0x10c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x0000577c                usb_pstd_write_data
  .text.usb_pstd_receive_start
-                0x00005894       0x88 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x00005894                usb_pstd_receive_start
+                0x00005888       0x88 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005888                usb_pstd_receive_start
  .text.usb_pstd_read_data
-                0x0000591c       0xfc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x0000591c                usb_pstd_read_data
+                0x00005910       0xfc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005910                usb_pstd_read_data
  .text.usb_pstd_data_end
-                0x00005a18        0xc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x00005a18                usb_pstd_data_end
+                0x00005a0c        0xc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005a0c                usb_pstd_data_end
  .text.usb_pstd_brdy_pipe_process
-                0x00005a24       0x64 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x00005a24                usb_pstd_brdy_pipe_process
+                0x00005a18       0x64 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005a18                usb_pstd_brdy_pipe_process
  .text.usb_pstd_nrdy_pipe_process
-                0x00005a88       0x58 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x00005a88                usb_pstd_nrdy_pipe_process
+                0x00005a7c       0x58 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005a7c                usb_pstd_nrdy_pipe_process
  .text.usb_pstd_bemp_pipe_process
-                0x00005ae0       0xe0 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x00005ae0                usb_pstd_bemp_pipe_process
+                0x00005ad4       0xe0 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005ad4                usb_pstd_bemp_pipe_process
  .text.usb_pstd_set_pipe_table
-                0x00005bc0       0xcc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x00005bc0                usb_pstd_set_pipe_table
+                0x00005bb4       0xcc ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005bb4                usb_pstd_set_pipe_table
  .text.usb_pstd_clr_pipe_table
-                0x00005c8c       0x3c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x00005c8c                usb_pstd_clr_pipe_table
+                0x00005c80       0x3c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005c80                usb_pstd_clr_pipe_table
  .text.usb_pstd_set_pipe_reg
-                0x00005cc8       0xa0 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x00005cc8                usb_pstd_set_pipe_reg
+                0x00005cbc       0xa0 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005cbc                usb_pstd_set_pipe_reg
  .text.usb_pstd_clr_pipe_reg
-                0x00005d68       0x3c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
-                0x00005d68                usb_pstd_clr_pipe_reg
+                0x00005d5c       0x3c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+                0x00005d5c                usb_pstd_clr_pipe_reg
  .text.usb_pstd_bus_reset
-                0x00005da4       0x3c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_psignal.o
-                0x00005da4                usb_pstd_bus_reset
+                0x00005d98       0x3c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_psignal.o
+                0x00005d98                usb_pstd_bus_reset
  .text.usb_pstd_attach_process
-                0x00005de0       0x18 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_psignal.o
-                0x00005de0                usb_pstd_attach_process
+                0x00005dd4       0x18 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_psignal.o
+                0x00005dd4                usb_pstd_attach_process
  .text.usb_pstd_detach_process
-                0x00005df8       0x80 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_psignal.o
-                0x00005df8                usb_pstd_detach_process
+                0x00005dec       0x80 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_psignal.o
+                0x00005dec                usb_pstd_detach_process
  .text.usb_pstd_suspend_process
-                0x00005e78       0x68 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_psignal.o
-                0x00005e78                usb_pstd_suspend_process
+                0x00005e6c       0x68 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_psignal.o
+                0x00005e6c                usb_pstd_suspend_process
  .text.usb_pstd_set_feature_function
-                0x00005ee0        0x4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdfunction.o
-                0x00005ee0                usb_pstd_set_feature_function
+                0x00005ed4        0x4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdfunction.o
+                0x00005ed4                usb_pstd_set_feature_function
  .text.usb_pstd_chk_vbsts
-                0x00005ee4       0x40 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdfunction.o
-                0x00005ee4                usb_pstd_chk_vbsts
+                0x00005ed8       0x40 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdfunction.o
+                0x00005ed8                usb_pstd_chk_vbsts
  .text.usb_pstd_busreset_function
-                0x00005f24        0x4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdfunction.o
-                0x00005f24                usb_pstd_busreset_function
+                0x00005f18        0x4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdfunction.o
+                0x00005f18                usb_pstd_busreset_function
  .text.usb_pstd_suspend_function
-                0x00005f28        0x4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdfunction.o
-                0x00005f28                usb_pstd_suspend_function
+                0x00005f1c        0x4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdfunction.o
+                0x00005f1c                usb_pstd_suspend_function
  .text.usb_pdriver_init
-                0x00005f2c       0xf4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdfunction.o
-                0x00005f2c                usb_pdriver_init
+                0x00005f20       0xf4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdfunction.o
+                0x00005f20                usb_pdriver_init
  .text.usb_pstd_stand_req0
-                0x00006020       0x80 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
-                0x00006020                usb_pstd_stand_req0
+                0x00006014       0x80 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
+                0x00006014                usb_pstd_stand_req0
  .text.usb_pstd_stand_req1
-                0x000060a0      0x294 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
-                0x000060a0                usb_pstd_stand_req1
+                0x00006094      0x294 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
+                0x00006094                usb_pstd_stand_req1
  .text.usb_pstd_stand_req2
-                0x00006334        0x4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
-                0x00006334                usb_pstd_stand_req2
+                0x00006328        0x4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
+                0x00006328                usb_pstd_stand_req2
  .text.usb_pstd_stand_req3
-                0x00006338      0x340 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
-                0x00006338                usb_pstd_stand_req3
+                0x0000632c      0x340 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
+                0x0000632c                usb_pstd_stand_req3
  .text.usb_pstd_stand_req4
-                0x00006678       0xc4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
-                0x00006678                usb_pstd_stand_req4
+                0x0000666c       0xc4 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
+                0x0000666c                usb_pstd_stand_req4
  .text.usb_pstd_stand_req5
-                0x0000673c       0xa8 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
-                0x0000673c                usb_pstd_stand_req5
+                0x00006730       0xa8 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
+                0x00006730                usb_pstd_stand_req5
  .text.usb_peri_class_request_rss
-                0x000067e4       0x54 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
-                0x000067e4                usb_peri_class_request_rss
+                0x000067d8       0x54 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
+                0x000067d8                usb_peri_class_request_rss
  .text.usb_peri_class_request_wss
-                0x00006838       0x60 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
-                0x00006838                usb_peri_class_request_wss
+                0x0000682c       0x60 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
+                0x0000682c                usb_peri_class_request_wss
  .text.usb_peri_class_request
-                0x00006898       0xf0 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
-                0x00006898                usb_peri_class_request
+                0x0000688c       0xf0 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
+                0x0000688c                usb_peri_class_request
  .text.R_USB_ModuleNumberGet
-                0x00006988        0xc ./ra/fsp/src/r_usb_basic/r_usb_basic.o
-                0x00006988                R_USB_ModuleNumberGet
+                0x0000697c        0xc ./ra/fsp/src/r_usb_basic/r_usb_basic.o
+                0x0000697c                R_USB_ModuleNumberGet
  .text.R_USB_ClassTypeGet
-                0x00006994       0x10 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
-                0x00006994                R_USB_ClassTypeGet
+                0x00006988       0x10 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
+                0x00006988                R_USB_ClassTypeGet
  .text.R_USB_SetupGet
-                0x000069a4       0x10 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
-                0x000069a4                R_USB_SetupGet
+                0x00006998       0x10 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
+                0x00006998                R_USB_SetupGet
  .text.R_USB_Open
-                0x000069b4       0xf4 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
-                0x000069b4                R_USB_Open
+                0x000069a8       0xf4 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
+                0x000069a8                R_USB_Open
  .text.R_USB_InfoGet
-                0x00006aa8       0xb4 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
-                0x00006aa8                R_USB_InfoGet
+                0x00006a9c       0xb4 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
+                0x00006a9c                R_USB_InfoGet
  .text.R_USB_Read
-                0x00006b5c       0x54 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
-                0x00006b5c                R_USB_Read
+                0x00006b50       0x54 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
+                0x00006b50                R_USB_Read
  .text.R_USB_Write
-                0x00006bb0       0x54 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
-                0x00006bb0                R_USB_Write
+                0x00006ba4       0x54 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
+                0x00006ba4                R_USB_Write
  .text.R_USB_PeriControlDataGet
-                0x00006c04       0x44 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
-                0x00006c04                R_USB_PeriControlDataGet
+                0x00006bf8       0x44 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
+                0x00006bf8                R_USB_PeriControlDataGet
  .text.R_USB_PeriControlDataSet
-                0x00006c48       0x44 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
-                0x00006c48                R_USB_PeriControlDataSet
+                0x00006c3c       0x44 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
+                0x00006c3c                R_USB_PeriControlDataSet
  .text.R_USB_PeriControlStatusSet
-                0x00006c8c       0x30 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
-                0x00006c8c                R_USB_PeriControlStatusSet
+                0x00006c80       0x30 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
+                0x00006c80                R_USB_PeriControlStatusSet
  .text.r_spi_call_callback
-                0x00006cbc       0x40 ./ra/fsp/src/r_spi/r_spi.o
+                0x00006cb0       0x40 ./ra/fsp/src/r_spi/r_spi.o
  .text.spi_rxi_isr
-                0x00006cfc       0x9c ./ra/fsp/src/r_spi/r_spi.o
-                0x00006cfc                spi_rxi_isr
+                0x00006cf0       0x9c ./ra/fsp/src/r_spi/r_spi.o
+                0x00006cf0                spi_rxi_isr
  .text.spi_txi_isr
-                0x00006d98       0xd8 ./ra/fsp/src/r_spi/r_spi.o
-                0x00006d98                spi_txi_isr
+                0x00006d8c       0xd8 ./ra/fsp/src/r_spi/r_spi.o
+                0x00006d8c                spi_txi_isr
  .text.spi_tei_isr
-                0x00006e70       0xe8 ./ra/fsp/src/r_spi/r_spi.o
-                0x00006e70                spi_tei_isr
+                0x00006e64       0xe8 ./ra/fsp/src/r_spi/r_spi.o
+                0x00006e64                spi_tei_isr
  .text.spi_eri_isr
-                0x00006f58       0xec ./ra/fsp/src/r_spi/r_spi.o
-                0x00006f58                spi_eri_isr
+                0x00006f4c       0xec ./ra/fsp/src/r_spi/r_spi.o
+                0x00006f4c                spi_eri_isr
  .text.R_SDHI_IoIntEnable
-                0x00007044       0x2c ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x00007044                R_SDHI_IoIntEnable
+                0x00007038       0x2c ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007038                R_SDHI_IoIntEnable
  .text.R_SDHI_StatusGet
-                0x00007070       0x30 ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x00007070                R_SDHI_StatusGet
+                0x00007064       0x30 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007064                R_SDHI_StatusGet
  .text.R_SDHI_CallbackSet
-                0x000070a0       0x10 ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x000070a0                R_SDHI_CallbackSet
+                0x00007094       0x10 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007094                R_SDHI_CallbackSet
  .text.r_sdhi_max_clock_rate_set
-                0x000070b0       0x7c ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x000070a4       0x7c ./ra/fsp/src/r_sdhi/r_sdhi.o
  .text.r_sdhi_transfer_read
-                0x0000712c       0x48 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007120       0x48 ./ra/fsp/src/r_sdhi/r_sdhi.o
  .text.r_sdhi_transfer_write
-                0x00007174       0x44 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007168       0x44 ./ra/fsp/src/r_sdhi/r_sdhi.o
  .text.r_sdhi_call_callback
-                0x000071b8       0x4c ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x000071ac       0x4c ./ra/fsp/src/r_sdhi/r_sdhi.o
  .text.R_SDHI_Open
-                0x00007204      0x1f4 ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x00007204                R_SDHI_Open
+                0x000071f8      0x1f4 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x000071f8                R_SDHI_Open
  .text.r_sdhi_command_send
-                0x000073f8       0xac ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x000073ec       0xac ./ra/fsp/src/r_sdhi/r_sdhi.o
  .text.R_SDHI_ReadIo
-                0x000074a4       0x4c ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x000074a4                R_SDHI_ReadIo
+                0x00007498       0x4c ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007498                R_SDHI_ReadIo
  .text.R_SDHI_WriteIo
-                0x000074f0       0x5c ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x000074f0                R_SDHI_WriteIo
+                0x000074e4       0x5c ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x000074e4                R_SDHI_WriteIo
  .text.R_SDHI_Close
-                0x0000754c       0xcc ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x0000754c                R_SDHI_Close
+                0x00007540       0xcc ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007540                R_SDHI_Close
  .text.R_SDHI_Read
-                0x00007618       0x88 ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x00007618                R_SDHI_Read
+                0x0000760c       0x88 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x0000760c                R_SDHI_Read
  .text.R_SDHI_WriteIoExt
-                0x000076a0       0xf8 ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x000076a0                R_SDHI_WriteIoExt
+                0x00007694       0xf8 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007694                R_SDHI_WriteIoExt
  .text.R_SDHI_Write
-                0x00007798       0x9c ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x00007798                R_SDHI_Write
+                0x0000778c       0x9c ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x0000778c                R_SDHI_Write
  .text.R_SDHI_ReadIoExt
-                0x00007834       0xe8 ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x00007834                R_SDHI_ReadIoExt
+                0x00007828       0xe8 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007828                R_SDHI_ReadIoExt
  .text.R_SDHI_Erase
-                0x0000791c       0x8c ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x0000791c                R_SDHI_Erase
+                0x00007910       0x8c ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007910                R_SDHI_Erase
  .text.R_SDHI_MediaInit
-                0x000079a8      0x468 ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x000079a8                R_SDHI_MediaInit
+                0x0000799c      0x468 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x0000799c                R_SDHI_MediaInit
  .text.sdhimmc_accs_isr
-                0x00007e10      0x134 ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x00007e10                sdhimmc_accs_isr
+                0x00007e04      0x134 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007e04                sdhimmc_accs_isr
  .text.sdhimmc_card_isr
-                0x00007f44       0x74 ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x00007f44                sdhimmc_card_isr
+                0x00007f38       0x74 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007f38                sdhimmc_card_isr
  .text.sdhimmc_dma_req_isr
-                0x00007fb8       0x24 ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x00007fb8                sdhimmc_dma_req_isr
+                0x00007fac       0x24 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x00007fac                sdhimmc_dma_req_isr
  .text.r_sci_uart_call_callback
-                0x00007fdc       0x44 ./ra/fsp/src/r_sci_uart/r_sci_uart.o
+                0x00007fd0       0x44 ./ra/fsp/src/r_sci_uart/r_sci_uart.o
  .text.sci_uart_txi_isr
-                0x00008020       0x9c ./ra/fsp/src/r_sci_uart/r_sci_uart.o
-                0x00008020                sci_uart_txi_isr
+                0x00008014       0x9c ./ra/fsp/src/r_sci_uart/r_sci_uart.o
+                0x00008014                sci_uart_txi_isr
  .text.sci_uart_rxi_isr
-                0x000080bc       0x90 ./ra/fsp/src/r_sci_uart/r_sci_uart.o
-                0x000080bc                sci_uart_rxi_isr
+                0x000080b0       0x90 ./ra/fsp/src/r_sci_uart/r_sci_uart.o
+                0x000080b0                sci_uart_rxi_isr
  .text.sci_uart_tei_isr
-                0x0000814c       0x48 ./ra/fsp/src/r_sci_uart/r_sci_uart.o
-                0x0000814c                sci_uart_tei_isr
+                0x00008140       0x48 ./ra/fsp/src/r_sci_uart/r_sci_uart.o
+                0x00008140                sci_uart_tei_isr
  .text.sci_uart_eri_isr
-                0x00008194       0x78 ./ra/fsp/src/r_sci_uart/r_sci_uart.o
-                0x00008194                sci_uart_eri_isr
+                0x00008188       0x78 ./ra/fsp/src/r_sci_uart/r_sci_uart.o
+                0x00008188                sci_uart_eri_isr
  .text.R_IOPORT_Close
-                0x0000820c        0xc ./ra/fsp/src/r_ioport/r_ioport.o
-                0x0000820c                R_IOPORT_Close
+                0x00008200        0xc ./ra/fsp/src/r_ioport/r_ioport.o
+                0x00008200                R_IOPORT_Close
  .text.R_IOPORT_PinRead
-                0x00008218       0x24 ./ra/fsp/src/r_ioport/r_ioport.o
-                0x00008218                R_IOPORT_PinRead
+                0x0000820c       0x24 ./ra/fsp/src/r_ioport/r_ioport.o
+                0x0000820c                R_IOPORT_PinRead
  .text.R_IOPORT_PortRead
-                0x0000823c       0x14 ./ra/fsp/src/r_ioport/r_ioport.o
-                0x0000823c                R_IOPORT_PortRead
+                0x00008230       0x14 ./ra/fsp/src/r_ioport/r_ioport.o
+                0x00008230                R_IOPORT_PortRead
  .text.R_IOPORT_PortWrite
-                0x00008250       0x1c ./ra/fsp/src/r_ioport/r_ioport.o
-                0x00008250                R_IOPORT_PortWrite
+                0x00008244       0x1c ./ra/fsp/src/r_ioport/r_ioport.o
+                0x00008244                R_IOPORT_PortWrite
  .text.R_IOPORT_PinWrite
-                0x0000826c       0x20 ./ra/fsp/src/r_ioport/r_ioport.o
-                0x0000826c                R_IOPORT_PinWrite
+                0x00008260       0x20 ./ra/fsp/src/r_ioport/r_ioport.o
+                0x00008260                R_IOPORT_PinWrite
  .text.R_IOPORT_PortDirectionSet
-                0x0000828c       0x2c ./ra/fsp/src/r_ioport/r_ioport.o
-                0x0000828c                R_IOPORT_PortDirectionSet
+                0x00008280       0x2c ./ra/fsp/src/r_ioport/r_ioport.o
+                0x00008280                R_IOPORT_PortDirectionSet
  .text.R_IOPORT_PortEventInputRead
-                0x000082b8       0x18 ./ra/fsp/src/r_ioport/r_ioport.o
-                0x000082b8                R_IOPORT_PortEventInputRead
+                0x000082ac       0x18 ./ra/fsp/src/r_ioport/r_ioport.o
+                0x000082ac                R_IOPORT_PortEventInputRead
  .text.R_IOPORT_PinEventInputRead
-                0x000082d0       0x34 ./ra/fsp/src/r_ioport/r_ioport.o
-                0x000082d0                R_IOPORT_PinEventInputRead
+                0x000082c4       0x34 ./ra/fsp/src/r_ioport/r_ioport.o
+                0x000082c4                R_IOPORT_PinEventInputRead
  .text.R_IOPORT_PortEventOutputWrite
-                0x00008304       0x1c ./ra/fsp/src/r_ioport/r_ioport.o
-                0x00008304                R_IOPORT_PortEventOutputWrite
+                0x000082f8       0x1c ./ra/fsp/src/r_ioport/r_ioport.o
+                0x000082f8                R_IOPORT_PortEventOutputWrite
  .text.R_IOPORT_PinEventOutputWrite
-                0x00008320       0x34 ./ra/fsp/src/r_ioport/r_ioport.o
-                0x00008320                R_IOPORT_PinEventOutputWrite
+                0x00008314       0x34 ./ra/fsp/src/r_ioport/r_ioport.o
+                0x00008314                R_IOPORT_PinEventOutputWrite
  .text.bsp_vbatt_init
-                0x00008354       0x9c ./ra/fsp/src/r_ioport/r_ioport.o
+                0x00008348       0x9c ./ra/fsp/src/r_ioport/r_ioport.o
  .text.r_ioport_pins_config
-                0x000083f0       0xac ./ra/fsp/src/r_ioport/r_ioport.o
+                0x000083e4       0xac ./ra/fsp/src/r_ioport/r_ioport.o
  .text.R_IOPORT_Open
-                0x0000849c       0x14 ./ra/fsp/src/r_ioport/r_ioport.o
-                0x0000849c                R_IOPORT_Open
+                0x00008490       0x14 ./ra/fsp/src/r_ioport/r_ioport.o
+                0x00008490                R_IOPORT_Open
  .text.R_IOPORT_PinsCfg
-                0x000084b0        0xc ./ra/fsp/src/r_ioport/r_ioport.o
-                0x000084b0                R_IOPORT_PinsCfg
+                0x000084a4        0xc ./ra/fsp/src/r_ioport/r_ioport.o
+                0x000084a4                R_IOPORT_PinsCfg
  .text.R_IOPORT_PinCfg
-                0x000084bc       0xa8 ./ra/fsp/src/r_ioport/r_ioport.o
-                0x000084bc                R_IOPORT_PinCfg
+                0x000084b0       0xa8 ./ra/fsp/src/r_ioport/r_ioport.o
+                0x000084b0                R_IOPORT_PinCfg
  .text.R_ICU_ExternalIrqOpen
-                0x00008564       0x84 ./ra/fsp/src/r_icu/r_icu.o
-                0x00008564                R_ICU_ExternalIrqOpen
+                0x00008558       0x84 ./ra/fsp/src/r_icu/r_icu.o
+                0x00008558                R_ICU_ExternalIrqOpen
  .text.R_ICU_ExternalIrqEnable
-                0x000085e8       0x44 ./ra/fsp/src/r_icu/r_icu.o
-                0x000085e8                R_ICU_ExternalIrqEnable
+                0x000085dc       0x44 ./ra/fsp/src/r_icu/r_icu.o
+                0x000085dc                R_ICU_ExternalIrqEnable
  .text.R_ICU_ExternalIrqDisable
-                0x0000862c       0x30 ./ra/fsp/src/r_icu/r_icu.o
-                0x0000862c                R_ICU_ExternalIrqDisable
+                0x00008620       0x30 ./ra/fsp/src/r_icu/r_icu.o
+                0x00008620                R_ICU_ExternalIrqDisable
  .text.R_ICU_ExternalIrqCallbackSet
-                0x0000865c        0xc ./ra/fsp/src/r_icu/r_icu.o
-                0x0000865c                R_ICU_ExternalIrqCallbackSet
+                0x00008650        0xc ./ra/fsp/src/r_icu/r_icu.o
+                0x00008650                R_ICU_ExternalIrqCallbackSet
  .text.R_ICU_ExternalIrqClose
-                0x00008668       0x4c ./ra/fsp/src/r_icu/r_icu.o
-                0x00008668                R_ICU_ExternalIrqClose
+                0x0000865c       0x4c ./ra/fsp/src/r_icu/r_icu.o
+                0x0000865c                R_ICU_ExternalIrqClose
  .text.r_icu_isr
-                0x000086b4       0x74 ./ra/fsp/src/r_icu/r_icu.o
-                0x000086b4                r_icu_isr
+                0x000086a8       0x74 ./ra/fsp/src/r_icu/r_icu.o
+                0x000086a8                r_icu_isr
  .text.R_DTC_Reset
-                0x00008728       0x84 ./ra/fsp/src/r_dtc/r_dtc.o
-                0x00008728                R_DTC_Reset
+                0x0000871c       0x84 ./ra/fsp/src/r_dtc/r_dtc.o
+                0x0000871c                R_DTC_Reset
  .text.R_DTC_SoftwareStart
-                0x000087ac        0x4 ./ra/fsp/src/r_dtc/r_dtc.o
-                0x000087ac                R_DTC_SoftwareStart
+                0x000087a0        0x4 ./ra/fsp/src/r_dtc/r_dtc.o
+                0x000087a0                R_DTC_SoftwareStart
  .text.R_DTC_SoftwareStop
-                0x000087b0        0x4 ./ra/fsp/src/r_dtc/r_dtc.o
-                0x000087b0                R_DTC_SoftwareStop
+                0x000087a4        0x4 ./ra/fsp/src/r_dtc/r_dtc.o
+                0x000087a4                R_DTC_SoftwareStop
  .text.R_DTC_Enable
-                0x000087b4       0x20 ./ra/fsp/src/r_dtc/r_dtc.o
-                0x000087b4                R_DTC_Enable
+                0x000087a8       0x20 ./ra/fsp/src/r_dtc/r_dtc.o
+                0x000087a8                R_DTC_Enable
  .text.R_DTC_Disable
-                0x000087d4       0x20 ./ra/fsp/src/r_dtc/r_dtc.o
-                0x000087d4                R_DTC_Disable
+                0x000087c8       0x20 ./ra/fsp/src/r_dtc/r_dtc.o
+                0x000087c8                R_DTC_Disable
  .text.R_DTC_InfoGet
-                0x000087f4       0x5c ./ra/fsp/src/r_dtc/r_dtc.o
-                0x000087f4                R_DTC_InfoGet
+                0x000087e8       0x5c ./ra/fsp/src/r_dtc/r_dtc.o
+                0x000087e8                R_DTC_InfoGet
  .text.R_DTC_Reload
-                0x00008850        0x4 ./ra/fsp/src/r_dtc/r_dtc.o
-                0x00008850                R_DTC_Reload
+                0x00008844        0x4 ./ra/fsp/src/r_dtc/r_dtc.o
+                0x00008844                R_DTC_Reload
  .text.R_DTC_CallbackSet
-                0x00008854        0x4 ./ra/fsp/src/r_dtc/r_dtc.o
-                0x00008854                R_DTC_CallbackSet
+                0x00008848        0x4 ./ra/fsp/src/r_dtc/r_dtc.o
+                0x00008848                R_DTC_CallbackSet
  .text.R_DTC_Close
-                0x00008858       0x30 ./ra/fsp/src/r_dtc/r_dtc.o
-                0x00008858                R_DTC_Close
+                0x0000884c       0x30 ./ra/fsp/src/r_dtc/r_dtc.o
+                0x0000884c                R_DTC_Close
  .text.R_DTC_Reconfigure
-                0x00008888       0x74 ./ra/fsp/src/r_dtc/r_dtc.o
-                0x00008888                R_DTC_Reconfigure
+                0x0000887c       0x74 ./ra/fsp/src/r_dtc/r_dtc.o
+                0x0000887c                R_DTC_Reconfigure
  .text.R_DTC_Open
-                0x000088fc       0xb0 ./ra/fsp/src/r_dtc/r_dtc.o
-                0x000088fc                R_DTC_Open
+                0x000088f0       0xb0 ./ra/fsp/src/r_dtc/r_dtc.o
+                0x000088f0                R_DTC_Open
  .text.SystemCoreClockUpdate
-                0x000089ac       0x28 ./ra/fsp/src/bsp/mcu/all/bsp_clocks.o
-                0x000089ac                SystemCoreClockUpdate
+                0x000089a0       0x28 ./ra/fsp/src/bsp/mcu/all/bsp_clocks.o
+                0x000089a0                SystemCoreClockUpdate
  .text.R_BSP_SubClockStabilizeWaitAfterReset
-                0x000089d4        0x4 ./ra/fsp/src/bsp/mcu/all/bsp_clocks.o
-                0x000089d4                R_BSP_SubClockStabilizeWaitAfterReset
+                0x000089c8        0x4 ./ra/fsp/src/bsp/mcu/all/bsp_clocks.o
+                0x000089c8                R_BSP_SubClockStabilizeWaitAfterReset
  .text.bsp_clock_init
-                0x000089d8      0x1a0 ./ra/fsp/src/bsp/mcu/all/bsp_clocks.o
-                0x000089d8                bsp_clock_init
+                0x000089cc      0x1a0 ./ra/fsp/src/bsp/mcu/all/bsp_clocks.o
+                0x000089cc                bsp_clock_init
  .text.R_BSP_Init_RTC
-                0x00008b78       0x68 ./ra/fsp/src/bsp/mcu/all/bsp_clocks.o
-                0x00008b78                R_BSP_Init_RTC
+                0x00008b6c       0x68 ./ra/fsp/src/bsp/mcu/all/bsp_clocks.o
+                0x00008b6c                R_BSP_Init_RTC
  .text.__assert_func
-                0x00008be0        0x4 ./ra/fsp/src/bsp/mcu/all/bsp_common.o
-                0x00008be0                __assert_func
+                0x00008bd4        0x4 ./ra/fsp/src/bsp/mcu/all/bsp_common.o
+                0x00008bd4                __assert_func
  .text.bsp_prv_software_delay_loop
-                0x00008be4        0xc ./ra/fsp/src/bsp/mcu/all/bsp_delay.o
-                0x00008be4                bsp_prv_software_delay_loop
+                0x00008bd8        0xc ./ra/fsp/src/bsp/mcu/all/bsp_delay.o
+                0x00008bd8                bsp_prv_software_delay_loop
  .text.R_BSP_SoftwareDelay
-                0x00008bf0       0x58 ./ra/fsp/src/bsp/mcu/all/bsp_delay.o
-                0x00008bf0                R_BSP_SoftwareDelay
+                0x00008be4       0x58 ./ra/fsp/src/bsp/mcu/all/bsp_delay.o
+                0x00008be4                R_BSP_SoftwareDelay
  .text.NMI_Handler
-                0x00008c48       0x3c ./ra/fsp/src/bsp/mcu/all/bsp_group_irq.o
-                0x00008c48                NMI_Handler
+                0x00008c3c       0x3c ./ra/fsp/src/bsp/mcu/all/bsp_group_irq.o
+                0x00008c3c                NMI_Handler
  .text.bsp_irq_cfg
-                0x00008c84       0xa4 ./ra/fsp/src/bsp/mcu/all/bsp_irq.o
-                0x00008c84                bsp_irq_cfg
+                0x00008c78       0xa4 ./ra/fsp/src/bsp/mcu/all/bsp_irq.o
+                0x00008c78                bsp_irq_cfg
  .text.R_BSP_RegisterProtectEnable
-                0x00008d28       0x60 ./ra/fsp/src/bsp/mcu/all/bsp_register_protection.o
-                0x00008d28                R_BSP_RegisterProtectEnable
+                0x00008d1c       0x60 ./ra/fsp/src/bsp/mcu/all/bsp_register_protection.o
+                0x00008d1c                R_BSP_RegisterProtectEnable
  .text.R_BSP_RegisterProtectDisable
-                0x00008d88       0x54 ./ra/fsp/src/bsp/mcu/all/bsp_register_protection.o
-                0x00008d88                R_BSP_RegisterProtectDisable
- .text._sbrk    0x00008ddc       0x40 ./ra/fsp/src/bsp/mcu/all/bsp_sbrk.o
-                0x00008ddc                _sbrk
+                0x00008d7c       0x54 ./ra/fsp/src/bsp/mcu/all/bsp_register_protection.o
+                0x00008d7c                R_BSP_RegisterProtectDisable
+ .text._sbrk    0x00008dd0       0x40 ./ra/fsp/src/bsp/mcu/all/bsp_sbrk.o
+                0x00008dd0                _sbrk
  .text.Default_Handler
-                0x00008e1c        0x4 ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.o
-                0x00008e1c                DebugMon_Handler
-                0x00008e1c                HardFault_Handler
-                0x00008e1c                UsageFault_Handler
-                0x00008e1c                SecureFault_Handler
-                0x00008e1c                Default_Handler
-                0x00008e1c                MemManage_Handler
-                0x00008e1c                BusFault_Handler
+                0x00008e10        0x4 ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.o
+                0x00008e10                DebugMon_Handler
+                0x00008e10                HardFault_Handler
+                0x00008e10                UsageFault_Handler
+                0x00008e10                SecureFault_Handler
+                0x00008e10                Default_Handler
+                0x00008e10                MemManage_Handler
+                0x00008e10                BusFault_Handler
  .text.Reset_Handler
-                0x00008e20        0xc ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.o
-                0x00008e20                Reset_Handler
+                0x00008e14        0xc ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.o
+                0x00008e14                Reset_Handler
  .text.SystemInit
-                0x00008e2c       0xe0 ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/system.o
-                0x00008e2c                SystemInit
+                0x00008e20       0xe0 ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/system.o
+                0x00008e20                SystemInit
  .text.bsp_init
-                0x00008f0c        0x4 ./ra/board/ra6m4_ek/board_init.o
-                0x00008f0c                bsp_init
+                0x00008f00        0x4 ./ra/board/ra6m4_ek/board_init.o
+                0x00008f00                bsp_init
  .text.prvInsertBlockIntoFreeList
-                0x00008f10       0x60 ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
+                0x00008f04       0x60 ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
  .text.pvPortMalloc
-                0x00008f70      0x134 ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
-                0x00008f70                pvPortMalloc
+                0x00008f64      0x134 ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
+                0x00008f64                pvPortMalloc
  .text.vPortFree
-                0x000090a4       0x7c ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
-                0x000090a4                vPortFree
+                0x00009098       0x7c ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
+                0x00009098                vPortFree
  .text.xEventGroupCreateStatic
-                0x00009120       0x50 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
-                0x00009120                xEventGroupCreateStatic
+                0x00009114       0x50 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+                0x00009114                xEventGroupCreateStatic
  .text.xEventGroupWaitBits
-                0x00009170      0x148 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
-                0x00009170                xEventGroupWaitBits
+                0x00009164      0x148 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+                0x00009164                xEventGroupWaitBits
  .text.xEventGroupGetBitsFromISR
-                0x000092b8       0x14 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
-                0x000092b8                xEventGroupGetBitsFromISR
+                0x000092ac       0x14 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+                0x000092ac                xEventGroupGetBitsFromISR
  .text.xEventGroupSetBits
-                0x000092cc       0x98 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
-                0x000092cc                xEventGroupSetBits
+                0x000092c0       0x98 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+                0x000092c0                xEventGroupSetBits
  .text.vEventGroupSetBitsCallback
-                0x00009364        0x4 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
-                0x00009364                vEventGroupSetBitsCallback
+                0x00009358        0x4 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+                0x00009358                vEventGroupSetBitsCallback
  .text.vListInitialise
-                0x00009368       0x18 ./ra/aws/FreeRTOS/FreeRTOS/Source/list.o
-                0x00009368                vListInitialise
+                0x0000935c       0x18 ./ra/aws/FreeRTOS/FreeRTOS/Source/list.o
+                0x0000935c                vListInitialise
  .text.vListInitialiseItem
-                0x00009380        0x8 ./ra/aws/FreeRTOS/FreeRTOS/Source/list.o
-                0x00009380                vListInitialiseItem
+                0x00009374        0x8 ./ra/aws/FreeRTOS/FreeRTOS/Source/list.o
+                0x00009374                vListInitialiseItem
  .text.vListInsert
-                0x00009388       0x30 ./ra/aws/FreeRTOS/FreeRTOS/Source/list.o
-                0x00009388                vListInsert
+                0x0000937c       0x30 ./ra/aws/FreeRTOS/FreeRTOS/Source/list.o
+                0x0000937c                vListInsert
  .text.uxListRemove
-                0x000093b8       0x28 ./ra/aws/FreeRTOS/FreeRTOS/Source/list.o
-                0x000093b8                uxListRemove
+                0x000093ac       0x28 ./ra/aws/FreeRTOS/FreeRTOS/Source/list.o
+                0x000093ac                uxListRemove
  .text.prvCopyDataToQueue
-                0x000093e0       0x60 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x000093d4       0x60 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .text.prvUnlockQueue
-                0x00009440       0x8c ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x00009434       0x8c ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .text.xQueueGenericReset
-                0x000094cc       0xbc ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
-                0x000094cc                xQueueGenericReset
+                0x000094c0       0xbc ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x000094c0                xQueueGenericReset
  .text.xQueueGenericCreateStatic
-                0x00009588       0x84 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
-                0x00009588                xQueueGenericCreateStatic
+                0x0000957c       0x84 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000957c                xQueueGenericCreateStatic
  .text.xQueueGenericCreate
-                0x0000960c       0x5c ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
-                0x0000960c                xQueueGenericCreate
+                0x00009600       0x5c ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x00009600                xQueueGenericCreate
  .text.xQueueCreateCountingSemaphoreStatic
-                0x00009668       0x7c ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
-                0x00009668                xQueueCreateCountingSemaphoreStatic
+                0x0000965c       0x7c ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000965c                xQueueCreateCountingSemaphoreStatic
  .text.xQueueGenericSend
-                0x000096e4      0x198 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
-                0x000096e4                xQueueGenericSend
+                0x000096d8      0x198 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x000096d8                xQueueGenericSend
  .text.xQueueGenericSendFromISR
-                0x0000987c       0xe8 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
-                0x0000987c                xQueueGenericSendFromISR
+                0x00009870       0xe8 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x00009870                xQueueGenericSendFromISR
  .text.xQueueReceive
-                0x00009964      0x178 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
-                0x00009964                xQueueReceive
+                0x00009958      0x178 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x00009958                xQueueReceive
  .text.xQueueSemaphoreTake
-                0x00009adc      0x154 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
-                0x00009adc                xQueueSemaphoreTake
+                0x00009ad0      0x154 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x00009ad0                xQueueSemaphoreTake
  .text.vQueueAddToRegistry
-                0x00009c30       0x64 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
-                0x00009c30                vQueueAddToRegistry
+                0x00009c24       0x64 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x00009c24                vQueueAddToRegistry
  .text.vQueueWaitForMessageRestricted
-                0x00009c94       0x50 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
-                0x00009c94                vQueueWaitForMessageRestricted
+                0x00009c88       0x50 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x00009c88                vQueueWaitForMessageRestricted
  .text.prvAddNewTaskToReadyList
-                0x00009ce4      0x128 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x00009cd8      0x128 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .text.prvAddCurrentTaskToDelayedList
-                0x00009e0c       0xa4 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x00009e00       0xa4 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .text.prvInitialiseNewTask.constprop.0
-                0x00009eb0       0x9c ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x00009ea4       0x9c ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .text.prvIdleTask
-                0x00009f4c       0x78 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x00009f40       0x78 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .text.xTaskIncrementTick.part.0
-                0x00009fc4      0x174 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x00009fb8      0x174 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .text.xTaskCreateStatic
-                0x0000a138       0x9c ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a138                xTaskCreateStatic
+                0x0000a12c       0x9c ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a12c                xTaskCreateStatic
  .text.xTaskCreate
-                0x0000a1d4       0x64 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a1d4                xTaskCreate
+                0x0000a1c8       0x64 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a1c8                xTaskCreate
  .text.vTaskStartScheduler
-                0x0000a238       0x94 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a238                vTaskStartScheduler
+                0x0000a22c       0x94 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a22c                vTaskStartScheduler
  .text.vTaskSuspendAll
-                0x0000a2cc       0x10 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a2cc                vTaskSuspendAll
+                0x0000a2c0       0x10 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a2c0                vTaskSuspendAll
  .text.xTaskResumeAll
-                0x0000a2dc      0x1a8 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a2dc                xTaskResumeAll
+                0x0000a2d0      0x1a8 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a2d0                xTaskResumeAll
  .text.vTaskDelay
-                0x0000a484       0x50 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a484                vTaskDelay
+                0x0000a478       0x50 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a478                vTaskDelay
  .text.xTaskGetTickCount
-                0x0000a4d4        0xc ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a4d4                xTaskGetTickCount
+                0x0000a4c8        0xc ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a4c8                xTaskGetTickCount
  .text.uxTaskGetNumberOfTasks
-                0x0000a4e0        0xc ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a4e0                uxTaskGetNumberOfTasks
+                0x0000a4d4        0xc ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a4d4                uxTaskGetNumberOfTasks
  .text.xTaskIncrementTick
-                0x0000a4ec       0x20 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a4ec                xTaskIncrementTick
+                0x0000a4e0       0x20 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a4e0                xTaskIncrementTick
  .text.vTaskSwitchContext
-                0x0000a50c       0x94 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a50c                vTaskSwitchContext
+                0x0000a500       0x94 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a500                vTaskSwitchContext
  .text.vTaskPlaceOnEventList
-                0x0000a5a0       0x3c ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a5a0                vTaskPlaceOnEventList
+                0x0000a594       0x3c ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a594                vTaskPlaceOnEventList
  .text.vTaskPlaceOnUnorderedEventList
-                0x0000a5dc       0x80 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a5dc                vTaskPlaceOnUnorderedEventList
+                0x0000a5d0       0x80 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a5d0                vTaskPlaceOnUnorderedEventList
  .text.vTaskPlaceOnEventListRestricted
-                0x0000a65c       0x6c ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a65c                vTaskPlaceOnEventListRestricted
+                0x0000a650       0x6c ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a650                vTaskPlaceOnEventListRestricted
  .text.xTaskRemoveFromEventList
-                0x0000a6c8       0xe8 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a6c8                xTaskRemoveFromEventList
+                0x0000a6bc       0xe8 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a6bc                xTaskRemoveFromEventList
  .text.vTaskRemoveFromUnorderedEventList
-                0x0000a7b0       0xd0 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a7b0                vTaskRemoveFromUnorderedEventList
+                0x0000a7a4       0xd0 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a7a4                vTaskRemoveFromUnorderedEventList
  .text.vTaskInternalSetTimeOutState
-                0x0000a880       0x18 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a880                vTaskInternalSetTimeOutState
+                0x0000a874       0x18 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a874                vTaskInternalSetTimeOutState
  .text.xTaskCheckForTimeOut
-                0x0000a898       0x90 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a898                xTaskCheckForTimeOut
+                0x0000a88c       0x90 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a88c                xTaskCheckForTimeOut
  .text.vTaskMissedYield
-                0x0000a928        0xc ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a928                vTaskMissedYield
+                0x0000a91c        0xc ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a91c                vTaskMissedYield
  .text.xTaskGetCurrentTaskHandle
-                0x0000a934        0xc ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a934                xTaskGetCurrentTaskHandle
+                0x0000a928        0xc ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a928                xTaskGetCurrentTaskHandle
  .text.xTaskGetSchedulerState
-                0x0000a940       0x20 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a940                xTaskGetSchedulerState
+                0x0000a934       0x20 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a934                xTaskGetSchedulerState
  .text.uxTaskResetEventItemValue
-                0x0000a960       0x18 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000a960                uxTaskResetEventItemValue
+                0x0000a954       0x18 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000a954                uxTaskResetEventItemValue
  .text.prvCheckForValidListAndQueue
-                0x0000a978       0x6c ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
+                0x0000a96c       0x6c ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
  .text.prvProcessExpiredTimer
-                0x0000a9e4       0x90 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
+                0x0000a9d8       0x90 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
  .text.prvTimerTask
-                0x0000aa74      0x25c ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
+                0x0000aa68      0x25c ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
  .text.xTimerCreateTimerTask
-                0x0000acd0       0x6c ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
-                0x0000acd0                xTimerCreateTimerTask
+                0x0000acc4       0x6c ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
+                0x0000acc4                xTimerCreateTimerTask
  .text.xTimerPendFunctionCallFromISR
-                0x0000ad3c       0x30 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
-                0x0000ad3c                xTimerPendFunctionCallFromISR
+                0x0000ad30       0x30 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
+                0x0000ad30                xTimerPendFunctionCallFromISR
  .text._strtol_l.isra.0
-                0x0000ad6c       0xf4 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strtol.o)
- .text.strtol   0x0000ae60       0x14 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strtol.o)
-                0x0000ae60                strtol
- .text.__errno  0x0000ae74        0xc /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-errno.o)
-                0x0000ae74                __errno
- .text.memset   0x0000ae80       0x10 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-memset.o)
-                0x0000ae80                memset
+                0x0000ad60       0xf4 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strtol.o)
+ .text.strtol   0x0000ae54       0x14 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strtol.o)
+                0x0000ae54                strtol
+ .text.__errno  0x0000ae68        0xc /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-errno.o)
+                0x0000ae68                __errno
+ .text.memset   0x0000ae74       0x10 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-memset.o)
+                0x0000ae74                memset
  .text.strcasecmp
-                0x0000ae90       0x38 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strcasecmp.o)
-                0x0000ae90                strcasecmp
- .text.strcat   0x0000aec8       0x1e /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strcat.o)
-                0x0000aec8                strcat
- .text.strchr   0x0000aee6       0x1a /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strchr.o)
-                0x0000aee6                strchr
+                0x0000ae84       0x38 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strcasecmp.o)
+                0x0000ae84                strcasecmp
+ .text.strcat   0x0000aebc       0x1e /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strcat.o)
+                0x0000aebc                strcat
+ .text.strchr   0x0000aeda       0x1a /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strchr.o)
+                0x0000aeda                strchr
  .text.strncasecmp
-                0x0000af00       0x40 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strncasecmp.o)
-                0x0000af00                strncasecmp
- .text.memcpy   0x0000af40       0x1a /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-memcpy-stub.o)
-                0x0000af40                memcpy
- .text          0x0000af5a       0x10 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strlen.o)
-                0x0000af5a                strlen
- .text.strncmp  0x0000af6a       0x24 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strncmp.o)
-                0x0000af6a                strncmp
- .text.strncpy  0x0000af8e       0x26 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strncpy.o)
-                0x0000af8e                strncpy
- .text.sprintf  0x0000afb4       0x44 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-sprintf.o)
-                0x0000afb4                sprintf
-                0x0000afb4                siprintf
- .text.strtok   0x0000aff8       0x68 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strtok.o)
-                0x0000aff8                strtok
- .text.atoi     0x0000b060        0x8 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-atoi.o)
-                0x0000b060                atoi
+                0x0000aef4       0x40 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strncasecmp.o)
+                0x0000aef4                strncasecmp
+ .text.memcpy   0x0000af34       0x1a /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-memcpy-stub.o)
+                0x0000af34                memcpy
+ .text          0x0000af4e       0x10 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strlen.o)
+                0x0000af4e                strlen
+ .text.strncmp  0x0000af5e       0x24 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strncmp.o)
+                0x0000af5e                strncmp
+ .text.strncpy  0x0000af82       0x26 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strncpy.o)
+                0x0000af82                strncpy
+ .text.sprintf  0x0000afa8       0x44 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-sprintf.o)
+                0x0000afa8                sprintf
+                0x0000afa8                siprintf
+ .text.strtok   0x0000afec       0x68 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strtok.o)
+                0x0000afec                strtok
+ .text.atoi     0x0000b054        0x8 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-atoi.o)
+                0x0000b054                atoi
  .text.__strtok_r
-                0x0000b068       0x50 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strtok_r.o)
-                0x0000b068                __strtok_r
- .text.strstr   0x0000b0b8       0x2c /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strstr.o)
-                0x0000b0b8                strstr
+                0x0000b05c       0x50 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strtok_r.o)
+                0x0000b05c                __strtok_r
+ .text.strstr   0x0000b0ac       0x2c /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strstr.o)
+                0x0000b0ac                strstr
  .text._vsprintf_r
-                0x0000b0e4       0x2c /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-vsprintf.o)
-                0x0000b0e4                _vsiprintf_r
-                0x0000b0e4                _vsprintf_r
+                0x0000b0d8       0x2c /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-vsprintf.o)
+                0x0000b0d8                _vsiprintf_r
+                0x0000b0d8                _vsprintf_r
  .text.vsprintf
-                0x0000b110       0x14 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-vsprintf.o)
-                0x0000b110                vsprintf
-                0x0000b110                vsiprintf
+                0x0000b104       0x14 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-vsprintf.o)
+                0x0000b104                vsprintf
+                0x0000b104                vsiprintf
  .text.__ssputs_r
-                0x0000b124       0xb6 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-nano-svfprintf.o)
-                0x0000b124                __ssputs_r
- *fill*         0x0000b1da        0x2 ff
+                0x0000b118       0xb6 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-nano-svfprintf.o)
+                0x0000b118                __ssputs_r
+ *fill*         0x0000b1ce        0x2 ff
  .text._svfprintf_r
-                0x0000b1dc      0x1f8 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-nano-svfprintf.o)
-                0x0000b1dc                _svfprintf_r
-                0x0000b1dc                _svfiprintf_r
- .text.memmove  0x0000b3d4       0x34 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-memmove.o)
-                0x0000b3d4                memmove
+                0x0000b1d0      0x1f8 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-nano-svfprintf.o)
+                0x0000b1d0                _svfprintf_r
+                0x0000b1d0                _svfiprintf_r
+ .text.memmove  0x0000b3c8       0x34 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-memmove.o)
+                0x0000b3c8                memmove
  .text.__retarget_lock_acquire_recursive
-                0x0000b408        0x2 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-lock.o)
-                0x0000b408                __retarget_lock_acquire_recursive
+                0x0000b3fc        0x2 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-lock.o)
+                0x0000b3fc                __retarget_lock_acquire_recursive
  .text.__retarget_lock_release_recursive
-                0x0000b40a        0x2 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-lock.o)
-                0x0000b40a                __retarget_lock_release_recursive
+                0x0000b3fe        0x2 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-lock.o)
+                0x0000b3fe                __retarget_lock_release_recursive
  .text._printf_common
-                0x0000b40c       0xe4 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-nano-vfprintf_i.o)
-                0x0000b40c                _printf_common
+                0x0000b400       0xe4 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-nano-vfprintf_i.o)
+                0x0000b400                _printf_common
  .text._printf_i
-                0x0000b4f0      0x23c /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-nano-vfprintf_i.o)
-                0x0000b4f0                _printf_i
- .text.malloc   0x0000b72c       0x10 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-malloc.o)
-                0x0000b72c                malloc
+                0x0000b4e4      0x23c /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-nano-vfprintf_i.o)
+                0x0000b4e4                _printf_i
+ .text.malloc   0x0000b720       0x10 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-malloc.o)
+                0x0000b720                malloc
  .text.sbrk_aligned
-                0x0000b73c       0x44 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-mallocr.o)
+                0x0000b730       0x44 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-mallocr.o)
  .text._malloc_r
-                0x0000b780      0x100 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-mallocr.o)
-                0x0000b780                _malloc_r
- .text.memchr   0x0000b880       0x1c /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-memchr-stub.o)
-                0x0000b880                memchr
+                0x0000b774      0x100 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-mallocr.o)
+                0x0000b774                _malloc_r
+ .text.memchr   0x0000b874       0x1c /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-memchr-stub.o)
+                0x0000b874                memchr
  .text.__malloc_lock
-                0x0000b89c        0xc /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-mlock.o)
-                0x0000b89c                __malloc_lock
+                0x0000b890        0xc /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-mlock.o)
+                0x0000b890                __malloc_lock
  .text.__malloc_unlock
-                0x0000b8a8        0xc /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-mlock.o)
-                0x0000b8a8                __malloc_unlock
- .text._sbrk_r  0x0000b8b4       0x20 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-sbrkr.o)
-                0x0000b8b4                _sbrk_r
+                0x0000b89c        0xc /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-mlock.o)
+                0x0000b89c                __malloc_unlock
+ .text._sbrk_r  0x0000b8a8       0x20 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-sbrkr.o)
+                0x0000b8a8                _sbrk_r
  .text._realloc_r
-                0x0000b8d4       0x5c /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-reallocr.o)
-                0x0000b8d4                _realloc_r
- .text._free_r  0x0000b930       0x94 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-freer.o)
-                0x0000b930                _free_r
+                0x0000b8c8       0x5c /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-reallocr.o)
+                0x0000b8c8                _realloc_r
+ .text._free_r  0x0000b924       0x94 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-freer.o)
+                0x0000b924                _free_r
  .text._malloc_usable_size_r
-                0x0000b9c4       0x10 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-msizer.o)
-                0x0000b9c4                _malloc_usable_size_r
+                0x0000b9b8       0x10 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-msizer.o)
+                0x0000b9b8                _malloc_usable_size_r
  *(.version)
- .version       0x0000b9d4       0x50 ./ra/fsp/src/bsp/mcu/all/bsp_common.o
+ .version       0x0000b9c8       0x50 ./ra/fsp/src/bsp/mcu/all/bsp_common.o
  *(.init)
- .init          0x0000ba24        0x4 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crti.o
-                0x0000ba24                _init
- .init          0x0000ba28        0x8 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtn.o
+ .init          0x0000ba18        0x4 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crti.o
+                0x0000ba18                _init
+ .init          0x0000ba1c        0x8 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtn.o
  *(.fini)
- .fini          0x0000ba30        0x4 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crti.o
-                0x0000ba30                _fini
- .fini          0x0000ba34        0x8 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtn.o
+ .fini          0x0000ba24        0x4 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crti.o
+                0x0000ba24                _fini
+ .fini          0x0000ba28        0x8 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtn.o
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
@@ -3252,381 +3252,381 @@ END GROUP
  *(.dtors)
  *(.rodata*)
  .rodata.SdioTxWorkerTask.str1.4
-                0x0000ba3c     0x197c ./src/sdio/sdio_cmd.o
-                                0x122 (size before relaxing)
+                0x0000ba30     0x197c ./src/sdio/sdio_cmd.o
+                                0x12a (size before relaxing)
  .rodata.SDIO_cmd_init.str1.4
-                0x0000d3b8       0x39 ./src/sdio/sdio_cmd.o
+                0x0000d3ac       0x39 ./src/sdio/sdio_cmd.o
  .rodata.Received_SDIO_Data_From_DA16xxx.str1.4
-                0x0000d3b8       0x8e ./src/sdio/sdio_cmd.o
+                0x0000d3ac       0x8e ./src/sdio/sdio_cmd.o
  .rodata.Transfer_ATCmd_To_SDIO.str1.4
-                0x0000d3b8      0x28a ./src/sdio/sdio_cmd.o
+                0x0000d3ac      0x282 ./src/sdio/sdio_cmd.o
  .rodata.sdio_read_ext_1.str1.4
-                0x0000d3b8       0x4e ./src/sdio/sdio_drv.o
+                0x0000d3ac       0x4e ./src/sdio/sdio_drv.o
  .rodata.sdio_read_ext.str1.4
-                0x0000d3b8       0x3c ./src/sdio/sdio_drv.o
+                0x0000d3ac       0x3c ./src/sdio/sdio_drv.o
  .rodata.sdio_write_ext.str1.4
-                0x0000d3b8       0x23 ./src/sdio/sdio_drv.o
+                0x0000d3ac       0x23 ./src/sdio/sdio_drv.o
  .rodata.sdio_initialize.str1.4
-                0x0000d3b8       0x1c ./src/sdio/sdio_drv.o
+                0x0000d3ac       0x1c ./src/sdio/sdio_drv.o
  .rodata.init_drv_sdio.str1.4
-                0x0000d3b8       0x78 ./src/sdio/sdio_drv.o
+                0x0000d3ac       0x78 ./src/sdio/sdio_drv.o
  .rodata.__func__.0
-                0x0000d3b8        0xe ./src/sdio/sdio_drv.o
+                0x0000d3ac        0xe ./src/sdio/sdio_drv.o
  .rodata.aws_iot_atcmd_stm_it.str1.4
-                0x0000d3c6      0x1db ./src/atcmd/at_cmd.o
+                0x0000d3ba      0x1db ./src/atcmd/at_cmd.o
  .rodata.PRINTF_ATCMD_WAITRES.str1.4
-                0x0000d3c6       0x1a ./src/atcmd/at_cmd.o
+                0x0000d3ba       0x1a ./src/atcmd/at_cmd.o
  .rodata.get_device_status.str1.4
-                0x0000d3c6        0xa ./src/atcmd/at_cmd.o
+                0x0000d3ba        0xa ./src/atcmd/at_cmd.o
  .rodata.atcmd_ota_image_check.str1.4
-                0x0000d3c6       0x95 ./src/atcmd/at_cmd.o
+                0x0000d3ba       0x95 ./src/atcmd/at_cmd.o
  .rodata.atcmd_ota_set.str1.4
-                0x0000d3c6       0xea ./src/atcmd/at_cmd.o
+                0x0000d3ba       0xea ./src/atcmd/at_cmd.o
  .rodata.command_parser.str1.4
-                0x0000d3c6       0x51 ./src/atcmd/at_cmd.o
- *fill*         0x0000d3c6        0x2 ff
+                0x0000d3ba       0x51 ./src/atcmd/at_cmd.o
+ *fill*         0x0000d3ba        0x2 ff
  .rodata.__func__.1
-                0x0000d3c8       0x15 ./src/atcmd/at_cmd.o
- *fill*         0x0000d3dd        0x3 ff
+                0x0000d3bc       0x15 ./src/atcmd/at_cmd.o
+ *fill*         0x0000d3d1        0x3 ff
  .rodata.__func__.2
-                0x0000d3e0       0x12 ./src/atcmd/at_cmd.o
+                0x0000d3d4       0x12 ./src/atcmd/at_cmd.o
  .rodata.str1.4
-                0x0000d3f2      0x484 ./src/atcmd/at_cmd.o
- *fill*         0x0000d3f2        0x2 ff
+                0x0000d3e6      0x484 ./src/atcmd/at_cmd.o
+ *fill*         0x0000d3e6        0x2 ff
  .rodata.commands
-                0x0000d3f4       0x3c ./src/atcmd/at_cmd.o
+                0x0000d3e8       0x3c ./src/atcmd/at_cmd.o
  .rodata.RO_fast_crc_nbit_LUT
-                0x0000d430       0x80 ./src/atcmd/at_cmd.o
+                0x0000d424       0x80 ./src/atcmd/at_cmd.o
  .rodata.irq_pins
-                0x0000d4b0        0xc ./src/common_init.o
+                0x0000d4a4        0xc ./src/common_init.o
  .rodata.read_temperature.str1.4
-                0x0000d4bc        0xa ./src/main_thread_entry.o
+                0x0000d4b0        0xa ./src/main_thread_entry.o
  .rodata.main_thread_entry.str1.4
-                0x0000d4bc      0x216 ./src/main_thread_entry.o
+                0x0000d4b0      0x216 ./src/main_thread_entry.o
  .rodata.__func__.0
-                0x0000d4bc       0x12 ./src/main_thread_entry.o
- *fill*         0x0000d4ce        0x2 ff
+                0x0000d4b0       0x12 ./src/main_thread_entry.o
+ *fill*         0x0000d4c2        0x2 ff
  .rodata.__func__.1
-                0x0000d4d0       0x11 ./src/main_thread_entry.o
+                0x0000d4c4       0x11 ./src/main_thread_entry.o
  .rodata.system_monitor_entry.str1.4
-                0x0000d4e1       0x5e ./src/system_monitor_entry.o
+                0x0000d4d5       0x5e ./src/system_monitor_entry.o
  .rodata.check_end.str1.4
-                0x0000d4e1       0x27 ./src/txcmd_thread_entry.o
+                0x0000d4d5       0x27 ./src/txcmd_thread_entry.o
  .rodata.txcmd_thread_entry.str1.4
-                0x0000d4e1       0x3d ./src/txcmd_thread_entry.o
- *fill*         0x0000d4e1        0x3 ff
+                0x0000d4d5       0x3d ./src/txcmd_thread_entry.o
+ *fill*         0x0000d4d5        0x3 ff
  .rodata.g_usb_descriptor
-                0x0000d4e4       0x18 ./src/usb_console_main.o
-                0x0000d4e4                g_usb_descriptor
+                0x0000d4d8       0x18 ./src/usb_console_main.o
+                0x0000d4d8                g_usb_descriptor
  .rodata.g_ioport
-                0x0000d4fc        0xc ./ra_gen/common_data.o
-                0x0000d4fc                g_ioport
+                0x0000d4f0        0xc ./ra_gen/common_data.o
+                0x0000d4f0                g_ioport
  .rodata.g_external_irq0
-                0x0000d508        0xc ./ra_gen/common_data.o
-                0x0000d508                g_external_irq0
+                0x0000d4fc        0xc ./ra_gen/common_data.o
+                0x0000d4fc                g_external_irq0
  .rodata.g_external_irq0_cfg
-                0x0000d514       0x14 ./ra_gen/common_data.o
-                0x0000d514                g_external_irq0_cfg
+                0x0000d508       0x14 ./ra_gen/common_data.o
+                0x0000d508                g_external_irq0_cfg
  .rodata.g_external_irq10
-                0x0000d528        0xc ./ra_gen/common_data.o
-                0x0000d528                g_external_irq10
+                0x0000d51c        0xc ./ra_gen/common_data.o
+                0x0000d51c                g_external_irq10
  .rodata.g_external_irq10_cfg
-                0x0000d534       0x14 ./ra_gen/common_data.o
-                0x0000d534                g_external_irq10_cfg
+                0x0000d528       0x14 ./ra_gen/common_data.o
+                0x0000d528                g_external_irq10_cfg
  .rodata.g_external_irq9
-                0x0000d548        0xc ./ra_gen/common_data.o
-                0x0000d548                g_external_irq9
+                0x0000d53c        0xc ./ra_gen/common_data.o
+                0x0000d53c                g_external_irq9
  .rodata.g_external_irq9_cfg
-                0x0000d554       0x14 ./ra_gen/common_data.o
-                0x0000d554                g_external_irq9_cfg
+                0x0000d548       0x14 ./ra_gen/common_data.o
+                0x0000d548                g_external_irq9_cfg
  .rodata.main_thread_create.str1.4
-                0x0000d568        0xc ./ra_gen/main_thread.o
+                0x0000d55c        0xc ./ra_gen/main_thread.o
  .rodata.main_thread_parameters
-                0x0000d568        0x4 ./ra_gen/main_thread.o
-                0x0000d568                main_thread_parameters
+                0x0000d55c        0x4 ./ra_gen/main_thread.o
+                0x0000d55c                main_thread_parameters
  .rodata.g_transfer2
-                0x0000d56c        0xc ./ra_gen/main_thread.o
-                0x0000d56c                g_transfer2
+                0x0000d560        0xc ./ra_gen/main_thread.o
+                0x0000d560                g_transfer2
  .rodata.g_transfer2_cfg
-                0x0000d578        0x8 ./ra_gen/main_thread.o
-                0x0000d578                g_transfer2_cfg
+                0x0000d56c        0x8 ./ra_gen/main_thread.o
+                0x0000d56c                g_transfer2_cfg
  .rodata.g_transfer2_cfg_extend
-                0x0000d580        0x1 ./ra_gen/main_thread.o
-                0x0000d580                g_transfer2_cfg_extend
- *fill*         0x0000d581        0x3 ff
+                0x0000d574        0x1 ./ra_gen/main_thread.o
+                0x0000d574                g_transfer2_cfg_extend
+ *fill*         0x0000d575        0x3 ff
  .rodata.g_bsp_pin_cfg
-                0x0000d584        0xc ./ra_gen/pin_data.o
-                0x0000d584                g_bsp_pin_cfg
+                0x0000d578        0xc ./ra_gen/pin_data.o
+                0x0000d578                g_bsp_pin_cfg
  .rodata.g_bsp_pin_cfg_data
-                0x0000d590      0x110 ./ra_gen/pin_data.o
-                0x0000d590                g_bsp_pin_cfg_data
+                0x0000d584      0x110 ./ra_gen/pin_data.o
+                0x0000d584                g_bsp_pin_cfg_data
  .rodata.rxcmd_thread_create.str1.4
-                0x0000d6a0        0xd ./ra_gen/rxcmd_thread.o
+                0x0000d694        0xd ./ra_gen/rxcmd_thread.o
  .rodata.rxcmd_thread_parameters
-                0x0000d6a0        0x4 ./ra_gen/rxcmd_thread.o
-                0x0000d6a0                rxcmd_thread_parameters
+                0x0000d694        0x4 ./ra_gen/rxcmd_thread.o
+                0x0000d694                rxcmd_thread_parameters
  .rodata.system_monitor_create.str1.4
-                0x0000d6a4        0xf ./ra_gen/system_monitor.o
+                0x0000d698        0xf ./ra_gen/system_monitor.o
  .rodata.system_monitor_parameters
-                0x0000d6a4        0x4 ./ra_gen/system_monitor.o
-                0x0000d6a4                system_monitor_parameters
+                0x0000d698        0x4 ./ra_gen/system_monitor.o
+                0x0000d698                system_monitor_parameters
  .rodata.txcmd_thread_create.str1.4
-                0x0000d6a8        0xd ./ra_gen/txcmd_thread.o
+                0x0000d69c        0xd ./ra_gen/txcmd_thread.o
  .rodata.txcmd_thread_parameters
-                0x0000d6a8        0x4 ./ra_gen/txcmd_thread.o
-                0x0000d6a8                txcmd_thread_parameters
+                0x0000d69c        0x4 ./ra_gen/txcmd_thread.o
+                0x0000d69c                txcmd_thread_parameters
  .rodata.usb_console_create.str1.4
-                0x0000d6ac        0xc ./ra_gen/usb_console.o
+                0x0000d6a0        0xc ./ra_gen/usb_console.o
  .rodata.usb_console_parameters
-                0x0000d6ac        0x4 ./ra_gen/usb_console.o
-                0x0000d6ac                usb_console_parameters
+                0x0000d6a0        0x4 ./ra_gen/usb_console.o
+                0x0000d6a0                usb_console_parameters
  .rodata.g_basic0_cfg
-                0x0000d6b0       0x30 ./ra_gen/usb_console.o
-                0x0000d6b0                g_basic0_cfg
+                0x0000d6a4       0x30 ./ra_gen/usb_console.o
+                0x0000d6a4                g_basic0_cfg
  .rodata.g_interrupt_event_link_select
-                0x0000d6e0       0xc0 ./ra_gen/vector_data.o
-                0x0000d6e0                g_interrupt_event_link_select
+                0x0000d6d4       0xc0 ./ra_gen/vector_data.o
+                0x0000d6d4                g_interrupt_event_link_select
  .rodata.vPortSVCHandler_C.str1.4
-                0x0000d7a0       0x3a ./ra/fsp/src/rm_freertos_port/port.o
+                0x0000d794       0x3a ./ra/fsp/src/rm_freertos_port/port.o
  .rodata.vPortEnterCritical.str1.4
-                0x0000d7a0       0x46 ./ra/fsp/src/rm_freertos_port/port.o
+                0x0000d794       0x46 ./ra/fsp/src/rm_freertos_port/port.o
  .rodata.vPortExitCritical.str1.4
-                0x0000d7a0       0x12 ./ra/fsp/src/rm_freertos_port/port.o
+                0x0000d794       0x12 ./ra/fsp/src/rm_freertos_port/port.o
  .rodata.vPortValidateInterruptPriority.str1.4
-                0x0000d7a0       0x64 ./ra/fsp/src/rm_freertos_port/port.o
+                0x0000d794       0x64 ./ra/fsp/src/rm_freertos_port/port.o
  .rodata.__func__.0
-                0x0000d7a0       0x1f ./ra/fsp/src/rm_freertos_port/port.o
- *fill*         0x0000d7bf        0x1 ff
+                0x0000d794       0x1f ./ra/fsp/src/rm_freertos_port/port.o
+ *fill*         0x0000d7b3        0x1 ff
  .rodata.__func__.1
-                0x0000d7c0       0x12 ./ra/fsp/src/rm_freertos_port/port.o
- *fill*         0x0000d7d2        0x2 ff
+                0x0000d7b4       0x12 ./ra/fsp/src/rm_freertos_port/port.o
+ *fill*         0x0000d7c6        0x2 ff
  .rodata.__func__.2
-                0x0000d7d4       0x13 ./ra/fsp/src/rm_freertos_port/port.o
- *fill*         0x0000d7e7        0x1 ff
+                0x0000d7c8       0x13 ./ra/fsp/src/rm_freertos_port/port.o
+ *fill*         0x0000d7db        0x1 ff
  .rodata.__func__.3
-                0x0000d7e8       0x12 ./ra/fsp/src/rm_freertos_port/port.o
- *fill*         0x0000d7fa        0x2 ff
+                0x0000d7dc       0x12 ./ra/fsp/src/rm_freertos_port/port.o
+ *fill*         0x0000d7ee        0x2 ff
  .rodata.g_usb_pipe_peri
-                0x0000d7fc       0x12 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cdataio.o
+                0x0000d7f0       0x12 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cdataio.o
  .rodata.usb_rtos_configuration.str1.4
-                0x0000d80e        0x8 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
- *fill*         0x0000d80e        0x2 ff
+                0x0000d802        0x8 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
+ *fill*         0x0000d802        0x2 ff
  .rodata.g_sdmmc_on_sdhi
-                0x0000d810       0x34 ./ra/fsp/src/r_sdhi/r_sdhi.o
-                0x0000d810                g_sdmmc_on_sdhi
+                0x0000d804       0x34 ./ra/fsp/src/r_sdhi/r_sdhi.o
+                0x0000d804                g_sdmmc_on_sdhi
  .rodata.g_vbatt_pins_input
-                0x0000d844        0x6 ./ra/fsp/src/r_ioport/r_ioport.o
- *fill*         0x0000d84a        0x2 ff
+                0x0000d838        0x6 ./ra/fsp/src/r_ioport/r_ioport.o
+ *fill*         0x0000d83e        0x2 ff
  .rodata.g_ioport_on_ioport
-                0x0000d84c       0x34 ./ra/fsp/src/r_ioport/r_ioport.o
-                0x0000d84c                g_ioport_on_ioport
+                0x0000d840       0x34 ./ra/fsp/src/r_ioport/r_ioport.o
+                0x0000d840                g_ioport_on_ioport
  .rodata.g_external_irq_on_icu
-                0x0000d880       0x14 ./ra/fsp/src/r_icu/r_icu.o
-                0x0000d880                g_external_irq_on_icu
+                0x0000d874       0x14 ./ra/fsp/src/r_icu/r_icu.o
+                0x0000d874                g_external_irq_on_icu
  .rodata.g_transfer_on_dtc
-                0x0000d894       0x2c ./ra/fsp/src/r_dtc/r_dtc.o
-                0x0000d894                g_transfer_on_dtc
+                0x0000d888       0x2c ./ra/fsp/src/r_dtc/r_dtc.o
+                0x0000d888                g_transfer_on_dtc
  .rodata.g_prcr_masks
-                0x0000d8c0        0x8 ./ra/fsp/src/bsp/mcu/all/bsp_register_protection.o
+                0x0000d8b4        0x8 ./ra/fsp/src/bsp/mcu/all/bsp_register_protection.o
  .rodata.g_bsp_leds
-                0x0000d8c8        0x8 ./ra/board/ra6m4_ek/board_leds.o
-                0x0000d8c8                g_bsp_leds
+                0x0000d8bc        0x8 ./ra/board/ra6m4_ek/board_leds.o
+                0x0000d8bc                g_bsp_leds
  .rodata.g_bsp_prv_leds
-                0x0000d8d0        0x6 ./ra/board/ra6m4_ek/board_leds.o
+                0x0000d8c4        0x6 ./ra/board/ra6m4_ek/board_leds.o
  .rodata.pvPortMalloc.str1.4
-                0x0000d8d6       0xad ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
+                0x0000d8ca       0xad ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
  .rodata.vPortFree.str1.4
-                0x0000d8d6       0x9b ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
- *fill*         0x0000d8d6        0x2 ff
+                0x0000d8ca       0x9b ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
+ *fill*         0x0000d8ca        0x2 ff
  .rodata.__func__.0
-                0x0000d8d8        0xa ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
- *fill*         0x0000d8e2        0x2 ff
+                0x0000d8cc        0xa ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
+ *fill*         0x0000d8d6        0x2 ff
  .rodata.__func__.1
-                0x0000d8e4        0xd ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
+                0x0000d8d8        0xd ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
  .rodata.xEventGroupClearBits.part.0.str1.4
-                0x0000d8f1       0x5a ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+                0x0000d8e5       0x5a ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
  .rodata.xEventGroupCreateStatic.str1.4
-                0x0000d8f1       0x34 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+                0x0000d8e5       0x34 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
  .rodata.xEventGroupWaitBits.str1.4
-                0x0000d8f1       0x9f ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+                0x0000d8e5       0x9f ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
  .rodata.xEventGroupSetBits.str1.4
-                0x0000d8f1       0x24 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
- *fill*         0x0000d8f1        0x3 ff
+                0x0000d8e5       0x24 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+ *fill*         0x0000d8e5        0x3 ff
  .rodata.__func__.2
-                0x0000d8f4       0x13 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
- *fill*         0x0000d907        0x1 ff
+                0x0000d8e8       0x13 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+ *fill*         0x0000d8fb        0x1 ff
  .rodata.__func__.4
-                0x0000d908       0x14 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+                0x0000d8fc       0x14 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
  .rodata.__func__.6
-                0x0000d91c       0x18 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+                0x0000d910       0x18 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
  .rodata.vQueueUnregisterQueue.part.0.str1.4
-                0x0000d934       0x33 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d928       0x33 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.xQueueGenericReset.str1.4
-                0x0000d934       0x2c ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d928       0x2c ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.xQueueGenericCreateStatic.str1.4
-                0x0000d934       0x37 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d928       0x37 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.xQueueCreateCountingSemaphoreStatic.str1.4
-                0x0000d934        0x8 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d928        0x8 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.xQueueGenericSend.str1.4
-                0x0000d934       0xfb ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d928       0xfb ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.xQueueGenericSendFromISR.str1.4
-                0x0000d934       0x22 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d928       0x22 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.xQueueGiveFromISR.str1.4
-                0x0000d934       0x7d ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d928       0x7d ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.xQueueReceive.str1.4
-                0x0000d934       0x66 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d928       0x66 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.__func__.2
-                0x0000d934       0x14 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d928       0x14 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.__func__.12
-                0x0000d948       0x14 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d93c       0x14 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.__func__.13
-                0x0000d95c        0xe ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
- *fill*         0x0000d96a        0x2 ff
+                0x0000d950        0xe ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+ *fill*         0x0000d95e        0x2 ff
  .rodata.__func__.15
-                0x0000d96c       0x19 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
- *fill*         0x0000d985        0x3 ff
+                0x0000d960       0x19 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+ *fill*         0x0000d979        0x3 ff
  .rodata.__func__.16
-                0x0000d988       0x12 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
- *fill*         0x0000d99a        0x2 ff
+                0x0000d97c       0x12 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+ *fill*         0x0000d98e        0x2 ff
  .rodata.__func__.18
-                0x0000d99c       0x24 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d990       0x24 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.__func__.19
-                0x0000d9c0       0x14 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d9b4       0x14 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.__func__.21
-                0x0000d9d4       0x1a ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
- *fill*         0x0000d9ee        0x2 ff
+                0x0000d9c8       0x1a ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+ *fill*         0x0000d9e2        0x2 ff
  .rodata.__func__.22
-                0x0000d9f0       0x13 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+                0x0000d9e4       0x13 ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
  .rodata.prvTaskIsTaskSuspended.part.0.str1.4
-                0x0000da03       0x33 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000d9f7       0x33 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.prvInitialiseNewTask.constprop.0.str1.4
-                0x0000da03       0x11 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000d9f7       0x11 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.prvIdleTask.str1.4
-                0x0000da03       0x32 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000d9f7       0x32 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.xTaskIncrementTick.part.0.str1.4
-                0x0000da03       0x76 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000d9f7       0x76 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.xTaskCreateStatic.str1.4
-                0x0000da03       0x55 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000d9f7       0x55 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.vTaskDelete.str1.4
-                0x0000da03       0x2b ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000d9f7       0x2b ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.vTaskStartScheduler.str1.4
-                0x0000da03       0x1a ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000d9f7       0x1a ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.xTaskResumeAll.str1.4
-                0x0000da03       0x2b ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000d9f7       0x2b ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.vTaskSwitchContext.str1.4
-                0x0000da03        0xe ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000d9f7        0xe ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.vTaskPlaceOnEventList.str1.4
-                0x0000da03        0xc ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000d9f7        0xc ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.xTaskRemoveFromEventList.str1.4
-                0x0000da03        0xf ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000d9f7        0xf ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.vTaskSetTimeOutState.str1.4
-                0x0000da03        0xa ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000d9f7        0xa ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.xTaskCheckForTimeOut.str1.4
-                0x0000da03        0xe ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000da03        0x1 ff
+                0x0000d9f7        0xe ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000d9f7        0x1 ff
  .rodata.__func__.8
-                0x0000da04       0x15 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000da19        0x3 ff
+                0x0000d9f8       0x15 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000da0d        0x3 ff
  .rodata.__func__.10
-                0x0000da1c       0x22 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000da3e        0x2 ff
+                0x0000da10       0x22 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000da32        0x2 ff
  .rodata.__func__.11
-                0x0000da40       0x19 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000da59        0x3 ff
+                0x0000da34       0x19 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000da4d        0x3 ff
  .rodata.__func__.12
-                0x0000da5c       0x20 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000da50       0x20 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.__func__.13
-                0x0000da7c       0x1f ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000da9b        0x1 ff
+                0x0000da70       0x1f ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000da8f        0x1 ff
  .rodata.__func__.14
-                0x0000da9c       0x16 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000dab2        0x2 ff
+                0x0000da90       0x16 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000daa6        0x2 ff
  .rodata.__func__.15
-                0x0000dab4       0x13 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000dac7        0x1 ff
+                0x0000daa8       0x13 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000dabb        0x1 ff
  .rodata.__func__.16
-                0x0000dac8       0x13 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000dadb        0x1 ff
+                0x0000dabc       0x13 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000dacf        0x1 ff
  .rodata.__func__.20
-                0x0000dadc        0xf ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000daeb        0x1 ff
+                0x0000dad0        0xf ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000dadf        0x1 ff
  .rodata.__func__.21
-                0x0000daec       0x14 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000dae0       0x14 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
  .rodata.__func__.28
-                0x0000db00        0xb ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000db0b        0x1 ff
+                0x0000daf4        0xb ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000daff        0x1 ff
  .rodata.__func__.30
-                0x0000db0c        0xd ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000db19        0x3 ff
+                0x0000db00        0xd ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000db0d        0x3 ff
  .rodata.__func__.32
-                0x0000db1c       0x15 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000db31        0x3 ff
+                0x0000db10       0x15 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000db25        0x3 ff
  .rodata.__func__.33
-                0x0000db34       0x12 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- *fill*         0x0000db46        0x2 ff
+                0x0000db28       0x12 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ *fill*         0x0000db3a        0x2 ff
  .rodata.uxTopUsedPriority
-                0x0000db48        0x4 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
-                0x0000db48                uxTopUsedPriority
+                0x0000db3c        0x4 ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+                0x0000db3c                uxTopUsedPriority
  .rodata.prvCheckForValidListAndQueue.str1.4
-                0x0000db4c        0x5 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
+                0x0000db40        0x5 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
  .rodata.prvInitialiseNewTimer.part.0.str1.4
-                0x0000db4c       0x48 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
+                0x0000db40       0x48 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
  .rodata.prvTimerTask.str1.4
-                0x0000db4c       0x25 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
+                0x0000db40       0x25 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
  .rodata.xTimerCreateTimerTask.str1.4
-                0x0000db4c       0x10 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
+                0x0000db40       0x10 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
  .rodata.__func__.16
-                0x0000db4c       0x1b ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
- *fill*         0x0000db67        0x1 ff
+                0x0000db40       0x1b ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
+ *fill*         0x0000db5b        0x1 ff
  .rodata.__func__.18
-                0x0000db68       0x16 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
+                0x0000db5c       0x16 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
  .rodata.strtok.str1.1
-                0x0000db7e       0xa5 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strtok.o)
+                0x0000db72       0xa5 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strtok.o)
                                  0x72 (size before relaxing)
  .rodata._ctype_
-                0x0000dc23      0x101 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-ctype_.o)
-                0x0000dc23                _ctype_
+                0x0000dc17      0x101 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-ctype_.o)
+                0x0000dc17                _ctype_
  .rodata._svfprintf_r.str1.1
-                0x0000dd24       0x11 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-nano-svfprintf.o)
+                0x0000dd18       0x11 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-nano-svfprintf.o)
  .rodata._printf_i.str1.1
-                0x0000dd24       0x22 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-nano-vfprintf_i.o)
-                0x0000dd24                        __usb_dev_descriptor_start_fs = .
+                0x0000dd18       0x22 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-nano-vfprintf_i.o)
+                0x0000dd18                        __usb_dev_descriptor_start_fs = .
  *(.usb_device_desc_fs*)
-                0x0000dd24                        __usb_cfg_descriptor_start_fs = .
+                0x0000dd18                        __usb_cfg_descriptor_start_fs = .
  *(.usb_config_desc_fs*)
-                0x0000dd24                        __usb_interface_descriptor_start_fs = .
+                0x0000dd18                        __usb_interface_descriptor_start_fs = .
  *(.usb_interface_desc_fs*)
-                0x0000dd24                        __usb_descriptor_end_fs = .
-                0x0000dd24                        __usb_dev_descriptor_start_hs = .
+                0x0000dd18                        __usb_descriptor_end_fs = .
+                0x0000dd18                        __usb_dev_descriptor_start_hs = .
  *(.usb_device_desc_hs*)
-                0x0000dd24                        __usb_cfg_descriptor_start_hs = .
+                0x0000dd18                        __usb_cfg_descriptor_start_hs = .
  *(.usb_config_desc_hs*)
-                0x0000dd24                        __usb_interface_descriptor_start_hs = .
+                0x0000dd18                        __usb_interface_descriptor_start_hs = .
  *(.usb_interface_desc_hs*)
-                0x0000dd24                        __usb_descriptor_end_hs = .
+                0x0000dd18                        __usb_descriptor_end_hs = .
  *(.eh_frame*)
- .eh_frame      0x0000dd24        0x0 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtbegin.o
- .eh_frame      0x0000dd24       0x28 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strlen.o)
- .eh_frame      0x0000dd4c        0x4 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtend.o
-                0x0000dd50                        __ROM_End = .
+ .eh_frame      0x0000dd18        0x0 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtbegin.o
+ .eh_frame      0x0000dd18       0x28 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v8-m.main+fp/hard/libg_nano.a(libc_a-strlen.o)
+ .eh_frame      0x0000dd40        0x4 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtend.o
+                0x0000dd44                        __ROM_End = .
                 0x000001c0                        __Vectors_Size = (__Vectors_End - __Vectors)
 
-.glue_7         0x0000dd50        0x0
- .glue_7        0x0000dd50        0x0 linker stubs
+.glue_7         0x0000dd44        0x0
+ .glue_7        0x0000dd44        0x0 linker stubs
 
-.glue_7t        0x0000dd50        0x0
- .glue_7t       0x0000dd50        0x0 linker stubs
+.glue_7t        0x0000dd44        0x0
+ .glue_7t       0x0000dd44        0x0 linker stubs
 
-.vfp11_veneer   0x0000dd50        0x0
- .vfp11_veneer  0x0000dd50        0x0 linker stubs
+.vfp11_veneer   0x0000dd44        0x0
+ .vfp11_veneer  0x0000dd44        0x0 linker stubs
 
-.v4_bx          0x0000dd50        0x0
- .v4_bx         0x0000dd50        0x0 linker stubs
+.v4_bx          0x0000dd44        0x0
+ .v4_bx         0x0000dd44        0x0 linker stubs
 
-.iplt           0x0000dd50        0x0
- .iplt          0x0000dd50        0x0 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtbegin.o
-                0x0000dd50                        . = .
-                0x0000dd50                        __itcm_data_pre_location = .
+.iplt           0x0000dd44        0x0
+ .iplt          0x0000dd44        0x0 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtbegin.o
+                0x0000dd44                        . = .
+                0x0000dd44                        __itcm_data_pre_location = .
 
 .itcm_data      0x00000000        0x0 load address 0x0000dd50
                 0x00000000                        __tz_ITCM_S = ABSOLUTE (ITCM_START)
@@ -3641,14 +3641,14 @@ END GROUP
                 0x00000001                        ASSERT (((LENGTH (ITCM) % 0x8) == 0x0), ITCM memory region length must be a multiple of 8 bytes.)
                 0x00000001                        ASSERT (((LOADADDR (.itcm_data) % 0x10) == 0x0), .itcm_data section must be aligned to 16 bytes.)
                 0x00000001                        ASSERT (((SIZEOF (.itcm_data) % 0x8) == 0x0), .itcm_data section size must be a multiple of 8 bytes.)
-                0x0000dd50                        . = (SIZEOF (.itcm_data) > 0x0)?__itcm_data_init_end:__itcm_data_pre_location
-                0x0000dd50                        __exidx_start = .
+                0x0000dd44                        . = (SIZEOF (.itcm_data) > 0x0)?__itcm_data_init_end:__itcm_data_pre_location
+                0x0000dd44                        __exidx_start = .
 
 /DISCARD/
  *(.ARM.extab* .gnu.linkonce.armextab.*)
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000dd50                        __exidx_end = .
-                0x0000dd50                        __etext = .
+                0x0000dd44                        __exidx_end = .
+                0x0000dd44                        __etext = .
                 0x20000000                        __tz_RAM_S = ORIGIN (RAM)
 
 .fsp_dtc_vector_table
@@ -3658,7 +3658,7 @@ END GROUP
  .fsp_dtc_vector_table
                 0x20000000      0x180 ./ra/fsp/src/r_dtc/r_dtc.o
 
-.data           0x20000180     0x1d9c load address 0x0000dd50
+.data           0x20000180     0x1d9c load address 0x0000dd44
                 0x20000180                        __data_start__ = .
                 0x20000180                        . = ALIGN (0x4)
                 0x20000180                        __Code_In_RAM_Start = .
@@ -3784,18 +3784,18 @@ END GROUP
                 0x20001f1c                        __data_end__ = .
 
 .tm_clone_table
-                0x20001f1c        0x0 load address 0x0000faec
+                0x20001f1c        0x0 load address 0x0000fae0
  .tm_clone_table
                 0x20001f1c        0x0 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtbegin.o
  .tm_clone_table
                 0x20001f1c        0x0 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtend.o
 
-.igot.plt       0x20001f1c        0x0 load address 0x0000faec
+.igot.plt       0x20001f1c        0x0 load address 0x0000fae0
  .igot.plt      0x20001f1c        0x0 /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v8-m.main+fp/hard/crtbegin.o
                 0x20001f1c                        . = .
-                0x0000faec                        __dtcm_data_pre_location = (LOADADDR (.data) + SIZEOF (.data))
+                0x0000fae0                        __dtcm_data_pre_location = (LOADADDR (.data) + SIZEOF (.data))
 
-.dtcm_data      0x00000000        0x0 load address 0x0000faf0
+.dtcm_data      0x00000000        0x0 load address 0x0000fae0
                 0x00000000                        __tz_DTCM_S = ABSOLUTE (DTCM_START)
                 0x00000000                        __dtcm_data_start = .
  *(.dtcm_data*)
@@ -3809,8 +3809,8 @@ END GROUP
                 0x00000000                        . = ALIGN (0x8)
                 0x00000000                        __dtcm_bss_end = .
                 0x00000000                        __tz_DTCM_N = DEFINED (DTCM_NS_START)?ABSOLUTE (DTCM_NS_START):ALIGN (__dtcm_bss_end, 0x2000)
-                0x0000faf0                        __dtcm_data_init_start = LOADADDR (.dtcm_data)
-                0x0000faf0                        __dtcm_data_init_end = (LOADADDR (.dtcm_data) + SIZEOF (.dtcm_data))
+                0x0000fae0                        __dtcm_data_init_start = LOADADDR (.dtcm_data)
+                0x0000fae0                        __dtcm_data_init_end = (LOADADDR (.dtcm_data) + SIZEOF (.dtcm_data))
                 0x00000001                        ASSERT (((ORIGIN (DTCM) % 0x8) == 0x0), DTCM memory region origin must be aligned to 8 bytes.)
                 0x00000001                        ASSERT (((LENGTH (DTCM) % 0x8) == 0x0), DTCM memory region length must be a multiple of 8 bytes.)
                 0x00000001                        ASSERT ((LOADADDR (.dtcm_bss) == ADDR (.dtcm_bss)), .dtcm_bss has (VMA != LMA) but should be NOLOAD (VMA == LMA).)
@@ -3819,8 +3819,8 @@ END GROUP
                 0x00000001                        ASSERT (((LOADADDR (.dtcm_bss) % 0x8) == 0x0), .dtcm_bss section must be aligned to 8 bytes.)
                 0x00000001                        ASSERT (((SIZEOF (.dtcm_bss) % 0x8) == 0x0), .dtcm_bss section size must be a multiple of 8 bytes.)
                 0x00000001                        ASSERT ((__dtcm_bss_start == __dtcm_data_end), .dtcm_bss section is not adjacent to .dtcm_data section.)
-                0x0000faec                        . = (SIZEOF (.dtcm_data) > 0x0)?__dtcm_data_init_end:__dtcm_data_pre_location
-                0x0000faec                        sgstubs_pre_location = .
+                0x0000fae0                        . = (SIZEOF (.dtcm_data) > 0x0)?__dtcm_data_init_end:__dtcm_data_pre_location
+                0x0000fae0                        sgstubs_pre_location = .
                 0x0000fc00                        SGSTUBS_LOC = (DEFINED (PROJECT_SECURE) && DEFINED (FLASH_NSC_START))?ABSOLUTE (FLASH_NSC_START):ALIGN (0x400)
 
 .gnu.sgstubs    0x0000fc00        0x0
@@ -3839,10 +3839,10 @@ END GROUP
  *(.code_in_qspi*)
                 0x60000000                        __qspi_flash_end__ = .
                 0x00000000                        __qspi_flash_code_size__ = (__qspi_flash_end__ - __qspi_flash_start__)
-                0x0000faec                        __qspi_flash_code_addr__ = sgstubs_pre_location
+                0x0000fae0                        __qspi_flash_code_addr__ = sgstubs_pre_location
 
 .qspi_non_retentive
-                0x60000000        0x0 load address 0x0000faec
+                0x60000000        0x0 load address 0x0000fae0
                 0x60000000                        __qspi_non_retentive_start__ = .
  *(.qspi_non_retentive*)
                 0x60000000                        __qspi_non_retentive_end__ = .
@@ -3875,10 +3875,10 @@ END GROUP
  *(.code_in_ospi_device_0*)
                 0x68000000                        __ospi_device_0_end__ = .
                 0x00000000                        __ospi_device_0_code_size__ = (__ospi_device_0_end__ - __ospi_device_0_start__)
-                0x0000faec                        __ospi_device_0_code_addr__ = (sgstubs_pre_location + SIZEOF (.qspi_non_retentive))
+                0x0000fae0                        __ospi_device_0_code_addr__ = (sgstubs_pre_location + SIZEOF (.qspi_non_retentive))
 
 .ospi_device_0_non_retentive
-                0x68000000        0x0 load address 0x0000faec
+                0x68000000        0x0 load address 0x0000fae0
                 0x68000000                        __ospi_device_0_non_retentive_start__ = .
  *(.ospi_device_0_non_retentive*)
                 0x68000000                        __ospi_device_0_non_retentive_end__ = .
@@ -3895,10 +3895,10 @@ END GROUP
  *(.code_in_ospi_device_1*)
                 0x70000000                        __ospi_device_1_end__ = .
                 0x00000000                        __ospi_device_1_code_size__ = (__ospi_device_1_end__ - __ospi_device_1_start__)
-                0x0000faec                        __ospi_device_1_code_addr__ = (sgstubs_pre_location + (SIZEOF (.qspi_non_retentive) + SIZEOF (.ospi_device_0_non_retentive)))
+                0x0000fae0                        __ospi_device_1_code_addr__ = (sgstubs_pre_location + (SIZEOF (.qspi_non_retentive) + SIZEOF (.ospi_device_0_non_retentive)))
 
 .ospi_device_1_non_retentive
-                0x70000000        0x0 load address 0x0000faec
+                0x70000000        0x0 load address 0x0000fae0
                 0x70000000                        __ospi_device_1_non_retentive_start__ = .
  *(.ospi_device_1_non_retentive*)
                 0x70000000                        __ospi_device_1_non_retentive_end__ = .
@@ -5362,74 +5362,74 @@ LOAD linker stubs
  .debug_rnglists
                 0x00002a08      0x1bb ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
 
-.debug_line     0x00000000    0x29f62
- .debug_line    0x00000000     0x10bb ./src/sdio/sdio_cmd.o
- .debug_line    0x000010bb      0xec4 ./src/sdio/sdio_drv.o
- .debug_line    0x00001f7f     0x1b64 ./src/atcmd/at_cmd.o
- .debug_line    0x00003ae3      0x4ca ./src/common_init.o
- .debug_line    0x00003fad      0x210 ./src/common_support.o
- .debug_line    0x000041bd      0x3ee ./src/hal_entry.o
- .debug_line    0x000045ab      0xf92 ./src/main_thread_entry.o
- .debug_line    0x0000553d      0x104 ./src/r_usb_pcdc_descriptor.o
- .debug_line    0x00005641      0x751 ./src/rxcmd_thread_entry.o
- .debug_line    0x00005d92      0x690 ./src/system_monitor_entry.o
- .debug_line    0x00006422      0x90b ./src/txcmd_thread_entry.o
- .debug_line    0x00006d2d      0x29f ./src/usb_console_entry.o
- .debug_line    0x00006fcc      0xbec ./src/usb_console_main.o
- .debug_line    0x00007bb8      0x5e3 ./ra_gen/common_data.o
- .debug_line    0x0000819b      0x455 ./ra_gen/hal_data.o
- .debug_line    0x000085f0      0x3e9 ./ra_gen/main.o
- .debug_line    0x000089d9      0x619 ./ra_gen/main_thread.o
- .debug_line    0x00008ff2      0x2f5 ./ra_gen/pin_data.o
- .debug_line    0x000092e7      0x31b ./ra_gen/rxcmd_thread.o
- .debug_line    0x00009602      0x31f ./ra_gen/system_monitor.o
- .debug_line    0x00009921      0x31b ./ra_gen/txcmd_thread.o
- .debug_line    0x00009c3c      0x54c ./ra_gen/usb_console.o
- .debug_line    0x0000a188      0x255 ./ra_gen/vector_data.o
- .debug_line    0x0000a3dd      0xabf ./ra/fsp/src/rm_freertos_port/port.o
- .debug_line    0x0000ae9c      0x572 ./ra/fsp/src/r_usb_pcdc/src/r_usb_pcdc_driver.o
- .debug_line    0x0000b40e      0x7aa ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
- .debug_line    0x0000bbb8     0x1bc6 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
- .debug_line    0x0000d77e      0xea2 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
- .debug_line    0x0000e620      0xb6d ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
- .debug_line    0x0000f18d      0x549 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
- .debug_line    0x0000f6d6      0x85f ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cdataio.o
- .debug_line    0x0000ff35      0x7f6 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
- .debug_line    0x0001072b      0xb08 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
- .debug_line    0x00011233      0x555 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pcontrolrw.o
- .debug_line    0x00011788     0x138c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
- .debug_line    0x00012b14      0x514 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pintfifo.o
- .debug_line    0x00013028      0x70e ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pinthandler_usbip0.o
- .debug_line    0x00013736      0xf2e ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
- .debug_line    0x00014664      0x58b ./ra/fsp/src/r_usb_basic/src/driver/r_usb_psignal.o
- .debug_line    0x00014bef      0x7cd ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdfunction.o
- .debug_line    0x000153bc     0x1157 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
- .debug_line    0x00016513     0x1243 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
- .debug_line    0x00017756     0x1a3b ./ra/fsp/src/r_spi/r_spi.o
- .debug_line    0x00019191     0x2b09 ./ra/fsp/src/r_sdhi/r_sdhi.o
- .debug_line    0x0001bc9a     0x1a7f ./ra/fsp/src/r_sci_uart/r_sci_uart.o
- .debug_line    0x0001d719      0xcb7 ./ra/fsp/src/r_ioport/r_ioport.o
- .debug_line    0x0001e3d0      0x9ac ./ra/fsp/src/r_icu/r_icu.o
- .debug_line    0x0001ed7c      0xb51 ./ra/fsp/src/r_dtc/r_dtc.o
- .debug_line    0x0001f8cd      0xab9 ./ra/fsp/src/bsp/mcu/all/bsp_clocks.o
- .debug_line    0x00020386      0x311 ./ra/fsp/src/bsp/mcu/all/bsp_common.o
- .debug_line    0x00020697      0x349 ./ra/fsp/src/bsp/mcu/all/bsp_delay.o
- .debug_line    0x000209e0      0x3fd ./ra/fsp/src/bsp/mcu/all/bsp_group_irq.o
- .debug_line    0x00020ddd      0x1bb ./ra/fsp/src/bsp/mcu/all/bsp_io.o
- .debug_line    0x00020f98      0x657 ./ra/fsp/src/bsp/mcu/all/bsp_irq.o
- .debug_line    0x000215ef      0x4b3 ./ra/fsp/src/bsp/mcu/all/bsp_register_protection.o
- .debug_line    0x00021aa2      0x113 ./ra/fsp/src/bsp/mcu/all/bsp_rom_registers.o
- .debug_line    0x00021bb5      0x1a6 ./ra/fsp/src/bsp/mcu/all/bsp_sbrk.o
- .debug_line    0x00021d5b      0x227 ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.o
- .debug_line    0x00021f82      0x765 ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/system.o
- .debug_line    0x000226e7       0x5a ./ra/board/ra6m4_ek/board_init.o
- .debug_line    0x00022741      0x27a ./ra/board/ra6m4_ek/board_leds.o
- .debug_line    0x000229bb      0x84d ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
- .debug_line    0x00023208      0xcf3 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
- .debug_line    0x00023efb      0x449 ./ra/aws/FreeRTOS/FreeRTOS/Source/list.o
- .debug_line    0x00024344     0x1fad ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
- .debug_line    0x000262f1     0x2d0f ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
- .debug_line    0x00029000      0xf62 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
+.debug_line     0x00000000    0x29f5d
+ .debug_line    0x00000000     0x10b6 ./src/sdio/sdio_cmd.o
+ .debug_line    0x000010b6      0xec4 ./src/sdio/sdio_drv.o
+ .debug_line    0x00001f7a     0x1b64 ./src/atcmd/at_cmd.o
+ .debug_line    0x00003ade      0x4ca ./src/common_init.o
+ .debug_line    0x00003fa8      0x210 ./src/common_support.o
+ .debug_line    0x000041b8      0x3ee ./src/hal_entry.o
+ .debug_line    0x000045a6      0xf92 ./src/main_thread_entry.o
+ .debug_line    0x00005538      0x104 ./src/r_usb_pcdc_descriptor.o
+ .debug_line    0x0000563c      0x751 ./src/rxcmd_thread_entry.o
+ .debug_line    0x00005d8d      0x690 ./src/system_monitor_entry.o
+ .debug_line    0x0000641d      0x90b ./src/txcmd_thread_entry.o
+ .debug_line    0x00006d28      0x29f ./src/usb_console_entry.o
+ .debug_line    0x00006fc7      0xbec ./src/usb_console_main.o
+ .debug_line    0x00007bb3      0x5e3 ./ra_gen/common_data.o
+ .debug_line    0x00008196      0x455 ./ra_gen/hal_data.o
+ .debug_line    0x000085eb      0x3e9 ./ra_gen/main.o
+ .debug_line    0x000089d4      0x619 ./ra_gen/main_thread.o
+ .debug_line    0x00008fed      0x2f5 ./ra_gen/pin_data.o
+ .debug_line    0x000092e2      0x31b ./ra_gen/rxcmd_thread.o
+ .debug_line    0x000095fd      0x31f ./ra_gen/system_monitor.o
+ .debug_line    0x0000991c      0x31b ./ra_gen/txcmd_thread.o
+ .debug_line    0x00009c37      0x54c ./ra_gen/usb_console.o
+ .debug_line    0x0000a183      0x255 ./ra_gen/vector_data.o
+ .debug_line    0x0000a3d8      0xabf ./ra/fsp/src/rm_freertos_port/port.o
+ .debug_line    0x0000ae97      0x572 ./ra/fsp/src/r_usb_pcdc/src/r_usb_pcdc_driver.o
+ .debug_line    0x0000b409      0x7aa ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_abs.o
+ .debug_line    0x0000bbb3     0x1bc6 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_creg_access.o
+ .debug_line    0x0000d779      0xea2 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_mcu.o
+ .debug_line    0x0000e61b      0xb6d ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_abs.o
+ .debug_line    0x0000f188      0x549 ./ra/fsp/src/r_usb_basic/src/hw/r_usb_preg_access.o
+ .debug_line    0x0000f6d1      0x85f ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cdataio.o
+ .debug_line    0x0000ff30      0x7f6 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_clibusbip.o
+ .debug_line    0x00010726      0xb08 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_cstd_rtos.o
+ .debug_line    0x0001122e      0x555 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pcontrolrw.o
+ .debug_line    0x00011783     0x138c ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pdriver.o
+ .debug_line    0x00012b0f      0x514 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pintfifo.o
+ .debug_line    0x00013023      0x70e ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pinthandler_usbip0.o
+ .debug_line    0x00013731      0xf2e ./ra/fsp/src/r_usb_basic/src/driver/r_usb_plibusbip.o
+ .debug_line    0x0001465f      0x58b ./ra/fsp/src/r_usb_basic/src/driver/r_usb_psignal.o
+ .debug_line    0x00014bea      0x7cd ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdfunction.o
+ .debug_line    0x000153b7     0x1157 ./ra/fsp/src/r_usb_basic/src/driver/r_usb_pstdrequest.o
+ .debug_line    0x0001650e     0x1243 ./ra/fsp/src/r_usb_basic/r_usb_basic.o
+ .debug_line    0x00017751     0x1a3b ./ra/fsp/src/r_spi/r_spi.o
+ .debug_line    0x0001918c     0x2b09 ./ra/fsp/src/r_sdhi/r_sdhi.o
+ .debug_line    0x0001bc95     0x1a7f ./ra/fsp/src/r_sci_uart/r_sci_uart.o
+ .debug_line    0x0001d714      0xcb7 ./ra/fsp/src/r_ioport/r_ioport.o
+ .debug_line    0x0001e3cb      0x9ac ./ra/fsp/src/r_icu/r_icu.o
+ .debug_line    0x0001ed77      0xb51 ./ra/fsp/src/r_dtc/r_dtc.o
+ .debug_line    0x0001f8c8      0xab9 ./ra/fsp/src/bsp/mcu/all/bsp_clocks.o
+ .debug_line    0x00020381      0x311 ./ra/fsp/src/bsp/mcu/all/bsp_common.o
+ .debug_line    0x00020692      0x349 ./ra/fsp/src/bsp/mcu/all/bsp_delay.o
+ .debug_line    0x000209db      0x3fd ./ra/fsp/src/bsp/mcu/all/bsp_group_irq.o
+ .debug_line    0x00020dd8      0x1bb ./ra/fsp/src/bsp/mcu/all/bsp_io.o
+ .debug_line    0x00020f93      0x657 ./ra/fsp/src/bsp/mcu/all/bsp_irq.o
+ .debug_line    0x000215ea      0x4b3 ./ra/fsp/src/bsp/mcu/all/bsp_register_protection.o
+ .debug_line    0x00021a9d      0x113 ./ra/fsp/src/bsp/mcu/all/bsp_rom_registers.o
+ .debug_line    0x00021bb0      0x1a6 ./ra/fsp/src/bsp/mcu/all/bsp_sbrk.o
+ .debug_line    0x00021d56      0x227 ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.o
+ .debug_line    0x00021f7d      0x765 ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/system.o
+ .debug_line    0x000226e2       0x5a ./ra/board/ra6m4_ek/board_init.o
+ .debug_line    0x0002273c      0x27a ./ra/board/ra6m4_ek/board_leds.o
+ .debug_line    0x000229b6      0x84d ./ra/aws/FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.o
+ .debug_line    0x00023203      0xcf3 ./ra/aws/FreeRTOS/FreeRTOS/Source/event_groups.o
+ .debug_line    0x00023ef6      0x449 ./ra/aws/FreeRTOS/FreeRTOS/Source/list.o
+ .debug_line    0x0002433f     0x1fad ./ra/aws/FreeRTOS/FreeRTOS/Source/queue.o
+ .debug_line    0x000262ec     0x2d0f ./ra/aws/FreeRTOS/FreeRTOS/Source/tasks.o
+ .debug_line    0x00028ffb      0xf62 ./ra/aws/FreeRTOS/FreeRTOS/Source/timers.o
 
 .debug_str      0x00000000    0x157a5
  .debug_str     0x00000000    0x157a5 ./src/sdio/sdio_cmd.o

@@ -1,25 +1,12 @@
-/***********************************************************************************************************************
-* DISCLAIMER
-* This software is supplied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
-* other uses are authorized. This software is owned by Renesas Electronics Corporation and is protected under all
-* applicable laws, including copyright laws.
-* THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
-* THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED. TO THE MAXIMUM
-* EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS AFFILIATED COMPANIES
-* SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY REASON RELATED TO THIS
-* SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-* Renesas reserves the right, without notice, to make changes to this software and to discontinue the availability of
-* this software. By using this software, you agree to the additional terms and conditions found by accessing the
-* following link:
-* http://www.renesas.com/disclaimer
-*
-* Copyright (C) 2019 Renesas Electronics Corporation. All rights reserved.
-***********************************************************************************************************************/
+/* 
+* Copyright (c) 2019 - 2025 Renesas Electronics Corporation and/or its affiliates 
+* 
+* SPDX-License-Identifier: BSD-3-Clause 
+*/
 /***********************************************************************************************************************
  * File Name: r_ble_gaps.h
  * Version : 1.0
- * Description : The header file for Generic Access service.
+ * Description : The header file for GAP Service service.
  **********************************************************************************************************************/
 /***********************************************************************************************************************
  * History : DD.MM.YYYY Version Description
@@ -28,7 +15,7 @@
 
 /*******************************************************************************************************************//**
  * @file
- * @defgroup gaps Generic Access Service Server
+ * @defgroup gaps GAP Service Service
  * @{
  * @ingroup profile
  * @brief   The generic_access service contains generic information about the device.
@@ -40,17 +27,13 @@
 #define R_BLE_GAPS_H
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Device Name Characteristic
+    Device Name Characteristic : The Device Name characteristic shall contain the name of the device.
 ----------------------------------------------------------------------------------------------------------------------*/
-/** Name Length */
-#define BLE_GAPS_DEV_NAME_NAME_LEN (100)
-
 /***************************************************************************//**
  * @brief Device Name value structure.
 *******************************************************************************/
-typedef struct
-{
-    char name[BLE_GAPS_DEV_NAME_NAME_LEN]; /**< Name */
+typedef struct {
+    char name[127]; /**< Name */
     uint8_t length; /**< Length */
 } st_ble_gaps_dev_name_t;
 
@@ -69,13 +52,12 @@ ble_status_t R_BLE_GAPS_SetDevName(const st_ble_gaps_dev_name_t *p_value);
 ble_status_t R_BLE_GAPS_GetDevName(st_ble_gaps_dev_name_t *p_value);
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Appearance Characteristic
+    Appearance Characteristic : The Appearance characteristic defines the representation of the external appearance of the device.
 ----------------------------------------------------------------------------------------------------------------------*/
 /***************************************************************************//**
  * @brief Appearance Category enumeration.
 *******************************************************************************/
-typedef enum
-{
+typedef enum {
     BLE_GAPS_APPEARANCE_CATEGORY_UNKNOWN = 0, /**< Unknown */
     BLE_GAPS_APPEARANCE_CATEGORY_GENERIC_PHONE = 64, /**< Generic Phone */
     BLE_GAPS_APPEARANCE_CATEGORY_GENERIC_COMPUTER = 128, /**< Generic Computer */
@@ -125,7 +107,7 @@ typedef enum
     BLE_GAPS_APPEARANCE_CATEGORY_LOCATION_AND_NAVIGATION_DISPLAY_DEVICE = 5186, /**< Location and Navigation Display Device */
     BLE_GAPS_APPEARANCE_CATEGORY_LOCATION_POD = 5187, /**< Location Pod */
     BLE_GAPS_APPEARANCE_CATEGORY_LOCATION_AND_NAVIGATION_POD = 5188, /**< Location and Navigation Pod */
-} e_ble_appearance_category_t;
+} e_ble_gaps_appearance_category_t;
 
 /***************************************************************************//**
  * @brief     Set Appearance characteristic value to the local GATT database.
@@ -142,17 +124,16 @@ ble_status_t R_BLE_GAPS_SetAppearance(const uint16_t *p_value);
 ble_status_t R_BLE_GAPS_GetAppearance(uint16_t *p_value);
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Peripheral Preferred Connection Parameters Characteristic
+    Peripheral Preferred Connection Parameters Characteristic : The Peripheral Preferred Connection Parameters (PPCP) characteristic contains the preferred connection parameters of the Peripheral
 ----------------------------------------------------------------------------------------------------------------------*/
 /***************************************************************************//**
  * @brief Peripheral Preferred Connection Parameters value structure.
 *******************************************************************************/
-typedef struct
-{
-    uint16_t min_conn_intv; /**< Minimum Connection Interval */
-    uint16_t max_conn_intv; /**< Maximum Connection Interval */
+typedef struct {
+    uint16_t minimum_connection_interval; /**< Minimum Connection Interval */
+    uint16_t maximum_connection_interval; /**< Maximum Connection Interval */
     uint16_t slave_latency; /**< Slave Latency */
-    uint16_t conn_sup_timeout_multiplier; /**< Connection Supervision Timeout Multiplier */
+    uint16_t connection_supervision_timeout_multiplier; /**< Connection Supervision Timeout Multiplier */
 } st_ble_gaps_per_pref_conn_param_t;
 
 /***************************************************************************//**
@@ -170,7 +151,7 @@ ble_status_t R_BLE_GAPS_SetPerPrefConnParam(const st_ble_gaps_per_pref_conn_para
 ble_status_t R_BLE_GAPS_GetPerPrefConnParam(st_ble_gaps_per_pref_conn_param_t *p_value);
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Central Address Resolution Characteristic
+    Central Address Resolution Characteristic : The Peripheral should check if the peer device supports address resolution by reading the Central Address Resolution characteristic.
 ----------------------------------------------------------------------------------------------------------------------*/
 /***************************************************************************//**
  * @brief     Set Central Address Resolution characteristic value to the local GATT database.
@@ -187,7 +168,7 @@ ble_status_t R_BLE_GAPS_SetCentAddrRslv(const uint8_t *p_value);
 ble_status_t R_BLE_GAPS_GetCentAddrRslv(uint8_t *p_value);
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Resolvable Private Address Only Characteristic
+    Resolvable Private Address Only Characteristic : The device should check if the peer will only use Resolvable Private Addresses (RPAs) after bonding by reading the Resolvable Private Address Only characteristic.
 ----------------------------------------------------------------------------------------------------------------------*/
 /***************************************************************************//**
  * @brief     Set Resolvable Private Address Only characteristic value to the local GATT database.
@@ -204,26 +185,24 @@ ble_status_t R_BLE_GAPS_SetRslvPrivAddrOnly(const uint8_t *p_value);
 ble_status_t R_BLE_GAPS_GetRslvPrivAddrOnly(uint8_t *p_value);
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Generic Access Service
+    GAP Service Service
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /***************************************************************************//**
- * @brief Generic Access characteristic Index.
+ * @brief GAP Service characteristic Index.
 *******************************************************************************/
-typedef enum
-{
+typedef enum {
     BLE_GAPS_DEV_NAME_IDX,
     BLE_GAPS_APPEARANCE_IDX,
     BLE_GAPS_PER_PREF_CONN_PARAM_IDX,
     BLE_GAPS_CENT_ADDR_RSLV_IDX,
     BLE_GAPS_RSLV_PRIV_ADDR_ONLY_IDX,
-} st_ble_gaps_char_idx_t;
+} e_ble_gaps_char_idx_t;
 
 /***************************************************************************//**
- * @brief Generic Access event type.
+ * @brief GAP Service event type.
 *******************************************************************************/
-typedef enum
-{
+typedef enum {
     /* Device Name */
     BLE_GAPS_EVENT_DEV_NAME_WRITE_REQ = BLE_SERVS_ATTR_EVENT(BLE_GAPS_DEV_NAME_IDX, BLE_SERVS_WRITE_REQ),
     BLE_GAPS_EVENT_DEV_NAME_WRITE_COMP = BLE_SERVS_ATTR_EVENT(BLE_GAPS_DEV_NAME_IDX, BLE_SERVS_WRITE_COMP),
@@ -239,7 +218,7 @@ typedef enum
 } e_ble_gaps_event_t;
 
 /***************************************************************************//**
- * @brief     Initialize Generic Access service.
+ * @brief     Initialize GAP Service service.
  * @param[in] cb Service callback.
  * @return    @ref ble_status_t
 *******************************************************************************/

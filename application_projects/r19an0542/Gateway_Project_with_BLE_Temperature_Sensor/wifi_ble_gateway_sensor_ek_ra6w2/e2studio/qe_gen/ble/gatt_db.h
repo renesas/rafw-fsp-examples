@@ -1,0 +1,64 @@
+/*
+ * Copyright (c) 2019 - 2025 Renesas Electronics Corporation and/or its affiliates
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
+#ifndef GATT_DB_H
+#define GATT_DB_H
+
+#include "profile_cmn/r_ble_serv_common.h"
+
+extern st_ble_gatts_db_cfg_t g_gatt_db_table;
+
+typedef enum
+{
+    BLE_INVALID_ATTR_HDL                        = 0x0000,
+    BLE_GAPS_DECL_HDL                           = 0x0001,
+    BLE_GAPS_DEV_NAME_DECL_HDL                  = 0x0002,
+    BLE_GAPS_DEV_NAME_VAL_HDL                   = 0x0003,
+    BLE_GAPS_APPEARANCE_DECL_HDL                = 0x0004,
+    BLE_GAPS_APPEARANCE_VAL_HDL                 = 0x0005,
+    BLE_GAPS_PER_PREF_CONN_PARAM_DECL_HDL       = 0x0006,
+    BLE_GAPS_PER_PREF_CONN_PARAM_VAL_HDL        = 0x0007,
+    BLE_GAPS_CENT_ADDR_RSLV_DECL_HDL            = 0x0008,
+    BLE_GAPS_CENT_ADDR_RSLV_VAL_HDL             = 0x0009,
+    BLE_GAPS_RSLV_PRIV_ADDR_ONLY_DECL_HDL       = 0x000A,
+    BLE_GAPS_RSLV_PRIV_ADDR_ONLY_VAL_HDL        = 0x000B,
+    BLE_GATS_DECL_HDL                           = 0x000C,
+    BLE_GATS_SERV_CHANGED_DECL_HDL              = 0x000D,
+    BLE_GATS_SERV_CHANGED_VAL_HDL               = 0x000E,
+    BLE_GATS_SERV_CHANGED_CLI_CNFG_DESC_HDL     = 0x000F,
+    BLE_WIFI_PROVISIONINGS_DECL_HDL             = 0x0010,
+    BLE_WIFI_PROVISIONINGS_WIFICOMMAND_DECL_HDL = 0x0011,
+    BLE_WIFI_PROVISIONINGS_WIFICOMMAND_VAL_HDL  = 0x0012,
+    BLE_WIFI_PROVISIONINGS_WIFICOMMAND_CHAR_USER_DESCRIPTION_DESC_HDL = 0x0013,
+    BLE_WIFI_PROVISIONINGS_WIFISTATUS_DECL_HDL                       = 0x0014,
+    BLE_WIFI_PROVISIONINGS_WIFISTATUS_VAL_HDL                        = 0x0015,
+    BLE_WIFI_PROVISIONINGS_WIFISTATUS_CLI_CNFG_DESC_HDL              = 0x0016,
+    BLE_WIFI_PROVISIONINGS_WIFISTATUS_CHAR_USER_DESCRIPTION_DESC_HDL = 0x0017,
+    BLE_WIFI_PROVISIONINGS_WIFIOUTPUT_DECL_HDL                       = 0x0018,
+    BLE_WIFI_PROVISIONINGS_WIFIOUTPUT_VAL_HDL                        = 0x0019,
+    BLE_WIFI_PROVISIONINGS_WIFIPROVISIONING_DECL_HDL                 = 0x001A,
+    BLE_WIFI_PROVISIONINGS_WIFIPROVISIONING_VAL_HDL                  = 0x001B,
+    BLE_WIFI_PROVISIONINGS_THINGNAME_DECL_HDL                        = 0x001C,
+    BLE_WIFI_PROVISIONINGS_THINGNAME_VAL_HDL = 0x001D,
+} e_ble_attr_hdl_t;
+
+#define BLE_GAPS_DEV_NAME_LEN                                           (128)
+#define BLE_GAPS_APPEARANCE_LEN                                         (2)
+#define BLE_GAPS_PER_PREF_CONN_PARAM_LEN                                (8)
+#define BLE_GAPS_CENT_ADDR_RSLV_LEN                                     (1)
+#define BLE_GAPS_RSLV_PRIV_ADDR_ONLY_LEN                                (1)
+#define BLE_GATS_SERV_CHANGED_LEN                                       (4)
+#define BLE_GATS_SERV_CHANGED_CLI_CNFG_LEN                              (2)
+#define BLE_WIFI_PROVISIONINGS_WIFICOMMAND_LEN                          (192)
+#define BLE_WIFI_PROVISIONINGS_WIFICOMMAND_CHAR_USER_DESCRIPTION_LEN    (10)
+#define BLE_WIFI_PROVISIONINGS_WIFISTATUS_LEN                           (2)
+#define BLE_WIFI_PROVISIONINGS_WIFISTATUS_CLI_CNFG_LEN                  (2)
+#define BLE_WIFI_PROVISIONINGS_WIFISTATUS_CHAR_USER_DESCRIPTION_LEN     (22)
+#define BLE_WIFI_PROVISIONINGS_WIFIOUTPUT_LEN                           (192)
+#define BLE_WIFI_PROVISIONINGS_WIFIPROVISIONING_LEN                     (192)
+#define BLE_WIFI_PROVISIONINGS_THINGNAME_LEN                            (192)
+
+#endif                                 /* GATT_DB_H */

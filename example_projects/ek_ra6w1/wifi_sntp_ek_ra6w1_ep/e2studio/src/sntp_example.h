@@ -31,6 +31,11 @@ typedef unsigned long uint32_t;
 #define INITIAL_VALUE            '\0'
 #define WIFI_EVENT_CONNECTED     5
 
+#define SSID_DISPLAY_WIDTH      (32)
+#define RSSI_DISPLAY_WIDTH      (5)
+#define CH_DISPLAY_WIDTH        (4)
+#define ENC_DISPLAY_WIDTH       (15)
+
 void print_ep_info();
 void print_current_time(void);
 void sntp_example(void);

@@ -3,7 +3,7 @@
  * Description  : Entry file for the thread New Thread
  **********************************************************************************************************************/
 /***********************************************************************************************************************
-* Copyright (c) 2025 Renesas Electronics Corporation and/or its affiliates
+* Copyright (c) 2026 Renesas Electronics Corporation and/or its affiliates
 *
 * SPDX-License-Identifier: BSD-3-Clause
 ***********************************************************************************************************************/
@@ -77,8 +77,35 @@ void new_thread0_entry(void *pvParameters)
 #endif // __SUPPORT_APP_CONSOLE_INPUT__
 #endif // CFG_CLI
 #if CFG_PMGR
+    /*
+     * DPM (auto power-save / sleep) control.
+     *
+     * RM_PMGR_W_Open() (see hal_entry.c) adds one PMGR_CONSTRAINT_SLEEP_PROHIBITED
+     * constraint at startup, which blocks all sleep and keeps the console/UART alive.
+     * Removing it here is what arms auto-DPM after WiFi connects (console is then lost).
+     *
+     * APP_DPM_AUTO_ENABLE:
+     *   0 (default) - DPM disabled by default: the constraint stays held, so the
+     *                 device never auto-enters DPM and the console stays available.
+     *   1           - original behavior: remove the constraint so DPM engages
+     *                 automatically after WiFi connects.
+     *
+     * To enable DPM at runtime (no rebuild) once the user is ready:
+     *   AT : AT+PMGRCONSTRAINT=2,4        (2 = remove, 4 = SLEEP_PROHIBITED)
+     *   CLI: pmgr remove_constraint PMGR_CONSTRAINT_SLEEP_PROHIBITED
+     *   Code: g_pmgr_w_ins.p_api->remove_sleep_constraint(g_pmgr_w_ins.p_ctrl,
+     *                                                     PMGR_CONSTRAINT_SLEEP_PROHIBITED);
+     * The constraint is a counter: DPM only engages when the SLEEP_PROHIBITED count
+     * reaches 0. Check it with "AT+PMGRCONSTRAINT=?" (4th value) or "pmgr status".
+     * This runtime enable is session-only; after a reboot DPM is disabled again.
+     */
+#ifndef APP_DPM_AUTO_ENABLE
+#define APP_DPM_AUTO_ENABLE (0)
+#endif
+#if APP_DPM_AUTO_ENABLE
     /* Remove SLEEP_PROHIBITED constraint */
     g_pmgr_w_ins.p_api->remove_sleep_constraint(g_pmgr_w_ins.p_ctrl, PMGR_CONSTRAINT_SLEEP_PROHIBITED);
+#endif //APP_DPM_AUTO_ENABLE
 #endif //CFG_PMGR
     while (1)
         vTaskDelay(portMAX_DELAY);

@@ -1,25 +1,12 @@
-/***********************************************************************************************************************
-* DISCLAIMER
-* This software is supplied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
-* other uses are authorized. This software is owned by Renesas Electronics Corporation and is protected under all
-* applicable laws, including copyright laws.
-* THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
-* THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED. TO THE MAXIMUM
-* EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS AFFILIATED COMPANIES
-* SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY REASON RELATED TO THIS
-* SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-* Renesas reserves the right, without notice, to make changes to this software and to discontinue the availability of
-* this software. By using this software, you agree to the additional terms and conditions found by accessing the
-* following link:
-* http://www.renesas.com/disclaimer
-*
-* Copyright (C) 2019 Renesas Electronics Corporation. All rights reserved.
-***********************************************************************************************************************/
+/* 
+* Copyright (c) 2019 - 2025 Renesas Electronics Corporation and/or its affiliates 
+* 
+* SPDX-License-Identifier: BSD-3-Clause 
+*/
 /***********************************************************************************************************************
  * File Name: r_ble_gapc.h
  * Version : 1.0
- * Description : The header file for Generic Access client.
+ * Description : The header file for GAP Service client.
  **********************************************************************************************************************/
 /***********************************************************************************************************************
  * History : DD.MM.YYYY Version Description
@@ -28,10 +15,10 @@
 
 /*******************************************************************************************************************//**
  * @file
- * @defgroup gapc Generic Access Service Client
+ * @defgroup gapc GAP Service Client
  * @{
  * @ingroup profile
- * @brief   This is the client for the Generic Access Service.
+ * @brief   The generic_access service contains generic information about the device.
  **********************************************************************************************************************/
 #include "profile_cmn/r_ble_servc_if.h"
 
@@ -39,24 +26,22 @@
 #define R_BLE_GAPC_H
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Device Name Characteristic
+    Device Name Characteristic : The Device Name characteristic shall contain the name of the device.
 ----------------------------------------------------------------------------------------------------------------------*/
 #define BLE_GAPC_DEV_NAME_UUID (0x2A00)
 #define BLE_GAPC_DEV_NAME_LEN (128)
 /***************************************************************************//**
  * @brief Device Name value structure.
 *******************************************************************************/
-typedef struct
-{
-    char name[BLE_GAPC_DEV_NAME_LEN]; /**< Name */
+typedef struct {
+    char name[127]; /**< Name */
     uint8_t length; /**< Length */
 } st_ble_gapc_dev_name_t;
 
 /***************************************************************************//**
  * @brief Device Name attribute handle value.
 *******************************************************************************/
-typedef struct
-{
+typedef struct {
     st_ble_gatt_hdl_range_t range;
 } st_ble_gapc_dev_name_attr_hdl_t;
 
@@ -74,7 +59,7 @@ ble_status_t R_BLE_GAPC_ReadDevName(uint16_t conn_hdl);
  * @return    @ref ble_status_t
 *******************************************************************************/
 ble_status_t R_BLE_GAPC_WriteDevName(uint16_t conn_hdl, const st_ble_gapc_dev_name_t *p_value);
-;
+
 /***************************************************************************//**
  * @brief      Get Device Name attribute handles.
  * @param[in]  p_addr Bluetooth device address for the attribute handles.
@@ -84,15 +69,14 @@ ble_status_t R_BLE_GAPC_WriteDevName(uint16_t conn_hdl, const st_ble_gapc_dev_na
 void R_BLE_GAPC_GetDevNameAttrHdl(const st_ble_dev_addr_t *p_addr, st_ble_gapc_dev_name_attr_hdl_t *p_hdl);
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Appearance Characteristic
+    Appearance Characteristic : The Appearance characteristic defines the representation of the external appearance of the device.
 ----------------------------------------------------------------------------------------------------------------------*/
 #define BLE_GAPC_APPEARANCE_UUID (0x2A01)
 #define BLE_GAPC_APPEARANCE_LEN (2)
 /***************************************************************************//**
  * @brief Appearance Category enumeration.
 *******************************************************************************/
-typedef enum
-{
+typedef enum {
     BLE_GAPC_APPEARANCE_CATEGORY_UNKNOWN = 0, /**< Unknown */
     BLE_GAPC_APPEARANCE_CATEGORY_GENERIC_PHONE = 64, /**< Generic Phone */
     BLE_GAPC_APPEARANCE_CATEGORY_GENERIC_COMPUTER = 128, /**< Generic Computer */
@@ -142,13 +126,12 @@ typedef enum
     BLE_GAPC_APPEARANCE_CATEGORY_LOCATION_AND_NAVIGATION_DISPLAY_DEVICE = 5186, /**< Location and Navigation Display Device */
     BLE_GAPC_APPEARANCE_CATEGORY_LOCATION_POD = 5187, /**< Location Pod */
     BLE_GAPC_APPEARANCE_CATEGORY_LOCATION_AND_NAVIGATION_POD = 5188, /**< Location and Navigation Pod */
-} e_ble_appearance_category_t;
+} e_ble_gapc_appearance_category_t;
 
 /***************************************************************************//**
  * @brief Appearance attribute handle value.
 *******************************************************************************/
-typedef struct
-{
+typedef struct {
     st_ble_gatt_hdl_range_t range;
 } st_ble_gapc_appearance_attr_hdl_t;
 
@@ -168,26 +151,24 @@ ble_status_t R_BLE_GAPC_ReadAppearance(uint16_t conn_hdl);
 void R_BLE_GAPC_GetAppearanceAttrHdl(const st_ble_dev_addr_t *p_addr, st_ble_gapc_appearance_attr_hdl_t *p_hdl);
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Peripheral Preferred Connection Parameters Characteristic
+    Peripheral Preferred Connection Parameters Characteristic : The Peripheral Preferred Connection Parameters (PPCP) characteristic contains the preferred connection parameters of the Peripheral
 ----------------------------------------------------------------------------------------------------------------------*/
 #define BLE_GAPC_PER_PREF_CONN_PARAM_UUID (0x2A04)
 #define BLE_GAPC_PER_PREF_CONN_PARAM_LEN (8)
 /***************************************************************************//**
  * @brief Peripheral Preferred Connection Parameters value structure.
 *******************************************************************************/
-typedef struct
-{
-    uint16_t min_conn_intv; /**< Minimum Connection Interval */
-    uint16_t max_conn_intv; /**< Maximum Connection Interval */
+typedef struct {
+    uint16_t minimum_connection_interval; /**< Minimum Connection Interval */
+    uint16_t maximum_connection_interval; /**< Maximum Connection Interval */
     uint16_t slave_latency; /**< Slave Latency */
-    uint16_t conn_sup_timeout_multiplier; /**< Connection Supervision Timeout Multiplier */
+    uint16_t connection_supervision_timeout_multiplier; /**< Connection Supervision Timeout Multiplier */
 } st_ble_gapc_per_pref_conn_param_t;
 
 /***************************************************************************//**
  * @brief Peripheral Preferred Connection Parameters attribute handle value.
 *******************************************************************************/
-typedef struct
-{
+typedef struct {
     st_ble_gatt_hdl_range_t range;
 } st_ble_gapc_per_pref_conn_param_attr_hdl_t;
 
@@ -207,15 +188,14 @@ ble_status_t R_BLE_GAPC_ReadPerPrefConnParam(uint16_t conn_hdl);
 void R_BLE_GAPC_GetPerPrefConnParamAttrHdl(const st_ble_dev_addr_t *p_addr, st_ble_gapc_per_pref_conn_param_attr_hdl_t *p_hdl);
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Central Address Resolution Characteristic
+    Central Address Resolution Characteristic : The Peripheral should check if the peer device supports address resolution by reading the Central Address Resolution characteristic.
 ----------------------------------------------------------------------------------------------------------------------*/
 #define BLE_GAPC_CENT_ADDR_RSLV_UUID (0x2AA6)
 #define BLE_GAPC_CENT_ADDR_RSLV_LEN (1)
 /***************************************************************************//**
  * @brief Central Address Resolution attribute handle value.
 *******************************************************************************/
-typedef struct
-{
+typedef struct {
     st_ble_gatt_hdl_range_t range;
 } st_ble_gapc_cent_addr_rslv_attr_hdl_t;
 
@@ -235,15 +215,14 @@ ble_status_t R_BLE_GAPC_ReadCentAddrRslv(uint16_t conn_hdl);
 void R_BLE_GAPC_GetCentAddrRslvAttrHdl(const st_ble_dev_addr_t *p_addr, st_ble_gapc_cent_addr_rslv_attr_hdl_t *p_hdl);
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Resolvable Private Address Only Characteristic
+    Resolvable Private Address Only Characteristic : The device should check if the peer will only use Resolvable Private Addresses (RPAs) after bonding by reading the Resolvable Private Address Only characteristic.
 ----------------------------------------------------------------------------------------------------------------------*/
 #define BLE_GAPC_RSLV_PRIV_ADDR_ONLY_UUID (0x2AC9)
 #define BLE_GAPC_RSLV_PRIV_ADDR_ONLY_LEN (1)
 /***************************************************************************//**
  * @brief Resolvable Private Address Only attribute handle value.
 *******************************************************************************/
-typedef struct
-{
+typedef struct {
     st_ble_gatt_hdl_range_t range;
 } st_ble_gapc_rslv_priv_addr_only_attr_hdl_t;
 
@@ -264,36 +243,33 @@ void R_BLE_GAPC_GetRslvPrivAddrOnlyAttrHdl(const st_ble_dev_addr_t *p_addr, st_b
 
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Generic Access Client
+    GAP Service Client
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /***************************************************************************//**
- * @brief Generic Access client event data.
+ * @brief GAP Service client event data.
 *******************************************************************************/
-typedef struct
-{
+typedef struct {
     uint16_t    conn_hdl;  /**< Connection handle */
     uint16_t    param_len; /**< Event parameter length */
     const void *p_param;   /**< Event parameter */
 } st_ble_gapc_evt_data_t;
 
 /***************************************************************************//**
- * @brief Generic Access characteristic ID.
+ * @brief GAP Service characteristic ID.
 *******************************************************************************/
-typedef enum
-{
+typedef enum {
     BLE_GAPC_DEV_NAME_IDX,
     BLE_GAPC_APPEARANCE_IDX,
     BLE_GAPC_PER_PREF_CONN_PARAM_IDX,
     BLE_GAPC_CENT_ADDR_RSLV_IDX,
     BLE_GAPC_RSLV_PRIV_ADDR_ONLY_IDX,
-} st_ble_gapc_char_idx_t;
+} e_ble_gapc_char_idx_t;
 
 /***************************************************************************//**
- * @brief Generic Access client event type.
+ * @brief GAP Service client event type.
 *******************************************************************************/
-typedef enum
-{
+typedef enum {
     /* Device Name */
     BLE_GAPC_EVENT_DEV_NAME_READ_RSP = BLE_SERVC_ATTR_EVENT(BLE_GAPC_DEV_NAME_IDX, BLE_SERVC_READ_RSP),
     BLE_GAPC_EVENT_DEV_NAME_WRITE_RSP = BLE_SERVC_ATTR_EVENT(BLE_GAPC_DEV_NAME_IDX, BLE_SERVC_WRITE_RSP),
@@ -308,24 +284,24 @@ typedef enum
 } e_ble_gapc_event_t;
 
 /***************************************************************************//**
- * @brief     Initialize Generic Access client.
+ * @brief     Initialize GAP Service client.
  * @param[in] cb Client callback.
  * @return    @ref ble_status_t
 *******************************************************************************/
 ble_status_t R_BLE_GAPC_Init(ble_servc_app_cb_t cb);
 
 /***************************************************************************//**
- * @brief     Generic Access client discovery callback.
+ * @brief     GAP Service client discovery callback.
  * @param[in] conn_hdl Connection handle
  * @param[in] serv_idx Service instance index.
  * @param[in] type     Service discovery event type.
- * @param[in] p_param  Service discovery event parameter.
+ * @param[out] p_param  Service discovery event parameter.
  * @return    @ref ble_status_t
 *******************************************************************************/
 void R_BLE_GAPC_ServDiscCb(uint16_t conn_hdl, uint8_t serv_idx, uint16_t type, void *p_param);
 
 /***************************************************************************//**
- * @brief     Get Generic Access client attribute handle.
+ * @brief     Get GAP Service client attribute handle.
  * @param[in]  p_addr Bluetooth device address for the attribute handles.
  * @param[out] p_hdl  The pointer to store the retrieved attribute handles.
 *******************************************************************************/

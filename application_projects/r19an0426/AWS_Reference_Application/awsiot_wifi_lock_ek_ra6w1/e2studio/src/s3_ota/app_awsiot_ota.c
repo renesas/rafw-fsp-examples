@@ -9,7 +9,7 @@
 ***********************************************************************************************************************/
 
 #include "FreeRTOS.h"
-#include "custom_config_sdk.h"
+#include "rm_wifi.h"
 /* for __SUPPORT_AWS_IOT_W__*/
 #include "rm_awsiot_w_cfg.h"
 

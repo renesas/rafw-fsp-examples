@@ -9,7 +9,7 @@
     <option key="#DeviceCommand#" value="R7JA6W2DE"/>
     <option key="#RTOS#" value="rtos.awsfreertos"/>
     <option key="#pinconfiguration#" value="R7SA6W1CEDZDD.pincfg"/>
-    <option key="#FSPVersion#" value="2.1.0"/>
+    <option key="#FSPVersion#" value="2.2.1"/>
     <option key="#ConfigurationFragments#" value="Renesas##BSP##Board##rrq614xx_evb##"/>
     <option key="#SELECTED_TOOLCHAIN#" value="gcc-arm-embedded"/>
     <option key="#ToolchainVersion#" value="13.3.1.arm-13-24"/>
@@ -46,6 +46,8 @@
       <property id="config.bsp.fsp.mcu.ppm_compensation" value="config.bsp.fsp.mcu.ppm_compensation.disabled"/>
       <property id="config.bsp.fsp.mcu.ppm_recomp_period_ms" value="8000U"/>
       <property id="config.bsp.fsp.mcu.ospi_8_lines_support" value="config.bsp.fsp.mcu.ospi_8_lines_support.disabled"/>
+      <property id="config.bsp.fsp.mcu.wifi_user_gpio" value="config.bsp.fsp.mcu.wifi_user_gpio.enabled"/>
+      <property id="config.bsp.fsp.mcu.factory_reset_btn" value="config.bsp.fsp.mcu.factory_reset_btn.enabled"/>
       <property id="config.bsp.fsp.mcu.uart.max_baud" value="5000000"/>
       <property id="config.bsp.fsp.mcu.iic_master.rate.rate_fastplus" value="1"/>
       <property id="config.bsp.fsp.mcu.iic_master.fastplus_channels" value="0x1"/>
@@ -115,49 +117,49 @@
     <node id="board.clock.wdog.div.display" option="board.clock.wdog.div.display.value"/>
   </raClockConfiguration>
   <raComponentSelection>
-    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq614xx_evb" variant="" vendor="Renesas" version="2.1.0">
-      <description>RRQ614xx-EVB Board Support Files</description>
-      <originalPack>Renesas.RAFW_board_rrq614xx_evb.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="RTOS" condition="" group="FreeRTOS" subgroup="all" variant="" vendor="AWS" version="11.1.0+fsp.2.1.0">
-      <description>FreeRTOS</description>
-      <originalPack>Amazon.FreeRTOS-Kernel.11.1.0+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.1.0">
-      <description>Arm CMSIS Version 6 - Core (M)</description>
-      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.2.1">
       <description>Board Support Package Common Files</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.2.1">
       <description>I/O Port (W)</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_freertos_port_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_freertos_port_w" variant="" vendor="Renesas" version="2.2.1">
       <description>FreeRTOS Port</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="device" variant="R7JA6W2DEDZNR" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="device" variant="R7JA6W2DEDZNR" vendor="Renesas" version="2.2.1">
       <description>Board support package for R7JA6W2DEDZNR</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="device" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="device" variant="" vendor="Renesas" version="2.2.1">
       <description>Board support package for RA6W2</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="fsp" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="fsp" variant="" vendor="Renesas" version="2.2.1">
       <description>Board support package for RA6W2 - FSP Data</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="events" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="events" variant="" vendor="Renesas" version="2.2.1">
       <description>Board support package for RA6W2 - Events</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="linker" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="linker" variant="" vendor="Renesas" version="2.2.1">
       <description>Board support package for RA6W2 - Linker</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="RTOS" condition="" group="FreeRTOS" subgroup="all" variant="" vendor="AWS" version="11.1.0+fsp.2.2.1">
+      <description>FreeRTOS</description>
+      <originalPack>Amazon.FreeRTOS-Kernel.11.1.0+fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq614xx_evb" variant="" vendor="Renesas" version="2.2.1">
+      <description>RRQ614xx-EVB Board Support Files</description>
+      <originalPack>Renesas.RAFW_board_rrq614xx_evb.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.2.1">
+      <description>Arm CMSIS Version 6 - Core (M)</description>
+      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.2.1.pack</originalPack>
     </component>
   </raComponentSelection>
   <raElcConfiguration/>

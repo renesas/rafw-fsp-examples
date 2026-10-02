@@ -35,6 +35,11 @@ typedef unsigned long long uint64_t;
 #define INITIAL_VALUE            '\0'
 #define WIFI_EVENT_CONNECTED     5
 
+#define SSID_DISPLAY_WIDTH      (32)
+#define RSSI_DISPLAY_WIDTH      (5)
+#define CH_DISPLAY_WIDTH        (4)
+#define ENC_DISPLAY_WIDTH       (15)
+
 #define eWiFiSecurityWPA_ent_ext		7	// WPA Enterprise Security
 #define eWiFiSecurityWPA_WPA2_ent_ext	8	// WPA + WPA2 Enterprise Security
 #define eWiFiSecurityWPA2_WPA3_ent_ext	9   // WPA2 + WPA3 Enterprise Security

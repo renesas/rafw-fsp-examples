@@ -15,6 +15,7 @@
 #include "lwip/err.h"
 #include "lwip/sockets.h"
 #include "lwip/ip_addr.h"
+#include "lwip/tcpip.h"
 #include "task.h"
 #include "ssl.h"
 #include "tls_server_client.h"
@@ -101,29 +102,58 @@ static err_t client_recv(void *arg, struct altcp_pcb *pcb, struct pbuf *p, err_t
 }
 
 /*
+ * Runs on the tcpip thread: safely write one message to the TLS connection.
+ * altcp/tcp APIs must not be called directly from application tasks when
+ * LWIP_TCPIP_CORE_LOCKING == 0, so the write is marshalled here.
+ */
+static void client_write_on_tcpip_thread(void *ctx)
+{
+    struct altcp_pcb *pcb = (struct altcp_pcb *)ctx;
+    err_t err = altcp_write(pcb, MESSAGE, strlen(MESSAGE), TCP_WRITE_FLAG_COPY);
+
+    if (err != ERR_OK)
+    {
+        APP_PRINT_INFO("[TLS-Client]Failed to send message : %d\n", err);
+    }
+    else
+    {
+        altcp_output(pcb);
+    }
+}
+
+/*
+ * Runs on the tcpip thread: safely close the TLS connection.
+ */
+static void client_close_on_tcpip_thread(void *ctx)
+{
+    altcp_close((struct altcp_pcb *)ctx);
+}
+
+/*
  * Send data messages to the server periodically
  */
 static void send_data_to_server(void *pvParameters)
 {
     struct altcp_pcb *pcb = (struct altcp_pcb *)pvParameters;
-    err_t err;
     int count = 0;
 
     while (count <= MAX_COUNT)
     {
-        err = altcp_write(pcb, MESSAGE, strlen(MESSAGE), TCP_WRITE_FLAG_COPY);
-
-        if (err != ERR_OK)
-        {
-            APP_PRINT_INFO("[TLS-Client]Failed to send message : %d\n", err);
-        }
-
+        /*
+         * The lwIP raw/altcp APIs are not thread-safe under this configuration
+         * (LWIP_TCPIP_CORE_LOCKING == 0). Calling altcp_write() directly from
+         * this task is undefined behaviour and, depending on target/library
+         * timing, caused this task to fault mid-loop before reaching the final
+         * log message (observed on RA6W2, not on RA6W1). Marshalling the call
+         * onto the tcpip thread makes the sequence deterministic.
+         */
+        tcpip_callback(client_write_on_tcpip_thread, pcb);
         vTaskDelay(portCONVERT_MS_2_TICKS(1000));
         count++;
     }
 
     APP_PRINT_INFO("All messages sent.Closing connection.\n");
-    altcp_close(pcb);
+    tcpip_callback(client_close_on_tcpip_thread, pcb);
     vTaskDelete(NULL);
 }
 

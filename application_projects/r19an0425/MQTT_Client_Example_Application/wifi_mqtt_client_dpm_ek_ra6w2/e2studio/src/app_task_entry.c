@@ -136,7 +136,7 @@ void app_task_entry (void *pvParameters)
 
 #if CFG_PMGR
     /* Set 10 second periodic wake up ,DPM wake up user time */
-    int ret = RM_PMGR_W_dpm_user_wakeup_timer_set(DPM_WAKEUP_INTERVAL_US);
+    int ret = RM_PMGR_W_dpm_user_wakeup_timer_set(DPM_WAKEUP_INTERVAL_MS);
 #endif
 
     if (!RM_PMGR_W_dpm_is_wakeup())

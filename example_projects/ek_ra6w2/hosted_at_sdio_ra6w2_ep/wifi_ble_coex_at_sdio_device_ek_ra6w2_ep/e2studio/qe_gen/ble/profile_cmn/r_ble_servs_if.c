@@ -1,27 +1,56 @@
-/***********************************************************************************************************************
-* DISCLAIMER
-* This software is supplied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
-* other uses are authorized. This software is owned by Renesas Electronics Corporation and is protected under all
-* applicable laws, including copyright laws.
-* THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
-* THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED. TO THE MAXIMUM
-* EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS AFFILIATED COMPANIES
-* SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY REASON RELATED TO THIS
-* SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-* Renesas reserves the right, without notice, to make changes to this software and to discontinue the availability of
-* this software. By using this software, you agree to the additional terms and conditions found by accessing the
-* following link:
-* http://www.renesas.com/disclaimer
-*
-* Copyright (C) 2024 Renesas Electronics Corporation. All rights reserved.
-***********************************************************************************************************************/
+/* 
+* Copyright (c) 2024 - 2025 Renesas Electronics Corporation and/or its affiliates 
+* 
+* SPDX-License-Identifier: BSD-3-Clause 
+*/
 #include <stdlib.h>
 #include <string.h>
 #include "r_ble_servs_if.h"
+#include "qe_ble_profile.h"
+
+#if defined(__CCRX__) || defined(__ICCRX__) || defined(__RX__)
+#if BSP_CFG_RTOS_USED == 1            // FreeRTOS
+    #define BSP_CFG_RTOS    2
+#elif BSP_CFG_RTOS_USED == 5          // ThreadX
+    #define BSP_CFG_RTOS    1
+#else
+    #define BSP_CFG_RTOS    0
+#endif
+#elif defined(__CCRL__) || defined(__ICCRL__) || defined(__RL78__)
+    #define BSP_CFG_RTOS    0
+#endif
+
+#if (BSP_CFG_RTOS_USED == 5)
+#define BSP_CFG_RTOS 1
+#endif
+
+#if (BSP_CFG_RTOS == 2) /* FreeRTOS */
+#include "FreeRTOS.h"
+#include "semphr.h"
+#include "event_groups.h"
+#include "timers.h"
+#elif (BSP_CFG_RTOS == 1) /* ThreadX */
+#include "tx_api.h"
+#endif
+
+#if (BSP_CFG_RTOS == 1) /* ThreadX */
+ #define QE_BLE_BYTE_POOL_LEN                0x800
+#endif
 
 static const st_ble_servs_info_t *gs_servs[BLE_PRF_MAX_NUM_OF_SERVS];
 static uint8_t gs_num_of_servs;
+
+#if (BSP_CFG_RTOS == 1) /* ThreadX */
+static TX_BYTE_POOL                     g_qe_byte_pool;
+#if defined(__GNUC__)
+static uint8_t                          g_qe_byte_pool_buff[QE_BLE_BYTE_POOL_LEN] __attribute__ ((aligned (4)));
+#else
+static uint8_t                          g_qe_byte_pool_buff[QE_BLE_BYTE_POOL_LEN];
+#endif
+#endif
+
+static void *qe_ble_malloc(uint32_t size);
+static void qe_ble_free(void *p_mem);
 
 static void find_attr(uint16_t attr_hdl,
                       const st_ble_servs_info_t **pp_serv,
@@ -60,7 +89,7 @@ static void desc_write_evt_handler(uint16_t conn_hdl, uint16_t attr_hdl, st_ble_
                     ble_status_t ret;
 
                     void *p_app_value;
-                    p_app_value = malloc(p_char->pp_descs[d]->app_size);
+                    p_app_value = qe_ble_malloc(p_char->pp_descs[d]->app_size);
 
                     ret = p_char->pp_descs[d]->decode(p_app_value, (const st_ble_gatt_value_t *)p_value);
 
@@ -78,7 +107,7 @@ static void desc_write_evt_handler(uint16_t conn_hdl, uint16_t attr_hdl, st_ble_
                         p_serv->cb(BLE_SERVS_MULTI_ATTR_EVENT(p_char->pp_descs[d]->desc_idx, p_char->pp_descs[d]->inst_idx, BLE_SERVS_WRITE_REQ), BLE_SUCCESS, &evt_data);
                     }
 
-                    free(p_app_value);
+                    qe_ble_free(p_app_value);
                     break;
                 }
             }
@@ -103,11 +132,11 @@ static void desc_read_evt_handler(uint16_t conn_hdl, uint16_t attr_hdl)
                     (NULL != p_char->pp_descs[d]->decode))
                 {
                     void *p_app_value;
-                    p_app_value = malloc(p_char->pp_descs[d]->app_size);
+                    p_app_value = qe_ble_malloc(p_char->pp_descs[d]->app_size);
 
                     st_ble_gatt_value_t gatt_value;
                     gatt_value.value_len = p_char->pp_descs[d]->db_size;
-                    gatt_value.p_value = malloc(p_char->pp_descs[d]->db_size);
+                    gatt_value.p_value = qe_ble_malloc(p_char->pp_descs[d]->db_size);
                     R_BLE_GATTS_GetAttr(conn_hdl, attr_hdl, &gatt_value);
                     p_char->pp_descs[d]->decode(p_app_value, &gatt_value);
 
@@ -125,8 +154,8 @@ static void desc_read_evt_handler(uint16_t conn_hdl, uint16_t attr_hdl)
                         p_serv->cb(BLE_SERVS_MULTI_ATTR_EVENT(p_char->pp_descs[d]->desc_idx, p_char->pp_descs[d]->inst_idx, BLE_SERVS_READ_REQ), BLE_SUCCESS, &evt_data);
                     }
 
-                    free(gatt_value.p_value);
-                    free(p_app_value);
+                    qe_ble_free(gatt_value.p_value);
+                    qe_ble_free(p_app_value);
                     break;
                 }
             }
@@ -173,7 +202,7 @@ static void ble_gatts_db_app_cb(uint16_t conn_hdl, uint8_t db_op, uint16_t attr_
                 ble_status_t ret;
                 void *p_app_value;
 
-                p_app_value = malloc(p_char->app_size);
+                p_app_value = qe_ble_malloc(p_char->app_size);
                 ret = p_char->decode(p_app_value, p_value);
 
                 if (NULL != p_char->write_req_cb)
@@ -191,7 +220,7 @@ static void ble_gatts_db_app_cb(uint16_t conn_hdl, uint8_t db_op, uint16_t attr_
                     p_serv->cb(BLE_SERVS_MULTI_ATTR_EVENT(p_char->char_idx, p_char->inst_idx, BLE_SERVS_WRITE_REQ), ret, &evt_data);
                 }
 
-                free(p_app_value);
+                qe_ble_free(p_app_value);
             }
         } break;
 
@@ -202,7 +231,7 @@ static void ble_gatts_db_app_cb(uint16_t conn_hdl, uint8_t db_op, uint16_t attr_
                 ble_status_t ret;
                 void *p_app_value;
 
-                p_app_value = malloc(p_char->app_size);
+                p_app_value = qe_ble_malloc(p_char->app_size);
                 ret = p_char->decode(p_app_value, p_value);
 
                 if (NULL != p_char->write_cmd_cb)
@@ -219,7 +248,7 @@ static void ble_gatts_db_app_cb(uint16_t conn_hdl, uint8_t db_op, uint16_t attr_
                     p_serv->cb(BLE_SERVS_MULTI_ATTR_EVENT(p_char->char_idx, p_char->inst_idx, BLE_SERVS_WRITE_CMD), ret, &evt_data);
                 }
 
-                free(p_app_value);
+                qe_ble_free(p_app_value);
             }
         } break;
 
@@ -323,12 +352,14 @@ void R_BLE_SERVS_GattsCb(uint16_t type, ble_status_t result, st_ble_gatts_evt_da
                 /* Characteristic */
                 if (((p_char->start_hdl + 1) == p_write_rsp_evt_param->attr_hdl) && (NULL != p_char->decode))
                 {
-                    ble_status_t ret;
+                    ble_status_t ret = BLE_SUCCESS;
+                    void *p_app_value = NULL;
 
-                    void *p_app_value;
-                    p_app_value = malloc(p_char->app_size);
+#if QE_BLE_READ_DATA_WHEN_WRITE_RSP_COMP == 1
+                    p_app_value = qe_ble_malloc(p_char->app_size);
 
                     ret = R_BLE_SERVS_GetChar(p_char, p_data->conn_hdl, p_app_value);
+#endif
 
                     if (NULL != p_char->write_comp_cb)
                     {
@@ -344,7 +375,9 @@ void R_BLE_SERVS_GattsCb(uint16_t type, ble_status_t result, st_ble_gatts_evt_da
                         p_serv->cb(BLE_SERVS_MULTI_ATTR_EVENT(p_char->char_idx, p_char->inst_idx, BLE_SERVS_WRITE_COMP), ret, &evt_data);
                     }
 
-                    free(p_app_value);
+#if QE_BLE_READ_DATA_WHEN_WRITE_RSP_COMP == 1
+                    qe_ble_free(p_app_value);
+#endif
                 }
                 /* Descriptor */
                 else
@@ -356,17 +389,19 @@ void R_BLE_SERVS_GattsCb(uint16_t type, ble_status_t result, st_ble_gatts_evt_da
                             if ((p_char->pp_descs[d]->attr_hdl == p_write_rsp_evt_param->attr_hdl) &&
                                 (NULL != p_char->pp_descs[d]->decode))
                             {
-                                ble_status_t ret;
+                                ble_status_t ret = BLE_SUCCESS;
+                                void *p_app_value = NULL;
 
-                                void *p_app_value;
-                                p_app_value = malloc(p_char->pp_descs[d]->app_size);
+#if QE_BLE_READ_DATA_WHEN_WRITE_RSP_COMP == 1
+                                p_app_value = qe_ble_malloc(p_char->pp_descs[d]->app_size);
 
                                 st_ble_gatt_value_t gatt_value;
                                 gatt_value.value_len = p_char->pp_descs[d]->db_size;
-                                gatt_value.p_value = malloc(p_char->pp_descs[d]->db_size);
+                                gatt_value.p_value = qe_ble_malloc(p_char->pp_descs[d]->db_size);
                                 R_BLE_GATTS_GetAttr(p_data->conn_hdl, p_write_rsp_evt_param->attr_hdl, &gatt_value);
 
                                 ret = p_char->pp_descs[d]->decode(p_app_value, &gatt_value);
+#endif
 
                                 if (NULL != p_char->pp_descs[d]->write_comp_cb)
                                 {
@@ -382,8 +417,10 @@ void R_BLE_SERVS_GattsCb(uint16_t type, ble_status_t result, st_ble_gatts_evt_da
                                     p_serv->cb(BLE_SERVS_MULTI_ATTR_EVENT(p_char->pp_descs[d]->desc_idx, p_char->pp_descs[d]->inst_idx, BLE_SERVS_WRITE_COMP), BLE_SUCCESS, &evt_data);
                                 }
 
-                                free(gatt_value.p_value);
-                                free(p_app_value);
+#if QE_BLE_READ_DATA_WHEN_WRITE_RSP_COMP == 1
+                                qe_ble_free(gatt_value.p_value);
+                                qe_ble_free(p_app_value);
+#endif
                                 break;
                             }
                         }
@@ -416,12 +453,14 @@ void R_BLE_SERVS_GattsCb(uint16_t type, ble_status_t result, st_ble_gatts_evt_da
                     /* Characteristic */
                     if (((p_char->start_hdl + 1) == s_write_long_attr_hdl) && (NULL != p_char->decode))
                     {
-                        ble_status_t ret;
+                        ble_status_t ret = BLE_SUCCESS;
+                        void *p_app_value = NULL;
 
-                        void *p_app_value;
-                        p_app_value = malloc(p_char->app_size);
+#if QE_BLE_READ_DATA_WHEN_WRITE_RSP_COMP == 1
+                        p_app_value = qe_ble_malloc(p_char->app_size);
 
                         ret = R_BLE_SERVS_GetChar(p_char, p_data->conn_hdl, p_app_value);
+#endif
 
                         if (NULL != p_char->write_comp_cb)
                         {
@@ -437,7 +476,10 @@ void R_BLE_SERVS_GattsCb(uint16_t type, ble_status_t result, st_ble_gatts_evt_da
                             p_serv->cb(BLE_SERVS_MULTI_ATTR_EVENT(p_char->char_idx, p_char->inst_idx, BLE_SERVS_WRITE_COMP), ret, &evt_data);
                         }
 
-                        free(p_app_value);
+#if QE_BLE_READ_DATA_WHEN_WRITE_RSP_COMP == 1
+                        qe_ble_free(p_app_value);
+#endif
+
                         s_write_long_attr_hdl = BLE_GATT_INVALID_ATTR_HDL_VAL;
                     }
                     /* Descriptor */
@@ -450,17 +492,19 @@ void R_BLE_SERVS_GattsCb(uint16_t type, ble_status_t result, st_ble_gatts_evt_da
                                 if ((p_char->pp_descs[d]->attr_hdl == s_write_long_attr_hdl) &&
                                     (NULL != p_char->pp_descs[d]->decode))
                                 {
-                                    ble_status_t ret;
+                                    ble_status_t ret = BLE_SUCCESS;
+                                    void *p_app_value = NULL;
 
-                                    void *p_app_value;
-                                    p_app_value = malloc(p_char->pp_descs[d]->app_size);
+#if QE_BLE_READ_DATA_WHEN_WRITE_RSP_COMP == 1
+                                    p_app_value = qe_ble_malloc(p_char->pp_descs[d]->app_size);
 
                                     st_ble_gatt_value_t gatt_value;
                                     gatt_value.value_len = p_char->pp_descs[d]->db_size;
-                                    gatt_value.p_value = malloc(p_char->pp_descs[d]->db_size);
+                                    gatt_value.p_value = qe_ble_malloc(p_char->pp_descs[d]->db_size);
                                     R_BLE_GATTS_GetAttr(p_data->conn_hdl, s_write_long_attr_hdl, &gatt_value);
 
                                     ret = p_char->pp_descs[d]->decode(p_app_value, &gatt_value);
+#endif
 
                                     if (NULL != p_char->pp_descs[d]->write_comp_cb)
                                     {
@@ -476,8 +520,10 @@ void R_BLE_SERVS_GattsCb(uint16_t type, ble_status_t result, st_ble_gatts_evt_da
                                         p_serv->cb(BLE_SERVS_MULTI_ATTR_EVENT(p_char->pp_descs[d]->desc_idx, p_char->pp_descs[d]->inst_idx, BLE_SERVS_WRITE_COMP), BLE_SUCCESS, &evt_data);
                                     }
 
-                                    free(gatt_value.p_value);
-                                    free(p_app_value);
+#if QE_BLE_READ_DATA_WHEN_WRITE_RSP_COMP == 1
+                                    qe_ble_free(gatt_value.p_value);
+                                    qe_ble_free(p_app_value);
+#endif
                                     s_write_long_attr_hdl = BLE_GATT_INVALID_ATTR_HDL_VAL;
                                     break;
                                 }
@@ -541,15 +587,22 @@ ble_status_t R_BLE_SERVS_Init(void)
     R_BLE_VS_StartTxFlowEvtNtf();
     gs_num_of_servs = 0;
 
+#if (BSP_CFG_RTOS == 1) /* ThreadX */
+    UINT status = tx_byte_pool_create(&g_qe_byte_pool, "QE_SERVS_HEAP", &g_qe_byte_pool_buff[0], QE_BLE_BYTE_POOL_LEN);
+    if (TX_SUCCESS != status) {
+        return BLE_ERR_INVALID_STATE;
+    }
+#endif
+
     return BLE_SUCCESS;
 }
 
-ble_status_t R_BLE_SERVS_RegisterServer(const st_ble_servs_info_t *p_serv)
+ble_status_t R_BLE_SERVS_RegisterServer(const st_ble_servs_info_t *p_info)
 {
     ble_status_t ret;
     if( BLE_PRF_MAX_NUM_OF_SERVS > gs_num_of_servs )
     {
-        gs_servs[gs_num_of_servs++] = p_serv;
+        gs_servs[gs_num_of_servs++] = p_info;
         ret = BLE_SUCCESS;
     }
     else
@@ -583,7 +636,7 @@ ble_status_t R_BLE_SERVS_SendHdlVal(const st_ble_servs_char_info_t *p_attr, uint
     uint16_t cccd = 0;
     R_BLE_SERVS_GetDesc(p_attr->pp_descs[0], conn_hdl, &cccd);
 
-    void *p_gatt_value = malloc(p_attr->db_size);
+    void *p_gatt_value = qe_ble_malloc(p_attr->db_size);
 
     if (NULL == p_gatt_value)
     {
@@ -614,7 +667,7 @@ ble_status_t R_BLE_SERVS_SendHdlVal(const st_ble_servs_char_info_t *p_attr, uint
         }
     }
 
-    free(p_gatt_value);
+    qe_ble_free(p_gatt_value);
 
     return ret;
 }
@@ -635,7 +688,7 @@ ble_status_t R_BLE_SERVS_GetChar(const st_ble_servs_char_info_t *p_attr, uint16_
 
     st_ble_gatt_value_t gatt_value;
     gatt_value.value_len = p_attr->db_size;
-    gatt_value.p_value = malloc(p_attr->db_size);
+    gatt_value.p_value = qe_ble_malloc(p_attr->db_size);
     ret = R_BLE_GATTS_GetAttr(conn_hdl, (uint16_t)(p_attr->start_hdl + 1), &gatt_value);
 
     if (BLE_SUCCESS == ret)
@@ -643,7 +696,7 @@ ble_status_t R_BLE_SERVS_GetChar(const st_ble_servs_char_info_t *p_attr, uint16_
         ret = p_attr->decode(p_app_value, &gatt_value);
     }
 
-    free(gatt_value.p_value);
+    qe_ble_free(gatt_value.p_value);
 
     return ret;
 }
@@ -662,7 +715,7 @@ ble_status_t R_BLE_SERVS_SetChar(const st_ble_servs_char_info_t *p_attr, uint16_
         return BLE_ERR_INVALID_PTR;
     }
 
-    void *p_gatt_value = malloc(p_attr->db_size);
+    void *p_gatt_value = qe_ble_malloc(p_attr->db_size);
 
     if (NULL == p_gatt_value)
     {
@@ -681,7 +734,7 @@ ble_status_t R_BLE_SERVS_SetChar(const st_ble_servs_char_info_t *p_attr, uint16_
         ret = R_BLE_GATTS_SetAttr(conn_hdl, (uint16_t)(p_attr->start_hdl + 1), &gatt_value);
     }
 
-    free(p_gatt_value);
+    qe_ble_free(p_gatt_value);
 
     return ret;
 }
@@ -702,7 +755,7 @@ ble_status_t R_BLE_SERVS_GetDesc(const st_ble_servs_desc_info_t *p_attr, uint16_
 
     st_ble_gatt_value_t gatt_value;
     gatt_value.value_len = p_attr->db_size;
-    gatt_value.p_value = malloc(p_attr->db_size);
+    gatt_value.p_value = qe_ble_malloc(p_attr->db_size);
     ret = R_BLE_GATTS_GetAttr(conn_hdl, p_attr->attr_hdl, &gatt_value);
 
     if (BLE_SUCCESS == ret)
@@ -710,7 +763,7 @@ ble_status_t R_BLE_SERVS_GetDesc(const st_ble_servs_desc_info_t *p_attr, uint16_
         ret = p_attr->decode(p_app_value, &gatt_value);
     }
 
-    free(gatt_value.p_value);
+    qe_ble_free(gatt_value.p_value);
 
     return ret;
 }
@@ -729,7 +782,7 @@ ble_status_t R_BLE_SERVS_SetDesc(const st_ble_servs_desc_info_t *p_attr, uint16_
         return BLE_ERR_INVALID_PTR;
     }
 
-    void *p_gatt_value = malloc(p_attr->db_size);
+    void *p_gatt_value = qe_ble_malloc(p_attr->db_size);
 
     if (NULL == p_gatt_value)
     {
@@ -748,7 +801,50 @@ ble_status_t R_BLE_SERVS_SetDesc(const st_ble_servs_desc_info_t *p_attr, uint16_
         ret = R_BLE_GATTS_SetAttr(conn_hdl, p_attr->attr_hdl, &gatt_value);
     }
 
-    free(p_gatt_value);
+    qe_ble_free(p_gatt_value);
 
     return ret;
+}
+
+/*******************************************************************************************************************//**
+ *  Wrappper for memory allocate function.
+ *
+ * @param[in]  size     Size of memory to be allocated (in bytes)
+ * @retval NULL         Memory not allocated
+ * @retval Address      Address of memory allocated
+ **********************************************************************************************************************/
+static void *qe_ble_malloc(uint32_t size)
+{
+#if (BSP_CFG_RTOS == 2) /* FreeRTOS */
+    return pvPortMalloc(size);
+#elif (BSP_CFG_RTOS == 1) /* ThreadX */
+    UINT    status;
+    UCHAR * p_mem;
+
+    status = tx_byte_allocate(&g_qe_byte_pool, (VOID **)&p_mem, size, TX_NO_WAIT);
+    if (TX_SUCCESS != status)
+    {
+        p_mem = NULL;
+    }
+
+    return p_mem;
+#elif (BSP_CFG_RTOS == 0) /* Baremetal */
+    return malloc(size);
+#endif
+}
+
+/*******************************************************************************************************************//**
+ *  Wrapper for free memory allocation function.
+ *
+ * @param[in]  p_mem    Pointer to memory to be freed
+ **********************************************************************************************************************/
+static void qe_ble_free(void *p_mem)
+{
+#if (BSP_CFG_RTOS == 2) /* FreeRTOS */
+    vPortFree(p_mem);
+#elif (BSP_CFG_RTOS == 1) /* ThreadX */
+    tx_byte_release(p_mem);
+#elif (BSP_CFG_RTOS == 0) /* Baremetal */
+    free(p_mem);
+#endif
 }

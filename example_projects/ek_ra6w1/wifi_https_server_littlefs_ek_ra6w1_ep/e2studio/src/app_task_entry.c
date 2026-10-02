@@ -54,12 +54,6 @@ void app_task_entry(void *pvParameters)
 
     /* TODO: add your own code here */
 #if CFG_WIFI
-    WIFIReturnCode_t wifi_err = WIFI_SetMode(eWiFiModeStation);
-
-    if (wifi_err != eWiFiSuccess)
-    {
-        APP_PRINT_INFO("Failed to set Wi-Fi mode, error: %d\n", wifi_err);
-    }
 
 #if WIFI_CFG_WATCHDOG_SERVICE_ENABLE
     g_wifi_cfg.p_watchdog_service->p_api->open(g_wifi_cfg.p_watchdog_service->p_ctrl,
@@ -111,9 +105,36 @@ void app_task_entry(void *pvParameters)
 
     /* wifi subsystem on and connect to AP with some pre configured params */
     WIFI_On();
+
+    /* Set station mode AFTER the Wi-Fi subsystem (and supplicant) is up.
+     * Calling WIFI_SetMode() before WIFI_On() fails because the supplicant
+     * is not yet running, which leaves the module in the wrong mode and
+     * prevents the automatic connect below from succeeding. */
+    WIFIReturnCode_t wifi_err = WIFI_SetMode(eWiFiModeStation);
+    if (wifi_err != eWiFiSuccess)
+    {
+        APP_PRINT_INFO("Failed to set Wi-Fi mode, error: %d\n", wifi_err);
+    }
+
     netif_set_status_callback(netif_default, netif_status_callback);
-    WIFIReturnCode_t wifi_error = WIFI_ConnectAP(&net_params);
-    (void)wifi_error;
+
+    /* Retry the automatic connect a few times: a single attempt right after
+     * power-up can miss the AP (scan/DHCP timing). */
+    WIFIReturnCode_t wifi_error = eWiFiFailure;
+    for (uint8_t attempt = 0; attempt < 5; attempt++)
+    {
+        wifi_error = WIFI_ConnectAP(&net_params);
+        if (eWiFiSuccess == wifi_error)
+        {
+            break;
+        }
+        APP_PRINT_INFO("WIFI_ConnectAP attempt %d failed, error: %d\n", attempt + 1, wifi_error);
+        vTaskDelay(pdMS_TO_TICKS(2000));
+    }
+    if (eWiFiSuccess != wifi_error)
+    {
+        APP_PRINT_INFO("Automatic Wi-Fi connect failed after retries, error: %d\n", wifi_error);
+    }
 
 #if defined(__SUPPORT_FACTORY_RESET_BTN__)
     /* Create gpio handler event */

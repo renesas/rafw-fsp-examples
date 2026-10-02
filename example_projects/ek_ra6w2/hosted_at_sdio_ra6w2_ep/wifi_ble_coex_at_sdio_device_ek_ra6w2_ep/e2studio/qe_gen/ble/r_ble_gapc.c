@@ -1,68 +1,59 @@
+/* 
+* Copyright (c) 2019 - 2025 Renesas Electronics Corporation and/or its affiliates 
+* 
+* SPDX-License-Identifier: BSD-3-Clause 
+*/
 /***********************************************************************************************************************
-* DISCLAIMER
-* This software is supplied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
-* other uses are authorized. This software is owned by Renesas Electronics Corporation and is protected under all
-* applicable laws, including copyright laws.
-* THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
-* THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED. TO THE MAXIMUM
-* EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS AFFILIATED COMPANIES
-* SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY REASON RELATED TO THIS
-* SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-* Renesas reserves the right, without notice, to make changes to this software and to discontinue the availability of
-* this software. By using this software, you agree to the additional terms and conditions found by accessing the
-* following link:
-* http://www.renesas.com/disclaimer
-*
-* Copyright (C) 2019 Renesas Electronics Corporation. All rights reserved.
-***********************************************************************************************************************/
-/***********************************************************************************************************************
- * File Name: r_ble_gapc.c
+ * File Name: r_ble_<built-in method lower of str object at 0x00000276BAD191F0>.c
  * Version : 1.0
- * Description : The source file for Generic Access client.
+ * Description : The source file for GAP Service client.
  **********************************************************************************************************************/
-#include <string.h>
 #include "r_ble_gapc.h"
 #include "profile_cmn/r_ble_servc_if.h"
 
 static st_ble_servc_info_t gs_client_info;
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Device Name Characteristic
+    Device Name Characteristic : The Device Name characteristic shall contain the name of the device.
 ----------------------------------------------------------------------------------------------------------------------*/
+
+
+/* Device Name characteristic 128 bit UUID */
 
 /* Device Name characteristic attribute handles */
 static st_ble_gatt_hdl_range_t gs_dev_name_char_ranges[BLE_SERVC_MAX_NUM_OF_SAVED];
 
 static ble_status_t decode_st_ble_gapc_dev_name_t(st_ble_gapc_dev_name_t *p_app_value, const st_ble_gatt_value_t *p_gatt_value)
 {
-    if (BLE_GAPC_DEV_NAME_LEN < p_gatt_value->value_len)
+    /* Start user code for Device Name characteristic value decode function. Do not edit comment generated here */
+    if (BLE_GAPC_DEV_NAME_LEN - 1 < p_gatt_value->value_len)
     {
         return BLE_ERR_INVALID_DATA;
     }
 
-    memset(p_app_value->name, 0x00, BLE_GAPC_DEV_NAME_LEN);
+    memset(p_app_value->name, 0x00, BLE_GAPC_DEV_NAME_LEN - 1);
 
     strcpy(p_app_value->name, (char *)p_gatt_value->p_value);
     p_app_value->length = (uint8_t)p_gatt_value->value_len;
-
+    /* End user code. Do not edit comment generated here */
     return BLE_SUCCESS;
 }
 
 static ble_status_t encode_st_ble_gapc_dev_name_t(const st_ble_gapc_dev_name_t *p_app_value, st_ble_gatt_value_t *p_gatt_value)
 {
+    /* Start user code for Device Name characteristic value encode function. Do not edit comment generated here */
     if (BLE_GAPC_DEV_NAME_LEN < p_app_value->length)
     {
         return BLE_ERR_INVALID_DATA;
     }
 
     strncpy((char *)p_gatt_value->p_value, p_app_value->name, p_app_value->length);
-
+    /* End user code. Do not edit comment generated here */
     return BLE_SUCCESS;
 }
 
 /* Device Name characteristic definition */
-const st_ble_servc_char_info_t gs_dev_name_char = {
+static const st_ble_servc_char_info_t gs_dev_name_char = {
     .uuid_16      = BLE_GAPC_DEV_NAME_UUID,
     .uuid_type    = BLE_GATT_16_BIT_UUID_FORMAT,
     .app_size     = sizeof(st_ble_gapc_dev_name_t),
@@ -93,18 +84,21 @@ void R_BLE_GAPC_GetDevNameAttrHdl(const st_ble_dev_addr_t *p_addr, st_ble_gapc_d
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Appearance Characteristic
+    Appearance Characteristic : The Appearance characteristic defines the representation of the external appearance of the device.
 ----------------------------------------------------------------------------------------------------------------------*/
+
+
+/* Appearance characteristic 128 bit UUID */
 
 /* Appearance characteristic attribute handles */
 static st_ble_gatt_hdl_range_t gs_appearance_char_ranges[BLE_SERVC_MAX_NUM_OF_SAVED];
 
 /* Appearance characteristic definition */
-const st_ble_servc_char_info_t gs_appearance_char = {
+static const st_ble_servc_char_info_t gs_appearance_char = {
     .uuid_16      = BLE_GAPC_APPEARANCE_UUID,
     .uuid_type    = BLE_GATT_16_BIT_UUID_FORMAT,
     .app_size     = sizeof(uint16_t),
-    .db_size      = sizeof(uint16_t),
+    .db_size      = BLE_GAPC_APPEARANCE_LEN,
     .char_idx     = BLE_GAPC_APPEARANCE_IDX,
     .p_attr_hdls  = gs_appearance_char_ranges,
     .decode       = (ble_servc_attr_decode_t)decode_uint16_t,
@@ -126,14 +120,18 @@ void R_BLE_GAPC_GetAppearanceAttrHdl(const st_ble_dev_addr_t *p_addr, st_ble_gap
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Peripheral Preferred Connection Parameters Characteristic
+    Peripheral Preferred Connection Parameters Characteristic : The Peripheral Preferred Connection Parameters (PPCP) characteristic contains the preferred connection parameters of the Peripheral
 ----------------------------------------------------------------------------------------------------------------------*/
+
+
+/* Peripheral Preferred Connection Parameters characteristic 128 bit UUID */
 
 /* Peripheral Preferred Connection Parameters characteristic attribute handles */
 static st_ble_gatt_hdl_range_t gs_per_pref_conn_param_char_ranges[BLE_SERVC_MAX_NUM_OF_SAVED];
 
 static ble_status_t decode_st_ble_gapc_per_pref_conn_param_t(st_ble_gapc_per_pref_conn_param_t *p_app_value, const st_ble_gatt_value_t *p_gatt_value)
 {
+    /* Start user code for Peripheral Preferred Connection Parameters characteristic value decode function. Do not edit comment generated here */
     uint32_t pos = 0;
 
     if (p_gatt_value->value_len < BLE_GAPC_PER_PREF_CONN_PARAM_LEN)
@@ -141,38 +139,39 @@ static ble_status_t decode_st_ble_gapc_per_pref_conn_param_t(st_ble_gapc_per_pre
         return BLE_ERR_INVALID_DATA;
     }
 
-    BT_UNPACK_LE_2_BYTE(&p_app_value->min_conn_intv, &p_gatt_value->p_value[pos]);
+    BT_UNPACK_LE_2_BYTE(&p_app_value->minimum_connection_interval, &p_gatt_value->p_value[pos]);
     pos += 2;
-    BT_UNPACK_LE_2_BYTE(&p_app_value->max_conn_intv, &p_gatt_value->p_value[pos]);
+    BT_UNPACK_LE_2_BYTE(&p_app_value->maximum_connection_interval, &p_gatt_value->p_value[pos]);
     pos += 2;
     BT_UNPACK_LE_2_BYTE(&p_app_value->slave_latency, &p_gatt_value->p_value[pos]);
     pos += 2;
-    BT_UNPACK_LE_2_BYTE(&p_app_value->conn_sup_timeout_multiplier, &p_gatt_value->p_value[pos]);
+    BT_UNPACK_LE_2_BYTE(&p_app_value->connection_supervision_timeout_multiplier, &p_gatt_value->p_value[pos]);
     pos += 2;
-
+    /* End user code. Do not edit comment generated here */
     return BLE_SUCCESS;
 }
 
 static ble_status_t encode_st_ble_gapc_per_pref_conn_param_t(const st_ble_gapc_per_pref_conn_param_t *p_app_value, st_ble_gatt_value_t *p_gatt_value)
 {
+    /* Start user code for Peripheral Preferred Connection Parameters characteristic value encode function. Do not edit comment generated here */
     uint32_t pos = 0;
 
-    BT_PACK_LE_2_BYTE(&p_gatt_value->p_value[pos], &p_app_value->min_conn_intv);
+    BT_PACK_LE_2_BYTE(&p_gatt_value->p_value[pos], &p_app_value->minimum_connection_interval);
     pos += 2;
-    BT_PACK_LE_2_BYTE(&p_gatt_value->p_value[pos], &p_app_value->max_conn_intv);
+    BT_PACK_LE_2_BYTE(&p_gatt_value->p_value[pos], &p_app_value->maximum_connection_interval);
     pos += 2;
     BT_PACK_LE_2_BYTE(&p_gatt_value->p_value[pos], &p_app_value->slave_latency);
     pos += 2;
-    BT_PACK_LE_2_BYTE(&p_gatt_value->p_value[pos], &p_app_value->conn_sup_timeout_multiplier);
+    BT_PACK_LE_2_BYTE(&p_gatt_value->p_value[pos], &p_app_value->connection_supervision_timeout_multiplier);
     pos += 2;
 
     p_gatt_value->value_len = (uint16_t)pos;
-
+    /* End user code. Do not edit comment generated here */
     return BLE_SUCCESS;
 }
 
 /* Peripheral Preferred Connection Parameters characteristic definition */
-const st_ble_servc_char_info_t gs_per_pref_conn_param_char = {
+static const st_ble_servc_char_info_t gs_per_pref_conn_param_char = {
     .uuid_16      = BLE_GAPC_PER_PREF_CONN_PARAM_UUID,
     .uuid_type    = BLE_GATT_16_BIT_UUID_FORMAT,
     .app_size     = sizeof(st_ble_gapc_per_pref_conn_param_t),
@@ -198,18 +197,21 @@ void R_BLE_GAPC_GetPerPrefConnParamAttrHdl(const st_ble_dev_addr_t *p_addr, st_b
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Central Address Resolution Characteristic
+    Central Address Resolution Characteristic : The Peripheral should check if the peer device supports address resolution by reading the Central Address Resolution characteristic.
 ----------------------------------------------------------------------------------------------------------------------*/
+
+
+/* Central Address Resolution characteristic 128 bit UUID */
 
 /* Central Address Resolution characteristic attribute handles */
 static st_ble_gatt_hdl_range_t gs_cent_addr_rslv_char_ranges[BLE_SERVC_MAX_NUM_OF_SAVED];
 
 /* Central Address Resolution characteristic definition */
-const st_ble_servc_char_info_t gs_cent_addr_rslv_char = {
+static const st_ble_servc_char_info_t gs_cent_addr_rslv_char = {
     .uuid_16      = BLE_GAPC_CENT_ADDR_RSLV_UUID,
     .uuid_type    = BLE_GATT_16_BIT_UUID_FORMAT,
     .app_size     = sizeof(uint8_t),
-    .db_size      = sizeof(uint8_t),
+    .db_size      = BLE_GAPC_CENT_ADDR_RSLV_LEN,
     .char_idx     = BLE_GAPC_CENT_ADDR_RSLV_IDX,
     .p_attr_hdls  = gs_cent_addr_rslv_char_ranges,
     .decode       = (ble_servc_attr_decode_t)decode_uint8_t,
@@ -231,18 +233,21 @@ void R_BLE_GAPC_GetCentAddrRslvAttrHdl(const st_ble_dev_addr_t *p_addr, st_ble_g
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Resolvable Private Address Only Characteristic
+    Resolvable Private Address Only Characteristic : The device should check if the peer will only use Resolvable Private Addresses (RPAs) after bonding by reading the Resolvable Private Address Only characteristic.
 ----------------------------------------------------------------------------------------------------------------------*/
+
+
+/* Resolvable Private Address Only characteristic 128 bit UUID */
 
 /* Resolvable Private Address Only characteristic attribute handles */
 static st_ble_gatt_hdl_range_t gs_rslv_priv_addr_only_char_ranges[BLE_SERVC_MAX_NUM_OF_SAVED];
 
 /* Resolvable Private Address Only characteristic definition */
-const st_ble_servc_char_info_t gs_rslv_priv_addr_only_char = {
+static const st_ble_servc_char_info_t gs_rslv_priv_addr_only_char = {
     .uuid_16      = BLE_GAPC_RSLV_PRIV_ADDR_ONLY_UUID,
     .uuid_type    = BLE_GATT_16_BIT_UUID_FORMAT,
     .app_size     = sizeof(uint8_t),
-    .db_size      = sizeof(uint8_t),
+    .db_size      = BLE_GAPC_RSLV_PRIV_ADDR_ONLY_LEN,
     .char_idx     = BLE_GAPC_RSLV_PRIV_ADDR_ONLY_IDX,
     .p_attr_hdls  = gs_rslv_priv_addr_only_char_ranges,
     .decode       = (ble_servc_attr_decode_t)decode_uint8_t,
@@ -265,10 +270,10 @@ void R_BLE_GAPC_GetRslvPrivAddrOnlyAttrHdl(const st_ble_dev_addr_t *p_addr, st_b
 
 
 /*----------------------------------------------------------------------------------------------------------------------
-    Generic Access client
+    GAP Service client
 ----------------------------------------------------------------------------------------------------------------------*/
 
-/* Generic Access client attribute handles */
+/* GAP Service client attribute handles */
 static st_ble_gatt_hdl_range_t gs_gapc_ranges[BLE_SERVC_MAX_NUM_OF_SAVED];
 
 const st_ble_servc_char_info_t *gspp_gapc_chars[] = {

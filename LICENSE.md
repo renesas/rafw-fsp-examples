@@ -1,15 +1,20 @@
-| Component                                             | Copyright                                | License                                                                                     |
-|-------------------------------------------------------|------------------------------------------|---------------------------------------------------------------------------------------------|
-| <tr><td colspan="3"><strong>Renesas example applications and middleware</strong></td></tr>                                                                                                            |
-| RAFW FSP application code                                 | Renesas Electronics Corporation    | [BSD-3-Clause](#bsd-3-clause-license)                                                       |
-| Renesas QE Tool for BLE                                  | Renesas Electronics Corporation    | [Renesas Software License Agreement](https://www.renesas.com/us/en/document/oth/disclaimer002)|
-| <tr><td colspan="3"><strong>Third-Party components included in the example applications</strong></td></tr>                                                                                              |
-| [azure-iot-sdk-c](https://github.com/Azure/azure-iot-sdk-c) | Microsoft Corporation                     | [MIT](https://github.com/Azure/azure-iot-sdk-c/blob/main/LICENSE)                          |
-| [cJSON](https://github.com/DaveGamble/cJSON)         | Dave Gamble and cJSON contributors        | [MIT](https://github.com/DaveGamble/cJSON/blob/master/LICENSE)                             |
-| [connectedhomeip](https://github.com/project-chip/connectedhomeip) | Connectivity Standards Alliance and contributors | [Apache-2.0](https://github.com/project-chip/connectedhomeip/blob/master/LICENSE)          |
-| [FreeRTOS Real Time Kernel](https://github.com/renesas/FreeRTOS) | Amazon.com, Inc. or its affiliates        | [MIT](https://github.com/renesas/FreeRTOS/blob/master/LICENSE.md)                          |
-| [JSMN](https://github.com/zserge/jsmn)               | Serge Zaitsev                             | [MIT](https://github.com/zserge/jsmn/blob/master/LICENSE)                                  |
-| [Segger RTT](https://kb.segger.com/RTT)              | SEGGER Microcontroller GmbH               | [SEGGER Software License Agreement](https://github.com/SEGGERMicro/RTT/blob/main/LICENSE.md) |
+<table style="width: 100%; border-collapse: collapse;">
+<thead>
+<tr style="border-bottom: 1px solid;"><th align="left">Component</th><th align="left">Copyright</th><th align="left">License</th></tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid;"><td colspan="3"><strong>Renesas example applications and middleware</strong></td></tr>
+<tr style="border-bottom: 1px solid;"><td>RAFW FSP application code</td><td>Renesas Electronics Corporation</td><td><a href="#bsd-3-clause-license">BSD-3-Clause</a></td></tr>
+<tr style="border-bottom: 1px solid;"><td colspan="3"><strong>Third-Party components included in the example applications</strong></td></tr>
+<tr style="border-bottom: 1px solid;"><td><a href="https://github.com/Azure/azure-iot-sdk-c">azure-iot-sdk-c</a></td><td>Microsoft Corporation</td><td><a href="https://github.com/Azure/azure-iot-sdk-c/blob/main/LICENSE">MIT</a></td></tr>
+<tr style="border-bottom: 1px solid;"><td><a href="https://github.com/DaveGamble/cJSON">cJSON</a></td><td>Dave Gamble and cJSON contributors</td><td><a href="https://github.com/DaveGamble/cJSON/blob/master/LICENSE">MIT</a></td></tr>
+<tr style="border-bottom: 1px solid;"><td><a href="https://github.com/project-chip/connectedhomeip">connectedhomeip</a></td><td>Connectivity Standards Alliance and contributors</td><td><a href="https://github.com/project-chip/connectedhomeip/blob/master/LICENSE">Apache-2.0</a></td></tr>
+<tr style="border-bottom: 1px solid;"><td><a href="https://github.com/renesas/FreeRTOS">FreeRTOS Real Time Kernel</a></td><td>Amazon.com, Inc. or its affiliates</td><td><a href="https://github.com/renesas/FreeRTOS/blob/master/LICENSE.md">MIT</a></td></tr>
+<tr style="border-bottom: 1px solid;"><td><a href="https://github.com/zserge/jsmn">JSMN</a></td><td>Serge Zaitsev</td><td><a href="https://github.com/zserge/jsmn/blob/master/LICENSE">MIT</a></td></tr>
+<tr style="border-bottom: 1px solid;"><td><a href="https://github.com/kgabis/parson/tree/master">Parson</a></td><td>Krzysztof Gabis</td><td><a href="https://github.com/kgabis/parson/blob/master/LICENSE">MIT</a></td></tr>
+<tr><td><a href="https://kb.segger.com/RTT">Segger RTT</a></td><td>SEGGER Microcontroller GmbH</td><td><a href="https://github.com/SEGGERMicro/RTT/blob/main/LICENSE.md">SEGGER Software License Agreement</a></td></tr>
+</tbody>
+</table>
 
 ## BSD 3-Clause License
 

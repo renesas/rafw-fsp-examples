@@ -1,25 +1,11 @@
-/***********************************************************************************************************************
-* DISCLAIMER
-* This software is supplied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
-* other uses are authorized. This software is owned by Renesas Electronics Corporation and is protected under all
-* applicable laws, including copyright laws.
-* THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
-* THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED. TO THE MAXIMUM
-* EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS AFFILIATED COMPANIES
-* SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY REASON RELATED TO THIS
-* SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-* Renesas reserves the right, without notice, to make changes to this software and to discontinue the availability of
-* this software. By using this software, you agree to the additional terms and conditions found by accessing the
-* following link:
-* http://www.renesas.com/disclaimer
-*
-* Copyright (C) 2019-2020 Renesas Electronics Corporation. All rights reserved.
-***********************************************************************************************************************/
+/* 
+* Copyright (c) 2019 - 2025 Renesas Electronics Corporation and/or its affiliates 
+* 
+* SPDX-License-Identifier: BSD-3-Clause 
+*/
 
 /******************************************************************************
 * File Name    : app_main.c
-* Device(s)    : RA4W1
 * Tool-Chain   : e2Studio
 * Description  : This is a application file for peripheral role.
 *******************************************************************************/
@@ -31,6 +17,7 @@
 #include "r_ble_api.h"
 #include "rm_ble_abs.h"
 #include "rm_ble_abs_api.h"
+#include "discovery/r_ble_disc.h"
 #include "gatt_db.h"
 #include "profile_cmn/r_ble_servs_if.h"
 #include "profile_cmn/r_ble_servc_if.h"
@@ -44,6 +31,9 @@
 #define BLE_EVENT_PATTERN   (0x0A0A)
 EventGroupHandle_t  g_ble_event_group_handle;
 #endif
+#include "r_ble_gapc.h"
+#include "r_ble_gaps.h"
+#include "r_ble_gats.h"
 #include "r_ble_di2s.h"
 
 /******************************************************************************
@@ -60,6 +50,8 @@ EventGroupHandle_t  g_ble_event_group_handle;
 #else
 #include "rm_vee_flash_w_rrq_nvram.h"
 #endif
+
+#include "qe_ble_profile.h"
 
 /* End user code. Do not edit comment generated here */
 
@@ -82,6 +74,7 @@ void gap_cb(uint16_t type, ble_status_t result, st_ble_evt_data_t *p_data);
 void gatts_cb(uint16_t type, ble_status_t result, st_ble_gatts_evt_data_t *p_data);
 void gattc_cb(uint16_t type, ble_status_t result, st_ble_gattc_evt_data_t *p_data);
 void vs_cb(uint16_t type, ble_status_t result, st_ble_vs_evt_data_t *p_data);
+void disc_comp_cb(uint16_t conn_hdl);
 ble_status_t ble_init(void);
 void app_main(void);
 
@@ -89,11 +82,28 @@ void app_main(void);
  User function prototype declarations
 *******************************************************************************/
 /* Start user code for function prototype declarations. Do not edit comment generated here */
+static bool gap_cb_user (uint16_t type, ble_status_t result, st_ble_evt_data_t * p_data);
+ble_status_t ble_uninit(void);
+static void ble_set_bd_addr(const char *bd_addr_string);
+void custom_conf_ble(void);
+static const char *ble_address_to_string(const uint8_t *address);
+static void di2s_send_read_cfm (uint16_t conn_hdl, uint16_t val_hdl);
 /* End user code. Do not edit comment generated here */
 
 /******************************************************************************
  Generated global variables
 *******************************************************************************/
+/* GAP Service UUID */
+static uint8_t GAPC_UUID[] = { 0x00, 0x18 };
+/* Service discovery parameters */
+static st_ble_disc_entry_t gs_disc_entries[] =
+{
+    {
+        .p_uuid     = GAPC_UUID,
+        .uuid_type  = BLE_GATT_16_BIT_UUID_FORMAT,
+        .serv_cb    = R_BLE_GAPC_ServDiscCb,
+    },
+};
 /* Advertising Data */
 static uint8_t gs_advertising_data[] =
 {
@@ -101,11 +111,13 @@ static uint8_t gs_advertising_data[] =
     0x02, /**< Data Size */
     0x01, /**< Data Type */
     ( 0x06 ), /**< Data Value */
+
     /* Complete Local Name */
     0x17, /**< Data Size */
     0x09, /**< Data Type */
     0x76, 0x6e, 0x64, 0x6d, 0x5f, 0x77, 0x6c, 0x61, 0x6e, 0x5f, 0x62, 0x6c, 0x65, 0x5f, 0x63, 0x6f, 0x65, 0x78, 0x5f, 0x61, 0x70, 0x70, /**< Data Value */
 };
+
 /* Scan Response Data */
 static uint8_t gs_scan_response_data[] =
 {
@@ -166,20 +178,8 @@ static st_ble_gatt_pre_queue_t gs_queue[BLE_GATTS_QUEUE_NUM] = {
     }
 };
 
-typedef enum e_mfr_app_state
-{
-    MFR_APP_STATE_STOPPED,
-    MFR_APP_STATE_STOPPING,
-    MFR_APP_STATE_RUNNING,
-} mfr_app_state_t;
-
 /* Connection handle */
-volatile uint16_t g_conn_hdl = BLE_GAP_INVALID_CONN_HDL;
-
-/* Advertisement handle */
-volatile uint8_t g_adv_hdl   = BLE_GAP_INVALID_ADV_HDL;
-
-mfr_app_state_t g_app_state = MFR_APP_STATE_RUNNING; /* Application starts with running state */
+uint16_t g_conn_hdl = BLE_GAP_INVALID_CONN_HDL;
 
 /******************************************************************************
  User global variables
@@ -188,6 +188,18 @@ mfr_app_state_t g_app_state = MFR_APP_STATE_RUNNING; /* Application starts with 
 uint8_t remote_addr[BLE_BD_ADDR_LEN];
 uint8_t remote_addr_type;
 char remote_addr_type_str[16];
+
+typedef enum e_mfr_app_state
+{
+    MFR_APP_STATE_STOPPED,
+    MFR_APP_STATE_STOPPING,
+    MFR_APP_STATE_RUNNING,
+} mfr_app_state_t;
+mfr_app_state_t g_app_state = MFR_APP_STATE_RUNNING; /* Application starts with running state */
+
+/* Advertisement handle */
+uint8_t g_adv_hdl   = BLE_GAP_INVALID_ADV_HDL;
+
 /* End user code. Do not edit comment generated here */
 
 /******************************************************************************
@@ -208,6 +220,11 @@ void gap_cb(uint16_t type, ble_status_t result, st_ble_evt_data_t *p_data)
 {
 /* Hint: Input common process of callback function such as variable definitions */
 /* Start user code for GAP callback function common process. Do not edit comment generated here */
+    if (gap_cb_user(type, result, p_data))
+    {
+        /* event handled by own application */
+        return;
+    }
 /* End user code. Do not edit comment generated here */
 
     switch(type)
@@ -225,29 +242,6 @@ void gap_cb(uint16_t type, ble_status_t result, st_ble_evt_data_t *p_data)
                 /* Store connection handle */
                 st_ble_gap_conn_evt_t *p_gap_conn_evt_param = (st_ble_gap_conn_evt_t *)p_data->p_param;
                 g_conn_hdl = p_gap_conn_evt_param->conn_hdl;
-                memcpy(&remote_addr[0], &p_gap_conn_evt_param->remote_addr[0], BLE_BD_ADDR_LEN);
-                remote_addr_type = p_gap_conn_evt_param->remote_addr_type;
-                switch (remote_addr_type)
-                {
-                case 0x00:
-                    memcpy(&remote_addr_type_str[0], "public", 7);
-                    break;
-                case 0x01:
-                    memcpy(&remote_addr_type_str[0], "random", 7);
-                    break;
-                case 0x02:
-                    memcpy(&remote_addr_type_str[0], "public identity", 16);
-                    break;
-                case 0x03:
-                    memcpy(&remote_addr_type_str[0], "random identity", 16);
-                    break;
-                default:
-                    memcpy(&remote_addr_type_str[0], " ", 2);
-                    break;
-                }
-                printf("Device connected\n");
-                printf("\tConnection index: %X\n", g_conn_hdl);
-                printf("\tAddress: %s %02X:%02X:%02X:%02X:%02X:%02X\n\n", remote_addr_type_str, remote_addr[5], remote_addr[4], remote_addr[3], remote_addr[2], remote_addr[1], remote_addr[0]);
             }
             else
             {
@@ -256,59 +250,11 @@ void gap_cb(uint16_t type, ble_status_t result, st_ble_evt_data_t *p_data)
             }
         } break;
 
-        case BLE_GAP_EVENT_DATA_LEN_CHG:
-        {
-            st_ble_gap_data_len_chg_evt_t *p_gap_data_len_chg_evt_param = (st_ble_gap_data_len_chg_evt_t *)p_data->p_param;
-            uint16_t tx_octets = p_gap_data_len_chg_evt_param->tx_octets;
-            uint16_t tx_time = p_gap_data_len_chg_evt_param->tx_time;
-            uint16_t rx_octets = p_gap_data_len_chg_evt_param->rx_octets;
-            uint16_t rx_time = p_gap_data_len_chg_evt_param->rx_time;
-            printf("Data length changed \n\tConnection index: %X\n", g_conn_hdl);
-            printf("\tMaximum RX data length: %d\n\tMaximum RX time: %d\n", rx_octets, rx_time);
-            printf("\tMaximum TX data length: %d\n\tMaximum TX time: %d\n\n", tx_octets, tx_time);
-        } break;
-        case BLE_GAP_EVENT_PAIRING_REQ:
-        {
-            st_ble_gap_pairing_req_evt_t *p_gap_pairing_req_evt_param = (st_ble_gap_pairing_req_evt_t *)p_data->p_param;
-            st_ble_gap_auth_info_t auth_info = p_gap_pairing_req_evt_param->auth_info;
-            uint8_t bonding = auth_info.bonding;
-            printf("Pair request\n");
-            printf("\tConnection index: %X\n", g_conn_hdl);
-            printf("\tBond: %s\n\n", bonding ? "true" : "false");
-        } break;
-        case BLE_GAP_EVENT_PAIRING_COMP:
-        {
-            st_ble_gap_pairing_info_evt_t *p_gap_pairing_info_evt_param = (st_ble_gap_pairing_info_evt_t *)p_data->p_param;
-            st_ble_gap_auth_info_t auth_info = p_gap_pairing_info_evt_param->auth_info;
-            uint8_t bonding = auth_info.bonding;
-            printf("Pair completed\n");
-            printf("\tConnection index: %X\n", g_conn_hdl);
-            printf("\tBond: %s\n\n", bonding ? "true" : "false");
-        } break;
-        case BLE_GAP_EVENT_ENC_CHG:
-        {
-            st_ble_gap_enc_chg_evt_t *p_gap_enc_chg_evt_param = (st_ble_gap_enc_chg_evt_t *)p_data->p_param;
-            uint8_t enc_status = p_gap_enc_chg_evt_param->enc_status;
-            printf("Security level changed\n");
-            printf("\tConnection index: %X\n", g_conn_hdl);
-            printf("\tSecurity level: %d\n\n", enc_status);
-        } break;
         case BLE_GAP_EVENT_DISCONN_IND:
         {
             /* Restart advertising when disconnected */
-            st_ble_gap_disconn_evt_t *p_gap_disconn_evt_param = (st_ble_gap_disconn_evt_t *)p_data->p_param;
-            uint8_t disconn_reason = p_gap_disconn_evt_param->reason;
-            printf("Device disconnected\n");
-            printf("\tConnection index: %X\n", g_conn_hdl);
-            printf("\tBD address of disconnected device: %s, %02X:%02X:%02X:%02X:%02X:%02X\n", remote_addr_type_str, remote_addr[5], remote_addr[4], remote_addr[3], remote_addr[2], remote_addr[1], remote_addr[0]);
-            printf("\tReason of disconnection: 0x%X\n\n", disconn_reason);
             g_conn_hdl = BLE_GAP_INVALID_CONN_HDL;
-
-            if (MFR_APP_STATE_RUNNING == g_app_state)
-            {
-                /* We aren't disconnecting due to closing of the service - restore the advertisement. */
-                RM_BLE_ABS_StartLegacyAdvertising(&g_ble_abs0_ctrl, &g_ble_advertising_parameter);
-            }
+            RM_BLE_ABS_StartLegacyAdvertising(&g_ble_abs0_ctrl, &g_ble_advertising_parameter);
         } break;
 
         case BLE_GAP_EVENT_CONN_PARAM_UPD_REQ:
@@ -331,6 +277,45 @@ void gap_cb(uint16_t type, ble_status_t result, st_ble_evt_data_t *p_data)
 
 /* Hint: Add cases of GAP event macros defined as BLE_GAP_XXX */
 /* Start user code for GAP callback function event process. Do not edit comment generated here */
+        case BLE_GAP_EVENT_DATA_LEN_CHG:
+        {
+            st_ble_gap_data_len_chg_evt_t *p_gap_data_len_chg_evt_param = (st_ble_gap_data_len_chg_evt_t *)p_data->p_param;
+            uint16_t tx_octets = p_gap_data_len_chg_evt_param->tx_octets;
+            uint16_t tx_time = p_gap_data_len_chg_evt_param->tx_time;
+            uint16_t rx_octets = p_gap_data_len_chg_evt_param->rx_octets;
+            uint16_t rx_time = p_gap_data_len_chg_evt_param->rx_time;
+            printf("Data length changed \n\tConnection index: %X\n", g_conn_hdl);
+            printf("\tMaximum RX data length: %d\n\tMaximum RX time: %d\n", rx_octets, rx_time);
+            printf("\tMaximum TX data length: %d\n\tMaximum TX time: %d\n\n", tx_octets, tx_time);
+        } break;
+        case BLE_GAP_EVENT_PAIRING_REQ:
+        {
+            st_ble_gap_pairing_req_evt_t *p_gap_pairing_req_evt_param = (st_ble_gap_pairing_req_evt_t *)p_data->p_param;
+            st_ble_gap_auth_info_t auth_info = p_gap_pairing_req_evt_param->auth_info;
+            uint8_t bonding = auth_info.bonding;
+            printf("Pair request\n");
+            printf("\tConnection index: %X\n", g_conn_hdl);
+            printf("\tBond: %s\n\n", bonding ? "true" : "false");
+            R_BLE_GAP_ReplyPairing(p_gap_pairing_req_evt_param->conn_hdl, BLE_GAP_PAIRING_ACCEPT);
+        } break;
+        case BLE_GAP_EVENT_PAIRING_COMP:
+        {
+            st_ble_gap_pairing_info_evt_t *p_gap_pairing_info_evt_param = (st_ble_gap_pairing_info_evt_t *)p_data->p_param;
+            st_ble_gap_auth_info_t auth_info = p_gap_pairing_info_evt_param->auth_info;
+            uint8_t bonding = auth_info.bonding;
+            printf("Pair completed\n");
+            printf("\tConnection index: %X\n", g_conn_hdl);
+            printf("\tBond: %s\n\n", bonding ? "true" : "false");
+        } break;
+        case BLE_GAP_EVENT_ENC_CHG:
+        {
+            st_ble_gap_enc_chg_evt_t *p_gap_enc_chg_evt_param = (st_ble_gap_enc_chg_evt_t *)p_data->p_param;
+            uint8_t enc_status = p_gap_enc_chg_evt_param->enc_status;
+            printf("Security level changed\n");
+            printf("\tConnection index: %X\n", g_conn_hdl);
+            printf("\tSecurity level: %d\n\n", enc_status);
+        } break;
+
         case BLE_GAP_EVENT_ADV_ON:
         {
             st_ble_gap_adv_set_evt_t * p_gap_adv_set_evt_param = (st_ble_gap_adv_set_evt_t *) p_data->p_param;
@@ -395,6 +380,11 @@ void gattc_cb(uint16_t type, ble_status_t result, st_ble_gattc_evt_data_t *p_dat
     R_BLE_SERVC_GattcCb(type, result, p_data);
     switch(type)
     {
+        case BLE_GATTC_EVENT_CONN_IND:
+        {
+            /* Start discovery operation after connection established */
+            R_BLE_DISC_Start(p_data->conn_hdl, gs_disc_entries, ARRAY_SIZE(gs_disc_entries), disc_comp_cb);
+        } break;
 
 /* Hint: Add cases of GATT Client event macros defined as BLE_GATTC_XXX */
 /* Start user code for GATT Client callback function event process. Do not edit comment generated here */
@@ -417,6 +407,11 @@ void vs_cb(uint16_t type, ble_status_t result, st_ble_vs_evt_data_t *p_data)
 {
 /* Hint: Input common process of callback function such as variable definitions */
 /* Start user code for vender specific callback function common process. Do not edit comment generated here */
+    if (BLE_VS_EVENT_GET_ADDR_COMP == type)
+    {
+        st_ble_vs_get_bd_addr_comp_evt_t * p_get_address = (st_ble_vs_get_bd_addr_comp_evt_t *)p_data->p_param;
+        printf("BD address from device: %s\n", ble_address_to_string(p_get_address->addr.addr));
+    }
 /* End user code. Do not edit comment generated here */
     
     R_BLE_SERVS_VsCb(type, result, p_data);
@@ -427,9 +422,6 @@ void vs_cb(uint16_t type, ble_status_t result, st_ble_vs_evt_data_t *p_data)
             /* Start advertising when BD address is ready */
             st_ble_vs_get_bd_addr_comp_evt_t * get_address = (st_ble_vs_get_bd_addr_comp_evt_t *)p_data->p_param;
             memcpy(g_ble_advertising_parameter.own_bluetooth_address, get_address->addr.addr, BLE_BD_ADDR_LEN);
-            printf("BD address from device: %02x:%02x:%02x:%02x:%02x:%02x\n", get_address->addr.addr[5], get_address->addr.addr[4], 
-                                                                               get_address->addr.addr[3], get_address->addr.addr[2],
-                                                                               get_address->addr.addr[1], get_address->addr.addr[0]);
             RM_BLE_ABS_StartLegacyAdvertising(&g_ble_abs0_ctrl, &g_ble_advertising_parameter);
         } break;
 
@@ -437,6 +429,56 @@ void vs_cb(uint16_t type, ble_status_t result, st_ble_vs_evt_data_t *p_data)
 /* Start user code for vender specific callback function event process. Do not edit comment generated here */
 /* End user code. Do not edit comment generated here */
     }
+}
+
+/******************************************************************************
+ * Function Name: gaps_cb
+ * Description  : Callback function for GAP Service server feature.
+ * Arguments    : uint16_t type -
+ *                  Event type of GAP Service server feature.
+ *              : ble_status_t result -
+ *                  Event result of GAP Service server feature.
+ *              : st_ble_servs_evt_data_t *p_data - 
+ *                  Event parameters of GAP Service server feature.
+ * Return Value : none
+ ******************************************************************************/
+static void gaps_cb(uint16_t type, ble_status_t result, st_ble_servs_evt_data_t *p_data)
+{
+/* Hint: Input common process of callback function such as variable definitions */
+/* Start user code for GAP Service Server callback function common process. Do not edit comment generated here */
+/* End user code. Do not edit comment generated here */
+
+    switch(type)
+    {
+/* Hint: Add cases of GAP Service server events defined in e_ble_gaps_event_t */
+/* Start user code for GAP Service Server callback function event process. Do not edit comment generated here */
+/* End user code. Do not edit comment generated here */
+    }    
+}
+
+/******************************************************************************
+ * Function Name: gats_cb
+ * Description  : Callback function for GATT Service server feature.
+ * Arguments    : uint16_t type -
+ *                  Event type of GATT Service server feature.
+ *              : ble_status_t result -
+ *                  Event result of GATT Service server feature.
+ *              : st_ble_servs_evt_data_t *p_data - 
+ *                  Event parameters of GATT Service server feature.
+ * Return Value : none
+ ******************************************************************************/
+static void gats_cb(uint16_t type, ble_status_t result, st_ble_servs_evt_data_t *p_data)
+{
+/* Hint: Input common process of callback function such as variable definitions */
+/* Start user code for GATT Service Server callback function common process. Do not edit comment generated here */
+/* End user code. Do not edit comment generated here */
+
+    switch(type)
+    {
+/* Hint: Add cases of GATT Service server events defined in e_ble_gats_event_t */
+/* Start user code for GATT Service Server callback function event process. Do not edit comment generated here */
+/* End user code. Do not edit comment generated here */
+    }    
 }
 
 /******************************************************************************
@@ -460,8 +502,105 @@ static void di2s_cb(uint16_t type, ble_status_t result, st_ble_servs_evt_data_t 
     {
 /* Hint: Add cases of Device Information Service2 server events defined in e_ble_di2s_event_t */
 /* Start user code for Device Information Service2 Server callback function event process. Do not edit comment generated here */
+    case BLE_DI2S_EVENT_MFR_NAME_READ_REQ:
+    {
+        di2s_send_read_cfm(p_data->conn_hdl, BLE_DI2S_MFR_NAME_VAL_HDL);
+        break;
+    }
+
+    case BLE_DI2S_EVENT_MODEL_NUM_READ_REQ:
+    {
+        di2s_send_read_cfm(p_data->conn_hdl, BLE_DI2S_MODEL_NUM_VAL_HDL);
+        break;
+    }
+
+    case BLE_DI2S_EVENT_SER_NUM_READ_REQ:
+    {
+        di2s_send_read_cfm(p_data->conn_hdl, BLE_DI2S_SER_NUM_VAL_HDL);
+        break;
+    }
+
+    case BLE_DI2S_EVENT_HW_REV_READ_REQ:
+    {
+        di2s_send_read_cfm(p_data->conn_hdl, BLE_DI2S_HW_REV_VAL_HDL);
+        break;
+    }
+
+    case BLE_DI2S_EVENT_FIRM_REV_READ_REQ:
+    {
+        di2s_send_read_cfm(p_data->conn_hdl, BLE_DI2S_FIRM_REV_VAL_HDL);
+        break;
+    }
+
+    case BLE_DI2S_EVENT_SW_REV_READ_REQ:
+    {
+        di2s_send_read_cfm(p_data->conn_hdl, BLE_DI2S_SW_REV_VAL_HDL);
+        break;
+    }
+
+    case BLE_DI2S_EVENT_SYS_ID_READ_REQ:
+    {
+        di2s_send_read_cfm(p_data->conn_hdl, BLE_DI2S_SYS_ID_VAL_HDL);
+        break;
+    }
+
+    case BLE_DI2S_EVENT_REG_CER_DATA_LIST_READ_REQ:
+    {
+        di2s_send_read_cfm(p_data->conn_hdl, BLE_DI2S_REG_CER_DATA_LIST_VAL_HDL);
+        break;
+    }
+
+    case BLE_DI2S_EVENT_PNP_ID_READ_REQ:
+    {
+        di2s_send_read_cfm(p_data->conn_hdl, BLE_DI2S_PNP_ID_VAL_HDL);
+        break;
+    }
+
+    default:
+    {
+        /* Handle code reach this line? */
+        break;
+    }
 /* End user code. Do not edit comment generated here */
     }    
+}
+
+/******************************************************************************
+ * Function Name: gapc_cb
+ * Description  : Callback function for GAP Service client feature.
+ * Arguments    : uint16_t type -
+ *                  Event type of GAP Service client feature.
+ *              : ble_status_t result -
+ *                  Event result of GAP Service client feature.
+ *              : st_ble_servc_evt_data_t *p_data - 
+ *                  Event parameters of GAP Service client feature.
+ * Return Value : none
+ ******************************************************************************/
+static void gapc_cb(uint16_t type, ble_status_t result, st_ble_servc_evt_data_t *p_data)
+{
+/* Hint: Input common process of callback function such as variable definitions */
+/* Start user code for GAP Service Client callback function common process. Do not edit comment generated here */
+/* End user code. Do not edit comment generated here */
+
+    switch(type)
+    {
+/* Hint: Add cases of GAP Service client events defined in e_ble_gapc_event_t */
+/* Start user code for GAP Service Client callback function event process. Do not edit comment generated here */
+/* End user code. Do not edit comment generated here */
+    }
+}
+/******************************************************************************
+ * Function Name: disc_comp_cb
+ * Description  : Callback function for Service Discovery.
+ * Arguments    : none
+ * Return Value : none
+ ******************************************************************************/
+void disc_comp_cb(uint16_t conn_hdl)
+{
+/* Hint: Input process such as GATT operation */
+/* Start user code for Discovery Complete callback function. Do not edit comment generated here */
+/* End user code. Do not edit comment generated here */
+    return;
 }
 /******************************************************************************
  * Function Name: ble_init
@@ -506,6 +645,26 @@ ble_status_t ble_init(void)
     
     /* Set Prepare Write Queue */
     R_BLE_GATTS_SetPrepareQueue(gs_queue, BLE_GATTS_QUEUE_NUM);
+    /* Initialize GATT Discovery Library */
+    status = R_BLE_DISC_Init();
+    if (BLE_SUCCESS != status)
+    {
+        return BLE_ERR_INVALID_OPERATION;
+    }
+
+    /* Initialize GAP Service server API */
+    status = R_BLE_GAPS_Init(gaps_cb);
+    if (BLE_SUCCESS != status)
+    {
+        return BLE_ERR_INVALID_OPERATION;
+    }
+
+    /* Initialize GATT Service server API */
+    status = R_BLE_GATS_Init(gats_cb);
+    if (BLE_SUCCESS != status)
+    {
+        return BLE_ERR_INVALID_OPERATION;
+    }
 
     /* Initialize Device Information Service2 server API */
     status = R_BLE_DI2S_Init(di2s_cb);
@@ -514,42 +673,14 @@ ble_status_t ble_init(void)
         return BLE_ERR_INVALID_OPERATION;
     }
 
-    return status;
-}
-
-ble_status_t ble_uninit(void)
-{
-    /* Terminate BLE */
-    return RM_BLE_ABS_Close(&g_ble_abs0_ctrl);;
-}
-
-static void ble_set_bd_addr(const char *bd_addr_string)
-{
-    if (!bd_addr_string)
-        return;
-
-    size_t bd_addr_len = strlen(bd_addr_string);
-    char tmp_bd_string[bd_addr_len + 1];
-
-    memset(tmp_bd_string, 0, bd_addr_len + 1);
-    memcpy(tmp_bd_string, bd_addr_string, bd_addr_len);
-
-    st_ble_dev_addr_t bd_addr = {.type = BLE_GAP_ADDR_PUBLIC, .addr = {0} };
-
-    char *saveptr;
-    char *p_tp = strtok_r(tmp_bd_string, ":", &saveptr);
-
-    unsigned int p = BLE_BD_ADDR_LEN - 1;
-
-    while ((p_tp != NULL) && (p >= 0)) {
-        bd_addr.addr[p] = (char)strtol(p_tp, NULL, 16);
-        p--;
-
-        p_tp = strtok_r(NULL, ":", &saveptr);
+    /* Initialize GAP Service client API */
+    status = R_BLE_GAPC_Init(gapc_cb);
+    if (BLE_SUCCESS != status)
+    {
+        return BLE_ERR_INVALID_OPERATION;
     }
 
-    ble_status_t ret = R_BLE_VS_SetBdAddr(BLE_VS_ADDR_AREA_REG, &bd_addr);
-    assert(BLE_SUCCESS == ret);
+    return status;
 }
 
 /******************************************************************************
@@ -560,15 +691,6 @@ static void ble_set_bd_addr(const char *bd_addr_string)
  ******************************************************************************/
 void app_main(void)
 {
-    ble_status_t ret;  
-#if CFG_PMGR
-    extern int RM_PMGR_W_dpm_is_wakeup(void);
-    extern bool RM_PMGR_W_IsSleep3Wakeup(void);
-    int dpm_ble_hibernate = 0;
-    bool is_sleep3_wakeup = RM_PMGR_W_dpm_is_wakeup() || RM_PMGR_W_IsSleep3Wakeup();
-#endif CFG_PMGR
-    uint32_t timeout;
-
 #if (BSP_CFG_RTOS == 2 || BSP_CFG_RTOS_USED == 1)
     /* Create Event Group */
     g_ble_event_group_handle = xEventGroupCreate();
@@ -576,34 +698,29 @@ void app_main(void)
 #endif
 
     /* Initialize BLE and profiles */
+    ble_init();
 
-    char *p_bd_addr = NULL;
-#ifndef RM_MAP_PERSISTANT_W
-    p_bd_addr = read_nvram_blecfg_string("PUBLIC_BD_ADDR");
-#else
-
-    RM_MAP_PERSISTANT_W_Read_STRING(RM_MAP_PERSISTANT_W_get_ctrl(), ENV_GROUP_BLECFG, "PUBLIC_BD_ADDR", &p_bd_addr);
-
-#endif
-#if CFG_PMGR
-    if (is_sleep3_wakeup == false)
-#endif
-    {
-        if (p_bd_addr) {
-            ble_set_bd_addr(p_bd_addr);
-        }
-
-        ret = ble_init();
-        assert(BLE_SUCCESS == ret);
-
-        ret = R_BLE_GTL_VS_SetSleepModeExt(R_BLE_GTL_SLEEP_MODE_EXTENDED, R_BLE_GTL_SLEEP_RAM_MODE_ON, 1 << DA1453x_GTL_CTS_PIN, 0);
-        assert(BLE_SUCCESS == ret);
-    }
 /* Hint: Input process that should be done before main loop such as calling initial function or variable definitions */
 /* Start user code for process before main loop. Do not edit comment generated here */
+    ble_status_t ret;
+    char *p_bd_addr = NULL;
     cli_ble_queue_init();
 
 #if CFG_PMGR
+    extern int RM_PMGR_W_dpm_is_wakeup(void);
+    extern bool RM_PMGR_W_IsSleep3Wakeup(void);
+    int dpm_ble_hibernate = 0;
+    bool is_sleep3_wakeup = RM_PMGR_W_dpm_is_wakeup() || RM_PMGR_W_IsSleep3Wakeup();
+    if (is_sleep3_wakeup == false)
+    {
+        ret = R_BLE_GTL_VS_SetSleepModeExt(R_BLE_GTL_SLEEP_MODE_EXTENDED, R_BLE_GTL_SLEEP_RAM_MODE_ON, 1 << DA1453x_GTL_CTS_PIN, 0);
+        assert(BLE_SUCCESS == ret);
+    }
+    else
+    {
+        ret = ble_uninit();
+        assert(BLE_SUCCESS == ret);
+    }
 #ifdef RM_MAP_PERSISTANT_W
     RM_MAP_PERSISTANT_W_Read_INT(RM_MAP_PERSISTANT_W_get_ctrl(), ENV_GROUP_WIFIPROFILE,
         WIFI_PROFILE_DPM_BLE_HIBERNATE, &dpm_ble_hibernate);
@@ -624,22 +741,61 @@ void app_main(void)
         }
     }
 #endif
+#if 0
 /* End user code. Do not edit comment generated here */
+
     /* main loop */
     while (1)
     {
-        cli_ble_msg_t msg;
-        
-        timeout = (g_app_state == MFR_APP_STATE_RUNNING) ? 0 : portMAX_DELAY;
+        /* Process BLE Event */
+        R_BLE_Execute();
 
-        if (cli_ble_queue_dequeue(&msg, timeout))
+/* When this BLE application works on the FreeRTOS */
+#if (BSP_CFG_RTOS == 2 || BSP_CFG_RTOS_USED == 1)
+        if(0 != R_BLE_IsTaskFree())
+        {
+            /* If the BLE Task has no operation to be processed, it transits block state until the event from RF transciever occurs. */
+            xEventGroupWaitBits(g_ble_event_group_handle,
+                                (EventBits_t)BLE_EVENT_PATTERN,
+                                pdTRUE,
+                                pdFALSE,
+                                portMAX_DELAY);
+        }
+#endif
+
+/* Hint: Input process that should be done during main loop such as calling processing functions */
+/* Start user code for process during main loop. Do not edit comment generated here */
+#endif
+     while (1)
+    {
+        if (MFR_APP_STATE_STOPPED != g_app_state)
+        {
+            /* Process BLE Event */
+            R_BLE_Execute();
+
+/* When this BLE application works on the FreeRTOS */
+#if (BSP_CFG_RTOS == 2 || BSP_CFG_RTOS_USED == 1)
+            if(0 != R_BLE_IsTaskFree())
+            {
+                /* If the BLE Task has no operation to be processed, it transits block state until the event from RF transciever occurs. */
+                xEventGroupWaitBits(g_ble_event_group_handle,
+                                    (EventBits_t)BLE_EVENT_PATTERN,
+                                    pdTRUE,
+                                    pdFALSE,
+                                    portMAX_DELAY);
+            }
+#endif
+        }
+        cli_ble_msg_t msg;
+
+        if (cli_ble_queue_dequeue(&msg, 0))
         {
             switch (msg.type)
             {
                 case CLI_BLE_MSG_TYPE_SVC_START:
                 {
                     /* Started already */
-                    if (MFR_APP_STATE_STOPPED != g_app_state)
+                    if (MFR_APP_STATE_RUNNING == g_app_state)
                     {
                         break;
                     }
@@ -649,7 +805,8 @@ void app_main(void)
 #else
                     RM_MAP_PERSISTANT_W_Read_STRING(RM_MAP_PERSISTANT_W_get_ctrl(), ENV_GROUP_BLECFG, "PUBLIC_BD_ADDR", (char *)&p_bd_addr);
 #endif
-                    if (p_bd_addr) {
+                    if (p_bd_addr)
+                    {
                         ble_set_bd_addr(p_bd_addr);
                     }
 
@@ -785,35 +942,36 @@ void app_main(void)
             assert(BLE_SUCCESS == ret);
 
             g_app_state = MFR_APP_STATE_STOPPED;
-            continue;
         }
 
-        if (MFR_APP_STATE_STOPPED != g_app_state)
+        while(MFR_APP_STATE_STOPPED == g_app_state)
         {
-            /* Process BLE Event */
-            ret = R_BLE_Execute();
-            assert(BLE_SUCCESS == ret);
-        }
-        else
-        {
-            continue;
-        }
-
-/* When this BLE application works on the FreeRTOS */
-#if (BSP_CFG_RTOS == 2 || BSP_CFG_RTOS_USED == 1)
-        if(0 != R_BLE_IsTaskFree())
-        {
-            /* If the BLE Task has no operation to be processed, it transits block state until the event from RF transciever occurs. */
-            xEventGroupWaitBits(g_ble_event_group_handle,
-                                (EventBits_t)BLE_EVENT_PATTERN,
-                                pdTRUE,
-                                pdFALSE,
-                                portMAX_DELAY);
-        }
+            if (cli_ble_queue_dequeue(&msg, 0) &&
+                CLI_BLE_MSG_TYPE_SVC_START == msg.type)
+            {
+#ifndef RM_MAP_PERSISTANT_W
+                p_bd_addr = (uint8_t *)read_nvram_blecfg_string("PUBLIC_BD_ADDR");
+#else
+                RM_MAP_PERSISTANT_W_Read_STRING(RM_MAP_PERSISTANT_W_get_ctrl(),
+                                                ENV_GROUP_BLECFG,
+                                                "PUBLIC_BD_ADDR",
+                                                (char *)&p_bd_addr);
 #endif
+                if (p_bd_addr)
+                {
+                    ble_set_bd_addr(p_bd_addr);
+                }
 
-/* Hint: Input process that should be done during main loop such as calling processing functions */
-/* Start user code for process during main loop. Do not edit comment generated here */
+                ret = ble_init();
+                assert(BLE_SUCCESS == ret);
+
+                g_app_state = MFR_APP_STATE_RUNNING;
+            }
+            else
+            {
+                vTaskDelay(10);
+            }
+        }
 /* End user code. Do not edit comment generated here */
     }
 
@@ -822,12 +980,184 @@ void app_main(void)
     cli_ble_queue_uninit();
 /* End user code. Do not edit comment generated here */
 
-    ret = ble_uninit();
-    assert(BLE_SUCCESS == ret);
+    /* Terminate BLE */
+    RM_BLE_ABS_Close(&g_ble_abs0_ctrl);
 }
 
 /******************************************************************************
  User function definitions
 *******************************************************************************/
 /* Start user code for function definitions. Do not edit comment generated here */
+static bool gap_cb_user (uint16_t type, ble_status_t result, st_ble_evt_data_t * p_data)
+{
+    bool event_handled = false;
+
+    switch (type)
+    {
+        case BLE_GAP_EVENT_CONN_IND:
+        {
+            if (BLE_SUCCESS == result)
+            {
+                /* Store connection handle */
+                st_ble_gap_conn_evt_t *p_gap_conn_evt_param = (st_ble_gap_conn_evt_t *)p_data->p_param;
+                g_conn_hdl = p_gap_conn_evt_param->conn_hdl;
+                memcpy(&remote_addr[0], &p_gap_conn_evt_param->remote_addr[0], BLE_BD_ADDR_LEN);
+                remote_addr_type = p_gap_conn_evt_param->remote_addr_type;
+                switch (remote_addr_type)
+                {
+                case 0x00:
+                    memcpy(&remote_addr_type_str[0], "public", 7);
+                    break;
+                case 0x01:
+                    memcpy(&remote_addr_type_str[0], "random", 7);
+                    break;
+                case 0x02:
+                    memcpy(&remote_addr_type_str[0], "public identity", 16);
+                    break;
+                case 0x03:
+                    memcpy(&remote_addr_type_str[0], "random identity", 16);
+                    break;
+                default:
+                    memcpy(&remote_addr_type_str[0], " ", 2);
+                    break;
+                }
+                printf("Device connected\n");
+                printf("\tConnection index: %X\n", g_conn_hdl);
+                printf("\tAddress: %s %02X:%02X:%02X:%02X:%02X:%02X\n\n", remote_addr_type_str, remote_addr[5], remote_addr[4], remote_addr[3], remote_addr[2], remote_addr[1], remote_addr[0]);
+            }
+            else
+            {
+                /* Restart advertising when connection failed */
+                RM_BLE_ABS_StartLegacyAdvertising(&g_ble_abs0_ctrl, &g_ble_advertising_parameter);
+            }
+
+            event_handled = true;
+            break;
+        }
+
+        case BLE_GAP_EVENT_DISCONN_IND:
+        {
+            /* Restart advertising when disconnected */
+            st_ble_gap_disconn_evt_t *p_gap_disconn_evt_param = (st_ble_gap_disconn_evt_t *)p_data->p_param;
+            uint8_t disconn_reason = p_gap_disconn_evt_param->reason;
+            printf("Device disconnected\n");
+            printf("\tConnection index: %X\n", g_conn_hdl);
+            printf("\tBD address of disconnected device: %s, %02X:%02X:%02X:%02X:%02X:%02X\n", remote_addr_type_str, remote_addr[5], remote_addr[4], remote_addr[3], remote_addr[2], remote_addr[1], remote_addr[0]);
+            printf("\tReason of disconnection: 0x%X\n\n", disconn_reason);
+            g_conn_hdl = BLE_GAP_INVALID_CONN_HDL;
+
+            if (MFR_APP_STATE_RUNNING == g_app_state)
+            {
+                /* We aren't disconnecting due to closing of the service - restore the advertisement. */
+                RM_BLE_ABS_StartLegacyAdvertising(&g_ble_abs0_ctrl, &g_ble_advertising_parameter);
+            }
+
+            event_handled = true;
+            break;
+        }
+
+        default:
+        {
+            /* Handle code reach this line? */
+            break;
+        }
+    }
+
+    return event_handled;
+}
+
+ble_status_t ble_uninit(void)
+{
+    /* Terminate BLE */
+    return RM_BLE_ABS_Close(&g_ble_abs0_ctrl);;
+}
+
+static void ble_set_bd_addr(const char *bd_addr_string)
+{
+    if (!bd_addr_string)
+        return;
+
+    size_t bd_addr_len = strlen(bd_addr_string);
+    char tmp_bd_string[bd_addr_len + 1];
+
+    memset(tmp_bd_string, 0, bd_addr_len + 1);
+    memcpy(tmp_bd_string, bd_addr_string, bd_addr_len);
+
+    st_ble_dev_addr_t bd_addr = {.type = BLE_GAP_ADDR_PUBLIC, .addr = {0} };
+
+    char *saveptr;
+    char *p_tp = strtok_r(tmp_bd_string, ":", &saveptr);
+
+    unsigned int p = BLE_BD_ADDR_LEN - 1;
+
+    while ((p_tp != NULL) && (p >= 0)) {
+        bd_addr.addr[p] = (char)strtol(p_tp, NULL, 16);
+        p--;
+
+        p_tp = strtok_r(NULL, ":", &saveptr);
+    }
+
+    ble_status_t ret = R_BLE_VS_SetBdAddr(BLE_VS_ADDR_AREA_REG, &bd_addr);
+    assert(BLE_SUCCESS == ret);
+}
+
+void custom_conf_ble(void)
+{
+    char *p_bd_addr = NULL;
+
+#ifndef RM_MAP_PERSISTANT_W
+    p_bd_addr = read_nvram_blecfg_string("PUBLIC_BD_ADDR");
+#else
+    fsp_err_t err = 0;
+    const uint32_t cnt_max = 50; // 5s
+    uint32_t cnt = 0;
+
+    /* Wait until RM_MAP_PERSISTANT_Open is called from WiFi thread */
+    while (cnt++ < cnt_max)
+    {
+        err = RM_MAP_PERSISTANT_W_Read_STRING(RM_MAP_PERSISTANT_W_get_ctrl(), ENV_GROUP_BLECFG, "PUBLIC_BD_ADDR", &p_bd_addr);
+        if (FSP_SUCCESS == err || FSP_ERR_NOT_FOUND == err)
+        {
+            break;
+        }
+
+        vTaskDelay(portCONVERT_MS_2_TICKS(100));
+    }
+
+    assert((FSP_SUCCESS == err || FSP_ERR_NOT_FOUND == err));
+#endif
+
+    if (NULL != p_bd_addr)
+    {
+        ble_set_bd_addr(p_bd_addr);
+    }
+}
+
+static const char *ble_address_to_string(const uint8_t *address)
+{
+    static char buf[18];
+
+    sprintf(buf, "%02X:%02X:%02X:%02X:%02X:%02X", address[5], address[4], address[3], address[2], address[1],
+            address[0]);
+
+    return buf;
+}
+
+/******************************************************************************
+ * Function Name: di2s_send_read_cfm
+ * Description  : Sends read confirmation for a Device Information Service
+ *                characteristic.
+ * Arguments    : uint16_t conn_hdl - Connection hdl of the client
+ *                uint16_t val_hdl  - Attribute hdl of the DIS characteristic
+ * Return Value : void
+ ******************************************************************************/
+static void di2s_send_read_cfm (uint16_t conn_hdl, uint16_t val_hdl)
+{
+    st_ble_gatt_value_t gatt_value;
+    gatt_value.p_value   = qe_ble_profile[val_hdl].value;
+    gatt_value.value_len = qe_ble_profile[val_hdl].value_length;
+
+    /* Confirm read back to the client */
+    R_BLE_GTL_GATTS_ReadCfm(conn_hdl, val_hdl, &gatt_value);
+}
 /* End user code. Do not edit comment generated here */

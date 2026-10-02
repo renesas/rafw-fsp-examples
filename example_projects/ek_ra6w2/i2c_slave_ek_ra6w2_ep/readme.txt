@@ -51,9 +51,6 @@ Connect the USB Debug port on the RA6W2 mother board to the host PC via a type C
  5. After flashing, press reset.
  6. Verify I2C slave read/write operations work correctly using segger prints.
 
-7. Limitation
- 1. The actual I2C clock output frequency may be approximately half of the configured value.
-
 
 Note:
 To view console output in RTT Viewer: 

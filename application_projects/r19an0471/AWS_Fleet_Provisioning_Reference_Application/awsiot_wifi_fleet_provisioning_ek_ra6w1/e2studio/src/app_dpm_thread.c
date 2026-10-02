@@ -11,7 +11,7 @@
 #include "bsp_api.h"
 #include "projdefs.h"
 #include "FreeRTOS.h"
-#include "custom_config_sdk.h"
+#include "rm_wifi.h"
 #include <stdio.h>
 #include "oal.h"
 #include "net_common.h"

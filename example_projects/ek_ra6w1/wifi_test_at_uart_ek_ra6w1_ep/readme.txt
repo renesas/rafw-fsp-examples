@@ -67,6 +67,7 @@ For Serial terminal application:
 	Parity:       none
 	Stop bit:     1-bit
 	Flow control: none
+3)DPM functionality is disabled by default. If need to enable in runtime , please execute AT+PMGRCONSTRAINT=2,4
 
 Flashing Procedure:
 

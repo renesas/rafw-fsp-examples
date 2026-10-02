@@ -12,7 +12,7 @@
 #include "rm_awsiot_w_cfg.h"
 #if defined (__SUPPORT_AWS_IOT_W__)
 #include "FreeRTOS.h"
-#include "custom_config_sdk.h"
+#include "rm_wifi.h"
 #include "nvedit.h"
 #include "sys_feature.h"
 #include "app_sample_manager.h"
@@ -279,6 +279,11 @@ void pal_app_dpm_auto_start(void)
     char *tmp_read = NULL;
     char user[32] = { 0, };
     int32_t dpm_auto;
+
+    /* Register the publish callback so that MCU PUBLISH AT commands are
+     * forwarded to the cloud (otherwise atcmd_publish_user_app_callback
+     * stays NULL and the status update is never published). */
+    register_atcmd_publish_user_app_callback(pal_app_publish_user_contents);
 
     /* MCU wake up port and pin check */
     RM_MAP_PERSISTANT_W_Read_STRING(RM_MAP_PERSISTANT_W_get_ctrl(), ENV_GROUP_APPCFG, AWSIOT_CFG_MCU_WAKEUP_PORT, &tmp_read);

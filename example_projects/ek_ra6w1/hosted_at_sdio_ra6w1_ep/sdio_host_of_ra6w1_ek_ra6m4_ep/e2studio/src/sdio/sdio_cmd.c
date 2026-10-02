@@ -43,7 +43,7 @@ typedef struct {
 typedef struct {
     uint32_t pkt_size;
     uint32_t pkt_count;
-    char mode[2]; // "M1" or "M2"
+    char mode[3]; // "M1" or "M2"
 } SdioTxJob;
 
 extern uint32_t g_app_at_start;

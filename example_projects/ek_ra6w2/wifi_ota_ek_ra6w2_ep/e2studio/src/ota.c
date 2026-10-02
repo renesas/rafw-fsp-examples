@@ -2,8 +2,13 @@
  * File Name    : ota.c
  * Description  : HTTPS OTA Download using Renesas OTA Framework
  **********************************************************************************************************************/
+/***********************************************************************************************************************
+* Copyright (c) 2020 - 2026 Renesas Electronics Corporation and/or its affiliates
+*
+* SPDX-License-Identifier: BSD-3-Clause
+***********************************************************************************************************************/
 #include "FreeRTOS.h"
-#include "custom_config_sdk.h"
+#include "rm_wifi.h"
 #include "common_data.h"
 #include "common_utils.h"
 #include "ota.h"

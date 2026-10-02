@@ -21,7 +21,8 @@
  */
 static fsp_err_t spi_wait_transfer_complete(void);
 static void error_print(const char *module, const char *error_type, fsp_err_t err_code);
-static fsp_err_t read_user_input(uint32_t * buf, uint16_t buf_len, uint32_t * p_num_bytes);
+static fsp_err_t read_user_input(uint8_t * buf, uint16_t buf_len, uint32_t * p_num_bytes);
+static uint32_t spi_transfer_words_get(uint32_t num_bytes);
 
 /* Wait counter for wait operation monitoring */
 static volatile uint32_t g_wait_count = MAX_COUNT;
@@ -89,23 +90,26 @@ fsp_err_t spi_write_and_read(void)
 {
     fsp_err_t err = FSP_SUCCESS;     // Error status
     uint32_t num_bytes = RESET_VALUE;  // Number of bytes read by SEGGER real-time-terminal
+    uint32_t master_transfer_words = 0U;
 
     /* Cleaning buffers */
-    memset(&g_master_tx_buff[0], 0, sizeof(uint32_t) * BUFF_LEN);
-    memset(&g_master_rx_buff[0], 0, sizeof(uint32_t) * BUFF_LEN);
-    memset(&g_slave_rx_buff[0], 0, sizeof(uint32_t) * BUFF_LEN);
-    memset(&g_slave_tx_buff[0], 0, sizeof(uint32_t) * BUFF_LEN);
+    memset(g_master_tx_buff, 0, sizeof(g_master_tx_buff));
+    memset(g_master_rx_buff, 0, sizeof(g_master_rx_buff));
+    memset(g_slave_tx_buff, 0, sizeof(g_slave_tx_buff));
+    memset(g_slave_rx_buff, 0, sizeof(g_slave_rx_buff));
 
     /* Input to master buffer */
-    APP_PRINT("\r\nEnter text input for Master buffer. Data size should not exceed 64 bytes. \r\n");
-    err = read_user_input(g_master_tx_buff, BUFF_LEN, &num_bytes);
+    APP_PRINT("\r\nEnter text input for Master buffer. Data size should not exceed %d bytes. \r\n", MAX_PAYLOAD_BYTES);
+    err = read_user_input((uint8_t *)g_master_tx_buff, MAX_PAYLOAD_BYTES + 1, &num_bytes);
     if (FSP_SUCCESS != err)
     {
         return err;
     }
 
+    master_transfer_words = spi_transfer_words_get(num_bytes);
+
     /* Slave receive data from Master */
-    err = R_SPI_W_Read(&g_spi_slave_ctrl, g_slave_rx_buff, num_bytes, SPI_BIT_WIDTH_32_BITS);
+    err = R_SPI_W_Read(&g_spi_slave_ctrl, g_slave_rx_buff, master_transfer_words, SPI_BIT_WIDTH_32_BITS);
     /* Error handle */
     if (err != FSP_SUCCESS)
     {
@@ -115,7 +119,7 @@ fsp_err_t spi_write_and_read(void)
     }
 
     /* Master send data to Slave */
-    err = R_SPI_W_Write(&g_spi_master_ctrl, g_master_tx_buff, num_bytes, SPI_BIT_WIDTH_32_BITS);
+    err = R_SPI_W_Write(&g_spi_master_ctrl, g_master_tx_buff, master_transfer_words, SPI_BIT_WIDTH_32_BITS);
     /* Error handle */
     if (FSP_SUCCESS != err)
     {
@@ -140,7 +144,7 @@ fsp_err_t spi_write_and_read(void)
     APP_PRINT("\r\nSlave received data:" RTT_CTRL_TEXT_BRIGHT_GREEN " %s \r\n" RTT_CTRL_RESET, (char *)g_slave_rx_buff);
 
     /* Slave send data to Master */
-    err = R_SPI_W_Write(&g_spi_slave_ctrl, g_slave_rx_buff, num_bytes, SPI_BIT_WIDTH_32_BITS);
+    err = R_SPI_W_Write(&g_spi_slave_ctrl, g_slave_rx_buff, master_transfer_words, SPI_BIT_WIDTH_32_BITS);
     /* Error handle */
     if (FSP_SUCCESS != err)
     {
@@ -150,7 +154,7 @@ fsp_err_t spi_write_and_read(void)
     }
 
     /* Master receive data from Slave */
-    err = R_SPI_W_Read(&g_spi_master_ctrl, g_master_rx_buff, num_bytes, SPI_BIT_WIDTH_32_BITS);
+    err = R_SPI_W_Read(&g_spi_master_ctrl, g_master_rx_buff, master_transfer_words, SPI_BIT_WIDTH_32_BITS);
     /* Error handle */
     if (FSP_SUCCESS != err)
     {
@@ -175,7 +179,7 @@ fsp_err_t spi_write_and_read(void)
     APP_PRINT("\r\nMaster received data:" RTT_CTRL_TEXT_BRIGHT_GREEN " %s \r\n" RTT_CTRL_RESET, (char *)g_master_rx_buff);
 
     /* Check whether transmitted data is equal to received data */
-    if (BUFF_EQUAL == memcmp(g_master_tx_buff, g_master_rx_buff, num_bytes * sizeof(uint32_t)))
+    if (BUFF_EQUAL == memcmp(g_master_tx_buff, g_master_rx_buff, num_bytes))
     {
         APP_PRINT("\r\nData transmitted and received are same.\r\n");
     }
@@ -209,28 +213,28 @@ fsp_err_t spi_write_read(void)
     uint32_t transmit_bytes = RESET_VALUE;
 
     /* Cleaning buffers */
-    memset(&g_master_tx_buff[0], 0, sizeof(uint32_t) * BUFF_LEN);
-    memset(&g_master_rx_buff[0], 0, sizeof(uint32_t) * BUFF_LEN);
-    memset(&g_slave_tx_buff[0], 0, sizeof(uint32_t) * BUFF_LEN);
-    memset(&g_slave_rx_buff[0], 0, sizeof(uint32_t) * BUFF_LEN);
+    memset(g_master_tx_buff, 0, sizeof(g_master_tx_buff));
+    memset(g_master_rx_buff, 0, sizeof(g_master_rx_buff));
+    memset(g_slave_tx_buff, 0, sizeof(g_slave_tx_buff));
+    memset(g_slave_rx_buff, 0, sizeof(g_slave_rx_buff));
 
     /* Input to master buffer */
-    APP_PRINT("\r\nEnter text input for Master buffer. Data size should not exceed 64 bytes.\r\n");
-    err = read_user_input(g_master_tx_buff, BUFF_LEN, &num_bytes_master);
+    APP_PRINT("\r\nEnter text input for Master buffer. Data size should not exceed %d bytes.\r\n", MAX_PAYLOAD_BYTES);
+    err = read_user_input((uint8_t *)g_master_tx_buff, MAX_PAYLOAD_BYTES + 1, &num_bytes_master);
     if (FSP_SUCCESS != err)
     {
         return err;
     }
 
     /* Input to slave buffer */
-    APP_PRINT("\r\nEnter text input for Slave buffer. Data size should not exceed 64 bytes.\r\n");
-    err = read_user_input(g_slave_tx_buff, BUFF_LEN, &num_bytes_slave);
+    APP_PRINT("\r\nEnter text input for Slave buffer. Data size should not exceed %d bytes.\r\n", MAX_PAYLOAD_BYTES);
+    err = read_user_input((uint8_t *)g_slave_tx_buff, MAX_PAYLOAD_BYTES + 1, &num_bytes_slave);
     if (FSP_SUCCESS != err)
     {
         return err;
     }
 
-    transmit_bytes = (num_bytes_master > num_bytes_slave) ? num_bytes_master : num_bytes_slave;
+    transmit_bytes = (num_bytes_master > num_bytes_slave) ? spi_transfer_words_get(num_bytes_master) : spi_transfer_words_get(num_bytes_slave);
 
     /* Slave send data to Master and receive data from Master */
     err = R_SPI_W_WriteRead(&g_spi_slave_ctrl, g_slave_tx_buff, g_slave_rx_buff, transmit_bytes,
@@ -272,7 +276,7 @@ fsp_err_t spi_write_read(void)
     APP_PRINT("\r\nSlave received data:" RTT_CTRL_TEXT_BRIGHT_GREEN " %s\r\n" RTT_CTRL_RESET, (char *)g_slave_rx_buff);
 
     /* Check whether Slave transmitted data is not equal to Master received data */
-    if (BUFF_EQUAL != memcmp(g_slave_tx_buff, g_master_rx_buff, num_bytes_slave * sizeof(uint32_t)))
+    if (BUFF_EQUAL != memcmp(g_slave_tx_buff, g_master_rx_buff, num_bytes_slave))
     {
         /* Return Parity error in case of data mismatch */
         err = FSP_ERR_SPI_PARITY;
@@ -282,7 +286,7 @@ fsp_err_t spi_write_read(void)
     }
 
     /* Check whether Master transmitted data is not equal to Slave received data */
-    if (BUFF_EQUAL != memcmp(g_master_tx_buff, g_slave_rx_buff, num_bytes_master * sizeof(uint32_t)))
+    if (BUFF_EQUAL != memcmp(g_master_tx_buff, g_slave_rx_buff, num_bytes_master))
     {
         /* Return Parity error in case of data mismatch */
         err = FSP_ERR_SPI_PARITY;
@@ -461,51 +465,67 @@ static void error_print(const char *module, const char *error_type, fsp_err_t er
  * @retval      FSP_SUCCESS                  User input read successfully
  * @retval      FSP_ERR_INVALID_SIZE         User input exceeds buffer size
  **********************************************************************************************************************/
-static fsp_err_t read_user_input(uint32_t *buf, uint16_t buf_len, uint32_t *p_num_bytes)
+static fsp_err_t read_user_input(uint8_t  * p_buf,
+                                 uint16_t   buf_len,
+                                 uint32_t * p_num_bytes)
 {
-    fsp_err_t err = FSP_SUCCESS;
-    uint32_t num_bytes = RESET_VALUE;
+    uint32_t num_bytes = 0U;
+    uint8_t  ch;
+    uint32_t bytes_read;
 
-    while (BYTES_RECEIVED_ZERO == num_bytes)
+    while (1)
     {
-        if (APP_CHECK_DATA)
+        if (!APP_CHECK_DATA)
         {
-            num_bytes = APP_READ_BYTES(buf, buf_len * sizeof(uint32_t));
-            if (BYTES_RECEIVED_ZERO == num_bytes)
-            {
-                APP_PRINT("\r\nNo Input\r\n");
-            }
+            continue;
+        }
+
+        bytes_read = APP_READ_BYTES(&ch, 1U);
+        if (bytes_read != 1U)
+        {
+            continue;
+        }
+
+        /* End of line */
+        if ((ch == '\n') || (ch == '\r'))
+        {
+            break;
+        }
+
+        /* Store only while space is available */
+        if (num_bytes < (uint32_t)(buf_len - 1U))
+        {
+            p_buf[num_bytes++] = ch;
         }
     }
 
-    /* Remove new line character */
-    num_bytes -= 1U;
-
-    /* RTT Reads user input data 1 byte at a time. SPI transfers the data 4 bytes at a time.
-     * With the below logic, we will calculate how many length of data has to be transferred. */
-    if (num_bytes % BITS_TO_BYTES != RESET_VALUE)
-    {
-        num_bytes = (num_bytes / BITS_TO_BYTES) + 1U;
-    }
-    else
-    {
-        num_bytes = num_bytes / BITS_TO_BYTES;
-        if (num_bytes < buf_len)
-        {
-            buf[num_bytes] = RESET_VALUE;
-        }
-        else
-        {
-            /* Return Invalid Size error if user input exceeds buffer size */
-            err = FSP_ERR_INVALID_SIZE;
-            APP_ERR_PRINT("\r\nInput data size exceeds buffer size.\r\n");
-            return err;
-        }
-    }
+    p_buf[num_bytes] = '\0';
 
     *p_num_bytes = num_bytes;
 
-    return err;
+    return FSP_SUCCESS;
+}
+
+/***********************************************************************************************************************
+ * @brief       Calculate the number of 32-bit SPI transfer frames required for the specified payload size.
+ *
+ * @details     The SPI peripheral is configured for 32-bit transfers. RTT input is received as a byte stream,
+ *              therefore the payload length must be rounded up to the nearest 32-bit word before passing the
+ *              transfer length to R_SPI_W_WriteRead().
+ *
+ *              Examples:
+ *              - 1~4 bytes   -> 1 transfer word
+ *              - 5~8 bytes   -> 2 transfer words
+ *              - 9~12 bytes  -> 3 transfer words
+ *
+ * @param[in]   num_bytes     Number of payload bytes.
+ *
+ * @retval      Number of 32-bit SPI transfer frames required.
+ **********************************************************************************************************************/
+static uint32_t spi_transfer_words_get(uint32_t num_bytes)
+{
+    return ((num_bytes + SPI_FRAME_SIZE_BYTES - 1U) /
+            SPI_FRAME_SIZE_BYTES);
 }
 
 /***********************************************************************************************************************

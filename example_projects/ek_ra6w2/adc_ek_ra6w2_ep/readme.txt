@@ -60,6 +60,7 @@ Connect the USB Debug port on the RA6W2 motherboard to the host PC via a type C 
 		Press 1 → Start the ADC scan.
 		Press 2 → Stop the ADC scan.
 		Press any other key → Return to the Main Menu.
+8. Enabled 2CH scanning. CH0 in P0_04 and CH1 in P0_05
 
 Note:
 

@@ -1,5 +1,5 @@
 /***********************************************************************************************************************
-* File Name    : new_thread0_entry.c
+* File Name    : ble_thread_entry.c
 * Description  : Entry file for the thread ble Thread
 **********************************************************************************************************************/
 /***********************************************************************************************************************
@@ -15,6 +15,7 @@
 /* BLE Thread entry function */
 
 extern void app_main(void);
+extern void custom_conf_ble(void);
 
 /* pvParameters contains TaskHandle_t */
 void ble_thread_entry(void *pvParameters)
@@ -26,6 +27,7 @@ void ble_thread_entry(void *pvParameters)
     assert(pdTRUE == sem_err);
 #endif /* CFG_WIFI && CFG_PMGR */
 
+    custom_conf_ble();
     app_main();
     /* TODO: add your own code here */
     while (1)

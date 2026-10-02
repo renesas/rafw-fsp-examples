@@ -1,21 +1,8 @@
-/***********************************************************************************************************************
-* DISCLAIMER
-* This software is supplied by Renesas Electronics Corporation and is only intended for use with Renesas products. No
-* other uses are authorized. This software is owned by Renesas Electronics Corporation and is protected under all
-* applicable laws, including copyright laws.
-* THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
-* THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED. TO THE MAXIMUM
-* EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS AFFILIATED COMPANIES
-* SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY REASON RELATED TO THIS
-* SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-* Renesas reserves the right, without notice, to make changes to this software and to discontinue the availability of
-* this software. By using this software, you agree to the additional terms and conditions found by accessing the
-* following link:
-* http://www.renesas.com/disclaimer
-*
-* Copyright (C) 2019-2020 Renesas Electronics Corporation. All rights reserved.
-***********************************************************************************************************************/
+/* 
+* Copyright (c) 2019 - 2025 Renesas Electronics Corporation and/or its affiliates 
+* 
+* SPDX-License-Identifier: BSD-3-Clause 
+*/
 /***********************************************************************************************************************
  * File Name: r_ble_di2s.h
  * Version : 1.0
@@ -147,8 +134,7 @@ ble_status_t R_BLE_DI2S_GetSwRev(st_ble_seq_data_t *p_value);
 /***************************************************************************//**
  * @brief System ID value structure.
 *******************************************************************************/
-typedef struct
-{
+typedef struct {
     uint8_t manufacturer_identifier[5]; /**< Manufacturer Identifier */
     uint8_t organizationally_unique_identifier[3]; /**< Organizationally Unique Identifier */
 } st_ble_di2s_sys_id_t;
@@ -190,8 +176,7 @@ ble_status_t R_BLE_DI2S_GetRegCerDataList(st_ble_seq_data_t *p_value);
 /***************************************************************************//**
  * @brief PnP ID Vendor ID Source enumeration.
 *******************************************************************************/
-typedef enum
-{
+typedef enum {
     BLE_DI2S_PNP_ID_VENDOR_ID_SOURCE_BLUETOOTH_SIG_ASSIGNED_COMPANY_IDENTIFIER_VALUE_FROM_THE_ASSIGNED_NUMBERS_DOCUMENT = 1, /**< Bluetooth SIG assigned Company Identifier value from the Assigned Numbers document */
     BLE_DI2S_PNP_ID_VENDOR_ID_SOURCE_USB_IMPLEMENTER_S_FORUM_ASSIGNED_VENDOR_ID_VALUE = 2, /**< USB Implementer's Forum assigned Vendor ID value */
 } e_ble_di2s_pnp_id_vendor_id_source_t;
@@ -199,8 +184,7 @@ typedef enum
 /***************************************************************************//**
  * @brief PnP ID value structure.
 *******************************************************************************/
-typedef struct
-{
+typedef struct {
     uint8_t vendor_id_source; /**< Vendor ID Source */
     uint16_t vendor_id; /**< Vendor ID */
     uint16_t product_id; /**< Product ID */
@@ -228,8 +212,7 @@ ble_status_t R_BLE_DI2S_GetPnpId(st_ble_di2s_pnp_id_t *p_value);
 /***************************************************************************//**
  * @brief Device Information Service2 characteristic Index.
 *******************************************************************************/
-typedef enum
-{
+typedef enum {
     BLE_DI2S_MFR_NAME_IDX,
     BLE_DI2S_MODEL_NUM_IDX,
     BLE_DI2S_SER_NUM_IDX,
@@ -244,11 +227,8 @@ typedef enum
 /***************************************************************************//**
  * @brief Device Information Service2 event type.
 *******************************************************************************/
-typedef enum
-{
+typedef enum {
     /* Manufacturer Name String */
-    BLE_DI2S_EVENT_MFR_NAME_WRITE_REQ = BLE_SERVS_ATTR_EVENT(BLE_DI2S_MFR_NAME_IDX, BLE_SERVS_WRITE_REQ),
-    BLE_DI2S_EVENT_MFR_NAME_WRITE_COMP = BLE_SERVS_ATTR_EVENT(BLE_DI2S_MFR_NAME_IDX, BLE_SERVS_WRITE_COMP),
     BLE_DI2S_EVENT_MFR_NAME_READ_REQ = BLE_SERVS_ATTR_EVENT(BLE_DI2S_MFR_NAME_IDX, BLE_SERVS_READ_REQ),
     /* Model Number String */
     BLE_DI2S_EVENT_MODEL_NUM_READ_REQ = BLE_SERVS_ATTR_EVENT(BLE_DI2S_MODEL_NUM_IDX, BLE_SERVS_READ_REQ),

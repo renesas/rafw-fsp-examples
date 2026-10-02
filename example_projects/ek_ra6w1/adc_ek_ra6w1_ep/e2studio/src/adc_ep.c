@@ -216,27 +216,40 @@ fsp_err_t adc_read_data(void)
     /* Error status */
     fsp_err_t err = FSP_SUCCESS;
 
-    /* Read the result */
-    err = R_ADC_W_Read(&g_adc0_ctrl, ADC_CHANNEL_0, &g_adc_data);
-
-    /* handle error */
-    if (FSP_SUCCESS != err)
+    /* Read and display the result of every channel enabled in the scan mask
+       (configured in the RA Smart Configurator). This allows the example to
+       show all four channels (CH0..CH3) when they are enabled, while still
+       working correctly when only a subset of channels is configured. */
+    for (uint32_t channel = ADC_CHANNEL_0; channel < BSP_FEATURE_ADC_W_MAX_NUM_CHANNELS; channel++)
     {
-        /* ADC Failure message */
-        APP_PRINT_ERR("** R_ADC_Read API failed ** \r\n");
+        /* Skip channels that are not part of the configured scan */
+        if (RESET_VALUE == (g_adc0_channel_cfg.scan_mask & (1U << channel)))
+        {
+            continue;
+        }
 
-        return err;
+        /* Read the result of the current channel */
+        err = R_ADC_W_Read(&g_adc0_ctrl, (adc_channel_t)channel, &g_adc_data);
+
+        /* handle error */
+        if (FSP_SUCCESS != err)
+        {
+            /* ADC Failure message */
+            APP_PRINT_ERR("** R_ADC_Read API failed ** \r\n");
+
+            return err;
+        }
+
+        g_adc_data = g_adc_data >> 4;
+
+        /* 12-bit ADC, we receive as 16-bit result */
+        adc_volt = (float)((g_adc_data * V_ref)/ADC_12_BIT);
+        adc_volt_int = (int) adc_volt;
+        adc_volt_decimal = (int)((adc_volt - (float)adc_volt_int) * 1000);
+
+        APP_PRINT_INFO("\r\nCH%d The Voltage Reading from ADC: %d\r\n", (int)channel, g_adc_data);
+        APP_PRINT_INFO("\r\nCH%d The ADC input voltage: %d.%03dV\r\n", (int)channel, adc_volt_int, adc_volt_decimal);
     }
-
-    g_adc_data = g_adc_data >> 4;
-
-    /* 12-bit ADC, we receive as 16-bit result */
-    adc_volt = (float)((g_adc_data * V_ref)/ADC_12_BIT);
-    adc_volt_int = (int) adc_volt;
-    adc_volt_decimal = (int)((adc_volt - (float)adc_volt_int) * 1000);
-
-    APP_PRINT_INFO("\r\nThe Voltage Reading from ADC: %d\r\n", g_adc_data);
-    APP_PRINT_INFO("\r\nThe ADC input voltage: %d.%dV\r\n", adc_volt_int, adc_volt_decimal);
 
     /* In adc single scan mode after reading the data, it stops.So reset the b_ready_to_read state to
        avoid reading unnecessarily. close the adc module as it gets opened in start scan command.*/

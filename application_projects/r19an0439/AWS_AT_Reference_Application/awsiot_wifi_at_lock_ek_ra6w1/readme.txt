@@ -60,6 +60,7 @@ Connect the pin P0_10 with any of the in-build buttons on the mother board like 
      Set attributes 2: AT+AWS=CFG 1 app_shadow 1 2
      Set attributes 3: AT+AWS=CFG 2 doorStat 1 1
      Set attributes 4: AT+AWS=CFG 3 battery 2 1
+	 Set attributes 5: AT+AWS=CFG 4 mcu_door 1 0
      Set RootCA: 
      <ESC(0x1B)>C0,-----BEGIN CERTIFICATE-----
 MIIDQTCCAimgAwIBAgITBmyfz5m/jAo54vB4ikPmljZbyjANBgkqhkiG9w0BAQsF
@@ -145,7 +146,7 @@ kg61geirHUDYgog9XzGKATXc3K/m7JdyOcWdbf54nhzcEqjRv1DhCA==
  15. Press on "open door" or "close door" to toggle between lock and unlock after the connection with device is successfull. 
  16. When the lock/unlock is done from the mobile application, the AT command: +AWSIOT=SERVER_DATA 0 app_door <close/open>
      will sent from RA6W1 to external MCU
- 17. Now, the MCU should do the door open/close action and responds with the command: AT+AWS=CMD MCU_DATA 4 DeviceControl <message>. The message can be something like "door_opened" or "door_closed". The message in the command is updated in the application, because the application is subscribing to the topic
+ 17. Now, the MCU should do the door open/close action and responds with the command: AT+AWS=CMD MCU_DATA 4 <message>. The message can be something like "door_opened" or "door_closed". The message in the command is updated in the application, because the application is subscribing to the topic
 <Thingname>/DeviceControl.
  18. Next, RA6W1 again sends the command +AWSIOT=CMD_TO_MCU update to get the status from the MCU, and it waits for a response until timeout.
  19. Now, the MCU should sent back the door status (along with other shadow details like battery if needed):

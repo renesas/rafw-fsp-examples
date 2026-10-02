@@ -9,7 +9,7 @@
     <option key="#DeviceCommand#" value="R7SA6W1CE"/>
     <option key="#RTOS#" value="rtos.awsfreertos"/>
     <option key="#pinconfiguration#" value="RTKRRQ61000C.pincfg"/>
-    <option key="#FSPVersion#" value="2.1.0"/>
+    <option key="#FSPVersion#" value="2.2.1"/>
     <option key="#ConfigurationFragments#" value="Renesas##BSP##Board##rrq61xxx_evb##"/>
     <option key="#SELECTED_TOOLCHAIN#" value="gcc-arm-embedded"/>
     <option key="#ToolchainVersion#" value="13.3.1.arm-13-24"/>
@@ -46,6 +46,8 @@
       <property id="config.bsp.fsp.mcu.ppm_compensation" value="config.bsp.fsp.mcu.ppm_compensation.disabled"/>
       <property id="config.bsp.fsp.mcu.ppm_recomp_period_ms" value="8000U"/>
       <property id="config.bsp.fsp.mcu.ospi_8_lines_support" value="config.bsp.fsp.mcu.ospi_8_lines_support.disabled"/>
+      <property id="config.bsp.fsp.mcu.wifi_user_gpio" value="config.bsp.fsp.mcu.wifi_user_gpio.enabled"/>
+      <property id="config.bsp.fsp.mcu.factory_reset_btn" value="config.bsp.fsp.mcu.factory_reset_btn.enabled"/>
       <property id="config.bsp.fsp.mcu.uart.max_baud" value="5000000"/>
       <property id="config.bsp.fsp.mcu.iic_master.rate.rate_fastplus" value="1"/>
       <property id="config.bsp.fsp.mcu.iic_master.fastplus_channels" value="0x1"/>
@@ -115,193 +117,197 @@
     <node id="board.clock.wdog.div.display" option="board.clock.wdog.div.display.value"/>
   </raClockConfiguration>
   <raComponentSelection>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_cc312_property_w" variant="" vendor="Renesas" version="1.0.0+fsp.2.1.0">
-      <description>CC312 Property Library</description>
-      <originalPack>Renesas.CC312-Property.1.0.0+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Libraries" condition="" group="coreMQTT" subgroup="source" variant="" vendor="AWS" version="2.1.1+fsp.2.1.0">
-      <description>AWS Core MQTT</description>
-      <originalPack>Amazon.coreMQTT.2.1.1+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq61xxx_evb" variant="" vendor="Renesas" version="2.1.0">
-      <description>RRQ61xxx-EVB Board Support Files</description>
-      <originalPack>Renesas.RAFW_board_rrq61xxx_evb.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Abstractions" condition="" group="PKCS11" subgroup="mbedtls" variant="" vendor="AWS" version="3.6.2+fsp.2.1.0">
-      <description>AWS PKCS11 to mbedTLS</description>
-      <originalPack>Amazon.corePKCS11.3.6.2+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Libraries" condition="" group="Networking" subgroup="lwIP" variant="" vendor="3rdParty" version="2.1.3+fsp.2.1.0">
-      <description>lwIP</description>
-      <originalPack>3rdparty.lwIP.2.1.3+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="AWSIOT_W" condition="" group="all" subgroup="Core" variant="" vendor="AWS" version="202411.0.0+renesas.fsp.2.1.0">
-      <description>AWSIOT_W</description>
-      <originalPack>Amazon.AWSIOT_W.202411.0.0+renesas.fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="c_sdk" condition="" group="standard" subgroup="logging" variant="" vendor="AWS" version="202411.0.0+renesas.fsp.2.1.0">
-      <description>AWS Logging</description>
-      <originalPack>Amazon.FreeRTOS.202411.0.0+renesas.fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="FreeRTOS_Plus" condition="" group="utilities" subgroup="mbedtls" variant="" vendor="AWS" version="202411.0.0+renesas.fsp.2.1.0">
-      <description>AWS MbedTLS FreeRTOS Port</description>
-      <originalPack>Amazon.FreeRTOS.202411.0.0+renesas.fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Libraries" condition="" group="FreeRTOS_Plus" subgroup="MbedTLS_PKCS11_Transport" variant="" vendor="AWS" version="202411.0.0+renesas.fsp.2.1.0">
-      <description>AWS MbedTLS/PKCS11 Transport Interface</description>
-      <originalPack>Amazon.FreeRTOS.202411.0.0+renesas.fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="FreeRTOS" condition="" group="demo" subgroup="key_provisioning_transport" variant="" vendor="AWS" version="202411.0.0+renesas.fsp.2.1.0">
-      <description>AWS Demo key_provisioning_transport</description>
-      <originalPack>Amazon.FreeRTOS.202411.0.0+renesas.fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="PSA" condition="" group="Crypto" subgroup="mbedCrypto" variant="" vendor="Arm" version="3.2.1+renesas.7.fsp.2.1.0">
-      <description>Arm PSA Crypto Implementation</description>
-      <originalPack>Arm.MbedCrypto.3.2.1+renesas.7.fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="RTOS" condition="" group="FreeRTOS" subgroup="all" variant="" vendor="AWS" version="11.1.0+fsp.2.1.0">
-      <description>FreeRTOS</description>
-      <originalPack>Amazon.FreeRTOS-Kernel.11.1.0+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Heaps" condition="" group="FreeRTOS" subgroup="heap_5" variant="" vendor="AWS" version="11.1.0+fsp.2.1.0">
-      <description>FreeRTOS - Memory Management - Heap 5</description>
-      <originalPack>Amazon.FreeRTOS-Kernel.11.1.0+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="mbed" condition="" group="Security" subgroup="mbedTLS" variant="" vendor="Arm" version="3.6.4+renesas.2.fsp.2.1.0">
-      <description>Arm mbed TLS</description>
-      <originalPack>Arm.MbedTLS.3.6.4+renesas.2.fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.1.0">
-      <description>Arm CMSIS Version 6 - Core (M)</description>
-      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_cc312_openable_w" variant="" vendor="Renesas" version="1.0.0+fsp.2.1.0">
-      <description>CC312 Openable Library</description>
-      <originalPack>Renesas.CC312-Openable.1.0.0+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="R7SA6W1CEDZDD" vendor="Renesas" version="2.1.0">
-      <description>Board support package for R7SA6W1CEDZDD</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="" vendor="Renesas" version="2.1.0">
-      <description>Board support package for RA6W1</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="fsp" variant="" vendor="Renesas" version="2.1.0">
-      <description>Board support package for RA6W1 - FSP Data</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="events" variant="" vendor="Renesas" version="2.1.0">
-      <description>Board support package for RA6W1 - Events</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="linker" variant="" vendor="Renesas" version="2.1.0">
-      <description>Board support package for RA6W1 - Linker</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Mbed" condition="" group="Library" subgroup="LittleFS" variant="" vendor="Arm" version="2.2.1+renesas.1.fsp.2.1.0">
-      <description>Arm Mbed LittleFS</description>
-      <originalPack>Arm.LittleFS.2.2.1+renesas.1.fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.2.1">
       <description>Board Support Package Common Files</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ext_irq_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ext_irq_w" variant="" vendor="Renesas" version="2.2.1">
       <description>External Interrupt (W)</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.2.1">
       <description>I/O Port (W)</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ospi_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ospi_w" variant="" vendor="Renesas" version="2.2.1">
       <description>Octa Serial Peripheral Interface Flash</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_rtc_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_qspi_w" variant="" vendor="Renesas" version="2.2.1">
+      <description>Quad Serial Peripheral Interface Flash</description>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_rtc_w" variant="" vendor="Renesas" version="2.2.1">
       <description>Real Time Clock</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_uart_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_uart_w" variant="" vendor="Renesas" version="2.2.1">
       <description>UART_W</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_wdog_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_wdog_w" variant="" vendor="Renesas" version="2.2.1">
       <description>Watchdog Timer (W)</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_aws_lwip_sock_wrap_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_aws_lwip_sock_wrap_w" variant="" vendor="Renesas" version="2.2.1">
       <description>lwIP sockets wrapper</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_aws_pkcs11_pal_littlefs_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_aws_pkcs11_pal_littlefs_w" variant="" vendor="Renesas" version="2.2.1">
       <description>AWS PCKS11 PAL on LittleFS</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_awsiot_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_awsiot_w" variant="" vendor="Renesas" version="2.2.1">
       <description>AWSIOT_W application for RA6W1/RA6W2</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_block_media_spi_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_block_media_spi_w" variant="" vendor="Renesas" version="2.2.1">
       <description>SPI Block Media Memory Implementation</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_cli_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_cli_w" variant="" vendor="Renesas" version="2.2.1">
       <description>Command Line Interface</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_comms_uart_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_comms_uart_w" variant="" vendor="Renesas" version="2.2.1">
       <description>UART Communications Implementation</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_freertos_port_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_freertos_port_w" variant="" vendor="Renesas" version="2.2.1">
       <description>FreeRTOS Port</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_https_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_https_w" variant="" vendor="Renesas" version="2.2.1">
       <description>HTTPS</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_littlefs_flash_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_littlefs_flash_w" variant="" vendor="Renesas" version="2.2.1">
       <description>LittleFS Flash Port (W)</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_lwip_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_lwip_w" variant="" vendor="Renesas" version="2.2.1">
       <description>lwip</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_map_persistant_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_map_persistant_w" variant="" vendor="Renesas" version="2.2.1">
       <description>RM_MAP_PERSISTANT_W</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_mbedtls" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_mbedtls" variant="" vendor="Renesas" version="2.2.1">
       <description>Modified mbedTLS</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_pmgr_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_pmgr_w" variant="" vendor="Renesas" version="2.2.1">
       <description>Power Manager Mode</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_psa_crypto_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_psa_crypto_w" variant="" vendor="Renesas" version="2.2.1">
       <description>MbedCrypto H/W Acceleration</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_stdio_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_stdio_w" variant="" vendor="Renesas" version="2.2.1">
       <description>RM_STDIO_W</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_vee_flash_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_vee_flash_w" variant="" vendor="Renesas" version="2.2.1">
       <description>Virtual EEPROM (W)</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_watchdog_service_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_watchdog_service_w" variant="" vendor="Renesas" version="2.2.1">
       <description>Watchdog Service</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_wifi" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_wifi" variant="" vendor="Renesas" version="2.2.1">
       <description>WIFI</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="PSA" condition="" group="Crypto" subgroup="mbedCrypto" variant="" vendor="Arm" version="3.2.1+renesas.7.fsp.2.2.1">
+      <description>Arm PSA Crypto Implementation</description>
+      <originalPack>Arm.MbedCrypto.3.2.1+renesas.7.fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="RTOS" condition="" group="FreeRTOS" subgroup="all" variant="" vendor="AWS" version="11.1.0+fsp.2.2.1">
+      <description>FreeRTOS</description>
+      <originalPack>Amazon.FreeRTOS-Kernel.11.1.0+fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Heaps" condition="" group="FreeRTOS" subgroup="heap_5" variant="" vendor="AWS" version="11.1.0+fsp.2.2.1">
+      <description>FreeRTOS - Memory Management - Heap 5</description>
+      <originalPack>Amazon.FreeRTOS-Kernel.11.1.0+fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_cc312_openable_w" variant="" vendor="Renesas" version="1.0.0+fsp.2.2.1">
+      <description>CC312 Openable Library</description>
+      <originalPack>Renesas.CC312-Openable.1.0.0+fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="c_sdk" condition="" group="standard" subgroup="logging" variant="" vendor="AWS" version="202411.0.0+renesas.fsp.2.2.1">
+      <description>AWS Logging</description>
+      <originalPack>Amazon.FreeRTOS.202411.0.0+renesas.fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="FreeRTOS_Plus" condition="" group="utilities" subgroup="mbedtls" variant="" vendor="AWS" version="202411.0.0+renesas.fsp.2.2.1">
+      <description>AWS MbedTLS FreeRTOS Port</description>
+      <originalPack>Amazon.FreeRTOS.202411.0.0+renesas.fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Libraries" condition="" group="FreeRTOS_Plus" subgroup="MbedTLS_PKCS11_Transport" variant="" vendor="AWS" version="202411.0.0+renesas.fsp.2.2.1">
+      <description>AWS MbedTLS/PKCS11 Transport Interface</description>
+      <originalPack>Amazon.FreeRTOS.202411.0.0+renesas.fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="FreeRTOS" condition="" group="demo" subgroup="key_provisioning_transport" variant="" vendor="AWS" version="202411.0.0+renesas.fsp.2.2.1">
+      <description>AWS Demo key_provisioning_transport</description>
+      <originalPack>Amazon.FreeRTOS.202411.0.0+renesas.fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Abstractions" condition="" group="PKCS11" subgroup="mbedtls" variant="" vendor="AWS" version="3.6.2+fsp.2.2.1">
+      <description>AWS PKCS11 to mbedTLS</description>
+      <originalPack>Amazon.corePKCS11.3.6.2+fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Libraries" condition="" group="coreMQTT" subgroup="source" variant="" vendor="AWS" version="2.1.1+fsp.2.2.1">
+      <description>AWS Core MQTT</description>
+      <originalPack>Amazon.coreMQTT.2.1.1+fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_cc312_property_w" variant="" vendor="Renesas" version="1.0.0+fsp.2.2.1">
+      <description>CC312 Property Library</description>
+      <originalPack>Renesas.CC312-Property.1.0.0+fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq61xxx_evb" variant="" vendor="Renesas" version="2.2.1">
+      <description>RRQ61xxx-EVB Board Support Files</description>
+      <originalPack>Renesas.RAFW_board_rrq61xxx_evb.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Mbed" condition="" group="Library" subgroup="LittleFS" variant="" vendor="Arm" version="2.2.1+renesas.1.fsp.2.2.1">
+      <description>Arm Mbed LittleFS</description>
+      <originalPack>Arm.LittleFS.2.2.1+renesas.1.fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Libraries" condition="" group="Networking" subgroup="lwIP" variant="" vendor="3rdParty" version="2.1.3+fsp.2.2.1">
+      <description>lwIP</description>
+      <originalPack>3rdparty.lwIP.2.1.3+fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.2.1">
+      <description>Arm CMSIS Version 6 - Core (M)</description>
+      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="AWSIOT_W" condition="" group="all" subgroup="Core" variant="" vendor="AWS" version="202411.0.0+renesas.fsp.2.2.1">
+      <description>AWSIOT_W</description>
+      <originalPack>Amazon.AWSIOT_W.202411.0.0+renesas.fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="mbed" condition="" group="Security" subgroup="mbedTLS" variant="" vendor="Arm" version="3.6.4+renesas.2.fsp.2.2.1">
+      <description>Arm mbed TLS</description>
+      <originalPack>Arm.MbedTLS.3.6.4+renesas.2.fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="R7SA6W1CEDZDD" vendor="Renesas" version="2.2.1">
+      <description>Board support package for R7SA6W1CEDZDD</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="" vendor="Renesas" version="2.2.1">
+      <description>Board support package for RA6W1</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="fsp" variant="" vendor="Renesas" version="2.2.1">
+      <description>Board support package for RA6W1 - FSP Data</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="events" variant="" vendor="Renesas" version="2.2.1">
+      <description>Board support package for RA6W1 - Events</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="linker" variant="" vendor="Renesas" version="2.2.1">
+      <description>Board support package for RA6W1 - Linker</description>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.2.1.pack</originalPack>
     </component>
   </raComponentSelection>
   <raElcConfiguration/>
@@ -528,7 +534,10 @@
     <module id="module.aws.freertosplus.crypto.2082014622"/>
     <module id="module.aws.c_sdk.logging.450670320"/>
     <module id="module.aws.freertos.dev_mode_key_provisioning_mbed_transport_interface.484921428"/>
-    <module id="module.middleware.rm_littlefs.1631995786">
+    <module id="module.driver.r_cc312_openable_w.1019208429"/>
+    <module id="module.driver.r_cc312_property_w.719625376"/>
+    <module id="module.driver.rm_mbedtls.788336977"/>
+    <module id="module.middleware.rm_littlefs_w.34038049">
       <property id="module.middleware.rm_littlefs.name" value="g_rm_littlefs0"/>
       <property id="module.middleware.rm_littlefs.read_size" value="1"/>
       <property id="module.middleware.rm_littlefs.prog_size" value="4"/>
@@ -538,16 +547,60 @@
       <property id="module.middleware.rm_littlefs.cache_size" value="64"/>
       <property id="module.middleware.rm_littlefs.lookahead_size" value="16"/>
     </module>
-    <module id="module.middleware.rm_block_media_on_rm_block_media_spi_w.1222705118">
+    <module id="module.middleware.rm_block_media_on_rm_block_media_spi_w.789129904">
       <property id="module.middleware.rm_block_media.name" value="g_rm_block_media2"/>
       <property id="module.middleware.rm_block_media.block_size" value="4096"/>
       <property id="module.middleware.rm_block_media.block_count" value="8192"/>
       <property id="module.middleware.rm_block_media.base_address" value="0"/>
       <property id="module.middleware.rm_block_media.callback" value="NULL"/>
     </module>
-    <module id="module.driver.r_cc312_openable_w.1019208429"/>
-    <module id="module.driver.r_cc312_property_w.719625376"/>
-    <module id="module.driver.rm_mbedtls.788336977"/>
+    <module id="module.driver.qspi_on_qspi_w.1791886509">
+      <property id="module.driver.qspi_w.name" value="g_qspi_w0"/>
+      <property id="module.driver.qspi_w.channel" value="0"/>
+      <property id="module.driver.qspi_w.address_bytes" value="module.driver.qspi_w.address_bytes.address_bytes_3"/>
+      <property id="module.driver.qspi_w.page_size_bytes" value="256"/>
+      <property id="module.driver.qspi_w.qspi_mode" value="module.driver.qspi_w.qspi_mode.qspi_mode_sdr"/>
+      <property id="module.driver.qspi_w.drive_current" value="module.driver.qspi_w.drive_current.drive_current_4"/>
+      <property id="module.driver.qspi_w.slew_rate" value="module.driver.qspi_w.slew_rate.slew_rate_0"/>
+      <property id="module.driver.qspi_w.data_cache" value="module.driver.qspi_w.data_cache.disable"/>
+      <property id="module.driver.qspi_w.clk_mode" value="module.driver.qspi_w.clk_mode.mode_0"/>
+      <property id="module.driver.qspi_w.wrap_mode" value="module.driver.qspi_w.wrap_mode.disabled"/>
+      <property id="module.driver.qspi_w.memblen" value="module.driver.qspi_w.memblen.memblen_0"/>
+      <property id="module.driver.qspi_w.read_mode" value="0xEB"/>
+      <property id="module.driver.qspi_w.read_mode_wb" value="0"/>
+      <property id="module.driver.qspi_w.extra_byte_val" value="0xFF"/>
+      <property id="module.driver.qspi_w.extra_byte_en" value="module.driver.qspi_w.extra_byte_en.disable"/>
+      <property id="module.driver.qspi_w.rd_cs_hi_min_cycles" value="0x01"/>
+      <property id="module.driver.qspi_w.rd_instr_opcode_lines" value="module.driver.qspi_w.rd_instr_opcode_lines.data_lines_1"/>
+      <property id="module.driver.qspi_w.rd_address_dummy_lines" value="module.driver.qspi_w.rd_address_dummy_lines.data_lines_4"/>
+      <property id="module.driver.qspi_w.rd_data_lines" value="module.driver.qspi_w.rd_data_lines.data_lines_4"/>
+      <property id="module.driver.qspi_w.rd_dummy_clocks" value="module.driver.qspi_w.dummy_clocks.dummy_clocks_6"/>
+      <property id="module.driver.qspi_w.instr_mode" value="module.driver.qspi_w.instr_mode.tx_at_any_burst_access"/>
+      <property id="module.driver.qspi_w.page_program_command" value="0x02"/>
+      <property id="module.driver.qspi_w.page_program_command_wb" value="0"/>
+      <property id="module.driver.qspi_w.pp_cs_hi_min_cycles" value="0x01"/>
+      <property id="module.driver.qspi_w.pp_instr_opcode_lines" value="module.driver.qspi_w.pp_instr_opcode_lines.data_lines_1"/>
+      <property id="module.driver.qspi_w.pp_address_data_lines" value="module.driver.qspi_w.pp_address_data_lines.data_lines_1"/>
+      <property id="module.driver.qspi_w.pp_dummy_clocks" value="module.driver.qspi_w.dummy_clocks.dummy_clocks_0"/>
+      <property id="module.driver.qspi_w.status_command" value="0x05"/>
+      <property id="module.driver.qspi_w.rd_sts_instr_opcode_lines" value="module.driver.qspi_w.rd_sts_instr_opcode_lines.data_lines_1"/>
+      <property id="module.driver.qspi_w.rd_sts_data_lines" value="module.driver.qspi_w.rd_sts_data_lines.data_lines_1"/>
+      <property id="module.driver.qspi_w.write_status_bit" value="0"/>
+      <property id="module.driver.qspi_w.write_enable_command" value="0x06"/>
+      <property id="module.driver.qspi_w.write_enable_bit" value="1"/>
+      <property id="module.driver.qspi_w.wr_en_data_lines" value="module.driver.qspi_w.wr_en_data_lines.data_lines_1"/>
+      <property id="module.driver.qspi_w.sector_erase_command" value="0x20"/>
+      <property id="module.driver.qspi_w.sector_erase_size" value="4096"/>
+      <property id="module.driver.qspi_w.block_erase_command" value="0xD8"/>
+      <property id="module.driver.qspi_w.block_erase_size" value="65536"/>
+      <property id="module.driver.qspi_w.block_erase_32kb_command" value="0x52"/>
+      <property id="module.driver.qspi_w.block_erase_32kb_size" value="32768"/>
+      <property id="module.driver.qspi_w.chip_erase_command" value="0xC7"/>
+      <property id="module.driver.qspi_w.ers_instr_opcode_lines" value="module.driver.qspi_w.ers_instr_opcode_lines.data_lines_1"/>
+      <property id="module.driver.qspi_w.ers_address_lines" value="module.driver.qspi_w.ers_address_lines.data_lines_1"/>
+      <property id="module.driver.qspi_w.xip_enter_command" value="0xA5"/>
+      <property id="module.driver.qspi_w.xip_exit_command" value="0xFF"/>
+    </module>
     <context id="_hal.0">
       <stack module="module.driver.ioport_on_gpio_w.0"/>
       <stack module="module.driver.external_irq_on_ext_irq_w.66277425"/>
@@ -569,9 +622,9 @@
             <stack module="module.aws.pkcs11.mbedtls.650786946" requires="module.aws.freertosplus.tls.requires.pkcs11">
               <stack module="module.driver.rm_aws_pkcs11_pal_littlefs.2019639601" requires="module.aws.pkcs11.mbedtls.requires.pal">
                 <stack module="module.arm.mbed.littlefs.1037316296" requires="module.driver.rm_aws_pkcs11_pal_littlefs.requires.littlefs">
-                  <stack module="module.middleware.rm_littlefs.1631995786" requires="module.arm.mbed.littlefs.requires.littlefs_port">
-                    <stack module="module.middleware.rm_block_media_on_rm_block_media_spi_w.1222705118" requires="module.middleware.rm_littlefs.requires.rm_block_media">
-                      <stack module="module.driver.ospi_on_ospi_w.1136123626" requires="module.middleware.rm_block_media_on_rm_block_media_spi_w.requires.spi"/>
+                  <stack module="module.middleware.rm_littlefs_w.34038049" requires="module.arm.mbed.littlefs.requires.littlefs_port">
+                    <stack module="module.middleware.rm_block_media_on_rm_block_media_spi_w.789129904" requires="module.middleware.rm_littlefs.requires.rm_block_media">
+                      <stack module="module.driver.qspi_on_qspi_w.1791886509" requires="module.middleware.rm_block_media_on_rm_block_media_spi_w.requires.spi"/>
                     </stack>
                   </stack>
                 </stack>
@@ -1098,12 +1151,25 @@
       <property id="config.arm.mbedtls.mbedtls_x509_max_file_path_len_enabled" value="config.arm.mbedtls.mbedtls_x509_max_file_path_len_enabled.disabled"/>
       <property id="config.arm.mbedtls.mbedtls_x509_max_file_path_len" value="512"/>
     </config>
+    <config id="config.driver.qspi_w">
+      <property id="config.driver.qspi_w.param_checking_enable" value="config.driver.qspi_w.param_checking_enable.bsp"/>
+    </config>
+    <config id="config.driver.qspi_w_ram">
+      <property id="config.driver.qspi_w_ram.param_checking_enable" value="config.driver.qspi_w_ram.param_checking_enable.bsp"/>
+    </config>
     <config id="config.middleware.rm_wifi">
       <property id="config.middleware.rm_wifi.param_checking_enable" value="config.middleware.rm_wifi.param_checking_enable.bsp"/>
       <property id="config.middleware.rm_wifi.watchdog_service_enable" value="config.middleware.rm_wifi.watchdog_service_enable.enabled"/>
       <property id="config.middleware.rm_wifi.ble_cli" value="config.middleware.rm_wifi.ble_cli.disabled"/>
       <property id="config.middleware.rm_wifi.mqtt_on_wifi_enable" value="config.middleware.rm_wifi.mqtt_on_wifi_enable.disabled"/>
       <property id="config.middleware.rm_wifi.atcmd_if_support" value="config.middleware.rm_wifi.atcmd_if_support.disabled"/>
+      <property id="config.middleware.rm_wifi.wps_btn" value="config.middleware.rm_wifi.wps_btn.enabled"/>
+      <property id="config.middleware.rm_wifi.wifi_concurrent" value="config.middleware.rm_wifi.wifi_concurrent.enabled"/>
+      <property id="config.middleware.rm_wifi.fast_conn_sleep2" value="config.middleware.rm_wifi.fast_conn_sleep2.enabled"/>
+      <property id="config.middleware.rm_wifi.sntp_client" value="config.middleware.rm_wifi.sntp_client.enabled"/>
+      <property id="config.middleware.rm_wifi.websocket_client" value="config.middleware.rm_wifi.websocket_client.enabled"/>
+      <property id="config.middleware.rm_wifi.user_dhcp_hostname" value="config.middleware.rm_wifi.user_dhcp_hostname.disabled"/>
+      <property id="config.middleware.rm_wifi.iperf" value="config.middleware.rm_wifi.iperf.enabled"/>
       <property id="config.middleware.rm_wifi.regdom_override_enable" value="config.middleware.rm_wifi.regdom_override_enable.disabled"/>
       <property id="config.middleware.rm_wifi.regdom_fcc_override_enable" value="config.middleware.rm_wifi.regdom_fcc_override_enable.enabled"/>
       <property id="config.middleware.rm_wifi.regdom_fcc_2gl_ofdm" value="0x09,0x09,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c"/>

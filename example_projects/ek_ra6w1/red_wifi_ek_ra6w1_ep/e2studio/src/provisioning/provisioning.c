@@ -343,6 +343,14 @@ fsp_err_t provisioning_Open (void)
 {
     fsp_err_t err = FSP_SUCCESS;
 
+    /* redirect cJSON to use FreeRTOS heap so cJSON_Print does not fail on the limited C library heap */
+    cJSON_Hooks hooks =
+    {
+        .malloc_fn = pvPortMalloc,
+        .free_fn   = vPortFree
+    };
+    cJSON_InitHooks(&hooks);
+
     printf("start AP profile load\n");
 
     /* Create PROVISIONING_W Task */

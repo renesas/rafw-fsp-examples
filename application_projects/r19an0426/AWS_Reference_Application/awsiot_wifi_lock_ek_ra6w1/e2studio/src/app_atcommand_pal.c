@@ -12,7 +12,7 @@
 #include "rm_awsiot_w_cfg.h"
 #if defined (__SUPPORT_AWS_IOT_W__)
 #include "FreeRTOS.h"
-#include "custom_config_sdk.h"
+#include "rm_wifi.h"
 #include "nvedit.h"
 #include "sys_feature.h"
 #include "app_sample_manager.h"

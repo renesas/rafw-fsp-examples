@@ -1,0 +1,40 @@
+﻿/***********************************************************************************************************************
+* File Name    : ble_thread_entry.c
+* Description  : BLE thread entry function for the Wi-Fi BLE coexistence example project.
+***********************************************************************************************************************/
+/***********************************************************************************************************************
+* Copyright (c) 2020 - 2026 Renesas Electronics Corporation and/or its affiliates
+*
+* SPDX-License-Identifier: BSD-3-Clause
+***********************************************************************************************************************/
+#include "ble_thread.h"
+#ifdef RM_MAP_PERSISTANT_W
+#include "rm_map_persistant_w.h"
+#include dg_configADNVPARAM_PROJ_FILE
+#endif
+/* BLE Thread entry function */
+
+extern void app_main(void);
+extern void custom_conf_ble(void);
+
+/* pvParameters contains TaskHandle_t */
+void ble_thread_entry(void *pvParameters)
+{
+    FSP_PARAMETER_NOT_USED (pvParameters);
+
+#if CFG_WIFI && CFG_PMGR
+    BaseType_t sem_err = xSemaphoreTake(g_sys_init_semaphore, pdMS_TO_TICKS(5000));
+    assert(pdTRUE == sem_err);
+#endif /* CFG_WIFI && CFG_PMGR */
+
+    custom_conf_ble();
+    app_main();
+    /* TODO: add your own code here */
+    while (1)
+    {
+        vTaskDelay (1);
+    }
+
+exit:
+   vTaskDelete(NULL);
+}

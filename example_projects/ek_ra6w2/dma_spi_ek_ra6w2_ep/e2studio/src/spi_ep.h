@@ -35,7 +35,12 @@
 #define BYTES_RECEIVED_ZERO  (0)
 
 /* SPI buffer length */
-#define BUFF_LEN 32
+#define MAX_PAYLOAD_BYTES     (64U)
+#define SPI_FRAME_SIZE_BYTES  (sizeof(uint32_t))
+#define SPI_BUFFER_BYTES      (MAX_PAYLOAD_BYTES + 1U)  /* +1 for NULL terminator */
+#define BUFF_LEN \
+    ((SPI_BUFFER_BYTES + SPI_FRAME_SIZE_BYTES - 1U) / \
+      SPI_FRAME_SIZE_BYTES)
 
 /* Max wait count for time-out operation */
 #define MAX_COUNT 0xFFFFFF

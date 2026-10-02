@@ -9,7 +9,7 @@
     <option key="#DeviceCommand#" value="R7JA6W2DE"/>
     <option key="#RTOS#" value="rtos.awsfreertos"/>
     <option key="#pinconfiguration#" value="R7JA6W2DEDZNR.pincfg"/>
-    <option key="#FSPVersion#" value="2.1.0"/>
+    <option key="#FSPVersion#" value="2.2.1"/>
     <option key="#ConfigurationFragments#" value="Renesas##BSP##Board##rrq614xx_evb##"/>
     <option key="#SELECTED_TOOLCHAIN#" value="gcc-arm-embedded"/>
     <option key="#ToolchainVersion#" value="13.3.1.arm-13-24"/>
@@ -46,6 +46,8 @@
       <property id="config.bsp.fsp.mcu.ppm_compensation" value="config.bsp.fsp.mcu.ppm_compensation.disabled"/>
       <property id="config.bsp.fsp.mcu.ppm_recomp_period_ms" value="8000U"/>
       <property id="config.bsp.fsp.mcu.ospi_8_lines_support" value="config.bsp.fsp.mcu.ospi_8_lines_support.disabled"/>
+      <property id="config.bsp.fsp.mcu.wifi_user_gpio" value="config.bsp.fsp.mcu.wifi_user_gpio.enabled"/>
+      <property id="config.bsp.fsp.mcu.factory_reset_btn" value="config.bsp.fsp.mcu.factory_reset_btn.enabled"/>
       <property id="config.bsp.fsp.mcu.uart.max_baud" value="5000000"/>
       <property id="config.bsp.fsp.mcu.iic_master.rate.rate_fastplus" value="1"/>
       <property id="config.bsp.fsp.mcu.iic_master.fastplus_channels" value="0x1"/>
@@ -115,57 +117,57 @@
     <node id="board.clock.wdog.div.display" option="board.clock.wdog.div.display.value"/>
   </raClockConfiguration>
   <raComponentSelection>
-    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.2.1">
       <description>Board Support Package Common Files</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.2.1">
       <description>I/O Port (W)</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="RTOS" condition="" group="FreeRTOS" subgroup="all" variant="" vendor="AWS" version="11.1.0+fsp.2.1.0">
-      <description>FreeRTOS</description>
-      <originalPack>Amazon.FreeRTOS-Kernel.11.1.0+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.1.0">
-      <description>Arm CMSIS Version 6 - Core (M)</description>
-      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_freertos_port_w" variant="" vendor="Renesas" version="2.1.0">
-      <description>FreeRTOS Port</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq614xx_evb" variant="" vendor="Renesas" version="2.1.0">
-      <description>RRQ614xx-EVB Board Support Files</description>
-      <originalPack>Renesas.RAFW_board_rrq614xx_evb.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="device" variant="R7JA6W2DEDZNR" vendor="Renesas" version="2.1.0">
-      <description>Board support package for R7JA6W2DEDZNR</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="device" variant="" vendor="Renesas" version="2.1.0">
-      <description>Board support package for RA6W2</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="fsp" variant="" vendor="Renesas" version="2.1.0">
-      <description>Board support package for RA6W2 - FSP Data</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="events" variant="" vendor="Renesas" version="2.1.0">
-      <description>Board support package for RA6W2 - Events</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="linker" variant="" vendor="Renesas" version="2.1.0">
-      <description>Board support package for RA6W2 - Linker</description>
-      <originalPack>Renesas.rafw_mcu_ra6w2.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Heaps" condition="" group="FreeRTOS" subgroup="heap_5" variant="" vendor="AWS" version="11.1.0+fsp.2.1.0">
-      <description>FreeRTOS - Memory Management - Heap 5</description>
-      <originalPack>Amazon.FreeRTOS-Kernel.11.1.0+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_tim_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_tim_w" variant="" vendor="Renesas" version="2.2.1">
       <description>General Purpose Timer (W)</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_freertos_port_w" variant="" vendor="Renesas" version="2.2.1">
+      <description>FreeRTOS Port</description>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="device" variant="R7JA6W2DEDZNR" vendor="Renesas" version="2.2.1">
+      <description>Board support package for R7JA6W2DEDZNR</description>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="device" variant="" vendor="Renesas" version="2.2.1">
+      <description>Board support package for RA6W2</description>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="fsp" variant="" vendor="Renesas" version="2.2.1">
+      <description>Board support package for RA6W2 - FSP Data</description>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="events" variant="" vendor="Renesas" version="2.2.1">
+      <description>Board support package for RA6W2 - Events</description>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6w2" subgroup="linker" variant="" vendor="Renesas" version="2.2.1">
+      <description>Board support package for RA6W2 - Linker</description>
+      <originalPack>Renesas.rafw_mcu_ra6w2.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="RTOS" condition="" group="FreeRTOS" subgroup="all" variant="" vendor="AWS" version="11.1.0+fsp.2.2.1">
+      <description>FreeRTOS</description>
+      <originalPack>Amazon.FreeRTOS-Kernel.11.1.0+fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="Heaps" condition="" group="FreeRTOS" subgroup="heap_5" variant="" vendor="AWS" version="11.1.0+fsp.2.2.1">
+      <description>FreeRTOS - Memory Management - Heap 5</description>
+      <originalPack>Amazon.FreeRTOS-Kernel.11.1.0+fsp.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq614xx_evb" variant="" vendor="Renesas" version="2.2.1">
+      <description>RRQ614xx-EVB Board Support Files</description>
+      <originalPack>Renesas.RAFW_board_rrq614xx_evb.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.2.1">
+      <description>Arm CMSIS Version 6 - Core (M)</description>
+      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.2.1.pack</originalPack>
     </component>
   </raComponentSelection>
   <raElcConfiguration/>
@@ -177,7 +179,7 @@
       <property id="module.driver.gpio_w.pincfg" value="g_bsp_pin_cfg"/>
     </module>
     <module id="module.middleware.rm_freertos_port.0"/>
-    <module id="module.driver.timer_on_tim_w.2082675896">
+    <module id="module.driver.timer_on_tim_w.1448016099">
       <property id="module.driver.timer.name" value="g_periodic_timer_msgq"/>
       <property id="module.driver.timer.channel" value="1"/>
       <property id="module.driver.timer.mode" value="module.driver.timer.mode.mode_periodic"/>
@@ -244,7 +246,7 @@
       <property id="module.driver.timer.ccmh_ipl" value="_disabled"/>
       <property id="module.driver.timer.underflow_ipl" value="_disabled"/>
     </module>
-    <module id="module.driver.timer_on_tim_w.212417887">
+    <module id="module.driver.timer_on_tim_w.2014536694">
       <property id="module.driver.timer.name" value="g_periodic_timer_sem"/>
       <property id="module.driver.timer.channel" value="1"/>
       <property id="module.driver.timer.mode" value="module.driver.timer.mode.mode_periodic"/>
@@ -311,25 +313,25 @@
       <property id="module.driver.timer.ccmh_ipl" value="_disabled"/>
       <property id="module.driver.timer.underflow_ipl" value="_disabled"/>
     </module>
-    <module id="module.freertos.heap.5.1092664808"/>
-    <object id="rtos.awsfreertos.object.queue.753399889">
+    <module id="module.freertos.heap.5.585366488"/>
+    <object id="rtos.awsfreertos.object.queue.737866845">
       <property id="rtos.awsfreertos.object.queue.symbol" value="g_queue"/>
       <property id="rtos.awsfreertos.object.queue.item_size" value="15"/>
-      <property id="rtos.awsfreertos.object.queue.queue_length" value="4"/>
+      <property id="rtos.awsfreertos.object.queue.queue_length" value="20"/>
       <property id="rtos.awsfreertos.object.queue.allocation" value="rtos.awsfreertos.object.queue.allocation.static"/>
     </object>
-    <object id="rtos.awsfreertos.object.binary_semaphore.1602475814">
+    <object id="rtos.awsfreertos.object.binary_semaphore.369961954">
       <property id="rtos.awsfreertos.object.binary_semaphore.symbol" value="g_binary_semaphore"/>
       <property id="rtos.awsfreertos.object.binary_semaphore.allocation" value="rtos.awsfreertos.object.binary_semaphore.allocation.static"/>
     </object>
     <context id="_hal.0">
       <stack module="module.driver.ioport_on_gpio_w.0"/>
       <stack module="module.middleware.rm_freertos_port.0"/>
-      <stack module="module.driver.timer_on_tim_w.2082675896"/>
-      <stack module="module.driver.timer_on_tim_w.212417887"/>
-      <stack module="module.freertos.heap.5.1092664808"/>
+      <stack module="module.driver.timer_on_tim_w.1448016099"/>
+      <stack module="module.driver.timer_on_tim_w.2014536694"/>
+      <stack module="module.freertos.heap.5.585366488"/>
     </context>
-    <context id="rtos.awsfreertos.thread.36981215">
+    <context id="rtos.awsfreertos.thread.1798895757">
       <property id="_symbol" value="sender_task"/>
       <property id="rtos.awsfreertos.thread.name" value="Sender Task"/>
       <property id="rtos.awsfreertos.thread.stack" value="1024"/>
@@ -338,7 +340,7 @@
       <property id="rtos.awsfreertos.thread.allocation" value="rtos.awsfreertos.thread.allocation.dynamic"/>
       <property id="rtos.awsfreertos.thread.secure_context" value="rtos.awsfreertos.thread.secure_context.enable"/>
     </context>
-    <context id="rtos.awsfreertos.thread.874418620">
+    <context id="rtos.awsfreertos.thread.1601272045">
       <property id="_symbol" value="receiver_task"/>
       <property id="rtos.awsfreertos.thread.name" value="Receiver Task"/>
       <property id="rtos.awsfreertos.thread.stack" value="1024"/>
@@ -347,7 +349,7 @@
       <property id="rtos.awsfreertos.thread.allocation" value="rtos.awsfreertos.thread.allocation.dynamic"/>
       <property id="rtos.awsfreertos.thread.secure_context" value="rtos.awsfreertos.thread.secure_context.enable"/>
     </context>
-    <context id="rtos.awsfreertos.thread.1168803992">
+    <context id="rtos.awsfreertos.thread.19038664">
       <property id="_symbol" value="semaphore_task"/>
       <property id="rtos.awsfreertos.thread.name" value="Semaphore Task"/>
       <property id="rtos.awsfreertos.thread.stack" value="1024"/>
@@ -419,7 +421,7 @@
       <property id="config.awsfreertos.thread.include_xtaskgetschedulerstate" value="config.awsfreertos.thread.include_xtaskgetschedulerstate.enabled"/>
       <property id="config.awsfreertos.thread.include_xtaskgetcurrenttaskhandle" value="config.awsfreertos.thread.include_xtaskgetcurrenttaskhandle.enabled"/>
       <property id="config.awsfreertos.thread.include_uxtaskgetstackhighwatermark" value="config.awsfreertos.thread.include_uxtaskgetstackhighwatermark.disabled"/>
-      <property id="config.awsfreertos.thread.include_xtaskgetidletaskhandle" value="config.awsfreertos.thread.include_xtaskgetidletaskhandle.disabled"/>
+      <property id="config.awsfreertos.thread.include_xtaskgetidletaskhandle" value="config.awsfreertos.thread.include_xtaskgetidletaskhandle.enabled"/>
       <property id="config.awsfreertos.thread.include_etaskgetstate" value="config.awsfreertos.thread.include_etaskgetstate.enabled"/>
       <property id="config.awsfreertos.thread.include_xeventgroupsetbitfromisr" value="config.awsfreertos.thread.include_xeventgroupsetbitfromisr.enabled"/>
       <property id="config.awsfreertos.thread.include_xtimerpendfunctioncall" value="config.awsfreertos.thread.include_xtimerpendfunctioncall.enabled"/>

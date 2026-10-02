@@ -32,6 +32,7 @@ Jumper Configurations
 	J105 ={2,3} [Volatge selector]
 	J107 ={2,3} [Volatge selector]
 	J210 ={1,2} [reset]
+	J213 ={1,2} = [BTN1]
 	SWCLK(c) = SWCLK
 	SWDIO(c) = SWDIO
 	

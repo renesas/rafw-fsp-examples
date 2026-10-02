@@ -45,9 +45,6 @@ Connect the USB Debug port on the RA6W1 mother board to the host PC via a type C
  5. After flashing, press reset.
  6. Verify RA6W1 read i2c data correctly from sensor board using segger prints.
 
-7. Limitation
- 1. The actual I2C clock output frequency may be approximately half of the configured value.
-
 
 Note:
 To view console output in RTT Viewer: 

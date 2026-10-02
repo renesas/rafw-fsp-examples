@@ -9,7 +9,7 @@
     <option key="#DeviceCommand#" value="R7SA6W1CE"/>
     <option key="#RTOS#" value="_none"/>
     <option key="#pinconfiguration#" value="R7SA6W1CEDZDD.pincfg"/>
-    <option key="#FSPVersion#" value="2.1.0"/>
+    <option key="#FSPVersion#" value="2.2.1"/>
     <option key="#ConfigurationFragments#" value="Renesas##BSP##Board##rrq61xxx_evb##"/>
     <option key="#SELECTED_TOOLCHAIN#" value="gcc-arm-embedded"/>
     <option key="#ToolchainVersion#" value="13.3.1.arm-13-24"/>
@@ -46,6 +46,8 @@
       <property id="config.bsp.fsp.mcu.ppm_compensation" value="config.bsp.fsp.mcu.ppm_compensation.disabled"/>
       <property id="config.bsp.fsp.mcu.ppm_recomp_period_ms" value="8000U"/>
       <property id="config.bsp.fsp.mcu.ospi_8_lines_support" value="config.bsp.fsp.mcu.ospi_8_lines_support.disabled"/>
+      <property id="config.bsp.fsp.mcu.wifi_user_gpio" value="config.bsp.fsp.mcu.wifi_user_gpio.enabled"/>
+      <property id="config.bsp.fsp.mcu.factory_reset_btn" value="config.bsp.fsp.mcu.factory_reset_btn.enabled"/>
       <property id="config.bsp.fsp.mcu.uart.max_baud" value="5000000"/>
       <property id="config.bsp.fsp.mcu.iic_master.rate.rate_fastplus" value="1"/>
       <property id="config.bsp.fsp.mcu.iic_master.fastplus_channels" value="0x1"/>
@@ -115,45 +117,45 @@
     <node id="board.clock.wdog.div.display" option="board.clock.wdog.div.display.value"/>
   </raClockConfiguration>
   <raComponentSelection>
-    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq61xxx_evb" variant="" vendor="Renesas" version="2.1.0">
-      <description>RRQ61xxx-EVB Board Support Files</description>
-      <originalPack>Renesas.RAFW_board_rrq61xxx_evb.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.1.0">
-      <description>Arm CMSIS Version 6 - Core (M)</description>
-      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.1.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="R7SA6W1CEDZDD" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="R7SA6W1CEDZDD" vendor="Renesas" version="2.2.1">
       <description>Board support package for R7SA6W1CEDZDD</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="device" variant="" vendor="Renesas" version="2.2.1">
       <description>Board support package for RA6W1</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="fsp" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="fsp" variant="" vendor="Renesas" version="2.2.1">
       <description>Board support package for RA6W1 - FSP Data</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="events" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="events" variant="" vendor="Renesas" version="2.2.1">
       <description>Board support package for RA6W1 - Events</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="linker" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="BSP" condition="" group="ra6w1" subgroup="linker" variant="" vendor="Renesas" version="2.2.1">
       <description>Board support package for RA6W1 - Linker</description>
-      <originalPack>Renesas.rafw_mcu_ra6w1.2.1.0.pack</originalPack>
+      <originalPack>Renesas.rafw_mcu_ra6w1.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="2.2.1">
       <description>Board Support Package Common Files</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpio_w" variant="" vendor="Renesas" version="2.2.1">
       <description>I/O Port (W)</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
     </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_tim_w" variant="" vendor="Renesas" version="2.1.0">
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_tim_w" variant="" vendor="Renesas" version="2.2.1">
       <description>General Purpose Timer (W)</description>
-      <originalPack>Renesas.RAFW.2.1.0.pack</originalPack>
+      <originalPack>Renesas.RAFW.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="Board" subgroup="rrq61xxx_evb" variant="" vendor="Renesas" version="2.2.1">
+      <description>RRQ61xxx-EVB Board Support Files</description>
+      <originalPack>Renesas.RAFW_board_rrq61xxx_evb.2.2.1.pack</originalPack>
+    </component>
+    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="CoreM" variant="" vendor="Arm" version="6.1.0+fsp.2.2.1">
+      <description>Arm CMSIS Version 6 - Core (M)</description>
+      <originalPack>Arm.CMSIS6.6.1.0+fsp.2.2.1.pack</originalPack>
     </component>
   </raComponentSelection>
   <raElcConfiguration/>
@@ -164,7 +166,7 @@
       <property id="module.driver.gpio_w.name" value="g_gpio_w"/>
       <property id="module.driver.gpio_w.pincfg" value="g_bsp_pin_cfg"/>
     </module>
-    <module id="module.driver.timer_on_tim_w.1360492285">
+    <module id="module.driver.timer_on_tim_w.926743303">
       <property id="module.driver.timer.name" value="g_timer_periodic"/>
       <property id="module.driver.timer.channel" value="2"/>
       <property id="module.driver.timer.mode" value="module.driver.timer.mode.mode_periodic"/>
@@ -231,7 +233,7 @@
       <property id="module.driver.timer.ccmh_ipl" value="_disabled"/>
       <property id="module.driver.timer.underflow_ipl" value="_disabled"/>
     </module>
-    <module id="module.driver.timer_on_tim_w.1834014636">
+    <module id="module.driver.timer_on_tim_w.1514393797">
       <property id="module.driver.timer.name" value="g_timer_oneshot"/>
       <property id="module.driver.timer.channel" value="1"/>
       <property id="module.driver.timer.mode" value="module.driver.timer.mode.mode_one_shot"/>
@@ -298,7 +300,7 @@
       <property id="module.driver.timer.ccmh_ipl" value="_disabled"/>
       <property id="module.driver.timer.underflow_ipl" value="_disabled"/>
     </module>
-    <module id="module.driver.timer_on_tim_w.1643987779">
+    <module id="module.driver.timer_on_tim_w.1943682075">
       <property id="module.driver.timer.name" value="g_timer_pwm"/>
       <property id="module.driver.timer.channel" value="1"/>
       <property id="module.driver.timer.mode" value="module.driver.timer.mode.mode_periodic"/>
@@ -367,9 +369,9 @@
     </module>
     <context id="_hal.0">
       <stack module="module.driver.ioport_on_gpio_w.0"/>
-      <stack module="module.driver.timer_on_tim_w.1360492285"/>
-      <stack module="module.driver.timer_on_tim_w.1834014636"/>
-      <stack module="module.driver.timer_on_tim_w.1643987779"/>
+      <stack module="module.driver.timer_on_tim_w.926743303"/>
+      <stack module="module.driver.timer_on_tim_w.1514393797"/>
+      <stack module="module.driver.timer_on_tim_w.1943682075"/>
     </context>
     <config id="config.driver.tim_w">
       <property id="config.driver.tim_w.param_checking_enable" value="config.driver.tim_w.param_checking_enable.bsp"/>

@@ -10,7 +10,7 @@
 
 #include "stdbool.h"
 #include "FreeRTOS.h"
-#include "custom_config_sdk.h"
+#include "rm_wifi.h"
 #include "rm_aws_lwip_sock_wrap_w_api.h"
 
 #if !defined(_APP_DPM_SAMPLE_H_)
